@@ -36,7 +36,9 @@ import requests
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "gemma4:e4b")
+OLLAMA_CHAT_MODEL = os.environ.get("OLLAMA_CHAT_MODEL", "").strip() or OLLAMA_MODEL
 OLLAMA_NUM_PREDICT = int(os.environ.get("OLLAMA_NUM_PREDICT", "512"))
+OLLAMA_BRAINSTORM_NUM_PREDICT = int(os.environ.get("OLLAMA_BRAINSTORM_NUM_PREDICT", "256"))
 
 ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-8")
 # claude-sonnet-4-6 is a cheaper alternative; set ANTHROPIC_MODEL to switch.
@@ -112,6 +114,7 @@ def backend_status() -> dict:
         "gemini_key": has_gemini_key(),
         "gemini_model": GEMINI_MODEL,
         "ollama_model": OLLAMA_MODEL,
+        "ollama_chat_model": OLLAMA_CHAT_MODEL,
         "ollama_url": OLLAMA_URL,
     }
 
@@ -205,46 +208,74 @@ def _ollama_options(temperature: float, num_predict: int | None = None) -> dict:
     }
 
 
-def _ollama_generate(system: str, messages: list[dict], temperature: float) -> str:
+def _ollama_generate(
+    system: str,
+    messages: list[dict],
+    temperature: float,
+    *,
+    model: str | None = None,
+    num_predict: int | None = None,
+) -> str:
+    use_model = model or OLLAMA_MODEL
     try:
         r = requests.post(
             f"{OLLAMA_URL}/api/chat",
-            json={"model": OLLAMA_MODEL, "messages": _ollama_messages(system, messages),
-                  "stream": False, "options": _ollama_options(temperature)},
+            json={"model": use_model, "messages": _ollama_messages(system, messages),
+                  "stream": False, "options": _ollama_options(temperature, num_predict)},
             timeout=300,
         )
     except requests.RequestException as e:
         raise _ollama_unreachable(e) from e
     if r.status_code == 404:
-        raise LLMError(f"Model '{OLLAMA_MODEL}' isn't installed. Run: ollama pull {OLLAMA_MODEL}")
+        raise LLMError(f"Model '{use_model}' isn't installed. Run: ollama pull {use_model}")
     r.raise_for_status()
     return r.json().get("message", {}).get("content", "")
 
 
-def _ollama_stream(system: str, messages: list[dict], temperature: float) -> Iterator[str]:
+def _ollama_chat_model() -> str:
+    """Prefer OLLAMA_CHAT_MODEL when set; fall back to OLLAMA_MODEL if same or unset."""
+    chat = OLLAMA_CHAT_MODEL.strip()
+    return chat if chat else OLLAMA_MODEL
+
+
+def _ollama_stream(
+    system: str,
+    messages: list[dict],
+    temperature: float,
+    *,
+    model: str | None = None,
+    num_predict: int | None = None,
+) -> Iterator[str]:
     import json
-    try:
-        r = requests.post(
-            f"{OLLAMA_URL}/api/chat",
-            json={"model": OLLAMA_MODEL, "messages": _ollama_messages(system, messages),
-                  "stream": True, "options": _ollama_options(temperature)},
-            stream=True, timeout=300,
-        )
-    except requests.RequestException as e:
-        raise _ollama_unreachable(e) from e
-    with r:
-        if r.status_code == 404:
-            raise LLMError(f"Model '{OLLAMA_MODEL}' isn't installed. Run: ollama pull {OLLAMA_MODEL}")
-        r.raise_for_status()
-        for line in r.iter_lines():
-            if not line:
-                continue
-            obj = json.loads(line.decode("utf-8"))
-            token = obj.get("message", {}).get("content", "")
-            if token:
-                yield token
-            if obj.get("done"):
-                break
+    primary = model or _ollama_chat_model()
+    fallback = OLLAMA_MODEL if primary != OLLAMA_MODEL else None
+    for use_model in filter(None, [primary, fallback]):
+        try:
+            r = requests.post(
+                f"{OLLAMA_URL}/api/chat",
+                json={"model": use_model, "messages": _ollama_messages(system, messages),
+                      "stream": True, "options": _ollama_options(temperature, num_predict)},
+                stream=True, timeout=300,
+            )
+        except requests.RequestException as e:
+            raise _ollama_unreachable(e) from e
+        if r.status_code == 404 and fallback and use_model == primary:
+            r.close()
+            continue
+        with r:
+            if r.status_code == 404:
+                raise LLMError(f"Model '{use_model}' isn't installed. Run: ollama pull {use_model}")
+            r.raise_for_status()
+            for line in r.iter_lines():
+                if not line:
+                    continue
+                obj = json.loads(line.decode("utf-8"))
+                token = obj.get("message", {}).get("content", "")
+                if token:
+                    yield token
+                if obj.get("done"):
+                    return
+        return
 
 
 # --- public interface ------------------------------------------------------
@@ -261,12 +292,13 @@ def _backend_error_message(errors: list[tuple[str, Exception]]) -> str:
 
 
 def _generate_one(backend: str, system: str, messages: list[dict],
-                  max_tokens: int, temperature: float) -> str:
+                  max_tokens: int, temperature: float, *,
+                  ollama_num_predict: int | None = None) -> str:
     if backend == "anthropic":
         return _anthropic_generate(system, messages, max_tokens)
     if backend == "gemini":
         return _gemini_generate(system, messages, max_tokens)
-    return _ollama_generate(system, messages, temperature)
+    return _ollama_generate(system, messages, temperature, num_predict=ollama_num_predict)
 
 
 def _stream_one(backend: str, system: str, messages: list[dict],
@@ -279,14 +311,18 @@ def _stream_one(backend: str, system: str, messages: list[dict],
 
 
 def generate(system: str, messages: list[dict], *,
-             max_tokens: int = 4096, temperature: float = 0.2) -> str:
+             max_tokens: int = 4096, temperature: float = 0.2,
+             ollama_num_predict: int | None = None) -> str:
     """Return one complete answer, trying each usable backend in chain order.
     `temperature` only applies to Ollama (Opus 4.8 rejects the parameter)."""
     chain = [b for b in _backend_chain() if _usable(b)]
     errors: list[tuple[str, Exception]] = []
     for backend in chain:
         try:
-            return _generate_one(backend, system, messages, max_tokens, temperature)
+            return _generate_one(
+                backend, system, messages, max_tokens, temperature,
+                ollama_num_predict=ollama_num_predict,
+            )
         except Exception as e:  # noqa: BLE001 - try the next backend in the chain
             errors.append((backend, e))
             _log(f"{backend} generate failed ({e}); trying next backend.")

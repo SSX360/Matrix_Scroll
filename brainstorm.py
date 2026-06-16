@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import threading
+import time
+import uuid
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Callable
@@ -10,6 +13,10 @@ import scanner
 import vault
 import workspace_config as wc
 import llm
+
+_JOB_TTL_SECONDS = 600
+_jobs: dict[str, dict[str, Any]] = {}
+_jobs_lock = threading.Lock()
 
 
 @dataclass
@@ -216,22 +223,74 @@ def suggest_offline(context: dict[str, Any], limit: int = 6) -> list[BrainstormI
 
 
 def _llm_enhancement_allowed() -> bool:
-    """LLM brainstorm enhancement is for cloud backends only (Ollama is too slow)."""
+    """Sync LLM brainstorm enhancement is for cloud backends only (Ollama is too slow)."""
     return llm.active_backend() in ("gemini", "anthropic")
 
 
-def suggest_with_llm(
-    context: dict[str, Any],
-    limit: int = 6,
-    generate: Callable[[str, list[dict]], str] | None = None,
-) -> list[BrainstormItem] | None:
-    if not generate:
-        return None
-    if not _llm_enhancement_allowed():
-        return None
-    if not context.get("config", {}).get("brainstorm", {}).get("prefer_llm_enhancement", True):
-        return None
+def _prune_jobs() -> None:
+    cutoff = time.monotonic() - _JOB_TTL_SECONDS
+    with _jobs_lock:
+        stale = [job_id for job_id, job in _jobs.items() if job.get("created", 0) < cutoff]
+        for job_id in stale:
+            _jobs.pop(job_id, None)
 
+
+def get_enhancement_job(job_id: str) -> dict[str, Any] | None:
+    _prune_jobs()
+    with _jobs_lock:
+        job = _jobs.get(job_id)
+        return dict(job) if job else None
+
+
+def _run_enhancement_job(
+    job_id: str,
+    context: dict[str, Any],
+    limit: int,
+    generate: Callable[[str, list[dict]], str],
+) -> None:
+    try:
+        items = _suggest_with_llm_raw(context, limit=limit, generate=generate)
+        payload = {
+            "status": "complete",
+            "suggestions": [s.to_dict() for s in (items or [])],
+            "llm_enhanced": bool(items),
+            "error": None,
+        }
+    except Exception as exc:  # noqa: BLE001
+        payload = {"status": "error", "suggestions": [], "llm_enhanced": False, "error": str(exc)}
+    with _jobs_lock:
+        if job_id in _jobs:
+            _jobs[job_id].update(payload)
+
+
+def start_enhancement_job(
+    context: dict[str, Any],
+    limit: int,
+    generate: Callable[[str, list[dict]], str],
+) -> str:
+    _prune_jobs()
+    job_id = uuid.uuid4().hex
+    with _jobs_lock:
+        _jobs[job_id] = {
+            "status": "running",
+            "suggestions": [],
+            "llm_enhanced": False,
+            "error": None,
+            "created": time.monotonic(),
+        }
+    threading.Thread(
+        target=_run_enhancement_job,
+        args=(job_id, context, limit, generate),
+        daemon=True,
+    ).start()
+    return job_id
+
+
+def _suggest_with_llm_raw(
+    context: dict[str, Any],
+    limit: int,
+    generate: Callable[[str, list[dict]], str],
+) -> list[BrainstormItem] | None:
     profile = context.get("profile", {})
     summary = scanner.profile_summary(profile)
     notebooks = profile.get("notebooks") or []
@@ -249,10 +308,11 @@ def suggest_with_llm(
         f"Stack: {summary}\nNotebooks: {nb_text}\nRules count: {rules_count}\n"
         f"Generate {limit} tailored brainstorm ideas."
     )
-    try:
-        raw = generate(sys_prompt, [{"role": "user", "content": user}])
-    except Exception:
-        return None
+
+    def _gen(system: str, messages: list[dict]) -> str:
+        return generate(system, messages, ollama_num_predict=llm.OLLAMA_BRAINSTORM_NUM_PREDICT)
+
+    raw = _gen(sys_prompt, [{"role": "user", "content": user}])
 
     items: list[BrainstormItem] = []
     for line in raw.splitlines():
@@ -270,11 +330,29 @@ def suggest_with_llm(
     return items or None
 
 
+def suggest_with_llm(
+    context: dict[str, Any],
+    limit: int = 6,
+    generate: Callable[..., str] | None = None,
+) -> list[BrainstormItem] | None:
+    if not generate:
+        return None
+    if not _llm_enhancement_allowed():
+        return None
+    if not context.get("config", {}).get("brainstorm", {}).get("prefer_llm_enhancement", True):
+        return None
+    try:
+        return _suggest_with_llm_raw(context, limit=limit, generate=generate)
+    except Exception:
+        return None
+
+
 def brainstorm(
     limit: int = 6,
     list_rules: Callable[[str], list[dict]] | None = None,
     catalog_search: Callable[[str, int], list[dict]] | None = None,
-    llm_generate: Callable[[str, list[dict]], str] | None = None,
+    llm_generate: Callable[..., str] | None = None,
+    async_enhance: bool = False,
 ) -> dict[str, Any]:
     context = gather_context(list_rules=list_rules, catalog_search=catalog_search)
     if not context.get("config", {}).get("brainstorm", {}).get("enabled", True):
@@ -288,15 +366,32 @@ def brainstorm(
         }
     cfg_limit = int(context.get("config", {}).get("brainstorm", {}).get("max_suggestions", limit))
     limit = min(limit, cfg_limit)
+    cfg = context.get("config", {}).get("brainstorm", {})
 
     offline = suggest_offline(context, limit=limit)
-    llm_items = suggest_with_llm(context, limit=limit, generate=llm_generate)
+    enhancement_job_id = None
+    llm_items = None
+
+    if (
+        async_enhance
+        and llm_generate
+        and cfg.get("prefer_llm_enhancement", True)
+        and llm.active_backend() == "ollama"
+    ):
+        enhancement_job_id = start_enhancement_job(context, limit=limit, generate=llm_generate)
+    else:
+        llm_items = suggest_with_llm(context, limit=limit, generate=llm_generate)
+
     suggestions = llm_items if llm_items else offline
 
-    return {
+    result = {
         "workspace": context["workspace"],
         "configured": context["configured"],
         "context_summary": context_summary(context),
         "suggestions": [s.to_dict() for s in suggestions],
         "llm_enhanced": bool(llm_items),
     }
+    if enhancement_job_id:
+        result["enhancement_job_id"] = enhancement_job_id
+        result["enhancement_status"] = "running"
+    return result

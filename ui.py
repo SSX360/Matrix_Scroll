@@ -907,12 +907,45 @@ document.addEventListener('mouseover', e => {
 // Dynamic brainstorm chips
 const chips = $('#chips');
 
+function renderBrainstormChips(suggestions) {
+  chips.innerHTML = '';
+  if (!suggestions.length) {
+    chips.innerHTML = '<div class="pill" style="grid-column:1/-1;">No ideas yet — set your active project first.</div>';
+    return;
+  }
+  suggestions.forEach(s => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.innerHTML = (s.title || 'Idea') + '<span>' + (s.tag || 'Brainstorm') + '</span>';
+    b.onclick = () => { input.value = s.prompt || s.title; ask(); };
+    chips.appendChild(b);
+  });
+}
+
+async function pollBrainstormJob(jobId) {
+  for (let i = 0; i < 90; i++) {
+    await new Promise(r => setTimeout(r, 2000));
+    try {
+      const r = await fetch('/api/brainstorm/job/' + jobId);
+      if (!r.ok) return;
+      const data = await r.json();
+      if (data.status === 'complete' && (data.suggestions || []).length) {
+        renderBrainstormChips(data.suggestions);
+        const subtitle = $('#heroSubtitle');
+        if (subtitle) subtitle.textContent = (subtitle.textContent || '') + ' · AI-enhanced';
+        return;
+      }
+      if (data.status === 'error') return;
+    } catch (e) { return; }
+  }
+}
+
 async function loadBrainstorm() {
   chips.innerHTML = '<div class="pill" style="grid-column:1/-1;text-align:center;">loading ideas…</div>';
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 30000);
   try {
-    const r = await fetch('/api/brainstorm?limit=6', { signal: controller.signal });
+    const r = await fetch('/api/brainstorm?limit=6&async=1', { signal: controller.signal });
     const data = await r.json();
     const subtitle = $('#heroSubtitle');
     if (subtitle) {
@@ -920,19 +953,10 @@ async function loadBrainstorm() {
         ? `Brainstorming for ${data.context_summary}`
         : 'Brainstorming for your active codebase';
     }
-    chips.innerHTML = '';
-    const suggestions = data.suggestions || [];
-    if (!suggestions.length) {
-      chips.innerHTML = '<div class="pill" style="grid-column:1/-1;">No ideas yet — set your active project first.</div>';
-      return;
+    renderBrainstormChips(data.suggestions || []);
+    if (data.enhancement_job_id) {
+      pollBrainstormJob(data.enhancement_job_id);
     }
-    suggestions.forEach(s => {
-      const b = document.createElement('button');
-      b.className = 'chip';
-      b.innerHTML = (s.title || 'Idea') + '<span>' + (s.tag || 'Brainstorm') + '</span>';
-      b.onclick = () => { input.value = s.prompt || s.title; ask(); };
-      chips.appendChild(b);
-    });
   } catch (e) {
     chips.innerHTML = '<div class="pill" style="grid-column:1/-1;">Could not load brainstorm ideas.</div>';
   } finally {
@@ -966,7 +990,7 @@ async function saveActiveWorkspace() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ path })
   });
-  await poll();
+  await poll(true);
   await loadBrainstorm();
 }
 
@@ -986,14 +1010,14 @@ async function saveVaultConfig() {
 
 async function scaffoldVault() {
   await fetch('/api/vault/scaffold', { method: 'POST' });
-  await poll();
+  await poll(true);
   speak('Project vault scaffolded under docs/vault.', 3000);
 }
 
 loadWorkspaceConfig();
 
 // Health + Project Status polling
-async function poll(){
+async function poll(forceRefresh=false){
   const dot = $('#dot'), txt = $('#statusText');
   try{
     const r = await fetch('/api/health'); const h = await r.json();
@@ -1003,7 +1027,12 @@ async function poll(){
     if (active === 'ollama') {
       if (!h.ollama) { dot.className='dot bad'; txt.textContent='Ollama offline'; }
       else if (!h.model_available) { dot.className='dot bad'; txt.textContent=(llm.ollama_model || h.model)+' not pulled'; }
-      else { dot.className='dot ok'; txt.textContent='ollama · '+(llm.ollama_model || h.model)+(chunks ? ' · '+chunks : ''); }
+      else {
+        const chat = h.chat_model && h.chat_model !== (llm.ollama_model || h.model)
+          ? ' · chat ' + h.chat_model : '';
+        dot.className='dot ok';
+        txt.textContent='ollama · '+(llm.ollama_model || h.model)+chat+(chunks ? ' · '+chunks : '');
+      }
     } else if (active === 'gemini') {
       if (!llm.gemini_key) { dot.className='dot bad'; txt.textContent='gemini · no API key'; }
       else { dot.className='dot ok'; txt.textContent='gemini · '+llm.gemini_model+(chunks ? ' · '+chunks : ''); }
@@ -1017,7 +1046,7 @@ async function poll(){
   
   // Also poll project status
   try{
-    const pr = await fetch('/api/project/status');
+    const pr = await fetch('/api/project/status' + (forceRefresh ? '?refresh=1' : ''));
     const pData = await pr.json();
     projectData = pData;
     renderProjectDashboard();
@@ -1249,7 +1278,7 @@ async function submitCreateRule() {
       $('#ruleIntent').value = '';
       $('#ruleGlobs').value = '';
       $('#ruleAlwaysApply').checked = false;
-      poll(); // reload
+      poll(true); // reload
     } else {
       alert('Error creating rule: ' + res.error);
     }
@@ -1266,7 +1295,7 @@ async function deleteRule(filename) {
       body: JSON.stringify({ filename })
     });
     const res = await r.json();
-    if(res.success) poll();
+    if(res.success) poll(true);
     else alert('Failed to delete: ' + res.error);
   } catch(e) { alert('Error: ' + e.message); }
 }
@@ -1282,7 +1311,7 @@ async function installMcp(serverName) {
     const res = await r.json();
     if(res.success) {
       alert(`Successfully installed ${serverName} to project mcp.json!`);
-      poll();
+      poll(true);
     } else {
       alert('Error: ' + res.error);
     }

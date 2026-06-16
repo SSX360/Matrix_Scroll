@@ -18,6 +18,7 @@ import json
 import os
 import socket
 import threading
+import time
 import webbrowser
 from pathlib import Path
 from typing import Any
@@ -44,6 +45,12 @@ TOP_K = int(os.environ.get("TOP_K", "5"))
 
 app = Flask(__name__)
 _bm25: S.BM25 | None = None
+_status_cache: dict[str, Any] = {"key": "", "payload": None, "ts": 0.0}
+STATUS_CACHE_TTL = int(os.environ.get("STATUS_CACHE_TTL", "30"))
+
+
+def _clear_status_cache() -> None:
+    _status_cache.update({"key": "", "payload": None, "ts": 0.0})
 
 
 # ---------------------------------------------------------------------------
@@ -237,6 +244,13 @@ def health():
             info["model_available"] = any(
                 n == OLLAMA_MODEL or n.split(":")[0] == base for n in names
             )
+            chat_model = llm.OLLAMA_CHAT_MODEL
+            if chat_model != OLLAMA_MODEL:
+                chat_base = chat_model.split(":")[0]
+                info["chat_model"] = chat_model
+                info["chat_model_available"] = any(
+                    n == chat_model or n.split(":")[0] == chat_base for n in names
+                )
     except requests.RequestException:
         pass
     return jsonify(info)
@@ -354,7 +368,20 @@ def list_project_rules(project_path=".") -> list[dict]:
 
 @app.get("/api/project/status")
 def project_status():
-    ws, cfg = get_workspace()
+    force = request.args.get("refresh", "").lower() in ("1", "true", "yes")
+    ws, _cfg = get_workspace()
+    cache_key = str(ws.resolve())
+    now = time.monotonic()
+    if (
+        not force
+        and _status_cache.get("key") == cache_key
+        and _status_cache.get("payload") is not None
+        and now - float(_status_cache.get("ts", 0)) < STATUS_CACHE_TTL
+    ):
+        cached = dict(_status_cache["payload"])
+        cached["cached"] = True
+        return jsonify(cached)
+
     profile = scan_active_profile()
 
     mcp_config = {}
@@ -368,12 +395,15 @@ def project_status():
     rules = list_project_rules(str(ws))
     status = wc.workspace_status()
 
-    return jsonify({
+    payload = {
         "profile": profile,
         "mcp_config": sanitize_mcp_config(mcp_config),
         "rules": rules,
         "workspace": status,
-    })
+        "cached": False,
+    }
+    _status_cache.update({"key": cache_key, "payload": payload, "ts": now})
+    return jsonify(payload)
 
 
 @app.post("/api/mcp/install")
@@ -501,6 +531,7 @@ def workspace_set_active():
     try:
         resolved = wc.set_active_workspace(path)
         wc.ensure_default_config(resolved)
+        _clear_status_cache()
         return jsonify({"success": True, "workspace": str(resolved)})
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
@@ -568,16 +599,26 @@ def _catalog_search(goal: str, k: int) -> list[dict]:
 @app.get("/api/brainstorm")
 def brainstorm_route():
     limit = int(request.args.get("limit", "6"))
+    async_enhance = request.args.get("async", "").lower() in ("1", "true", "yes")
     try:
         result = bs.brainstorm(
             limit=limit,
             list_rules=list_project_rules,
             catalog_search=_catalog_search,
             llm_generate=llm.generate,
+            async_enhance=async_enhance,
         )
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.get("/api/brainstorm/job/<job_id>")
+def brainstorm_job_route(job_id: str):
+    job = bs.get_enhancement_job(job_id)
+    if not job:
+        return jsonify({"error": "job not found"}), 404
+    return jsonify(job)
 
 
 # ---------------------------------------------------------------------------
