@@ -232,6 +232,12 @@ def _ollama_generate(
     return r.json().get("message", {}).get("content", "")
 
 
+def _ollama_chat_model() -> str:
+    """Prefer OLLAMA_CHAT_MODEL when set; fall back to OLLAMA_MODEL if same or unset."""
+    chat = OLLAMA_CHAT_MODEL.strip()
+    return chat if chat else OLLAMA_MODEL
+
+
 def _ollama_stream(
     system: str,
     messages: list[dict],
@@ -241,29 +247,35 @@ def _ollama_stream(
     num_predict: int | None = None,
 ) -> Iterator[str]:
     import json
-    use_model = model or OLLAMA_CHAT_MODEL
-    try:
-        r = requests.post(
-            f"{OLLAMA_URL}/api/chat",
-            json={"model": use_model, "messages": _ollama_messages(system, messages),
-                  "stream": True, "options": _ollama_options(temperature, num_predict)},
-            stream=True, timeout=300,
-        )
-    except requests.RequestException as e:
-        raise _ollama_unreachable(e) from e
-    with r:
-        if r.status_code == 404:
-            raise LLMError(f"Model '{use_model}' isn't installed. Run: ollama pull {use_model}")
-        r.raise_for_status()
-        for line in r.iter_lines():
-            if not line:
-                continue
-            obj = json.loads(line.decode("utf-8"))
-            token = obj.get("message", {}).get("content", "")
-            if token:
-                yield token
-            if obj.get("done"):
-                break
+    primary = model or _ollama_chat_model()
+    fallback = OLLAMA_MODEL if primary != OLLAMA_MODEL else None
+    for use_model in filter(None, [primary, fallback]):
+        try:
+            r = requests.post(
+                f"{OLLAMA_URL}/api/chat",
+                json={"model": use_model, "messages": _ollama_messages(system, messages),
+                      "stream": True, "options": _ollama_options(temperature, num_predict)},
+                stream=True, timeout=300,
+            )
+        except requests.RequestException as e:
+            raise _ollama_unreachable(e) from e
+        if r.status_code == 404 and fallback and use_model == primary:
+            r.close()
+            continue
+        with r:
+            if r.status_code == 404:
+                raise LLMError(f"Model '{use_model}' isn't installed. Run: ollama pull {use_model}")
+            r.raise_for_status()
+            for line in r.iter_lines():
+                if not line:
+                    continue
+                obj = json.loads(line.decode("utf-8"))
+                token = obj.get("message", {}).get("content", "")
+                if token:
+                    yield token
+                if obj.get("done"):
+                    return
+        return
 
 
 # --- public interface ------------------------------------------------------
