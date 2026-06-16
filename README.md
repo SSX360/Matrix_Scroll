@@ -223,7 +223,10 @@ so it's treated as optional enrichment — the registry is the robust primary.
 | `GEMINI_MODEL` | `gemini-2.5-flash` | Gemini model to use |
 | `LLM_BACKEND` | `anthropic` | Preferred backend: `anthropic`, `gemini`, or `ollama` |
 | `OLLAMA_MODEL` | `gemma4:e4b` | Local model when using Ollama |
-| `OLLAMA_NUM_PREDICT` | `512` | Max tokens for Ollama generation |
+| `OLLAMA_CHAT_MODEL` | _(same as OLLAMA_MODEL)_ | Faster model for interactive chat (`gemma3:4b` recommended) |
+| `OLLAMA_NUM_PREDICT` | `512` | Max tokens for Ollama chat generation |
+| `OLLAMA_BRAINSTORM_NUM_PREDICT` | `256` | Max tokens for async Ollama brainstorm jobs |
+| `STATUS_CACHE_TTL` | `30` | Seconds to cache `/api/project/status` scans |
 | `OLLAMA_URL` | `http://localhost:11434` | Ollama server address |
 | `TOP_K` | `5` | Doc chunks retrieved per question (web UI) |
 | `COPILOT_WORKSPACE` | _(unset)_ | Absolute path to the user's active codebase (MCP: `${workspaceFolder}`) |

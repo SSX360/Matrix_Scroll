@@ -34,6 +34,22 @@ class LLMTests(unittest.TestCase):
         payload = mock_post.call_args.kwargs["json"]
         self.assertIn("num_predict", payload["options"])
 
+    @patch("llm.requests.post")
+    def test_ollama_stream_uses_chat_model(self, mock_post):
+        mock_resp = unittest.mock.Mock()
+        mock_resp.status_code = 200
+        mock_resp.iter_lines.return_value = iter([
+            b'{"message":{"content":"hi"},"done":true}',
+        ])
+        mock_resp.__enter__ = unittest.mock.Mock(return_value=mock_resp)
+        mock_resp.__exit__ = unittest.mock.Mock(return_value=False)
+        mock_post.return_value = mock_resp
+        with patch.object(llm, "OLLAMA_CHAT_MODEL", "gemma3:4b"):
+            tokens = list(llm._ollama_stream("sys", [{"role": "user", "content": "hi"}], 0.2))
+        self.assertEqual(tokens, ["hi"])
+        payload = mock_post.call_args.kwargs["json"]
+        self.assertEqual(payload["model"], "gemma3:4b")
+
 
 if __name__ == "__main__":
     unittest.main()

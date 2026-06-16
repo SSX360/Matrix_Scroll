@@ -10,7 +10,8 @@
         "GEMINI_API_KEY": "${env:GEMINI_API_KEY}",
         "LLM_BACKEND": "ollama",
         "GEMINI_MODEL": "gemini-2.5-flash",
-        "OLLAMA_MODEL": "gemma4:e4b"
+        "OLLAMA_MODEL": "gemma4:e4b",
+        "OLLAMA_CHAT_MODEL": "gemma3:4b"
       }
     }
   }
