@@ -65,7 +65,7 @@ def get_index() -> S.BM25:
 # Prompt construction
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """You are the Cursor Docs Assistant. You answer questions about \
+SYSTEM_PROMPT = """You are the Cursor Co-pilot. You answer questions about \
 the Cursor AI code editor using ONLY the documentation excerpts provided below.
 
 Rules:
@@ -215,8 +215,18 @@ def home() -> Response:
 
 @app.get("/api/health")
 def health():
-    info = {"model": OLLAMA_MODEL, "ollama": False, "model_available": False,
-            "models": [], "chunks": get_index().N, "llm": llm.backend_status()}
+    status = llm.backend_status()
+    active = status["active"]
+    if active == "ollama":
+        model_label = status["ollama_model"]
+    elif active == "gemini":
+        model_label = status["gemini_model"]
+    elif active == "anthropic":
+        model_label = status["anthropic_model"]
+    else:
+        model_label = OLLAMA_MODEL
+    info = {"model": model_label, "ollama": False, "model_available": False,
+            "models": [], "chunks": get_index().N, "llm": status}
     try:
         r = requests.get(f"{OLLAMA_URL}/api/tags", timeout=3)
         if r.ok:

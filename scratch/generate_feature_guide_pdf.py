@@ -330,7 +330,8 @@ Create a Cursor rule for this repository's Python conventions.
             ["GEMINI_API_KEY", "unset", "Enables Gemini backend."],
             ["GEMINI_MODEL", "gemini-2.5-flash", "Gemini model selection."],
             ["LLM_BACKEND", "anthropic", "Preferred backend; moved to the front of the fallback chain."],
-            ["OLLAMA_MODEL", "gemma3:4b", "Local model name for Ollama."],
+            ["OLLAMA_MODEL", "gemma4:e4b", "Local model name for Ollama."],
+            ["OLLAMA_NUM_PREDICT", "512", "Max tokens for Ollama generation."],
             ["OLLAMA_URL", "http://localhost:11434", "Ollama server URL."],
             ["TOP_K", "5", "Number of doc chunks retrieved for web chat."],
             ["PORT", "random", "Forces the web UI/API port."],
@@ -391,7 +392,7 @@ Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/health"
         "Health should report chunks > 0 and an active LLM backend.",
         "Launcher should say Backend already healthy when the backend is already running.",
         "Stack chat should mention Python, Flask, pip, SDKs, and notebook health for this project.",
-        "MCP smoke test should list 11 tools and confirm scan_project plus scan_notebooks.",
+        "MCP smoke test should list 12 tools and confirm scan_project plus scan_notebooks.",
         "Project status should redact GEMINI_API_KEY and other secret-like env values.",
     ], styles["Body"]))
 

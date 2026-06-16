@@ -15,8 +15,9 @@ It runs several ways over the same engine:
 - **As a local web chat** (`app.py`) — open it in a browser alongside Cursor.
 - **As direct local APIs** — useful for QA, scripts, and quick health checks.
 
-Generation is powered by **Claude** (Anthropic) by default, with **Google
-Gemini** and a **local Ollama** model as fallbacks.
+Generation uses **LLM_BACKEND** to pick a preferred backend, then falls through
+**anthropic → gemini → ollama**. For fully offline use, set `LLM_BACKEND=ollama`
+and run `ollama pull gemma4:e4b`. Cloud backends are used when keys are configured.
 
 | Piece | File | What it does |
 | --- | --- | --- |
@@ -41,15 +42,14 @@ python ingest.py                   # scrape docs + build the MCP catalog index
 ```
 
 Pick a generation backend (resolution tries them in order — **anthropic →
-gemini → ollama** — using the first one with a key + SDK available):
+gemini → ollama** — preferred first via `LLM_BACKEND`):
 
-- **Claude (recommended):** set `ANTHROPIC_API_KEY`. Uses `claude-opus-4-8` by
+- **Local Ollama (offline, common default):** install [Ollama](https://ollama.com/download),
+  run `ollama pull gemma4:e4b`, and set `LLM_BACKEND=ollama`.
+- **Claude:** set `ANTHROPIC_API_KEY`. Uses `claude-opus-4-8` by
   default (set `ANTHROPIC_MODEL=claude-sonnet-4-6` for a cheaper option).
-- **Google Gemini (fallback):** set `GEMINI_API_KEY`. Uses `gemini-2.5-flash` by
+- **Google Gemini:** set `GEMINI_API_KEY`. Uses `gemini-2.5-flash` by
   default (set `GEMINI_MODEL=gemini-2.5-pro` for the stronger option).
-- **Local Ollama (offline):** install [Ollama](https://ollama.com/download),
-  run `ollama pull gemma4:e4b`, and set `LLM_BACKEND=ollama` (or just leave the
-  cloud keys unset — it falls back automatically).
 
 ## 2. Recommended: launch the floating companion
 
