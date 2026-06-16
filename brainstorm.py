@@ -1,0 +1,302 @@
+"""Context-aware brainstorm suggestions for the active workspace."""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass
+from pathlib import Path
+from typing import Any, Callable
+
+import scanner
+import vault
+import workspace_config as wc
+import llm
+
+
+@dataclass
+class BrainstormItem:
+    title: str
+    prompt: str
+    tag: str
+    category: str
+    source: str = "offline"
+
+    def to_dict(self) -> dict[str, str]:
+        return asdict(self)
+
+
+def _scan_workspace(workspace: Path, config: dict[str, Any]) -> dict:
+    nb_cfg = config.get("notebooks", {})
+    if not nb_cfg.get("enabled", True):
+        return scanner.scan_project(str(workspace), max_notebooks=0)
+    return scanner.scan_project(
+        str(workspace),
+        max_notebooks=int(nb_cfg.get("max_notebooks", 10)),
+        exclude_dirs=list(nb_cfg.get("exclude_dirs") or []),
+    )
+
+
+def gather_context(
+    workspace: Path | None = None,
+    config: dict[str, Any] | None = None,
+    list_rules: Callable[[str], list[dict]] | None = None,
+    catalog_search: Callable[[str, int], list[dict]] | None = None,
+) -> dict[str, Any]:
+    ws = workspace if workspace is not None else wc.resolve_workspace()[0]
+    cfg = config or wc.load_config(ws)
+    profile = _scan_workspace(ws, cfg)
+
+    rules: list[dict] = []
+    if list_rules:
+        rules = list_rules(str(ws))
+
+    mcp_hits: list[dict] = []
+    if catalog_search:
+        query_parts = [
+            scanner.profile_summary(profile),
+            *profile.get("frameworks", []),
+            *profile.get("notable_sdks", []),
+        ]
+        goal = " ".join(p for p in query_parts if p)
+        if goal.strip():
+            mcp_hits = catalog_search(goal, 3)
+
+    vault_snippets: list[str] = []
+    if cfg.get("brainstorm", {}).get("include_vault_context", True):
+        vault_path = wc.resolve_vault_path(ws, cfg)
+        if vault_path and vault_path.is_dir():
+            query = " ".join(profile.get("frameworks", []) + profile.get("languages", []))
+            if query.strip():
+                try:
+                    hits = vault.search_vault(query, str(vault_path), k=2)
+                    vault_snippets = [h.get("text", "")[:200] for h in hits]
+                except Exception:
+                    pass
+
+    return {
+        "workspace": str(ws),
+        "configured": wc.resolve_workspace()[1],
+        "profile": profile,
+        "rules": rules,
+        "mcp_hits": mcp_hits,
+        "vault_snippets": vault_snippets,
+        "config": cfg,
+    }
+
+
+def context_summary(context: dict[str, Any]) -> str:
+    profile = context.get("profile", {})
+    parts = []
+    if profile.get("languages"):
+        parts.append(", ".join(profile["languages"][:3]))
+    if profile.get("frameworks"):
+        parts.append(", ".join(profile["frameworks"][:2]))
+    notebooks = profile.get("notebooks") or []
+    if notebooks:
+        parts.append(f"{len(notebooks)} notebook(s)")
+    return " · ".join(parts) if parts else "project"
+
+
+def suggest_offline(context: dict[str, Any], limit: int = 6) -> list[BrainstormItem]:
+    items: list[BrainstormItem] = []
+    profile = context.get("profile", {})
+    rules = context.get("rules") or []
+    configured = context.get("configured", False)
+
+    if not configured:
+        items.append(BrainstormItem(
+            title="Point co-pilot at your active codebase",
+            prompt="Help me configure the active workspace for Cursor Co-pilot so scans target my real project.",
+            tag="Setup",
+            category="workspace",
+        ))
+
+    vault_path = wc.resolve_vault_path(Path(context["workspace"]), context.get("config"))
+    vault_mode = context.get("config", {}).get("vault", {}).get("mode", "project")
+    if vault_mode == "project" and vault_path and not vault_path.exists():
+        items.append(BrainstormItem(
+            title="Create a project notes vault",
+            prompt="Scaffold a docs/vault folder for this project and suggest what notes I should capture.",
+            tag="Vault",
+            category="vault",
+        ))
+    elif vault_mode == "existing" and not vault_path:
+        items.append(BrainstormItem(
+            title="Link your Obsidian vault path",
+            prompt="Walk me through linking an existing Obsidian vault to this project in co-pilot config.",
+            tag="Vault",
+            category="vault",
+        ))
+
+    for nb in profile.get("notebooks") or []:
+        if nb.get("execution_health") == "out_of_order":
+            name = nb.get("filename", "notebook")
+            items.append(BrainstormItem(
+                title=f"Fix out-of-order cells in {name}",
+                prompt=(
+                    f"My notebook {name} has out-of-order execution. "
+                    "Explain the risks and a safe order to re-run cells."
+                ),
+                tag="Notebook health",
+                category="notebook",
+            ))
+            break
+
+    frameworks = profile.get("frameworks") or []
+    langs = profile.get("languages") or []
+    sdks = profile.get("notable_sdks") or []
+
+    if not rules:
+        scope = frameworks[0] if frameworks else (langs[0] if langs else "this project")
+        items.append(BrainstormItem(
+            title=f"Create a Cursor rule for {scope}",
+            prompt=(
+                f"Generate a .cursor/rules file for {scope} conventions in this codebase "
+                "based on what you detect in the project scan."
+            ),
+            tag="Rules",
+            category="rules",
+        ))
+
+    if frameworks:
+        fw = frameworks[0]
+        items.append(BrainstormItem(
+            title=f"Recommend MCP servers for {fw}",
+            prompt=(
+                f"Scan my project and recommend MCP servers that fit a {fw} stack. "
+                "Include install snippets for the top matches."
+            ),
+            tag="MCP setup",
+            category="mcp",
+        ))
+    elif sdks:
+        sdk = sdks[0]
+        items.append(BrainstormItem(
+            title=f"Integrate {sdk} with Cursor MCP",
+            prompt=f"Suggest MCP servers and project rules to improve my {sdk} workflow in this repo.",
+            tag="MCP setup",
+            category="mcp",
+        ))
+
+    for hit in context.get("mcp_hits") or []:
+        name = hit.get("name") or hit.get("title") or "MCP server"
+        items.append(BrainstormItem(
+            title=f"Install {name} for this stack",
+            prompt=f"Recommend how to add the {name} MCP server to this project and what I'd use it for here.",
+            tag="Catalog match",
+            category="mcp",
+        ))
+
+    if "python" in langs and not any(i.category == "notebook" for i in items):
+        items.append(BrainstormItem(
+            title="Scan Jupyter notebooks in this repo",
+            prompt="Scan my project's notebooks and report execution health, imports, and variables.",
+            tag="Notebook scan",
+            category="notebook",
+        ))
+
+    if not items:
+        items.append(BrainstormItem(
+            title="Scan my project stack",
+            prompt="Scan my project and summarize languages, frameworks, SDKs, and notable config signals.",
+            tag="Project scan",
+            category="workspace",
+        ))
+
+    seen: set[str] = set()
+    unique: list[BrainstormItem] = []
+    for item in items:
+        key = item.prompt
+        if key in seen:
+            continue
+        seen.add(key)
+        unique.append(item)
+        if len(unique) >= limit:
+            break
+    return unique
+
+
+def _llm_enhancement_allowed() -> bool:
+    """LLM brainstorm enhancement is for cloud backends only (Ollama is too slow)."""
+    return llm.active_backend() in ("gemini", "anthropic")
+
+
+def suggest_with_llm(
+    context: dict[str, Any],
+    limit: int = 6,
+    generate: Callable[[str, list[dict]], str] | None = None,
+) -> list[BrainstormItem] | None:
+    if not generate:
+        return None
+    if not _llm_enhancement_allowed():
+        return None
+    if not context.get("config", {}).get("brainstorm", {}).get("prefer_llm_enhancement", True):
+        return None
+
+    profile = context.get("profile", {})
+    summary = scanner.profile_summary(profile)
+    notebooks = profile.get("notebooks") or []
+    nb_text = ", ".join(
+        f"{n.get('filename')}:{n.get('execution_health')}" for n in notebooks[:5]
+    ) or "none"
+    rules_count = len(context.get("rules") or [])
+
+    sys_prompt = (
+        "You suggest concise next-step ideas for a developer using Cursor. "
+        "Return exactly one idea per line in the format: TITLE | PROMPT | TAG. "
+        "Keep titles under 60 chars. Prompts must be actionable and reference the stack provided."
+    )
+    user = (
+        f"Stack: {summary}\nNotebooks: {nb_text}\nRules count: {rules_count}\n"
+        f"Generate {limit} tailored brainstorm ideas."
+    )
+    try:
+        raw = generate(sys_prompt, [{"role": "user", "content": user}])
+    except Exception:
+        return None
+
+    items: list[BrainstormItem] = []
+    for line in raw.splitlines():
+        if "|" not in line:
+            continue
+        parts = [p.strip() for p in line.split("|", 2)]
+        if len(parts) < 2:
+            continue
+        title, prompt = parts[0], parts[1]
+        tag = parts[2] if len(parts) > 2 else "Brainstorm"
+        if title and prompt:
+            items.append(BrainstormItem(title, prompt, tag, "llm", source="llm"))
+        if len(items) >= limit:
+            break
+    return items or None
+
+
+def brainstorm(
+    limit: int = 6,
+    list_rules: Callable[[str], list[dict]] | None = None,
+    catalog_search: Callable[[str, int], list[dict]] | None = None,
+    llm_generate: Callable[[str, list[dict]], str] | None = None,
+) -> dict[str, Any]:
+    context = gather_context(list_rules=list_rules, catalog_search=catalog_search)
+    if not context.get("config", {}).get("brainstorm", {}).get("enabled", True):
+        return {
+            "workspace": context["workspace"],
+            "configured": context["configured"],
+            "context_summary": context_summary(context),
+            "suggestions": [],
+            "llm_enhanced": False,
+            "disabled": True,
+        }
+    cfg_limit = int(context.get("config", {}).get("brainstorm", {}).get("max_suggestions", limit))
+    limit = min(limit, cfg_limit)
+
+    offline = suggest_offline(context, limit=limit)
+    llm_items = suggest_with_llm(context, limit=limit, generate=llm_generate)
+    suggestions = llm_items if llm_items else offline
+
+    return {
+        "workspace": context["workspace"],
+        "configured": context["configured"],
+        "context_summary": context_summary(context),
+        "suggestions": [s.to_dict() for s in suggestions],
+        "llm_enhanced": bool(llm_items),
+    }

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "workspace_root": ".",
+  "vault": {
+    "mode": "project",
+    "path": "",
+    "project_subdir": "docs/vault"
+  },
+  "notebooks": {
+    "enabled": true,
+    "warn_on_out_of_order": true,
+    "max_notebooks": 10,
+    "exclude_dirs": [
+      "scratch",
+      ".venv",
+      "node_modules"
+    ]
+  },
+  "brainstorm": {
+    "enabled": true,
+    "max_suggestions": 6,
+    "include_vault_context": true,
+    "prefer_llm_enhancement": true
+  }
+}

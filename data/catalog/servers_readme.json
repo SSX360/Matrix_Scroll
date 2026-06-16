@@ -1,0 +1,162 @@
+[
+ {
+  "name": "Everything",
+  "description": "Reference / test server with prompts, resources, and tools.",
+  "tags": "everything",
+  "source_url": "src/everything",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "Fetch",
+  "description": "Web content fetching and conversion for efficient LLM usage.",
+  "tags": "fetch",
+  "source_url": "src/fetch",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "Filesystem",
+  "description": "Secure file operations with configurable access controls.",
+  "tags": "filesystem",
+  "source_url": "src/filesystem",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "Git",
+  "description": "Tools to read, search, and manipulate Git repositories.",
+  "tags": "git",
+  "source_url": "src/git",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "Memory",
+  "description": "Knowledge graph-based persistent memory system.",
+  "tags": "memory",
+  "source_url": "src/memory",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "Sequential Thinking",
+  "description": "Dynamic and reflective problem-solving through thought sequences.",
+  "tags": "sequential thinking",
+  "source_url": "src/sequentialthinking",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "Time",
+  "description": "Time and timezone conversion capabilities.",
+  "tags": "time",
+  "source_url": "src/time",
+  "github_url": "",
+  "install_snippet": ""
+ },
+ {
+  "name": "AWS KB Retrieval",
+  "description": "Retrieval from AWS Knowledge Base using Bedrock Agent Runtime.",
+  "tags": "aws kb retrieval",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/aws-kb-retrieval-server",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/aws-kb-retrieval-server",
+  "install_snippet": ""
+ },
+ {
+  "name": "Brave Search",
+  "description": "Web and local search using Brave's Search API.  Has been replaced by the [official server](https://github.com/brave/brave-search-mcp-server).",
+  "tags": "brave search",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/brave-search",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/brave-search",
+  "install_snippet": ""
+ },
+ {
+  "name": "EverArt",
+  "description": "AI image generation using various models.",
+  "tags": "everart",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/everart",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/everart",
+  "install_snippet": ""
+ },
+ {
+  "name": "GitHub",
+  "description": "Repository management, file operations, and GitHub API integration.",
+  "tags": "",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/github",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/github",
+  "install_snippet": ""
+ },
+ {
+  "name": "GitLab",
+  "description": "GitLab API, enabling project management.",
+  "tags": "gitlab",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gitlab",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gitlab",
+  "install_snippet": ""
+ },
+ {
+  "name": "Google Drive",
+  "description": "File access and search capabilities for Google Drive.",
+  "tags": "google drive",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gdrive",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/gdrive",
+  "install_snippet": ""
+ },
+ {
+  "name": "Google Maps",
+  "description": "Location services, directions, and place details.",
+  "tags": "google maps",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/google-maps",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/google-maps",
+  "install_snippet": ""
+ },
+ {
+  "name": "PostgreSQL",
+  "description": "Read-only database access with schema inspection.",
+  "tags": "postgresql",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/postgres",
+  "install_snippet": ""
+ },
+ {
+  "name": "Puppeteer",
+  "description": "Browser automation and web scraping.",
+  "tags": "puppeteer",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/puppeteer",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/puppeteer",
+  "install_snippet": ""
+ },
+ {
+  "name": "Redis",
+  "description": "Interact with Redis key-value stores.",
+  "tags": "redis",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/redis",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/redis",
+  "install_snippet": ""
+ },
+ {
+  "name": "Sentry",
+  "description": "Retrieving and analyzing issues from Sentry.io.",
+  "tags": "sentry",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/sentry",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/sentry",
+  "install_snippet": ""
+ },
+ {
+  "name": "Slack",
+  "description": "Channel management and messaging capabilities. Now maintained by [Zencoder](https://github.com/zencoderai/slack-mcp-server)",
+  "tags": "slack",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/slack",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/slack",
+  "install_snippet": ""
+ },
+ {
+  "name": "SQLite",
+  "description": "Database interaction and business intelligence capabilities.",
+  "tags": "sqlite",
+  "source_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/sqlite",
+  "github_url": "https://github.com/modelcontextprotocol/servers-archived/tree/main/src/sqlite",
+  "install_snippet": ""
+ }
+]

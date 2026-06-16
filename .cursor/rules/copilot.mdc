@@ -1,0 +1,15 @@
+---
+description: Guidelines and rules for developing with the Cursor Co-pilot project
+globs: *
+alwaysApply: true
+---
+
+# Cursor Co-pilot Development Guidelines
+
+Always adhere to these guidelines when working in this codebase:
+
+- **LLM Selection**: Default is `LLM_BACKEND=ollama` with `gemma4:e4b` locally; cloud backends (Gemini 2.5 Flash, Claude) are used when configured and preferred. Preserve fallback handlers in `llm.py`.
+- **Project Scan Updates**: When adding new Python modules, check if they need exclusion in `scanner.py` (e.g. adding temporary directories to `_SKIP_DIRS`).
+- **Jupyter Notebook Health**: Keep cells in notebooks ordered. If the execution order becomes scrambled, run the project scanner (`scanner.scan_project`) to identify and clean up the out-of-order state.
+- **Knowledge Vault**: Ground code modifications in the notes indexed by `vault.py`.
+- **MCP Integration**: Register new catalog MCP servers through the `.cursor/mcp.json` configuration file, avoiding direct hardcoded API keys where possible.

@@ -1,0 +1,3202 @@
+[
+ {
+  "name": "inference.sh",
+  "description": "Run 150+ AI apps \u2014 image, video, audio, LLMs, 3D and more. Browse, execute, stream results.",
+  "tags": "ac inference sh",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ac.inference.sh/mcp",
+  "github_url": "https://ac.inference.sh",
+  "install_snippet": "{\"url\": \"https://sh.inference.ac\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "inference.sh",
+  "description": "Run 150+ AI apps \u2014 image, video, audio, LLMs, 3D and more. Browse, execute, stream results.",
+  "tags": "ac inference sh",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ac.inference.sh/mcp",
+  "github_url": "https://ac.inference.sh",
+  "install_snippet": "{\"url\": \"https://sh.inference.ac\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ac.tandem/docs-mcp",
+  "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
+  "tags": "ac tandem docs",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ac.tandem/docs-mcp",
+  "github_url": "https://ac.tandem",
+  "install_snippet": "{\"url\": \"https://tandem.ac/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ac.tandem/docs-mcp",
+  "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
+  "tags": "ac tandem docs",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ac.tandem/docs-mcp",
+  "github_url": "https://ac.tandem",
+  "install_snippet": "{\"url\": \"https://tandem.ac/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ac.tandem/docs-mcp",
+  "description": "Remote MCP server for Tandem docs, install guides, SDKs, workflows, and agent setup help.",
+  "tags": "ac tandem docs",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ac.tandem/docs-mcp",
+  "github_url": "https://ac.tandem",
+  "install_snippet": "{\"url\": \"https://tandem.ac/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "agency.lona/trading",
+  "description": "AI-powered trading strategy development: backtesting, market data, and portfolio analysis",
+  "tags": "agency lona trading",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=agency.lona/trading",
+  "github_url": "https://agency.lona",
+  "install_snippet": "{\"url\": \"https://mcp.lona.agency/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "aTars MCP",
+  "description": "Crypto market signals, technical indicators, and sentiment analysis for AI agents.",
+  "tags": "aarna atars",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.aarna/atars-mcp",
+  "github_url": "https://ai.aarna",
+  "install_snippet": "{\"url\": \"https://mcp.aarna.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ABMeter",
+  "description": "Feature flagging and A/B testing platform with AI-first experimentation workflows.",
+  "tags": "abmeter abmeter",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.abmeter/abmeter",
+  "github_url": "https://ai.abmeter",
+  "install_snippet": "{\"url\": \"https://mcp.abmeter.ai\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AdAdvisor MCP Server",
+  "description": "Query Meta Ads performance data \u2014 accounts, campaigns, ad sets, ads, metrics & settings.",
+  "tags": "adadvisor",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adadvisor/mcp-server",
+  "github_url": "https://ai.adadvisor",
+  "install_snippet": "{\"url\": \"https://api.adadvisor.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AdAdvisor MCP Server",
+  "description": "Query Meta Ads performance data \u2014 accounts, campaigns, ad sets, ads, metrics & settings.",
+  "tags": "adadvisor",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adadvisor/mcp-server",
+  "github_url": "https://ai.adadvisor",
+  "install_snippet": "{\"url\": \"https://api.adadvisor.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.adeu/adeu",
+  "description": "Automated DOCX Redlining Engine",
+  "tags": "adeu adeu",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adeu/adeu",
+  "github_url": "https://ai.adeu",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"adeu\"]}"
+ },
+ {
+  "name": "ai.adeu/adeu",
+  "description": "Automated DOCX Redlining Engine",
+  "tags": "adeu adeu",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adeu/adeu",
+  "github_url": "https://ai.adeu",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@adeu/mcp-server\"]}"
+ },
+ {
+  "name": "ai.adramp/google-ads",
+  "description": "Google Ads MCP server \u2014 manage campaigns, keywords, and metrics.",
+  "tags": "adramp google ads",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adramp/google-ads",
+  "github_url": "https://ai.adramp",
+  "install_snippet": "{\"url\": \"https://mcp.adramp.ai/sse\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "ai.adramp/google-ads",
+  "description": "Google Ads MCP server \u2014 manage campaigns, keywords, and metrics.",
+  "tags": "adramp google ads",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adramp/google-ads",
+  "github_url": "https://ai.adramp",
+  "install_snippet": "{\"url\": \"https://mcp.adramp.ai\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.adramp/google-ads",
+  "description": "Google Ads MCP server \u2014 manage campaigns, keywords, and metrics.",
+  "tags": "adramp google ads",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adramp/google-ads",
+  "github_url": "https://ai.adramp",
+  "install_snippet": "{\"url\": \"https://mcp.adramp.ai\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.adramp/google-ads",
+  "description": "Google Ads MCP server \u2014 manage campaigns, keywords, and metrics.",
+  "tags": "adramp google ads",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adramp/google-ads",
+  "github_url": "https://ai.adramp",
+  "install_snippet": "{\"url\": \"https://mcp.adramp.ai\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AdWeave \u2014 Meta Ads MCP Server",
+  "description": "Meta Ads MCP server with 47 tools for campaigns, creatives, audiences, and insights.",
+  "tags": "adweave meta ads",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.adweave/meta-ads-mcp",
+  "github_url": "https://ai.adweave",
+  "install_snippet": "{\"url\": \"https://mcp.adweave.ai/meta-ads-mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AgentDM",
+  "description": "Agent-to-agent messaging platform using MCP for cross-model communication.",
+  "tags": "agentdm agentdm",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agentdm/agentdm",
+  "github_url": "https://ai.agentdm",
+  "install_snippet": "{\"url\": \"https://api.agentdm.ai/api/v1/grid\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AgentDM: Agent to Agent Communication Platform",
+  "description": "Agent communication platform for agent to agent messaging via MCP. Messages, channels, skills.",
+  "tags": "agentdm agentdm",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agentdm/agentdm",
+  "github_url": "https://ai.agentdm",
+  "install_snippet": "{\"url\": \"https://api.agentdm.ai/mcp/v1/grid\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Agentic News",
+  "description": "AI-powered news intelligence \u2014 21 tools for personalized monitoring, briefings, and semantic search",
+  "tags": "agentic news",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agentic-news/mcp",
+  "github_url": "https://ai.agentic-news",
+  "install_snippet": "{\"url\": \"https://api.agentic-news.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Graffeo Coffee Roasting",
+  "description": "Live MCP catalog for Graffeo Coffee Roasting \u2014 North Beach SF specialty coffee since 1935.",
+  "tags": "agenticshelf graffeo",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agenticshelf/graffeo",
+  "github_url": "https://ai.agenticshelf",
+  "install_snippet": "{\"url\": \"https://api.agenticshelf.ai/m/graffeo/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Graffeo Coffee Roasting",
+  "description": "Live MCP catalog for Graffeo Coffee Roasting - Simply the World's Finest Coffee since 1935.",
+  "tags": "agenticshelf graffeo",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agenticshelf/graffeo",
+  "github_url": "https://ai.agenticshelf",
+  "install_snippet": "{\"url\": \"https://api.agenticshelf.ai/m/graffeo/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Graffeo Coffee Roasting",
+  "description": "Live MCP catalog for Graffeo Coffee Roasting - Simply the World's Finest Coffee since 1935.",
+  "tags": "agenticshelf graffeo",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agenticshelf/graffeo",
+  "github_url": "https://ai.agenticshelf",
+  "install_snippet": "{\"url\": \"https://api.agenticshelf.ai/m/graffeo/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Agentic Shelf",
+  "description": "Hosted MCP for e-commerce: live product catalog, stock, and pricing for AI agents.",
+  "tags": "agenticshelf",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agenticshelf/mcp",
+  "github_url": "https://ai.agenticshelf",
+  "install_snippet": "{\"url\": \"https://api.agenticshelf.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Agentic Terminal Directory",
+  "description": "Verified merchants accepting agentic payments on Lightning/L402/BOLT12/USDT \u2014 search, verify, pay.",
+  "tags": "agenticterminal directory",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agenticterminal/directory",
+  "github_url": "https://ai.agenticterminal",
+  "install_snippet": "{\"url\": \"https://mcp.agenticterminal.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.agentrapay/agentra",
+  "description": "Identity oracle and trust layer for autonomous AI agents. Bidirectional KYA and trust scoring.",
+  "tags": "agentrapay agentra",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agentrapay/agentra",
+  "github_url": "https://ai.agentrapay",
+  "install_snippet": "{\"url\": \"https://api.agentrapay.ai/mcp\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "AgentTrust \u2014 Identity & Trust for A2A Agents",
+  "description": "Identity, trust, and A2A orchestration for autonomous AI agents. Official A2A partner.",
+  "tags": "agenttrust",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.agenttrust/mcp-server",
+  "github_url": "https://ai.agenttrust",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@agenttrust/mcp-server\"], \"env\": {\"AGENTTRUST_API_KEY\": \"${env:AGENTTRUST_API_KEY}\"}}"
+ },
+ {
+  "name": "ai.aient/mcp",
+  "description": "MCP-native AI SRE: ask what's broken in production, get a reviewed GitHub fix PR.",
+  "tags": "aient",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.aient/mcp",
+  "github_url": "https://ai.aient",
+  "install_snippet": "{\"url\": \"https://aient.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.aliengiraffe/spotdb",
+  "description": "Ephemeral data sandbox for AI workflows with guardrails and security",
+  "tags": "aliengiraffe spotdb",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.aliengiraffe/spotdb",
+  "github_url": "https://ai.aliengiraffe",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"docker.io/aliengiraffe/spotdb:0.1.0\"], \"env\": {\"X-API-Key\": \"${env:X-API-Key}\"}}"
+ },
+ {
+  "name": "AlphaCreek MCP",
+  "description": "Access SEC filings efficiently, save time and tokens, and get cited answers.",
+  "tags": "alphacreek alphacreek",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.alphacreek/alphacreek-mcp",
+  "github_url": "https://ai.alphacreek",
+  "install_snippet": "{\"url\": \"https://mcp.alphacreek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AlphaCreek SEC Filings MCP",
+  "description": "Access SEC filings efficiently (10-K, 10-Q, etc), save time and tokens, and get cited answers.",
+  "tags": "alphacreek alphacreek",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.alphacreek/alphacreek-mcp",
+  "github_url": "https://ai.alphacreek",
+  "install_snippet": "{\"url\": \"https://mcp.alphacreek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Alpic",
+  "description": "Manage your projects, debug deployment, and check analytics for any MCP server you host with Alpic",
+  "tags": "alpic alpic",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.alpic.mcp/alpic-mcp",
+  "github_url": "https://ai.alpic.mcp",
+  "install_snippet": "{\"url\": \"https://mcp.alpic.ai\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.alpic.test/test-mcp-server",
+  "description": "Alpic Test MCP Server - great server!",
+  "tags": "alpic test test",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.alpic.test/test-mcp-server",
+  "github_url": "https://ai.alpic.test",
+  "install_snippet": "{\"url\": \"https://test.alpic.ai/\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "Anki MCP Server",
+  "description": "MCP server for Anki flashcards: adaptive review, notes, media, and deck management via AnkiConnect.",
+  "tags": "ankimcp anki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ankimcp/anki-mcp-server\"]}"
+ },
+ {
+  "name": "AnkiMCP Server",
+  "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+  "tags": "ankimcp anki addon",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server-addon",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": ""
+ },
+ {
+  "name": "AnkiMCP Server",
+  "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+  "tags": "ankimcp anki addon",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server-addon",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": ""
+ },
+ {
+  "name": "AnkiMCP Server",
+  "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+  "tags": "ankimcp anki addon",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server-addon",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": ""
+ },
+ {
+  "name": "AnkiMCP Server",
+  "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+  "tags": "ankimcp anki addon",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server-addon",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": ""
+ },
+ {
+  "name": "AnkiMCP Server",
+  "description": "Anki addon that exposes your flashcard collection to AI assistants via a local MCP server.",
+  "tags": "ankimcp anki addon",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.ankimcp/anki-mcp-server-addon",
+  "github_url": "https://ai.ankimcp",
+  "install_snippet": ""
+ },
+ {
+  "name": "AnomalyArmor",
+  "description": "Data observability tools for engineering teams: alerts, freshness, schema drift, lineage, quality.",
+  "tags": "anomalyarmor armor",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.anomalyarmor/armor-mcp",
+  "github_url": "https://ai.anomalyarmor",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"armor-mcp\"], \"env\": {\"ARMOR_API_KEY\": \"${env:ARMOR_API_KEY}\"}}"
+ },
+ {
+  "name": "ai.anzenna/anzenna",
+  "description": "MCP server for Anzenna",
+  "tags": "anzenna anzenna",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.anzenna/anzenna",
+  "github_url": "https://ai.anzenna",
+  "install_snippet": "{\"url\": \"https://mcp.anzenna.ai/sse\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "AppDeploy",
+  "description": "AppDeploy turns app ideas described in AI chat into live full-stack web applications",
+  "tags": "appdeploy deploy",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.appdeploy/deploy-app",
+  "github_url": "https://ai.appdeploy",
+  "install_snippet": "{\"url\": \"https://api-v2.appdeploy.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Arclan MCP Registry",
+  "description": "MCP server registry \u2014 validated by live handshake, scored on reliability, monitored continuously.",
+  "tags": "arclan registry",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.arclan/registry",
+  "github_url": "https://ai.arclan",
+  "install_snippet": "{\"url\": \"https://arclan.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.artidrop/artidrop",
+  "description": "The publishing layer for AI agents. Turn HTML and Markdown into shareable URLs instantly via MCP.",
+  "tags": "artidrop artidrop",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.artidrop/artidrop",
+  "github_url": "https://ai.artidrop",
+  "install_snippet": "{\"url\": \"https://artidrop.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.artidrop/artidrop",
+  "description": "Publish HTML, Markdown, and multi-file sites as shareable URLs instantly via MCP.",
+  "tags": "artidrop artidrop",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.artidrop/artidrop",
+  "github_url": "https://ai.artidrop",
+  "install_snippet": "{\"url\": \"https://artidrop.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Auralogs",
+  "description": "Read-only access to Auralogs production logs: search logs, inspect errors, review AI analyses.",
+  "tags": "auralogs auralogs",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auralogs/auralogs",
+  "github_url": "https://ai.auralogs",
+  "install_snippet": "{\"url\": \"https://mcp.auralogs.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AutEng MCP - Markdown Publishing & Document Share Links",
+  "description": "Publish markdown documents as public share links with mermaid diagram support. Built by AutEng.ai",
+  "tags": "auteng docs",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auteng/docs",
+  "github_url": "https://ai.auteng",
+  "install_snippet": "{\"url\": \"https://auteng.ai/mcp/docs\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AutEng Document Publisher",
+  "description": "Publish markdown as a publicly shareable AutEng document",
+  "tags": "auteng",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auteng/mcp",
+  "github_url": "https://ai.auteng",
+  "install_snippet": "{\"url\": \"https://auteng.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "AutEng MCP - Markdown Publishing & Document Share Links",
+  "description": "Publish markdown documents as public share links with mermaid diagrams. Built by AutEng.ai",
+  "tags": "auteng",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auteng/mcp",
+  "github_url": "https://ai.auteng",
+  "install_snippet": "{\"url\": \"https://auteng.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.autoblocks/contextlayer-mcp",
+  "description": "Personal context management for AI assistants",
+  "tags": "autoblocks contextlayer",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autoblocks/contextlayer-mcp",
+  "github_url": "https://ai.autoblocks",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@contextlayer/mcp\"]}"
+ },
+ {
+  "name": "ai.autoblocks/ctxl",
+  "description": "Personal context management for AI assistants",
+  "tags": "autoblocks ctxl",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autoblocks/ctxl",
+  "github_url": "https://ai.autoblocks",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"ctxl\"]}"
+ },
+ {
+  "name": "ai.autoblocks/ctxl-mcp",
+  "description": "Personal context management for AI assistants",
+  "tags": "autoblocks ctxl",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autoblocks/ctxl-mcp",
+  "github_url": "https://ai.autoblocks",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"ctxl-mcp\"]}"
+ },
+ {
+  "name": "ai.autonomad/computeback",
+  "description": "Agent marketplace: earn $NOMD on B2B work, spend on compute/voice/memory capabilities.",
+  "tags": "autonomad computeback",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autonomad/computeback",
+  "github_url": "https://ai.autonomad",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@autonomad1/computeback-mcp\"], \"env\": {\"COMPUTEBACK_API_URL\": \"${env:COMPUTEBACK_API_URL}\", \"BASE_RPC_URL\": \"${env:BASE_RPC_URL}\", \"AGENT_DID\": \"${env:AGENT_DID}\", \"AGENT_HMAC_SECRET\": \"${env:AGENT_HMAC_SECRET}\"}}"
+ },
+ {
+  "name": "ai.autonomad/computeback",
+  "description": "Agent Rewards Marketplace: earn $NOMD on B2B work, spend on agent capabilities.",
+  "tags": "autonomad computeback",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autonomad/computeback",
+  "github_url": "https://ai.autonomad",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@autonomad1/computeback-mcp\"], \"env\": {\"COMPUTEBACK_API_URL\": \"${env:COMPUTEBACK_API_URL}\", \"BASE_RPC_URL\": \"${env:BASE_RPC_URL}\", \"AGENT_DID\": \"${env:AGENT_DID}\", \"AGENT_HMAC_SECRET\": \"${env:AGENT_HMAC_SECRET}\"}}"
+ },
+ {
+  "name": "ai.autonomad/travel",
+  "description": "AI travel agent \u2014 book flights, hotels, activities, and events worldwide via autonomad.ai.",
+  "tags": "autonomad travel",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autonomad/travel",
+  "github_url": "https://ai.autonomad",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"autonomad-travel\"], \"env\": {\"AUTONOMAD_API_URL\": \"${env:AUTONOMAD_API_URL}\", \"AUTONOMAD_AGENT_MODE\": \"${env:AUTONOMAD_AGENT_MODE}\"}}"
+ },
+ {
+  "name": "AutoRFP.ai",
+  "description": "Search AutoRFP.ai projects, requirements, content library, and tags for Q&A and analytics.",
+  "tags": "autorfp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.autorfp/mcp",
+  "github_url": "https://ai.autorfp",
+  "install_snippet": "{\"url\": \"https://{api_host}/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.auxen/auxen",
+  "description": "Provision private AI model endpoints on dedicated GPUs (Llama, Qwen, Mistral). Pay per minute.",
+  "tags": "auxen auxen",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auxen/auxen",
+  "github_url": "https://ai.auxen",
+  "install_snippet": "{\"url\": \"https://api.auxen.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.auxen/auxen",
+  "description": "Provision private AI model endpoints on dedicated GPUs (Llama, Qwen, Mistral). Pay per minute.",
+  "tags": "auxen auxen",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auxen/auxen",
+  "github_url": "https://ai.auxen",
+  "install_snippet": "{\"url\": \"https://api.auxen.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Auxen",
+  "description": "Provision private AI model endpoints on dedicated GPUs (Llama, Qwen, Mistral). Pay per minute.",
+  "tags": "auxen auxen",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.auxen/auxen",
+  "github_url": "https://ai.auxen",
+  "install_snippet": "{\"url\": \"https://api.auxen.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Inferventis MCP Server",
+  "description": "Loan & mortgage calculator, compound interest, ROI, crypto prices, FX conversion for AI agents.",
+  "tags": "bankee inferventis",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bankee/inferventis-mcp",
+  "github_url": "https://ai.bankee",
+  "install_snippet": "{\"url\": \"https://mcp-server-295985738387.europe-west1.run.app/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bareun \u2014 Korean NLP & Spell/Grammar Checking",
+  "description": "Korean NLP MCP server: morphological analysis, tokenization, spell & grammar checking (Bareun)",
+  "tags": "bareun bareun",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bareun/bareun",
+  "github_url": "https://ai.bareun",
+  "install_snippet": "{\"url\": \"https://api.bareun.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.baselight/baselight",
+  "description": "Query Baselight's public catalog of 70,000+ datasets \u2014 finance, demographics, sports, and more.",
+  "tags": "baselight baselight",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.baselight/baselight",
+  "github_url": "https://ai.baselight",
+  "install_snippet": "{\"url\": \"https://api.baselight.app/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bezal \u2014 Local Business Intelligence for AI Agents",
+  "description": "Search 7,000+ local service businesses across America by category, location, or keyword.",
+  "tags": "bezal local commerce",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bezal/local-commerce",
+  "github_url": "https://ai.bezal",
+  "install_snippet": "{\"url\": \"https://app.bezal.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BittleBits GEO Assistant",
+  "description": "GEO scores and content-rewrite suggestions for any web page, as MCP tools.",
+  "tags": "bittlebits bittlebits",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bittlebits/bittlebits",
+  "github_url": "https://ai.bittlebits",
+  "install_snippet": "{\"url\": \"https://bittlebits.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BlueNexus Universal MCP",
+  "description": "Connect your AI to all your data - 200+ sources, intelligently filtered, compliance-ready.",
+  "tags": "bluenexus universal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bluenexus/universal-mcp",
+  "github_url": "https://ai.bluenexus",
+  "install_snippet": "{\"url\": \"https://api.bluenexus.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "bolthub Marketplace",
+  "description": "Discover and call every paid API on the bolthub marketplace with automatic L402 Lightning payments.",
+  "tags": "bolthub registry",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bolthub/registry",
+  "github_url": "https://ai.bolthub",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@bolthub/mcp-registry\"], \"env\": {\"LND_REST_HOST\": \"${env:LND_REST_HOST}\", \"LND_MACAROON\": \"${env:LND_MACAROON}\", \"NWC_URI\": \"${env:NWC_URI}\", \"LNBITS_URL\": \"${env:LNBITS_URL}\", \"LNBITS_ADMIN_KEY\": \"${env:LNBITS_ADMIN_KEY}\", \"PHOENIXD_URL\": \"${env:PHOENIXD_URL}\", \"PHOENIXD_PASSWORD\": \"${env:PHOENIXD_PASSWORD}\", \"BUDGET_SATS\": \"${env:BUDGET_SATS}\", \"BOLTHUB_AUTH_TOKEN\": \"${env:BOLTHUB_AUTH_TOKEN}\"}}"
+ },
+ {
+  "name": "bolthub Marketplace",
+  "description": "Discover and call every paid API on the bolthub marketplace with automatic L402 Lightning payments.",
+  "tags": "bolthub registry",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bolthub/registry",
+  "github_url": "https://ai.bolthub",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@bolthub/mcp-registry\"], \"env\": {\"LND_REST_HOST\": \"${env:LND_REST_HOST}\", \"LND_MACAROON\": \"${env:LND_MACAROON}\", \"NWC_URI\": \"${env:NWC_URI}\", \"LNBITS_URL\": \"${env:LNBITS_URL}\", \"LNBITS_ADMIN_KEY\": \"${env:LNBITS_ADMIN_KEY}\", \"PHOENIXD_URL\": \"${env:PHOENIXD_URL}\", \"PHOENIXD_PASSWORD\": \"${env:PHOENIXD_PASSWORD}\", \"BUDGET_SATS\": \"${env:BUDGET_SATS}\", \"BOLTHUB_AUTH_TOKEN\": \"${env:BOLTHUB_AUTH_TOKEN}\"}}"
+ },
+ {
+  "name": "Boolsai Directory",
+  "description": "Indexed ecommerce site directory \u2014 vendor lookups, brands by city/market/founder. 10 tools.",
+  "tags": "boolsai directory",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.boolsai/directory",
+  "github_url": "https://ai.boolsai",
+  "install_snippet": "{\"url\": \"https://directory.boolsai.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Boolsai Grep",
+  "description": "Parallel regex across all Boolsai scans \u2014 discover new vendor patterns, niche signals. 4 tools.",
+  "tags": "boolsai grep",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.boolsai/grep",
+  "github_url": "https://ai.boolsai",
+  "install_snippet": "{\"url\": \"https://grep.boolsai.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Boolsai Scan",
+  "description": "Live tech-stack scan of any public site \u2014 vendors, account IDs, scripts, JSON-LD. 2 tools.",
+  "tags": "boolsai scan",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.boolsai/scan",
+  "github_url": "https://ai.boolsai",
+  "install_snippet": "{\"url\": \"https://boolsai.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Boolsai Signals",
+  "description": "Quant-research MCP \u2014 tradeable signals from public-company website stack changes. 7 tools.",
+  "tags": "boolsai signals",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.boolsai/signals",
+  "github_url": "https://ai.boolsai",
+  "install_snippet": "{\"url\": \"https://signals.boolsai.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BorealHost",
+  "description": "Agent-native web hosting \u2014 deploy sites, manage DNS, register domains, scale infrastructure",
+  "tags": "borealhost",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.borealhost/mcp",
+  "github_url": "https://ai.borealhost",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"borealhost-mcp\"], \"env\": {\"BOREALHOST_API_KEY\": \"${env:BOREALHOST_API_KEY}\"}}"
+ },
+ {
+  "name": "BorealHost",
+  "description": "Agent-native web hosting \u2014 deploy sites, manage DNS, register domains, scale infrastructure",
+  "tags": "borealhost",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.borealhost/mcp",
+  "github_url": "https://ai.borealhost",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"borealhost-mcp\"], \"env\": {\"BOREALHOST_API_KEY\": \"${env:BOREALHOST_API_KEY}\"}}"
+ },
+ {
+  "name": "BorealHost",
+  "description": "Agent-native web hosting \u2014 deploy sites, manage DNS, register domains, scale infrastructure",
+  "tags": "borealhost",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.borealhost/mcp",
+  "github_url": "https://ai.borealhost",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"borealhost-mcp\"], \"env\": {\"BOREALHOST_API_KEY\": \"${env:BOREALHOST_API_KEY}\"}}"
+ },
+ {
+  "name": "BorealHost",
+  "description": "Agent-native web hosting \u2014 deploy sites, manage DNS, register domains, scale infrastructure",
+  "tags": "borealhost",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.borealhost/mcp",
+  "github_url": "https://ai.borealhost",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"borealhost-mcp\"], \"env\": {\"BOREALHOST_API_KEY\": \"${env:BOREALHOST_API_KEY}\"}}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bowmark",
+  "description": "Pre-computed navigation recipes for public websites \u2014 skip explore-and-discover.",
+  "tags": "bowmark bowmark",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bowmark/bowmark",
+  "github_url": "https://ai.bowmark",
+  "install_snippet": "{\"url\": \"https://api.bowmark.ai/mcp?s=r\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bring Your AI",
+  "description": "No-data MCP handoff for local Claude Code to Codex harness moves. $49 lifetime.",
+  "tags": "bringyour bringyour",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bringyour/bringyour",
+  "github_url": "https://ai.bringyour",
+  "install_snippet": "{\"url\": \"https://bringyour.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Bunzee",
+  "description": "Turn your app idea into IA, wireframes, PRD, style guides, and dev specs for coding agents.",
+  "tags": "bunzee bunzee",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.bunzee/bunzee",
+  "github_url": "https://ai.bunzee",
+  "install_snippet": "{\"url\": \"https://bunzee.ai/mcp-server\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.butlerbrain/mcp",
+  "description": "Persistent memory for AI assistants. Save once; recall from Claude, ChatGPT, or any MCP client.",
+  "tags": "butlerbrain",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.butlerbrain/mcp",
+  "github_url": "https://ai.butlerbrain",
+  "install_snippet": "{\"url\": \"https://api.butlerbrain.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.buyersense/buyersense",
+  "description": "MCP server for the BuyerSense API. Get buyer signals from any MCP client.",
+  "tags": "buyersense buyersense",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.buyersense/buyersense",
+  "github_url": "https://ai.buyersense",
+  "install_snippet": "{\"url\": \"https://mcp.buyersense.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "BuyWhere MCP",
+  "description": "BuyWhere MCP server for product search, price comparison, and affiliate-ready shopping workflows.",
+  "tags": "buywhere buywhere",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.buywhere/buywhere-mcp",
+  "github_url": "https://ai.buywhere",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"buywhere-mcp\"], \"env\": {\"BUYWHERE_API_KEY\": \"${env:BUYWHERE_API_KEY}\", \"BUYWHERE_API_URL\": \"${env:BUYWHERE_API_URL}\"}}"
+ },
+ {
+  "name": "BuyWhere MCP",
+  "description": "Product search, price comparison, and affiliate-ready shopping across Singapore and US retailers.",
+  "tags": "buywhere buywhere",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.buywhere/buywhere-mcp",
+  "github_url": "https://ai.buywhere",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@buywhere/mcp-server\"], \"env\": {\"BUYWHERE_API_KEY\": \"${env:BUYWHERE_API_KEY}\", \"BUYWHERE_API_URL\": \"${env:BUYWHERE_API_URL}\"}}"
+ },
+ {
+  "name": "BuyWhere Product Catalog",
+  "description": "Search 1.5M+ products across 20+ platforms. Compare prices, find deals, browse categories.",
+  "tags": "buywhere catalog api",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.buywhere/catalog-api",
+  "github_url": "https://ai.buywhere",
+  "install_snippet": "{\"url\": \"https://mcp.buywhere.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ByteRay AI",
+  "description": "AI-augmented binary vulnerability analysis with 38 MCP tools for taint tracing and zero-day hunting",
+  "tags": "byteray byteray",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.byteray/byteray-mcp",
+  "github_url": "https://ai.byteray",
+  "install_snippet": "{\"url\": \"https://mcp.byteray.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ByteRay MCP",
+  "description": "AI-powered binary vulnerability hunter lifting binaries to LLM-readable forms for zero-day discovery",
+  "tags": "byteray byteray",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.byteray/byteray-mcp",
+  "github_url": "https://ai.byteray",
+  "install_snippet": "{\"url\": \"https://mcp.byteray.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ByteRay AI",
+  "description": "Hunt zero-days by talking to binaries. 40+ tools. Hosted, OAuth + SSO, invite: hi@byteray.ai",
+  "tags": "byteray byteray",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.byteray/byteray-mcp",
+  "github_url": "https://ai.byteray",
+  "install_snippet": "{\"url\": \"https://mcp.byteray.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "CalendarMCP",
+  "description": "Hosted Google Calendar MCP server for AI agents. No self-hosting or Google Cloud setup.",
+  "tags": "calendarmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.calendarmcp/server",
+  "github_url": "https://ai.calendarmcp",
+  "install_snippet": "{\"url\": \"https://calendarmcp.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Calfeed",
+  "description": "Turn a written schedule into a live calendar link people subscribe to in Apple, Google, Outlook.",
+  "tags": "calfeed calfeed",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.calfeed/calfeed",
+  "github_url": "https://ai.calfeed",
+  "install_snippet": "{\"url\": \"https://calfeed.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.canaryusers/canaryusers",
+  "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
+  "tags": "canaryusers canaryusers",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.canaryusers/canaryusers",
+  "github_url": "https://ai.canaryusers",
+  "install_snippet": "{\"url\": \"https://www.canaryusers.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.canaryusers/canaryusers",
+  "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
+  "tags": "canaryusers canaryusers",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.canaryusers/canaryusers",
+  "github_url": "https://ai.canaryusers",
+  "install_snippet": "{\"url\": \"https://www.canaryusers.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.canaryusers/canaryusers",
+  "description": "A flock of AI users tests your deployed app and reports where real people get stuck, with fixes.",
+  "tags": "canaryusers canaryusers",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.canaryusers/canaryusers",
+  "github_url": "https://ai.canaryusers",
+  "install_snippet": "{\"url\": \"https://www.canaryusers.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.canvora/canvora",
+  "description": "Create professional visuals from text, URLs, or PDFs. Carousels, presentations, posts. 100+ formats",
+  "tags": "canvora canvora",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.canvora/canvora",
+  "github_url": "https://ai.canvora",
+  "install_snippet": "{\"url\": \"https://api.canvora.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.childadhd/library",
+  "description": "Clinician-reviewed library on ADHD in children \u2014 evaluation, treatment, school, parenting.",
+  "tags": "childadhd library",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.childadhd/library",
+  "github_url": "https://ai.childadhd",
+  "install_snippet": "{\"url\": \"https://childadhd.ai/api/mcp/v1\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.childanxiety/library",
+  "description": "Clinician-reviewed library on anxiety, OCD, and phobias in children ages 5\u201312.",
+  "tags": "childanxiety library",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.childanxiety/library",
+  "github_url": "https://ai.childanxiety",
+  "install_snippet": "{\"url\": \"https://childanxiety.ai/api/mcp/v1\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.childpsychiatry/library",
+  "description": "Clinician-reviewed library on child psychiatric evaluation and medication decision-making.",
+  "tags": "childpsychiatry library",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.childpsychiatry/library",
+  "github_url": "https://ai.childpsychiatry",
+  "install_snippet": "{\"url\": \"https://childpsychiatry.ai/api/mcp/v1\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "China Marketing AI Intelligence MCP",
+  "description": "Remote MCP server for China brand visibility, destination demand, and KOL discovery workflows.",
+  "tags": "chinamarketing intelligence",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.chinamarketing/intelligence",
+  "github_url": "https://ai.chinamarketing",
+  "install_snippet": "{\"url\": \"https://api.chinamarketing.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "China Marketing AI Intelligence MCP",
+  "description": "Remote MCP server for China brand visibility, destination demand, and KOL discovery workflows.",
+  "tags": "chinamarketing intelligence",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.chinamarketing/intelligence",
+  "github_url": "https://ai.chinamarketing",
+  "install_snippet": "{\"url\": \"https://api.chinamarketing.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cirra AI Salesforce Admin MCP Server",
+  "description": "Comprehensive Salesforce administration and data management capabilities",
+  "tags": "cirra salesforce",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cirra/salesforce-mcp",
+  "github_url": "https://ai.cirra",
+  "install_snippet": "{\"url\": \"https://mcp.cirra.ai/sfdc/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Clarid Compliance",
+  "description": "Check bank marketing for FDIC, NCUA, TILA, Reg DD, Reg Z, UDAAP, and Equal Housing compliance.",
+  "tags": "clarid compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.clarid/compliance",
+  "github_url": "https://ai.clarid",
+  "install_snippet": "{\"url\": \"https://mcp.clarid.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Clarid HMDA Validator",
+  "description": "Validate HMDA LAR files against CFPB edit checks for community banks and credit unions.",
+  "tags": "clarid hmda",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.clarid/hmda",
+  "github_url": "https://ai.clarid",
+  "install_snippet": "{\"url\": \"https://api.clarid.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Contabo (VPS) MCP Server",
+  "description": "Contabo API (v1.0.0) as MCP tools for cloud provisioning, and management. Powered by HAPI MCP server",
+  "tags": "contabo",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/contabo",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://contabo.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "HAPI MCP Server",
+  "description": "HAPI MCP server: Dynamically exposes OpenAPI REST APIs as MCP tools for AI assistants",
+  "tags": "hapi",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/hapi-mcp",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"docker.io/hapimcp/hapi-cli:0.6.0\"], \"env\": {\"HAPI_FQDN\": \"${env:HAPI_FQDN}\", \"HAPI_HOME\": \"${env:HAPI_HOME}\", \"PROJECT_NAME\": \"${env:PROJECT_NAME}\", \"HAPI_OPENAPI\": \"${env:HAPI_OPENAPI}\", \"HAPI_URL\": \"${env:HAPI_URL}\", \"HAPI_PORT\": \"${env:HAPI_PORT}\", \"HAPI_HEADLESS\": \"${env:HAPI_HEADLESS}\", \"HAPI_MCP\": \"${env:HAPI_MCP}\", \"HAPI_DEV\": \"${env:HAPI_DEV}\", \"HAPI_CORS\": \"${env:HAPI_CORS}\", \"HAPI_CONFIG_FILES\": \"${env:HAPI_CONFIG_FILES}\", \"NODE_ENV\": \"${env:NODE_ENV}\"}}"
+ },
+ {
+  "name": "Lenny Rachitsky Podcast Transcripts MCP Server",
+  "description": "MCP server for structured access to Lenny Rachitsky podcast transcripts. For content creators.",
+  "tags": "lenny rachitsky podcast",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/lenny-rachitsky-podcast",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://lenny-rachitsky.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "LinkedIn MCP Server",
+  "description": "LinkedIn API as MCP tools to retrieve profile data and publish content. Powered by HAPI MCP.",
+  "tags": "linkedin",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/linkedin",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://linkedin.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "OpenAI Tools MCP Server",
+  "description": "Focused MCP server for OpenAI image/audio generation (v2.0.0). Wraps endpoints via HAPI CLI.",
+  "tags": "openai tools",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/openai-tools",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://openai-tools.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Petstore MCP Server",
+  "description": "Swagger Petstore API (v1.0.27) as MCP for testing and prototyping powered by the HAPI MCP server",
+  "tags": "petstore",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/petstore",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://petstore.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "MCP Registry Server",
+  "description": "Publish and discover MCP servers via the official MCP Registry. Powered by HAPI MCP server.",
+  "tags": "registry",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/registry",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://registry.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Agent Skills Search Server",
+  "description": "Search and discover Agent Skills from the skills.sh registry. Powered by HAPI MCP server.",
+  "tags": "skills search",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/skills-search",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://skills-sh.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "HAPI Strava MCP Server",
+  "description": "Strava MCP tools for AI: athletes, activities, segments, clubs, routes. Powered by HAPI MCP server.",
+  "tags": "strava",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.com.mcp/strava",
+  "github_url": "https://ai.com.mcp",
+  "install_snippet": "{\"url\": \"https://strava.run.mcp.com.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Compeller",
+  "description": "Create and track AI music videos and audio-reactive visuals from songs.",
+  "tags": "compeller compel",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.compeller/compel",
+  "github_url": "https://ai.compeller",
+  "install_snippet": "{\"url\": \"https://compeller.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Compeller",
+  "description": "Create and track AI music videos and audio-reactive visuals from songs.",
+  "tags": "compeller compel",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.compeller/compel",
+  "github_url": "https://ai.compeller",
+  "install_snippet": "{\"url\": \"https://compeller.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ComplyHat",
+  "description": "MCP for AI compliance documentation \u2014 EU AI Act, SR 11-7, NAIC + 6 more frameworks.",
+  "tags": "complyhat compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyhat/compliance",
+  "github_url": "https://ai.complyhat",
+  "install_snippet": "{\"url\": \"https://complyhat.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ComplyHat",
+  "description": "MCP for AI compliance documentation \u2014 EU AI Act, SR 11-7, NAIC + 6 more frameworks.",
+  "tags": "complyhat compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyhat/compliance",
+  "github_url": "https://ai.complyhat",
+  "install_snippet": "{\"url\": \"https://complyhat.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ComplyHat",
+  "description": "MCP for AI compliance documentation across SR 26-2, EU AI Act, NIST AI RMF, and ISO/IEC 42001.",
+  "tags": "complyhat compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyhat/compliance",
+  "github_url": "https://ai.complyhat",
+  "install_snippet": "{\"url\": \"https://complyhat.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ComplyHat",
+  "description": "MCP for AI compliance documentation across SR 26-2, EU AI Act, NIST AI RMF, and ISO/IEC 42001.",
+  "tags": "complyhat compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyhat/compliance",
+  "github_url": "https://ai.complyhat",
+  "install_snippet": "{\"url\": \"https://complyhat.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ComplyHat",
+  "description": "MCP for AI compliance documentation across SR 26-2, EU AI Act, NIST AI RMF, and ISO/IEC 42001.",
+  "tags": "complyhat compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyhat/compliance",
+  "github_url": "https://ai.complyhat",
+  "install_snippet": "{\"url\": \"https://complyhat.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ComplyHat",
+  "description": "MCP for AI compliance documentation across SR 26-2, EU AI Act, NIST AI RMF, and ISO/IEC 42001.",
+  "tags": "complyhat compliance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyhat/compliance",
+  "github_url": "https://ai.complyhat",
+  "install_snippet": "{\"url\": \"https://complyhat.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.complyme.mcp/mcp",
+  "description": "ComplyMe.AI MCP server for legal & data protection risk analysis and audits.",
+  "tags": "complyme",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.complyme.mcp/mcp",
+  "github_url": "https://ai.complyme.mcp",
+  "install_snippet": ""
+ },
+ {
+  "name": "Constellation Credit",
+  "description": "Financial and covenant data for public and private credit: statements, cap stacks, covenants.",
+  "tags": "constellationfinance constellation finance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.constellationfinance/constellation-finance-mcp",
+  "github_url": "https://ai.constellationfinance",
+  "install_snippet": "{\"url\": \"https://mcp.constellationfinance.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Constellation Credit",
+  "description": "Financial and covenant data for public and private credit: statements, cap stacks, covenants.",
+  "tags": "constellationfinance constellation finance",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.constellationfinance/constellation-finance-mcp",
+  "github_url": "https://ai.constellationfinance",
+  "install_snippet": "{\"url\": \"https://mcp.constellationfinance.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.contextstudios/mcp",
+  "description": "AI agency API: 25 free tools for glossary, comparisons, blog, guides, and estimates",
+  "tags": "contextstudios",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.contextstudios/mcp",
+  "github_url": "https://ai.contextstudios",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"contextstudios-mcp\"]}"
+ },
+ {
+  "name": "Conveo",
+  "description": "Qualitative research platform. Design studies, analyze interviews, and generate insights.",
+  "tags": "conveo conveo",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.conveo/conveo",
+  "github_url": "https://ai.conveo",
+  "install_snippet": "{\"url\": \"https://app.conveo.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cookiy",
+  "description": "AI user research via studies, interviews, recruitment, reports, and quantitative surveys.",
+  "tags": "cookiy cookiy",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cookiy/cookiy",
+  "github_url": "https://ai.cookiy",
+  "install_snippet": "{\"url\": \"https://s-api.cookiy.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cookiy",
+  "description": "AI user research through MCP: studies, AI interviews, recruitment, and insight reports.",
+  "tags": "cookiy cookiy",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cookiy/cookiy",
+  "github_url": "https://ai.cookiy",
+  "install_snippet": "{\"url\": \"https://s-api.cookiy.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cookiy",
+  "description": "AI user research via study creation, interviews, recruitment, and reports.",
+  "tags": "cookiy cookiy",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cookiy/cookiy",
+  "github_url": "https://ai.cookiy",
+  "install_snippet": "{\"url\": \"https://s-api.cookiy.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cookiy",
+  "description": "AI user research via study creation, interviews, recruitment, and reports.",
+  "tags": "cookiy cookiy",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cookiy/cookiy",
+  "github_url": "https://ai.cookiy",
+  "install_snippet": "{\"url\": \"https://s-api.cookiy.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cookiy",
+  "description": "AI user research via study creation, interviews, recruitment, and reports.",
+  "tags": "cookiy cookiy",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cookiy/cookiy",
+  "github_url": "https://ai.cookiy",
+  "install_snippet": "{\"url\": \"https://s-api.cookiy.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Cosmonote",
+  "description": "Access your Cosmonote audio notes, transcriptions, summaries, and action items.",
+  "tags": "cosmonote notes",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cosmonote/notes",
+  "github_url": "https://ai.cosmonote",
+  "install_snippet": "{\"url\": \"https://nebula.cosmonote.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.cueapi/mcp",
+  "description": "Schedule agent work and report write-once outcomes via CueAPI from any MCP host.",
+  "tags": "cueapi",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.cueapi/mcp",
+  "github_url": "https://ai.cueapi",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@cueapi/mcp\"], \"env\": {\"CUEAPI_API_KEY\": \"${env:CUEAPI_API_KEY}\", \"CUEAPI_BASE_URL\": \"${env:CUEAPI_BASE_URL}\"}}"
+ },
+ {
+  "name": "D50 AI \u2014 Sales, Marketing & Hiring Automation",
+  "description": "246 tools to run sales, marketing & hiring: CRM, leads, AI calling, content, recruiting & SEO.",
+  "tags": "d50 d50 platform",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.d50/d50-platform",
+  "github_url": "https://ai.d50",
+  "install_snippet": "{\"url\": \"https://app.d50.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "DataForB2B",
+  "description": "Search and enrich B2B people & companies \u2014 70+ filters, live enrichment, emails, lookalike.",
+  "tags": "dataforb2b dataforb2b",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dataforb2b/dataforb2b",
+  "github_url": "https://ai.dataforb2b",
+  "install_snippet": "{\"url\": \"https://mcp.dataforb2b.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "DataForB2B",
+  "description": "Search and enrich B2B people & companies \u2014 70+ filters (funding, linkedin, industry, country, ...).",
+  "tags": "dataforb2b dataforb2b",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dataforb2b/dataforb2b",
+  "github_url": "https://ai.dataforb2b",
+  "install_snippet": "{\"url\": \"https://mcp.dataforb2b.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "DataMerge MCP",
+  "description": "B2B data enrichment for 375M+ companies: legal entities, corporate hierarchies, and contacts.",
+  "tags": "datamerge",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.datamerge/mcp",
+  "github_url": "https://ai.datamerge",
+  "install_snippet": "{\"url\": \"https://mcp.datamerge.ai\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "DeepLedger \u2014 AI Accountant for QuickBooks",
+  "description": "AI Accountant for Quickbooks- recording, reconcile, month-end close",
+  "tags": "deepledger",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.deepledger/mcp",
+  "github_url": "https://ai.deepledger",
+  "install_snippet": "{\"url\": \"https://mcp.deepledger.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Creator SKILL \u2014 Influencer Discovery",
+  "description": "AI influencer search on TikTok, Instagram, YouTube. Deinai MCP token required; credits per result.",
+  "tags": "deinai creator skill",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.deinai/creator-skill",
+  "github_url": "https://ai.deinai",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"deinai-mcp\"], \"env\": {\"DEINAI_MCP_TOKEN\": \"${env:DEINAI_MCP_TOKEN}\", \"DEINAI_MCP_URL\": \"${env:DEINAI_MCP_URL}\"}}"
+ },
+ {
+  "name": "delega.ai for AWS Pricing Calculator",
+  "description": "Create AWS cost estimates and shareable AWS Pricing Calculator URLs.",
+  "tags": "delega aws pricing calculator",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.delega/aws-pricing-calculator",
+  "github_url": "https://ai.delega",
+  "install_snippet": "{\"url\": \"https://calculator.delega.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Demand Discovery AI",
+  "description": "Sales-agent MCP for Demand Discovery AI. Validate startup ideas with behavioral signals.",
+  "tags": "demanddiscovery",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.demanddiscovery/mcp",
+  "github_url": "https://ai.demanddiscovery",
+  "install_snippet": "{\"url\": \"https://mcp.demanddiscovery.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dimetrics/dimetrics",
+  "description": "HPC lease economics, datacenter power, debt linkage, and political risk for miners and neoclouds.",
+  "tags": "dimetrics dimetrics",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dimetrics/dimetrics",
+  "github_url": "https://ai.dimetrics",
+  "install_snippet": "{\"url\": \"https://www.dimetrics.ai/api/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "TVWizard",
+  "description": "Control Android TV from any AI. 21 MCP tools: keys, apps, titles, playback, volume, observe.",
+  "tags": "djwizard tvwizard",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.djwizard/tvwizard",
+  "github_url": "https://ai.djwizard",
+  "install_snippet": "{\"url\": \"https://tv.djwizard.ai/mcp/\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "TVWizard",
+  "description": "Control Android TV from any AI. 38 MCP tools: playback, recap, recommend, smart-home, schedules.",
+  "tags": "djwizard tvwizard",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.djwizard/tvwizard",
+  "github_url": "https://ai.djwizard",
+  "install_snippet": "{\"url\": \"https://tv.djwizard.ai/mcp/\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "DoneThat",
+  "description": "Privacy-first work tracking with summaries, reports, coaching, and AI-ready long-term memory.",
+  "tags": "donethat donethat",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.donethat/donethat",
+  "github_url": "https://ai.donethat",
+  "install_snippet": "{\"url\": \"https://mcp.donethat.ai/\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dragoneye/mcp",
+  "description": "Build zero-shot video models for object detection, and category and attribute classification.",
+  "tags": "dragoneye",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dragoneye/mcp",
+  "github_url": "https://ai.dragoneye",
+  "install_snippet": "{\"url\": \"https://nexus.api.dragoneye.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Dreamlit",
+  "description": "Create, test, publish, and manage Dreamlit notification workflows from AI clients.",
+  "tags": "dreamlit",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dreamlit/mcp",
+  "github_url": "https://ai.dreamlit",
+  "install_snippet": "{\"url\": \"https://mcp.dreamlit.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Drillr \u2014 The financial MCP for AI agents",
+  "description": "The financial MCP for AI agents - 90+ financial tables, SEC filings, signals, alt-data.",
+  "tags": "drillr drillr",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.drillr/drillr",
+  "github_url": "https://ai.drillr",
+  "install_snippet": "{\"url\": \"https://gateway.drillr.ai/mcp/data\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Drillr \u2014 The financial MCP for AI agents",
+  "description": "The financial MCP for AI agents - 90+ financial tables, SEC filings, signals, alt-data.",
+  "tags": "drillr drillr",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.drillr/drillr",
+  "github_url": "https://ai.drillr",
+  "install_snippet": "{\"url\": \"https://gateway.drillr.ai/mcp/data\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.duvera/gateway",
+  "description": "Governed AI actions with signed, verifiable receipts: free keyless reads, human-approved writes.",
+  "tags": "duvera gateway",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.duvera/gateway",
+  "github_url": "https://ai.duvera",
+  "install_snippet": "{\"url\": \"https://app.duvera.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dynamicfeed/dynamic-feed",
+  "description": "Fresh data AI models lack: live LLM pricing, MCP registry, service status, and AI news.",
+  "tags": "dynamicfeed dynamic feed",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dynamicfeed/dynamic-feed",
+  "github_url": "https://ai.dynamicfeed",
+  "install_snippet": "{\"url\": \"https://dynamicfeed.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dynamicfeed/dynamic-feed",
+  "description": "Fresh data AI models lack: live prices, software versions, CVEs, service status & more.",
+  "tags": "dynamicfeed dynamic feed",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dynamicfeed/dynamic-feed",
+  "github_url": "https://ai.dynamicfeed",
+  "install_snippet": "{\"url\": \"https://dynamicfeed.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dynamicfeed/dynamic-feed",
+  "description": "Fresh data AI models lack: live prices, software versions, CVEs, service status & more.",
+  "tags": "dynamicfeed dynamic feed",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dynamicfeed/dynamic-feed",
+  "github_url": "https://ai.dynamicfeed",
+  "install_snippet": "{\"url\": \"https://dynamicfeed.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dynamicfeed/dynamic-feed",
+  "description": "Live, verifiable data for AI \u2014 56 Ed25519-signed tools: weather, hazards, space, CVEs, markets.",
+  "tags": "dynamicfeed dynamic feed",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dynamicfeed/dynamic-feed",
+  "github_url": "https://ai.dynamicfeed",
+  "install_snippet": "{\"url\": \"https://dynamicfeed.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.dynamicfeed/dynamic-feed",
+  "description": "87 keyless tools of live, verifiable data for AI: weather, hazards, space, CVEs. Ed25519-signed.",
+  "tags": "dynamicfeed dynamic feed",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dynamicfeed/dynamic-feed",
+  "github_url": "https://ai.dynamicfeed",
+  "install_snippet": "{\"url\": \"https://dynamicfeed.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "SaC \u2014 Software as Content",
+  "description": "Give your AI agent the ability to respond with live, interactive apps that evolve.",
+  "tags": "dynsoft sac",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.dynsoft/sac",
+  "github_url": "https://ai.dynsoft",
+  "install_snippet": "{\"command\": \"uvx\", \"args\": [\"sac-sdk\"], \"env\": {\"SAC_API_KEY\": \"${env:SAC_API_KEY}\", \"SAC_API_BASE\": \"${env:SAC_API_BASE}\", \"SAC_MODEL\": \"${env:SAC_MODEL}\", \"SAC_SEARCH_API_KEY\": \"${env:SAC_SEARCH_API_KEY}\"}}"
+ },
+ {
+  "name": "ai.edusignal/districts",
+  "description": "K-12 school district data for all 50 US states. Enrollment, demographics, and academics.",
+  "tags": "edusignal districts",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.edusignal/districts",
+  "github_url": "https://ai.edusignal",
+  "install_snippet": "{\"url\": \"https://edusignal.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.exa/exa",
+  "description": "Fast, intelligent web search and web crawling.\n\nNew mcp tool: Exa-code is a context tool for coding ",
+  "tags": "exa exa",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.exa/exa",
+  "github_url": "https://ai.exa",
+  "install_snippet": "{\"url\": \"https://mcp.exa.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.exa/exa",
+  "description": "Fast, intelligent web search and web crawling.\n\nNew mcp tool: Exa-code is a context tool for coding ",
+  "tags": "exa exa",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.exa/exa",
+  "github_url": "https://ai.exa",
+  "install_snippet": "{\"url\": \"https://mcp.exa.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.exa/exa",
+  "description": "Fast, intelligent web search and web crawling.\n\nNew mcp tool: Exa-code is a context tool for coding ",
+  "tags": "exa exa",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.exa/exa",
+  "github_url": "https://ai.exa",
+  "install_snippet": "{\"url\": \"https://mcp.exa.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.exa/exa",
+  "description": "Fast, intelligent web search and web crawling.\n\nNew mcp tool: Exa-code is a context tool for coding ",
+  "tags": "exa exa",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.exa/exa",
+  "github_url": "https://ai.exa",
+  "install_snippet": "{\"url\": \"https://mcp.exa.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.exa/exa",
+  "description": "Fast, intelligent web search and web crawling.\n\nNew mcp tool: Exa-code is a context tool for coding ",
+  "tags": "exa exa",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.exa/exa",
+  "github_url": "https://ai.exa",
+  "install_snippet": "{\"url\": \"https://mcp.exa.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.exa/exa",
+  "description": "Fast, intelligent web search and web crawling.\n\nNew mcp tool: Exa-code is a context tool for coding ",
+  "tags": "exa exa",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.exa/exa",
+  "github_url": "https://ai.exa",
+  "install_snippet": "{\"url\": \"https://mcp.exa.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "xmp4 \u2014 Semantic Code Intelligence",
+  "description": "SCIP-backed semantic code intelligence over 800+ pre-indexed OSS libraries. Hosted, free.",
+  "tags": "example4 xmp4",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.example4/xmp4",
+  "github_url": "https://ai.example4",
+  "install_snippet": "{\"url\": \"https://mcp.example4.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "xmp4 \u2014 Semantic Code Intelligence",
+  "description": "Code knowledge base for AI agents: real source, tests, callers of 800+ OSS libs via MCP. 11 langs.",
+  "tags": "example4 xmp4",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.example4/xmp4",
+  "github_url": "https://ai.example4",
+  "install_snippet": "{\"url\": \"https://mcp.example4.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "xmp4 \u2014 Semantic Code Intelligence",
+  "description": "See how any OSS library is really used \u2014 real source, tests, callers. Python, TS, Rust, Java, Go+.",
+  "tags": "example4 xmp4",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.example4/xmp4",
+  "github_url": "https://ai.example4",
+  "install_snippet": "{\"url\": \"https://mcp.example4.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "xmp4 \u2014 Semantic Code Intelligence",
+  "description": "See how any OSS library is really used \u2014 real source, tests, callers. C#, Java, TS, Python, Rust+.",
+  "tags": "example4 xmp4",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.example4/xmp4",
+  "github_url": "https://ai.example4",
+  "install_snippet": "{\"url\": \"https://mcp.example4.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "xmp4 \u2014 Semantic Code Intelligence",
+  "description": "OSS libs in your stack, really used: source, tests, callers. C#, Java, TS, Python, Rust, PHP+.",
+  "tags": "example4 xmp4",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.example4/xmp4",
+  "github_url": "https://ai.example4",
+  "install_snippet": "{\"url\": \"https://mcp.example4.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "xmp4 \u2014 Semantic code knowledge for your stack",
+  "description": "OSS libs in your stack, really used: source, tests, callers. C#, Java, TS, Python, Rust, PHP+.",
+  "tags": "example4 xmp4",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.example4/xmp4",
+  "github_url": "https://ai.example4",
+  "install_snippet": "{\"url\": \"https://mcp.example4.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.explorium/mcp-explorium",
+  "description": "Access live company and contact data from Explorium's AgentSource B2B platform.",
+  "tags": "explorium explorium",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.explorium/mcp-explorium",
+  "github_url": "https://ai.explorium",
+  "install_snippet": "{\"url\": \"https://mcp-github-registry.explorium.ai/sse\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "ai.explorium/mcp-explorium",
+  "description": "Access live company and contact data from Explorium's AgentSource B2B platform.",
+  "tags": "explorium explorium",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.explorium/mcp-explorium",
+  "github_url": "https://ai.explorium",
+  "install_snippet": "{\"url\": \"https://mcp-github-registry.explorium.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.factori/mcp",
+  "description": "Search POI data, profile audiences, analyze foot traffic, and score sites \u2014 no SQL needed.",
+  "tags": "factori",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.factori/mcp",
+  "github_url": "https://ai.factori",
+  "install_snippet": "{\"url\": \"https://mcp.factori.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.factori/mcp",
+  "description": "Real-world location intelligence: foot traffic, trade areas, demographics, site scoring, and more.",
+  "tags": "factori",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.factori/mcp",
+  "github_url": "https://ai.factori",
+  "install_snippet": "{\"url\": \"https://mcp.factori.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.fathom.api/mcp",
+  "description": "Give your AI assistant real meeting context via Fathom so every output grounded in your work",
+  "tags": "fathom api",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.fathom.api/mcp",
+  "github_url": "https://ai.fathom.api",
+  "install_snippet": "{\"url\": \"https://api.fathom.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Fiber AI",
+  "description": "Search companies, enrich contacts, and reveal emails and phones from your AI agent.",
+  "tags": "fiber",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.fiber/mcp",
+  "github_url": "https://ai.fiber",
+  "install_snippet": "{\"url\": \"https://mcp.fiber.ai/mcp/v2/\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.filegraph/document-processing",
+  "description": "Extract text from documents, manipulate PDFs, and perform OCR via FileGraph API.",
+  "tags": "filegraph document processing",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.filegraph/document-processing",
+  "github_url": "https://ai.filegraph",
+  "install_snippet": "{\"url\": \"https://api.filegraph.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.filegraph/document-processing",
+  "description": "Extract text from documents, manipulate PDFs, and perform OCR on images.",
+  "tags": "filegraph document processing",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.filegraph/document-processing",
+  "github_url": "https://ai.filegraph",
+  "install_snippet": "{\"url\": \"https://api.filegraph.ai/mcp\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "ai.filegraph/document-processing",
+  "description": "Extract text from documents, manipulate PDFs, and perform OCR on images.",
+  "tags": "filegraph document processing",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.filegraph/document-processing",
+  "github_url": "https://ai.filegraph",
+  "install_snippet": "{\"url\": \"https://api.filegraph.ai/mcp\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "Filepad",
+  "description": "Connect AI agents to Filepad workspaces through OAuth MCP.",
+  "tags": "filepad filepad",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.filepad/filepad",
+  "github_url": "https://ai.filepad",
+  "install_snippet": "{\"url\": \"https://api.filepad.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Filtrix AI MCP",
+  "description": "Filtrix MCP for image/video generation. Portal: https://agent.filtrix.ai/",
+  "tags": "filtrix filtrix",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.filtrix.mcp/filtrix-ai",
+  "github_url": "https://ai.filtrix.mcp",
+  "install_snippet": "{\"url\": \"https://mcp.filtrix.ai/\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.fincontext/fincontext",
+  "description": "Read-only bank & investment accounts via Plaid: balances, holdings, transactions, SQL analytics.",
+  "tags": "fincontext fincontext",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.fincontext/fincontext",
+  "github_url": "https://ai.fincontext",
+  "install_snippet": "{\"url\": \"https://fincontext.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Fodda Knowledge Graphs",
+  "description": "Expert-curated knowledge graphs for AI agents \u2014 PSFK Retail, Beauty, Sports and more.",
+  "tags": "fodda",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.fodda/mcp-server",
+  "github_url": "https://ai.fodda",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"fodda-mcp\"], \"env\": {\"FODDA_API_KEY\": \"${env:FODDA_API_KEY}\", \"FODDA_API_URL\": \"${env:FODDA_API_URL}\"}}"
+ },
+ {
+  "name": "Gavelin",
+  "description": "Search bills and speaker-attributed hearing transcripts across all 50 US state legislatures.",
+  "tags": "gavelin",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.gavelin/mcp",
+  "github_url": "https://ai.gavelin",
+  "install_snippet": "{\"url\": \"https://mcp.gavelin.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.geodesiclabs/governance-platform",
+  "description": "Deterministic AI governance platform. Validates agent outputs, discovers patterns, solves math.",
+  "tags": "geodesiclabs governance platform",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.geodesiclabs/governance-platform",
+  "github_url": "https://ai.geodesiclabs",
+  "install_snippet": "{\"url\": \"https://app.geodesiclabs.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "gethal.ai",
+  "description": "Public MCP for gethal.ai \u2014 autonomous AI sales agent. Pricing, features, book a demo.",
+  "tags": "gethal",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.gethal/mcp",
+  "github_url": "https://ai.gethal",
+  "install_snippet": "{\"url\": \"https://gethal.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Optibot",
+  "description": "AI code review for your AI assistant \u2014 review local changes, branch diffs, and patch files.",
+  "tags": "getoptimal optibot",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.getoptimal/optibot",
+  "github_url": "https://ai.getoptimal",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@optimalai/optibot-mcp\"], \"env\": {\"OPTIBOT_API_KEY\": \"${env:OPTIBOT_API_KEY}\"}}"
+ },
+ {
+  "name": "Perspective AI",
+  "description": "An AI concierge that turns static forms into adaptive AI conversations. From any MCP client.",
+  "tags": "getperspective",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.getperspective/mcp",
+  "github_url": "https://ai.getperspective",
+  "install_snippet": "{\"url\": \"https://getperspective.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "Perspective AI",
+  "description": "An AI concierge that turns static forms into adaptive AI conversations. From any MCP client.",
+  "tags": "getperspective",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.getperspective/mcp",
+  "github_url": "https://ai.getperspective",
+  "install_snippet": "{\"url\": \"https://getperspective.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.getthroughline/throughline",
+  "description": "A persistent AI self you own \u2014 memory, persona, judgment \u2014 portable across all your AI hosts.",
+  "tags": "getthroughline throughline",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.getthroughline/throughline",
+  "github_url": "https://ai.getthroughline",
+  "install_snippet": "{\"url\": \"https://getthroughline.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.getvet/vet",
+  "description": "Discover and vet MCP servers: search 200K+ AI tools with security verification and schemas.",
+  "tags": "getvet vet",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.getvet/vet",
+  "github_url": "https://ai.getvet",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@getvetai/mcp\"], \"env\": {\"VET_API_KEY\": \"${env:VET_API_KEY}\", \"VET_API_URL\": \"${env:VET_API_URL}\"}}"
+ },
+ {
+  "name": "ai.gomarble/mcp-api",
+  "description": "GoMarble MCP API Server",
+  "tags": "gomarble api",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.gomarble/mcp-api",
+  "github_url": "https://ai.gomarble",
+  "install_snippet": "{\"url\": \"https://apps.gomarble.ai/mcp-api/sse\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "Gossiper Shopify Admin MCP Server",
+  "description": "Control Shopify Admin tasks with agents or via prompt. Ultra slim integration, fast and secure.",
+  "tags": "gossiper shopify admin",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.gossiper/shopify-admin-mcp",
+  "github_url": "https://ai.gossiper",
+  "install_snippet": "{\"url\": \"https://mcp.gossiper.io/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.groundroute/web-search",
+  "description": "Web search for AI agents \u2014 one tool across 6 engines, routed to the cheapest + cached.",
+  "tags": "groundroute web search",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.groundroute/web-search",
+  "github_url": "https://ai.groundroute",
+  "install_snippet": "{\"url\": \"https://api.groundroute.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": ""
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.5.0\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.5.2\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.6.0\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.6.1\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.6.2\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.6.3\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.6.4\"]}"
+ },
+ {
+  "name": "ai.haymon/database",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon database",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/database",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/database:0.7.0\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.10.0\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.10.1\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.10.2\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.10.3\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.10.4\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.11.0\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.11.1\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.12.0\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.12.1\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite with PII redaction and write-prevention",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.13.1\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite with PII redaction and write-prevention",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.13.2\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.8.0\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.9.0\"]}"
+ },
+ {
+  "name": "ai.haymon/dbmcp",
+  "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+  "tags": "haymon dbmcp",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.haymon/dbmcp",
+  "github_url": "https://ai.haymon",
+  "install_snippet": "{\"command\": \"docker\", \"args\": [\"run\", \"-i\", \"--rm\", \"ghcr.io/haymon-ai/dbmcp:0.9.1\"]}"
+ },
+ {
+  "name": "Helixar Security",
+  "description": "Security tools for AI agents: scan MCP servers, validate HDP delegation chains, audit releases.",
+  "tags": "helixar",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.helixar/mcp",
+  "github_url": "https://ai.helixar",
+  "install_snippet": "{\"url\": \"https://mcp.helixar.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.hermitsh/texts",
+  "description": "Search complete classical author editions; retrieve exact, citable passages with parallel Latin.",
+  "tags": "hermitsh texts",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.hermitsh/texts",
+  "github_url": "https://ai.hermitsh",
+  "install_snippet": "{\"url\": \"https://hermitsh.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.hirey/hi",
+  "description": "The people network your AI agent joins on your behalf \u2014 find, match, and meet anyone.",
+  "tags": "hirey hi",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.hirey/hi",
+  "github_url": "https://ai.hirey",
+  "install_snippet": "{\"url\": \"https://mcp.hirey.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "hiveWiki",
+  "description": "Shared project wiki for AI agents: read and write pages, next actions, and activity logs over MCP.",
+  "tags": "hivewiki hivewiki",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.hivewiki/hivewiki",
+  "github_url": "https://ai.hivewiki",
+  "install_snippet": "{\"url\": \"https://mcp.hivewiki.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "HostProfit",
+  "description": "Revenue intelligence platform for short-term rental operators.",
+  "tags": "hostprofit",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.hostprofit/mcp",
+  "github_url": "https://ai.hostprofit",
+  "install_snippet": "{\"url\": \"https://hostprofit-mcp-production.up.railway.app/mcp\", \"type\": \"sse\"}"
+ },
+ {
+  "name": "i18n-agent",
+  "description": "AI-powered translation for 48 languages with context-aware quality",
+  "tags": "i18nagent i18n agent",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.i18nagent/i18n-agent",
+  "github_url": "https://ai.i18nagent",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@i18n-agent/mcp-client\"], \"env\": {\"I18N_AGENT_API_KEY\": \"${env:I18N_AGENT_API_KEY}\", \"MCP_SERVER_URL\": \"${env:MCP_SERVER_URL}\"}}"
+ },
+ {
+  "name": "ai.imboard/dossier",
+  "description": "MCP server for dossier automation standard - enables LLMs to discover, verify, and execute dossiers",
+  "tags": "imboard dossier",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.imboard/dossier",
+  "github_url": "https://ai.imboard",
+  "install_snippet": "{\"command\": \"npx\", \"args\": [\"-y\", \"@ai-dossier/mcp-server\"]}"
+ },
+ {
+  "name": "ai.inflowpay.app/inflow",
+  "description": "Inflow MCP Server",
+  "tags": "inflowpay inflow",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.inflowpay.app/inflow",
+  "github_url": "https://ai.inflowpay.app",
+  "install_snippet": "{\"url\": \"https://app.inflowpay.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.inflowpay.app/inflow",
+  "description": "MCP Server for agents to onboard, pay, and provision services autonomously",
+  "tags": "inflowpay inflow",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.inflowpay.app/inflow",
+  "github_url": "https://ai.inflowpay.app",
+  "install_snippet": "{\"url\": \"https://app.inflowpay.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.inflowpay.app/inflow",
+  "description": "MCP Server for agents to onboard, pay, and provision services autonomously with InFlow",
+  "tags": "inflowpay inflow",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.inflowpay.app/inflow",
+  "github_url": "https://ai.inflowpay.app",
+  "install_snippet": "{\"url\": \"https://app.inflowpay.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "ai.inflowpay.app/inflow",
+  "description": "MCP Server for agents to onboard, pay, and provision services autonomously with InFlow",
+  "tags": "inflowpay inflow",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.inflowpay.app/inflow",
+  "github_url": "https://ai.inflowpay.app",
+  "install_snippet": "{\"url\": \"https://app.inflowpay.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "x402 MCP chassis \u2014 26 pay-per-call tools: finance, market data, AI utilities. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "28 pay-per-call tools: finance, macro, commodities, market data, AI utilities. USDC on Base. x402.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "29 pay-per-call x402 tools: stocks, macro, SEC EDGAR, crypto, DeFi, commodities, AI. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "31 pay-per-call x402 tools: crypto, DeFi, stocks, SEC EDGAR, macro, commodities, AI. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "32 x402 tools: crypto, DeFi, stocks, SEC EDGAR, sports, macro, commodities, AI. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "41 x402 AI tools: markets, DeFi, BTC mining, page intel, stocks, Reddit. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "42 x402 AI tools: markets, DeFi, BTC mining, IP intel, page intel, stocks. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "44 x402 AI tools: markets, DeFi, BTC mining, IP/DNS intel, RSS, stocks. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "46 x402 AI tools: markets, DeFi, IP/DNS, geocode, security headers, RSS. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "48 x402 AI tools: markets, DeFi, SSL cert, geocode, IP/DNS, timezone, RSS. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "53 x402 AI tools: markets, DeFi, clinical trials, portfolio, geocode, IP/DNS, RSS. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "55 x402 AI tools: markets, DeFi, clinical trials, portfolio, code tests, RAG prep. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "58 x402 AI tools: markets, DeFi, WHOIS, email verify, regex, RAG prep. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "59 x402 AI tools: markets, DeFi, WHOIS, email, regex, policy analysis. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "33 x402 tools: crypto, DeFi, stocks, flights, SEC EDGAR, sports, macro, AI. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "60 x402 AI tools: markets, DeFi, WHOIS, citations, regex, policy analysis. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "62 x402 AI tools: markets, DeFi, scores, fiber optics, citations, policy. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "64 x402 AI tools: markets, DeFi, legal search, citations, policy. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "66 x402 AI tools: markets, DeFi, legal, books, unit convert, citations. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "68 x402 AI tools: markets, DeFi, legal, US gov votes, JSON extract, books. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "70 x402 AI tools: markets, DeFi, legal, strategy signals, company intel. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "71 x402 AI tools: markets, DeFi, yield farming, legal, strategy signals. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "72 x402 AI tools: market movers, DeFi, yield farming, legal, strategy signals. USDC.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "73 x402 AI tools: BTC game theory, DeFi, market movers, legal, strategy signals.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "74 x402 AI tools: BTC game theory, DeFi, stock briefs, market movers, legal, strategy signals.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "34 x402 tools: crypto, DeFi, stocks, flights, macro, web monitoring, AI. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "75 x402 AI tools: BTC systems theory, DeFi, stock briefs, market movers, legal, strategy signals.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "76 x402 AI tools: BTC/DeFi, World Bank data, stock briefs, market movers, legal, strategy signals.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "77 x402 AI tools: BTC/DeFi, World Bank, research papers, stock briefs, market movers, legal.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "78 x402 AI tools: US stocks, BTC/DeFi, World Bank, research papers, market movers, legal.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "78 x402 AI tools: Base chain, US stocks, BTC/DeFi, World Bank, research papers, legal.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "78 AI tools: stocks, DeFi, token security, macro, prediction markets, research & more. x402+MCP.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "79 AI tools via x402 USDC micropayments. Stocks, DeFi, crypto, macro, code analysis & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "80 AI tools via x402 USDC micropayments. Stocks, DeFi, crypto, macro, code analysis & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "81 AI tools via x402 USDC micropayments. Stocks, DeFi, crypto, macro, code analysis & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "81 AI tools via x402 USDC micropayments. Stocks, DeFi, crypto, macro, code analysis & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "35 x402 tools: crypto, DeFi, stocks, flights, macro, prediction markets, monitoring. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "83 AI tools via x402 USDC micropayments. Stocks, DeFi, crypto, macro, EVM tx decoding & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "84 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, macro, web content & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "84 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, macro, web content & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "86 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, memes, macro, web content & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "86 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, memes, macro, web content & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "88 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "89 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "90 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "90 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "92 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "36 x402 tools: crypto, DeFi, stocks, block intel, flights, macro, prediction markets. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "93 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "93 pay-per-call tools via x402 USDC. Stocks, DeFi, crypto, web, macro, news & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "95 pay-per-call data tools via x402 USDC. Stocks, crypto, DeFi, web, macro, research & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "96 pay-per-call data tools via x402 USDC. Stocks, crypto, DeFi, web, macro, research & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "97 x402 pay-per-call tools: stocks, DeFi, crypto, research, image gen, macro & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "98 x402 pay-per-call tools: stocks, DeFi, crypto, research, gas, image gen & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "99 x402 pay-per-call tools: stocks, DeFi, crypto, earnings, gas, image gen & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "100 x402 pay-per-call tools: stocks, DeFi, crypto, whale-radar, gas, image gen & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "101 x402 pay-per-call tools: stocks, DeFi, crypto, NFT metadata, whale-radar & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "102 x402 pay-per-call tools: stocks, DeFi, crypto, NFT, on-chain intel, roast & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "37 x402 tools: crypto, DeFi, stocks, macro, flights, Reddit intel, block data. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "103 x402 pay-per-call tools: stocks, DeFi, crypto, NFT, on-chain intel, roast & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "104 x402 pay-per-call tools: stocks, DeFi, crypto, NFT, on-chain intel, fact-check & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "105 x402 pay-per-call tools: stocks, DeFi, crypto, SEC filings, NFT, on-chain intel & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "106 x402 pay-per-call tools: stocks, DeFi, crypto, SEC filings, NFT, on-chain intel & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "108 x402 pay-per-call tools: stocks, DeFi, crypto, SEC insider trades, NFT & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "109 x402 pay-per-call tools: stocks, DeFi, crypto, SEC, NFT, intel-pack & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "109 x402 pay-per-call tools: stocks, DeFi, crypto, prediction markets, seam packs & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "110 x402 pay-per-call tools: stocks, DeFi, crypto, SEC, short interest & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "111 x402 pay-per-call tools: stocks, OHLCV, DeFi, crypto, SEC, short interest & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "112 x402 pay-per-call tools: stocks, OHLCV, DeFi, crypto, SEC, short interest & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "38 x402 tools: crypto, DeFi, stocks, macro, flights, Reddit intel, prediction markets. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "113 x402 pay-per-call tools: stocks, OHLCV, DeFi, crypto, SEC, short interest & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "114 x402 pay-per-call tools: stocks, OHLCV, DeFi, crypto, wallets, SEC & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "115 x402 pay-per-call tools: stocks, OHLCV, DeFi, crypto, wallets, SEC & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "116 x402 pay-per-call tools: stocks, DeFi, crypto, wallets, address risk & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "117 x402 pay-per-call tools: stocks, DeFi, crypto, wallets, swap quotes & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "118 x402 pay-per-call tools: stocks, DeFi, crypto, social profiles & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "119 x402 pay-per-call tools: stocks, DeFi, crypto, ENS, social profiles & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "120 x402 pay-per-call tools: stocks, DeFi, crypto, ENS, HuggingFace & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "121 x402 pay-per-call tools: stocks, DeFi, crypto, ENS, HuggingFace & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "122 x402 pay-per-call tools: stocks, DeFi, LBO model, crypto, ENS & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "39 x402 AI tools: market data, DeFi, stocks, Reddit intel, db perf intelligence. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "123 x402 pay-per-call tools: stocks, DeFi, LBO model, crypto, ENS & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "123 x402 pay-per-call tools: stocks, DeFi, LBO model, crypto, ENS & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "123 x402 pay-per-call tools: stocks, DeFi, LBO model, crypto, ENS & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "124 x402 pay-per-call tools: stocks, DeFi, drug intel, crypto, ENS & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "125 x402 pay-per-call tools: stocks, DeFi, Polymarket accuracy, drug intel, crypto & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "126 x402 pay-per-call tools: stocks, DeFi, kimchi premium, drug intel, crypto & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "127 x402 pay-per-call tools: stocks, DeFi, Polymarket, drug intel, crypto & more.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "128 x402 pay-per-call tools: stocks, DeFi, Polymarket, drug intel, gov contracts & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "129 x402 pay-per-call tools: stocks, options intel, DeFi, Polymarket, gov contracts & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "130 x402 pay-per-call tools: stocks, options intel, DeFi, FDA recalls, gov contracts & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "40 x402 AI tools: markets, DeFi, BTC mining economics, stocks, Reddit intel. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "131 x402 pay-per-call tools: stocks, Treasury yields, DeFi, FDA recalls, gov contracts & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "132 x402 pay-per-call tools: stocks, credit spreads, DeFi, FDA recalls, gov contracts & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "133 x402 pay-per-call tools: stocks, labor market, credit spreads, DeFi, FDA recalls & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "133 x402 pay-per-call tools: stocks, labor market, credit spreads, DeFi, FDA recalls & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "134 x402 pay-per-call tools: macro AI brief, stocks, labor market, credit spreads, DeFi & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "135 x402 pay-per-call tools: equity AI brief, macro AI brief, stocks, insider trades, DeFi & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "136 x402 pay-per-call tools: housing AI brief, equity AI brief, macro brief, stocks, DeFi & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "137 x402 pay-per-call tools: consumer AI brief, housing AI brief, macro brief, stocks, DeFi & more",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "138 x402 pay-per-call data tools: labor, consumer, housing & macro AI briefs, stocks, DeFi",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "139 x402 pay-per-call data tools: energy, labor, consumer, housing & macro AI briefs",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "140 x402 pay-per-call data tools: energy, labor, consumer, housing & macro AI briefs",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "141 x402 pay-per-call data tools: energy, labor, consumer, housing, manufacturing & macro AI briefs",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "142 x402 pay-per-call data tools: IMF forecasts, macro/sector AI briefs, crypto, finance",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "153 pay-per-call tools: finance, macro, DeFi, crypto, legal, weather. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "154 pay-per-call tools: finance, macro, DeFi, crypto, legal, weather. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "155 pay-per-call tools: finance, macro, DeFi, crypto, legal, weather. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "156 pay-per-call tools: finance, macro, DeFi, crypto, x402 intel. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "157 pay-per-call tools: finance, macro, DeFi, crypto, x402 intel. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "158 pay-per-call tools: finance, macro, DeFi, crypto, x402 intel. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "159 pay-per-call tools: finance, macro, DeFi, crypto, Korean market movers. x402 USDC/Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "160 pay-per-call tools: finance, macro, DeFi, crypto, job search, Korean markets. x402 USDC/Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "162 pay-per-call tools: finance, macro, DeFi, crypto, job search, Korean markets. x402 USDC/Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "163 pay-per-call tools: finance, macro, DeFi, crypto, job search, agent trust (KYA). x402 USDC/Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "143 x402 pay-per-call data tools: global indices, IMF forecasts, macro/sector AI briefs",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "165 pay-per-call tools: finance, macro, DeFi, crypto, air quality, FEC donors. x402 USDC/Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "166 pay-per-call tools: finance, macro, DeFi, crypto, OFAC sanctions, air quality. x402 USDC/Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "168 pay-per-call tools: finance, options chain, insider trades, DeFi, crypto, OFAC, macro. x402.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "170 pay-per-call tools: finance, options chain, insider trades, DeFi, crypto, NPI, weather. x402.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "171 pay-per-call tools: finance, options, DeFi, crypto, clinical trials, earthquakes. x402.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "172 pay-per-call tools: finance, DeFi, crypto, Solana tx, options, clinical trials. x402.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "173 pay-per-call tools: US stocks, DeFi, crypto, Polymarket, sanctions \u2014 USDC on Base",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "174 pay-per-call tools: US stocks, DeFi, crypto, Polymarket, sanctions \u2014 USDC on Base",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "144 pay-per-call tools: finance, macro, DeFi, crypto, legal, weather. x402 USDC/Base. No API keys.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "175 pay-per-call tools: US stocks, DeFi, crypto, global news, sanctions \u2014 USDC on Base",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "177 pay-per-call AI data tools: stocks, DefiLlama TVL, DeFi, crypto, news, sanctions. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "178 pay-per-call AI data tools: stocks, DefiLlama pack, DeFi, crypto, news, sanctions. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "182 pay-per-call AI tools: US+intl stocks, DeFi, crypto, news, sanctions. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ },
+ {
+  "name": "The Stall",
+  "description": "183 pay-per-call AI tools: stocks, DeFi, crypto, social momentum, news, sanctions. USDC on Base.",
+  "tags": "intuitek the stall the stall",
+  "source_url": "https://registry.modelcontextprotocol.io/?search=ai.intuitek.the-stall/the-stall",
+  "github_url": "https://ai.intuitek.the-stall",
+  "install_snippet": "{\"url\": \"https://the-stall.intuitek.ai/mcp\", \"type\": \"streamable-http\"}"
+ }
+]
