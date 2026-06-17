@@ -1711,26 +1711,10 @@
                     <p style="margin-bottom: 8px;"><strong>Scroll Token waitlist</strong>: $199 · Est. Ship Q3 2026 (No payment required today)</p>
                     <p style="margin-bottom: 32px; font-size:15px; color:var(--muted-2);">Hardware units are in final testing and not available for direct order yet. Join the waitlist below to reserve your slot. No credit card is needed; you will only be notified when units are ready to ship.</p>
                     
-                    <form class="preorder-form" id="preorderForm">
-                        <div class="preorder-input-wrap">
-                            <svg class="preorder-mail-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="20" height="16" x="2" y="4" rx="2"/>
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                            </svg>
-                            <input type="email" id="preorderEmail" required placeholder="Enter your email address..." class="preorder-input" />
-                            <select id="preorderQty" class="preorder-select">
-                                <option value="key_1">1x Scroll Key Waitlist ($99)</option>
-                                <option value="token_1">1x Scroll Token Waitlist ($199)</option>
-                                <option value="token_2">2x Scroll Token Waitlist ($398)</option>
-                                <option value="bundle_1">Developer Bundle: 1x Key + 1x Token Waitlist ($298)</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary preorder-submit-btn">
-                            <span class="btn-text">Join Waitlist →</span>
-                            <span class="btn-spinner" style="display:none;"></span>
-                        </button>
-                    </form>
-                    <div class="preorder-status" id="preorderStatus"></div>
+                    <div class="tally-embed-wrap" style="margin-top: 32px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(0,0,0,0.2); padding: 12px; overflow: hidden;">
+                        <iframe data-tally-src="https://tally.so/embed/68Vo2Y?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="340" frameborder="0" marginheight="0" marginwidth="0" title="Matrix Scroll Waitlist"></iframe>
+                    </div>
+                    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.getAttribute("data-tally-src")}))};if("undefined"!=typeof Tally)v();else{var g=d.createElement("script");g.src=w,g.onload=v,g.onerror=v,d.body.appendChild(g);}</script>
                     
                     <!-- Social Proof / Documentation Links -->
                     <div style="margin-top: 36px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 14px;">
