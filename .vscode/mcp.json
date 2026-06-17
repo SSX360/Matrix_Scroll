@@ -1,0 +1,20 @@
+{
+  "servers": {
+    "cursor-copilot": {
+      "type": "stdio",
+      "command": "c:/Users/ryanj/OneDrive/Desktop/cursor-co-pilot/.venv/Scripts/python.exe",
+      "args": [
+        "c:/Users/ryanj/OneDrive/Desktop/cursor-co-pilot/mcp_server.py"
+      ],
+      "env": {
+        "COPILOT_WORKSPACE": "${workspaceFolder}",
+        "GEMINI_API_KEY": "${env:GEMINI_API_KEY}",
+        "ANTHROPIC_API_KEY": "${env:ANTHROPIC_API_KEY}",
+        "LLM_BACKEND": "ollama",
+        "GEMINI_MODEL": "gemini-2.5-flash",
+        "OLLAMA_MODEL": "gemma4:e4b",
+        "OLLAMA_CHAT_MODEL": "gemma3:4b"
+      }
+    }
+  }
+}

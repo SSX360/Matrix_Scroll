@@ -111,8 +111,8 @@ def suggest_offline(context: dict[str, Any], limit: int = 6) -> list[BrainstormI
 
     if not configured:
         items.append(BrainstormItem(
-            title="Point co-pilot at your active codebase",
-            prompt="Help me configure the active workspace for Cursor Co-pilot so scans target my real project.",
+            title="Point Digital Rain at your active codebase",
+            prompt="Help me configure the active workspace for Digital Rain so scans target my real project.",
             tag="Setup",
             category="workspace",
         ))
@@ -129,7 +129,7 @@ def suggest_offline(context: dict[str, Any], limit: int = 6) -> list[BrainstormI
     elif vault_mode == "existing" and not vault_path:
         items.append(BrainstormItem(
             title="Link your Obsidian vault path",
-            prompt="Walk me through linking an existing Obsidian vault to this project in co-pilot config.",
+            prompt="Walk me through linking an existing Obsidian vault to this project in Digital Rain config.",
             tag="Vault",
             category="vault",
         ))

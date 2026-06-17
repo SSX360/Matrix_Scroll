@@ -8,7 +8,7 @@ every documentation page. Each page is available as raw markdown by appending
 
 The bot also recommends MCP servers/skills. We ingest an MCP *catalog* from
 several sources into the SAME index (tagged source_type="mcp_catalog"), so the
-co-pilot can rank-search servers offline alongside the docs.
+Digital Rain can rank-search servers offline alongside the docs.
 
 Usage:
     python ingest.py                 # docs + catalog -> build index

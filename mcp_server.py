@@ -1,5 +1,5 @@
 """
-Cursor Co-pilot — an MCP server that turns this docs bot into a context-aware
+Digital Rain — an MCP server that turns this docs bot into a context-aware
 assistant Cursor's agent can call directly.
 
 It does four things for you while you work in Cursor:
@@ -36,6 +36,7 @@ import search as S
 import scanner
 import llm
 import cursor_artifacts as ca
+import identity
 import vault
 import workspace_config as wc
 import brainstorm as bs
@@ -100,7 +101,7 @@ def _catalog_lookup() -> dict[str, dict]:
 # Grounded-answer helper (kept local so the stdio server doesn't import Flask)
 # ---------------------------------------------------------------------------
 
-DOCS_SYSTEM = """You are the Cursor Co-pilot, an expert on the Cursor AI code \
+DOCS_SYSTEM = """You are Digital Rain, an expert on the Cursor AI code \
 editor. Answer using the documentation excerpts provided. Be concise and \
 practical: short paragraphs, steps or code blocks where useful, and cite facts \
 inline like [1], [2] matching the numbered sources. If the answer isn't in the \
@@ -187,6 +188,30 @@ def scan_project(path: str = ".") -> str:
         out.append(f"- **Manifests Detected**: {', '.join(p['manifests'])}")
     if p.get("signals"):
         out.append(f"- **Config/File Signals**: {', '.join(p['signals'])}")
+    if p.get("components"):
+        out.append("\n## Components")
+        for component in p["components"][:8]:
+            labels = component.get("frameworks") or component.get("languages") or [component.get("kind", "component")]
+            out.append(
+                f"- `{component.get('path', '.')}` "
+                f"({component.get('kind', 'component')}): {', '.join(labels)}"
+            )
+    if p.get("suggested_commands"):
+        out.append("\n## Suggested Commands")
+        for command in p["suggested_commands"][:8]:
+            out.append(
+                f"- `{command.get('cwd', '.')}`: "
+                f"{command.get('label', 'Command')} -> `{command.get('command', '')}`"
+            )
+    if p.get("launch_readiness"):
+        readiness = p["launch_readiness"]
+        out.append(
+            "\n## Launch Readiness\n"
+            f"- **Status**: {readiness.get('status', 'unknown')}\n"
+            f"- **Static validation**: {readiness.get('safe_command_count', 0)} safe, "
+            f"{readiness.get('warning_count', 0)} warnings, "
+            f"{readiness.get('blocking_issue_count', 0)} blockers"
+        )
     if p.get("readme_excerpt"):
         out.append(f"\n## README Excerpt\n{p['readme_excerpt'][:400]}...")
         
@@ -461,7 +486,41 @@ def brainstorm_project(goal: str = "", limit: int = 6) -> str:
     return "\n".join(lines)
 
 
+@mcp.tool()
+def device_identity() -> str:
+    """Report the active Matrix Scroll root-of-trust identity.
+
+    Use this to attribute work to a verifiable device: cite the Device ID when
+    attesting a release, and quote the Ed25519 public key when asking a user to
+    verify a signed manifest or audit-trail entry. Returns the device id, public
+    key, signing mode (emulated software key vs. physical hardware), and creation
+    time. Private keys never leave the device, so they are never returned.
+    """
+    try:
+        info = identity.identity_info()
+    except Exception as exc:
+        return f"Error reading device identity: {exc}"
+    created = info["created_at"] or "unknown"
+    hardware = info["mode"] == "hardware"
+    return "\n".join([
+        "# Matrix Scroll Root of Trust",
+        f"- **Device ID**: {info['device_id']}",
+        f"- **Mode**: {info['mode']} "
+        + ("(physical secure element)" if hardware else "(software-emulated key)"),
+        f"- **Algorithm**: {info['algorithm']}",
+        f"- **Public Key (base64)**: `{info['public_key']}`",
+        f"- **Created (ISO-8601 UTC)**: {created}",
+        "",
+        "## How to use this identity",
+        "- **Attest releases**: reference the Device ID above as the signer of "
+        "release evidence (`qa/release_evidence.py` signs `manifest.json`).",
+        "- **Verify signatures**: a manifest is authentic if its `signature.value` "
+        "validates against the public key above for this device id.",
+        "- **Trust boundary**: never request, log, or echo the private key; it "
+        "stays inside the device/secure store by design.",
+    ])
+
+
 if __name__ == "__main__":
     get_index()  # warm the index before serving
     mcp.run(transport="stdio")
-

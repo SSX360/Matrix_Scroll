@@ -23,7 +23,7 @@ from reportlab.platypus import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "docs" / "Cursor-Co-pilot-Feature-Guide.pdf"
+OUT = ROOT / "docs" / "Digital-Rain-Feature-Guide.pdf"
 MASCOT = ROOT / "static" / "mascot.png"
 
 
@@ -79,7 +79,7 @@ def footer(canvas, doc):
     canvas.saveState()
     canvas.setFont("Helvetica", 8)
     canvas.setFillColor(colors.HexColor("#7a7368"))
-    canvas.drawString(0.7 * inch, 0.45 * inch, "Cursor Co-pilot Feature Guide")
+    canvas.drawString(0.7 * inch, 0.45 * inch, "Digital Rain Feature Guide")
     canvas.drawRightString(7.8 * inch, 0.45 * inch, f"Page {doc.page}")
     canvas.restoreState()
 
@@ -92,8 +92,8 @@ def build_pdf() -> None:
         leftMargin=0.65 * inch,
         topMargin=0.7 * inch,
         bottomMargin=0.7 * inch,
-        title="Cursor Co-pilot Feature Guide",
-        author="Cursor Co-pilot",
+        title="Digital Rain Feature Guide",
+        author="Digital Rain",
         subject="Feature guide and operating instructions",
     )
 
@@ -190,12 +190,12 @@ def build_pdf() -> None:
         img.hAlign = "CENTER"
         story.append(img)
         story.append(Spacer(1, 10))
-    story.append(para("Cursor Co-pilot", styles["Title"]))
+    story.append(para("Digital Rain", styles["Title"]))
     story.append(para("Full Feature Guide and Operating Instructions", styles["Subtitle"]))
     story.append(para(f"Generated {date.today().isoformat()} from the local project workspace.", styles["Subtitle"]))
     story.append(Spacer(1, 0.15 * inch))
     story.append(para(
-        "Cursor Co-pilot is a context-aware assistant for Cursor that combines an MCP server, "
+        "Digital Rain is a context-aware assistant for Cursor that combines an MCP server, "
         "local project scanner, official Cursor documentation retrieval, MCP recommendations, "
         "rule/config scaffolding, a web dashboard, and a native floating desktop companion.",
         styles["Body"],
@@ -203,12 +203,13 @@ def build_pdf() -> None:
 
     story.append(para("Executive Summary", styles["H1"]))
     story.append(bullet([
-        "Primary mode: a Cursor MCP server named cursor-copilot with 11 callable tools.",
+        "Primary mode: a Cursor MCP server named cursor-copilot with 13 callable tools.",
         "Desktop mode: a transparent always-on-top mascot launched by run_desktop_companion.bat.",
         "Project intelligence: scans manifests, file tree, README, Cursor rules, and Jupyter notebooks.",
         "Knowledge layer: BM25 retrieval over Cursor docs plus MCP catalog data.",
         "LLM layer: Anthropic, Gemini, and Ollama fallback chain with full backend error reporting.",
-        "QA surface: health, project status, chat SSE, and MCP stdio smoke tests.",
+        "Root of trust: an Ed25519 device identity that signs release manifests for auditable attestation.",
+        "QA surface: health, project status, chat SSE, identity, and MCP stdio smoke tests.",
     ], styles["Body"]))
 
     story.append(para("System Architecture", styles["H1"]))
@@ -220,7 +221,8 @@ def build_pdf() -> None:
             ["Project scanner", "scanner.py", "Infers language, framework, package manager, SDKs, file summaries, and notebook health."],
             ["Retrieval and ingestion", "search.py, ingest.py", "Builds and queries a BM25 index over Cursor docs and the MCP catalog."],
             ["Artifact generation", "cursor_artifacts.py", "Renders Cursor rules and MCP config snippets."],
-            ["Web dashboard", "app.py, ui.py", "Serves chat, project status, install/rule APIs, and health checks."],
+            ["Web dashboard", "app.py, ui.py", "Serves chat, project status, install/rule APIs, identity, and health checks."],
+            ["Root of trust", "identity.py", "Mints an Ed25519 device identity and signs/verifies release manifests; emulated on disk or backed by hardware."],
             ["Desktop companion", "companion.py", "Native Tkinter overlay with drag, chat, dashboard open, and notebook warnings."],
             ["Desktop launcher", "desktop_launcher.py, run_desktop_companion.bat", "Starts or reuses the backend, waits for health, and launches the companion."],
         ],
@@ -248,6 +250,7 @@ run_desktop_companion.bat
         "Right-click to open a small chat box and ask a question.",
         "Double-click to open the full dashboard.",
         "On launch, the companion calls /api/project/status and warns about Jupyter notebooks with out-of-order execution.",
+        "When no language is detected yet, it surfaces a tailored next-step idea from /api/brainstorm.",
         "A socket lock prevents duplicate companion widgets.",
     ], styles["Body"]))
 
@@ -265,6 +268,7 @@ python app.py
     story.append(code(r"""
 Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/health"
 Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/project/status"
+Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/identity"
 """, styles))
     story.append(para(
         "The chat endpoint streams Server-Sent Events. Project-aware questions such as stack scans "
@@ -287,10 +291,27 @@ Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/project/status"
             ["install_mcp_server", "Install or merge a catalog MCP server into project/global MCP config.", "No"],
             ["scan_notebooks", "Report Jupyter notebook imports, variables, headers, execution counts, and order health.", "No"],
             ["search_knowledge_vault", "Search personal Markdown or Obsidian notes with BM25 ranking.", "No"],
+            ["brainstorm_project", "Generate tailored next-step ideas from a project scan and goal.", "Yes"],
+            ["device_identity", "Return this device's Ed25519 public identity for release attestation and signature verification.", "No"],
         ],
         styles,
         widths=[1.45 * inch, 4.45 * inch, 0.65 * inch],
     ))
+
+    story.append(para("Root of Trust", styles["H1"]))
+    story.append(para(
+        "Digital Rain mints a stable Ed25519 device identity on first use and uses it to sign release "
+        "manifests, giving every build a verifiable provenance trail. The emulated provider stores the "
+        "private key on disk with owner-only permissions; the hardware provider delegates signing to a "
+        "secure element so the private key never leaves the device.",
+        styles["Body"],
+    ))
+    story.append(bullet([
+        "device_id and public key are stable across restarts and surfaced via /api/identity and the device_identity MCP tool.",
+        "Release manifests carry a signature block that verify_manifest checks against the signer's public key.",
+        "Canonical JSON signing (sorted keys, ASCII escaping, NaN rejection) keeps signatures reproducible across platforms.",
+        "MATRIXSCROLL_MODE selects the emulated disk provider or the hardware secure-element provider.",
+    ], styles["Body"]))
 
     story.append(PageBreak())
     story.append(para("Project Intelligence", styles["H1"]))
@@ -305,7 +326,7 @@ Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/project/status"
 
     story.append(para("Example project-aware prompts", styles["H2"]))
     story.append(code(r"""
-Co-pilot, scan my project and tell me what stack we are using.
+Digital Rain, scan my project and tell me what stack we are using.
 Does my Jupyter Notebook have any out-of-order execution issues?
 Recommend MCP servers for this Python Flask project.
 Create a Cursor rule for this repository's Python conventions.
@@ -336,6 +357,9 @@ Create a Cursor rule for this repository's Python conventions.
             ["TOP_K", "5", "Number of doc chunks retrieved for web chat."],
             ["PORT", "random", "Forces the web UI/API port."],
             ["OPEN_BROWSER", "1", "Set to 0 to suppress browser auto-open."],
+            ["COPILOT_WORKSPACE", "cwd", "Active project path the scanner and MCP tools operate on."],
+            ["MATRIXSCROLL_MODE", "emulated", "Selects the identity provider: emulated disk key or hardware secure element."],
+            ["MATRIXSCROLL_HOME", "~/.matrixscroll", "Directory for the device identity key store."],
         ],
         styles,
         widths=[1.45 * inch, 1.55 * inch, 4.1 * inch],
@@ -384,15 +408,17 @@ Create a Cursor rule for this repository's Python conventions.
     story.append(para("QA Checklist", styles["H1"]))
     story.append(code(r"""
 .\.venv\Scripts\python.exe -m unittest discover -v
-.\.venv\Scripts\python.exe -m py_compile app.py llm.py desktop_launcher.py companion.py mcp_server.py
+.\.venv\Scripts\python.exe -m py_compile app.py llm.py desktop_launcher.py companion.py mcp_server.py identity.py
 Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/health"
+Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/identity"
 .\run_desktop_companion.bat
 """, styles))
     story.append(bullet([
         "Health should report chunks > 0 and an active LLM backend.",
         "Launcher should say Backend already healthy when the backend is already running.",
         "Stack chat should mention Python, Flask, pip, SDKs, and notebook health for this project.",
-        "MCP smoke test should list 12 tools and confirm scan_project plus scan_notebooks.",
+        "MCP smoke test should list 13 tools and confirm scan_project plus device_identity.",
+        "Identity endpoint should return a stable device_id and Ed25519 public key.",
         "Project status should redact GEMINI_API_KEY and other secret-like env values.",
     ], styles["Body"]))
 
@@ -414,10 +440,11 @@ Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/health"
     story.append(para("Verified Current State", styles["H1"]))
     story.append(bullet([
         "Desktop launcher reboot/reuse path verified.",
-        "Backend health verified on port 59712 with Gemini active and 191 indexed chunks.",
+        "Backend health verified on port 59712 with an active LLM backend and a populated retrieval index.",
         "Live project-aware chat verified for stack and notebook health questions.",
-        "Unit suite verified with 13 passing tests.",
-        "Python compile check verified for app.py, llm.py, desktop_launcher.py, companion.py, and mcp_server.py.",
+        "Device identity verified: stable device_id, signed manifest, and verify_manifest round-trip.",
+        "Unit suite verified with 103 passing tests, including 18 identity tests.",
+        "Python compile check verified for app.py, llm.py, desktop_launcher.py, companion.py, mcp_server.py, and identity.py.",
         "Linter diagnostics reported no errors for touched files.",
     ], styles["Body"]))
 

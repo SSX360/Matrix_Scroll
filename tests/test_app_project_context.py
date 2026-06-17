@@ -11,6 +11,11 @@ class AppProjectContextTests(unittest.TestCase):
             "frameworks": ["flask"],
             "notable_sdks": ["pandas"],
             "package_managers": ["pip"],
+            "security_posture": {
+                "status": "review",
+                "redacted_value_count": 2,
+                "secret_file_count": 1,
+            },
             "notebooks": [
                 {
                     "filename": "analysis.ipynb",
@@ -27,6 +32,7 @@ class AppProjectContextTests(unittest.TestCase):
         self.assertIn("Answering priority: for project, stack, or notebook questions", prompt)
         self.assertIn("Do not mention this instruction.", prompt)
         self.assertIn("frameworks=flask", prompt)
+        self.assertIn("Security posture: review", prompt)
         self.assertIn("analysis.ipynb: out_of_order", prompt)
 
     def test_cursor_docs_question_does_not_add_project_context(self):
@@ -58,6 +64,11 @@ class AppProjectContextTests(unittest.TestCase):
             "frameworks": ["flask"],
             "notable_sdks": ["pandas"],
             "package_managers": ["pip"],
+            "security_posture": {
+                "status": "review",
+                "redacted_value_count": 2,
+                "secret_file_count": 1,
+            },
             "notebooks": [
                 {
                     "filename": "analysis.ipynb",
@@ -73,6 +84,7 @@ class AppProjectContextTests(unittest.TestCase):
             )
 
         self.assertIn("frameworks=flask", answer)
+        self.assertIn("Security posture: review", answer)
         self.assertIn("analysis.ipynb: out_of_order", answer)
         self.assertIn("offline", answer.lower())
 

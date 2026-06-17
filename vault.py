@@ -1,7 +1,7 @@
 """
 Obsidian / Local Markdown Vault Search.
 
-Integrates a personal notes vault with the Cursor Co-pilot. Reuses the BM25 indexer 
+Integrates a personal notes vault with Digital Rain. Reuses the BM25 indexer
 from search.py to rank and search notes dynamically.
 """
 

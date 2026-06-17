@@ -1,7 +1,7 @@
 @echo off
-title Cursor Co-pilot Desktop Companion
+title Digital Rain Desktop Companion
 cd /d "%~dp0"
-echo Starting Cursor Co-pilot desktop companion...
+echo Starting Digital Rain desktop companion...
 call run_desktop_companion.bat
 if errorlevel 1 (
     echo.

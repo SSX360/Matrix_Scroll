@@ -62,7 +62,7 @@ _CURSOR_FAQ_ONLY = (
     "what is mcp in cursor",
 )
 
-ADVISOR_SYSTEM_PROMPT = """You are the Cursor Co-pilot project advisor for the user's \
+ADVISOR_SYSTEM_PROMPT = """You are the Digital Rain project advisor for the user's \
 active codebase.
 
 Rules:
@@ -294,7 +294,7 @@ def build_offline_advisor_answer(
             "1. Review README priorities and restart live trading sessions when ready.",
             "2. Validate model pipelines (TimesFM, MLForecast) on current data.",
             "3. Run project tests and fix failing weather-domain suites.",
-            "4. Ask co-pilot to install MCP servers (postgres, redis) or generate domain rules.",
+            "4. Ask Digital Rain to install MCP servers (postgres, redis) or generate domain rules.",
         ])
 
     lines.extend([

@@ -8,15 +8,26 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run unit tests
         run: python -m unittest discover -v tests
+      - name: Compile core modules
+        run: python -m py_compile app.py brainstorm.py chat_actions.py chat_advisor.py companion.py cursor_artifacts.py desktop_launcher.py ingest.py llm.py mcp_server.py scanner.py search.py vault.py workspace_config.py qa/run_gates.py qa/release_evidence.py
+      - name: Run fresh-project QA gate
+        run: python -m qa.run_gates --workspace empty --report out/qa-report.json
+      - name: Build expanded release evidence smoke
+        run: python -m qa.release_evidence --skip-unit-tests --skip-compile --workspace typescript --workspace monorepo --output-dir out/release-evidence-ci

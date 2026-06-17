@@ -1,5 +1,5 @@
 """
-Cursor Co-pilot — local RAG chatbot, project scanner, and MCP assistant.
+Digital Rain — local RAG chatbot, project scanner, and MCP assistant.
 
 - Retrieval: BM25 over scraped Cursor docs + MCP catalog (search.py / ingest.py)
 - Generation: anthropic → gemini → ollama fallback chain (see llm.py)
@@ -16,7 +16,9 @@ from __future__ import annotations
 
 import json
 import os
+import platform
 import socket
+import sys
 import threading
 import time
 import webbrowser
@@ -31,6 +33,7 @@ import ingest
 import llm
 import scanner
 import cursor_artifacts as ca
+import identity
 import vault
 import workspace_config as wc
 import brainstorm as bs
@@ -44,6 +47,26 @@ INDEX_PATH = ROOT / "data" / "index.json"
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "gemma4:e4b")
 TOP_K = int(os.environ.get("TOP_K", "5"))
+SECRET_MARKERS = ("KEY", "TOKEN", "SECRET", "PASSWORD", "CREDENTIAL")
+SAFE_SECRET_STATUS_KEYS = {"secrets_redacted"}
+DIAGNOSTIC_ENV_KEYS = (
+    "LLM_BACKEND",
+    "ANTHROPIC_API_KEY",
+    "GEMINI_API_KEY",
+    "GOOGLE_API_KEY",
+    "ANTHROPIC_MODEL",
+    "GEMINI_MODEL",
+    "OLLAMA_URL",
+    "OLLAMA_MODEL",
+    "OLLAMA_CHAT_MODEL",
+    "OLLAMA_NUM_PREDICT",
+    "OLLAMA_BRAINSTORM_NUM_PREDICT",
+    "TOP_K",
+    "STATUS_CACHE_TTL",
+    "COPILOT_WORKSPACE",
+    "PORT",
+    "OPEN_BROWSER",
+)
 
 app = Flask(__name__)
 _bm25: S.BM25 | None = None
@@ -74,7 +97,7 @@ def get_index() -> S.BM25:
 # Prompt construction
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """You are the Cursor Co-pilot. You answer questions about \
+SYSTEM_PROMPT = """You are Digital Rain. You answer questions about \
 the Cursor AI code editor using ONLY the documentation excerpts provided below.
 
 Rules:
@@ -123,6 +146,44 @@ def build_project_context() -> str:
     ]
 
     notebooks = profile.get("notebooks") or []
+    components = profile.get("components") or []
+    if components:
+        lines.append("Components:")
+        for component in components[:6]:
+            labels = component.get("frameworks") or component.get("languages") or [component.get("kind", "component")]
+            lines.append(
+                f"- {component.get('path', '.')}: "
+                f"{component.get('kind', 'component')} "
+                f"({', '.join(labels)})"
+            )
+
+    commands = profile.get("suggested_commands") or []
+    if commands:
+        lines.append("Suggested commands:")
+        for command in commands[:8]:
+            lines.append(
+                f"- [{command.get('cwd', '.')}] {command.get('label', 'Command')}: "
+                f"{command.get('command', '')}"
+            )
+
+    readiness = profile.get("launch_readiness") or {}
+    if readiness:
+        lines.append(
+            "Launch readiness: "
+            f"{readiness.get('status', 'unknown')} "
+            f"(blockers={readiness.get('blocking_issue_count', 0)}, "
+            f"warnings={readiness.get('warning_count', 0)})"
+        )
+
+    security = profile.get("security_posture") or {}
+    if security:
+        lines.append(
+            "Security posture: "
+            f"{security.get('status', 'unknown')} "
+            f"(redacted_values={security.get('redacted_value_count', 0)}, "
+            f"sensitive_files={security.get('secret_file_count', 0)})"
+        )
+
     if notebooks:
         lines.append("Jupyter notebooks:")
         for notebook in notebooks:
@@ -152,6 +213,44 @@ def build_offline_project_answer(question: str) -> str:
     if frameworks:
         lines.append(f"Frameworks: {', '.join(frameworks)}.")
 
+    components = profile.get("components") or []
+    if components:
+        lines.append("Components:")
+        for component in components[:6]:
+            labels = component.get("frameworks") or component.get("languages") or [component.get("kind", "component")]
+            lines.append(
+                f"- {component.get('path', '.')}: "
+                f"{component.get('kind', 'component')} "
+                f"({', '.join(labels)})"
+            )
+
+    commands = profile.get("suggested_commands") or []
+    if commands:
+        lines.append("Suggested commands:")
+        for command in commands[:8]:
+            lines.append(
+                f"- [{command.get('cwd', '.')}] {command.get('label', 'Command')}: "
+                f"{command.get('command', '')}"
+            )
+
+    readiness = profile.get("launch_readiness") or {}
+    if readiness:
+        lines.append(
+            "Launch readiness: "
+            f"{readiness.get('status', 'unknown')} "
+            f"(blockers={readiness.get('blocking_issue_count', 0)}, "
+            f"warnings={readiness.get('warning_count', 0)})."
+        )
+
+    security = profile.get("security_posture") or {}
+    if security:
+        lines.append(
+            "Security posture: "
+            f"{security.get('status', 'unknown')} "
+            f"(redacted_values={security.get('redacted_value_count', 0)}, "
+            f"sensitive_files={security.get('secret_file_count', 0)})."
+        )
+
     notebooks = profile.get("notebooks") or []
     if notebooks:
         lines.append("Jupyter notebooks:")
@@ -179,7 +278,6 @@ def sanitize_mcp_config(config: dict) -> dict:
     if not isinstance(servers, dict):
         return sanitized
 
-    secret_markers = ("KEY", "TOKEN", "SECRET", "PASSWORD", "CREDENTIAL")
     for server in servers.values():
         if not isinstance(server, dict):
             continue
@@ -187,9 +285,45 @@ def sanitize_mcp_config(config: dict) -> dict:
         if not isinstance(env, dict):
             continue
         for key in list(env):
-            if any(marker in key.upper() for marker in secret_markers):
+            if is_secret_key(key):
                 env[key] = "<redacted>"
     return sanitized
+
+
+def is_secret_key(key: str) -> bool:
+    return any(marker in key.upper() for marker in SECRET_MARKERS)
+
+
+def secret_value_is_present(value: Any) -> bool:
+    return value not in (None, "", False, "<unset>")
+
+
+def redact_diagnostics(value: Any) -> Any:
+    if isinstance(value, dict):
+        redacted: dict[str, Any] = {}
+        for key, child in value.items():
+            key_text = str(key)
+            if is_secret_key(key_text) and key_text not in SAFE_SECRET_STATUS_KEYS:
+                redacted[key] = (
+                    "<redacted:set>" if secret_value_is_present(child) else "<unset>"
+                )
+            else:
+                redacted[key] = redact_diagnostics(child)
+        return redacted
+    if isinstance(value, list):
+        return [redact_diagnostics(child) for child in value]
+    return value
+
+
+def diagnostic_environment() -> dict[str, str]:
+    env: dict[str, str] = {}
+    for key in DIAGNOSTIC_ENV_KEYS:
+        value = os.environ.get(key)
+        if is_secret_key(key):
+            env[key] = "<redacted:set>" if value else "<unset>"
+        elif value is not None:
+            env[key] = value
+    return env
 
 
 def build_prompt(question: str, contexts: list[dict]) -> str:
@@ -257,6 +391,46 @@ def health():
     except requests.RequestException:
         pass
     return jsonify(info)
+
+
+@app.get("/api/identity")
+def identity_route():
+    """Active Matrix Scroll root-of-trust identity (public material only)."""
+    try:
+        return jsonify(identity.identity_info())
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.get("/api/diagnostics")
+def diagnostics():
+    ws, configured = wc.resolve_workspace()
+    cfg = wc.load_config(ws)
+    payload = {
+        "product": "Digital Rain",
+        "diagnostics_version": 1,
+        "generated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "app": {
+            "root": str(ROOT),
+            "index_path": str(INDEX_PATH),
+            "index_exists": INDEX_PATH.exists(),
+            "chunks": get_index().N,
+        },
+        "runtime": {
+            "python": sys.version.split()[0],
+            "platform": platform.platform(),
+        },
+        "workspace": {
+            "path": str(ws),
+            "configured": configured,
+            "status": wc.workspace_status(),
+            "config": cfg,
+        },
+        "llm": llm.backend_status(),
+        "environment": diagnostic_environment(),
+        "redaction": {"secrets_redacted": True},
+    }
+    return jsonify(redact_diagnostics(payload))
 
 
 def _chat_messages(history: list[dict], prompt: str) -> list[dict]:
@@ -730,7 +904,7 @@ def main() -> None:
     else:
         model_label = "unknown"
     print("\n" + "=" * 56)
-    print("  Cursor Co-pilot")
+    print("  Digital Rain")
     print(f"  LLM:    {active} ({model_label})")
     print(f"  Open:   {url}")
     print("=" * 56 + "\n")

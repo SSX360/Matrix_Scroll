@@ -1,5 +1,5 @@
 """
-LLM backend abstraction for the Cursor co-pilot.
+LLM backend abstraction for Digital Rain.
 
 Three backends, one interface:
   - "anthropic" (default): Claude via the Anthropic API. Best reasoning for the

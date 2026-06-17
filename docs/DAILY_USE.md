@@ -1,4 +1,4 @@
-# Daily Use — Cursor Co-pilot
+# Daily Use — Digital Rain
 
 ## One-command launch
 
@@ -33,7 +33,12 @@ Brainstorm shows **offline chips instantly**, then upgrades in the background wh
 ```powershell
 Invoke-RestMethod http://127.0.0.1:59712/api/health
 Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&async=1"
+Invoke-RestMethod http://127.0.0.1:59712/api/identity
 ```
+
+`/api/identity` returns the active Matrix Scroll device id, Ed25519 public key,
+and mode (`emulated` by default). The same data is available to any IDE through
+the `device_identity` MCP tool.
 
 ## MCP in Cursor
 

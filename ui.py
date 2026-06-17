@@ -5,7 +5,7 @@ INDEX_HTML = r'''<!doctype html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cursor Co-pilot Dashboard</title>
+<title>Digital Rain Dashboard</title>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
@@ -105,6 +105,67 @@ INDEX_HTML = r'''<!doctype html>
     color:var(--accent);
     border-color:var(--accent-soft);
     background:var(--accent-soft);
+  }
+  .command-list{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .command-row{
+    border:1px solid var(--border-soft);
+    background:var(--panel);
+    border-radius:8px;
+    padding:8px 10px;
+    min-width:0;
+  }
+  .command-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:6px;
+    font-size:10px;
+    color:var(--faint);
+    text-transform:uppercase;
+    letter-spacing:.4px;
+  }
+  .command-cwd{
+    max-width:128px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    color:var(--accent);
+  }
+  .command-code{
+    display:block;
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:11px;
+    line-height:1.45;
+    overflow-wrap:anywhere;
+  }
+  .readiness-badge{
+    font-size:10px;
+    padding:3px 7px;
+    border-radius:6px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--muted);
+    text-transform:lowercase;
+  }
+  .readiness-badge.ready,
+  .readiness-badge.no_commands,
+  .readiness-badge.clean{
+    color:var(--ok);
+    border-color:rgba(92,204,132,.25);
+  }
+  .readiness-badge.review{
+    color:var(--warn);
+    border-color:rgba(240,178,66,.25);
+  }
+  .readiness-badge.blocked{
+    color:var(--bad);
+    border-color:rgba(232,90,90,.25);
   }
 
   /* Notebook list */
@@ -716,6 +777,16 @@ INDEX_HTML = r'''<!doctype html>
       </div>
     </div>
     
+    <div class="sidebar-section" id="commandSection" style="display:none;">
+      <div class="section-title">Suggested Commands <span class="readiness-badge" id="launchReadinessBadge"></span></div>
+      <div class="command-list" id="commandList"></div>
+    </div>
+
+    <div class="sidebar-section" id="securitySection" style="display:none;">
+      <div class="section-title">Local Trust <span class="readiness-badge" id="securityPostureBadge"></span></div>
+      <div class="command-list" id="securityFindings"></div>
+    </div>
+
     <div class="sidebar-section" id="notebookSection" style="display:none;">
       <div class="section-title">Jupyter Notebooks</div>
       <div id="notebookList"></div>
@@ -735,7 +806,7 @@ INDEX_HTML = r'''<!doctype html>
     <header>
       <div class="mark">C</div>
       <div class="titles">
-        <h1>Cursor Co-pilot</h1>
+        <h1>Digital Rain</h1>
         <p>Grounded in the official docs + your active codebase</p>
       </div>
       <div class="status" id="status" title="Backend status">
@@ -747,7 +818,7 @@ INDEX_HTML = r'''<!doctype html>
       <div class="wrap" id="wrap">
         <div class="hero" id="hero">
           <div class="big">C</div>
-          <h2>Cursor Co-pilot</h2>
+          <h2>Digital Rain</h2>
           <p id="heroSubtitle">Brainstorming for your active codebase…</p>
           <button class="add-rule-trigger" style="margin:12px auto 0;display:block;" onclick="loadBrainstorm()">Refresh ideas</button>
           <div class="chips" id="chips"></div>
@@ -840,7 +911,7 @@ INDEX_HTML = r'''<!doctype html>
 
 <!-- Mascot Companion -->
 <div class="mascot-container" id="mascotContainer">
-  <div class="mascot-bubble" id="mascotBubble">Hi! I'm your Cursor Co-pilot. Ask me anything about Cursor docs or stack setups!</div>
+  <div class="mascot-bubble" id="mascotBubble">Hi! I'm Digital Rain. Ask me anything about Cursor docs or stack setups!</div>
   <img src="/static/mascot.png" class="mascot-img" id="mascotImg" alt="Mascot" onclick="speak('Need help? Ask me any question, search your vault, or configure MCP servers!')">
 </div>
 
@@ -854,6 +925,15 @@ let workspaceConfig = {};
 
 const mascotBubble = $('#mascotBubble');
 const mascotImg = $('#mascotImg');
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 function speak(text, duration = 4000) {
   mascotBubble.textContent = text;
@@ -871,7 +951,7 @@ function speak(text, duration = 4000) {
 
 // Speak greeting on startup
 setTimeout(() => {
-  speak("Hi! I'm your Cursor Co-pilot. Ask me anything about Cursor docs, vault search, or project setups!", 6000);
+  speak("Hi! I'm Digital Rain. Ask me anything about Cursor docs, vault search, or project setups!", 6000);
 }, 1200);
 
 // Hover listeners for mascot interactivity
@@ -1060,7 +1140,7 @@ function renderProjectDashboard() {
   if (wsPill) {
     wsPill.textContent = ws.configured
       ? (ws.workspace || 'Active project set')
-      : 'Using co-pilot install dir — set active project';
+      : 'Using Digital Rain install dir — set active project';
   }
   if (ws.configured && ws.workspace && !$('#workspacePath').value) {
     $('#workspacePath').value = ws.workspace;
@@ -1077,9 +1157,77 @@ function renderProjectDashboard() {
   if(!langs.length && !fws.length && !sdks.length) {
     pills.innerHTML = '<div class="pill">no stack detected</div>';
   } else {
-    langs.forEach(l => pills.innerHTML += `<div class="pill highlight">${l}</div>`);
-    fws.forEach(f => pills.innerHTML += `<div class="pill">${f}</div>`);
-    sdks.forEach(s => pills.innerHTML += `<div class="pill">${s}</div>`);
+    langs.forEach(l => pills.innerHTML += `<div class="pill highlight">${escapeHtml(l)}</div>`);
+    fws.forEach(f => pills.innerHTML += `<div class="pill">${escapeHtml(f)}</div>`);
+    sdks.forEach(s => pills.innerHTML += `<div class="pill">${escapeHtml(s)}</div>`);
+  }
+
+  const commandSection = $('#commandSection');
+  const commandList = $('#commandList');
+  const readinessBadge = $('#launchReadinessBadge');
+  const commands = prof.suggested_commands || [];
+  const readiness = prof.launch_readiness || {};
+  const readinessCommands = {};
+  (readiness.commands || []).forEach(cmd => {
+    readinessCommands[(cmd.cwd || '.') + '::' + (cmd.command || '')] = cmd;
+  });
+  if(commands.length > 0) {
+    commandSection.style.display = 'block';
+    const readinessStatus = readiness.status || 'unknown';
+    readinessBadge.textContent = readinessStatus;
+    readinessBadge.className = 'readiness-badge ' + readinessStatus;
+    commandList.innerHTML = '';
+    commands.slice(0, 6).forEach(cmd => {
+      const checked = readinessCommands[(cmd.cwd || '.') + '::' + (cmd.command || '')] || {};
+      const safety = checked.safety || '';
+      commandList.innerHTML += `
+        <div class="command-row">
+          <div class="command-head">
+            <span>${escapeHtml(cmd.label || 'Command')}</span>
+            <span>${escapeHtml(safety)}</span>
+            <span class="command-cwd" title="${escapeHtml(cmd.cwd || '.')}">${escapeHtml(cmd.cwd || '.')}</span>
+          </div>
+          <code class="command-code">${escapeHtml(cmd.command || '')}</code>
+        </div>
+      `;
+    });
+  } else {
+    commandSection.style.display = 'none';
+    commandList.innerHTML = '';
+    readinessBadge.textContent = '';
+  }
+
+  const securitySection = $('#securitySection');
+  const securityBadge = $('#securityPostureBadge');
+  const securityFindings = $('#securityFindings');
+  const security = prof.security_posture || {};
+  const securityStatus = security.status || '';
+  if(securityStatus) {
+    securitySection.style.display = 'block';
+    securityBadge.textContent = securityStatus;
+    securityBadge.className = 'readiness-badge ' + securityStatus;
+    const findings = security.findings || [];
+    if(findings.length) {
+      securityFindings.innerHTML = '';
+      findings.slice(0, 3).forEach(finding => {
+        securityFindings.innerHTML += `
+          <div class="command-row">
+            <div class="command-head">
+              <span>${escapeHtml(finding.type || 'security')}</span>
+              <span>${escapeHtml(finding.severity || '')}</span>
+              <span class="command-cwd" title="${escapeHtml(finding.path || '.')}">${escapeHtml(finding.path || '.')}</span>
+            </div>
+            <code class="command-code">${escapeHtml(finding.message || '')}</code>
+          </div>
+        `;
+      });
+    } else {
+      securityFindings.innerHTML = '<div class="pill">no surfaced secret values</div>';
+    }
+  } else {
+    securitySection.style.display = 'none';
+    securityFindings.innerHTML = '';
+    securityBadge.textContent = '';
   }
   
   // 2. Render Notebooks

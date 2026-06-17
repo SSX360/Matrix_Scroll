@@ -1,3 +1,5 @@
+import json
+import os
 import unittest
 from unittest.mock import patch
 
@@ -24,6 +26,57 @@ class AppRoutesTests(unittest.TestCase):
         data = resp.get_json()
         self.assertIn("workspace", data)
         self.assertIn("configured", data)
+
+    def test_diagnostics_returns_redacted_support_bundle(self):
+        with (
+            patch.object(app_module, "get_index") as mock_index,
+            patch.dict(
+                os.environ,
+                {
+                    "ANTHROPIC_API_KEY": "anthropic-real-secret",
+                    "GEMINI_API_KEY": "gemini-real-secret",
+                    "LLM_BACKEND": "ollama",
+                },
+            ),
+        ):
+            mock_index.return_value = type("Idx", (), {"N": 42})()
+            resp = self.client.get("/api/diagnostics")
+
+        self.assertEqual(resp.status_code, 200)
+        data = resp.get_json()
+        encoded = json.dumps(data)
+        self.assertEqual(data["product"], "Digital Rain")
+        self.assertEqual(data["diagnostics_version"], 1)
+        self.assertEqual(data["app"]["chunks"], 42)
+        self.assertIn("workspace", data)
+        self.assertIn("llm", data)
+        self.assertIs(data["redaction"]["secrets_redacted"], True)
+        self.assertEqual(data["environment"]["ANTHROPIC_API_KEY"], "<redacted:set>")
+        self.assertEqual(data["environment"]["GEMINI_API_KEY"], "<redacted:set>")
+        self.assertNotIn("anthropic-real-secret", encoded)
+        self.assertNotIn("gemini-real-secret", encoded)
+
+    def test_redact_diagnostics_recurses(self):
+        payload = {
+            "safe": "keep",
+            "nested": {
+                "api_key": "secret",
+                "items": [{"password": "pw", "label": "visible"}],
+            },
+            "token": "",
+            "secret_status": "<unset>",
+            "redaction": {"secrets_redacted": True},
+        }
+
+        redacted = app_module.redact_diagnostics(payload)
+
+        self.assertEqual(redacted["safe"], "keep")
+        self.assertEqual(redacted["nested"]["api_key"], "<redacted:set>")
+        self.assertEqual(redacted["nested"]["items"][0]["password"], "<redacted:set>")
+        self.assertEqual(redacted["nested"]["items"][0]["label"], "visible")
+        self.assertEqual(redacted["token"], "<unset>")
+        self.assertEqual(redacted["secret_status"], "<unset>")
+        self.assertIs(redacted["redaction"]["secrets_redacted"], True)
 
     def test_workspace_config_includes_configured_flag(self):
         resp = self.client.get("/api/workspace/config")

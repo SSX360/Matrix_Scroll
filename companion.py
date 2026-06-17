@@ -21,7 +21,7 @@ os.chdir(ROOT)
 class DesktopCompanion:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.title("Cursor Co-pilot")
+        self.root.title("Digital Rain")
         
         # Hide from taskbar and make frameless
         self.root.overrideredirect(True)
@@ -122,7 +122,7 @@ class DesktopCompanion:
 
     def open_dashboard(self, event=None):
         webbrowser.open(self.api_base)
-        self.speak("Opening full co-pilot control center!")
+        self.speak("Opening full Digital Rain control center!")
 
     def speak(self, text, duration_ms=6000):
         if self.bubble_timeout:
@@ -168,7 +168,7 @@ class DesktopCompanion:
             frame.pack(fill="both", expand=True)
             
             # Help Label
-            lbl = tk.Label(frame, text="Ask Co-pilot:", bg="#141311", fg="#a9a59d", font=("Outfit", 8))
+            lbl = tk.Label(frame, text="Ask Digital Rain:", bg="#141311", fg="#a9a59d", font=("Outfit", 8))
             lbl.pack(anchor="w", padx=8, pady=(4, 0))
             
             # Input Entry
@@ -271,11 +271,11 @@ class DesktopCompanion:
                 if unhealthy:
                     msg = f"Alert! I detected out-of-order execution in notebook: {', '.join(unhealthy)}. This might cause state bugs!"
                 elif langs:
-                    msg = f"Co-pilot loaded! I see you are coding in {', '.join(langs[:3])}."
+                    msg = f"Digital Rain loaded! I see you are coding in {', '.join(langs[:3])}."
                     if frameworks:
                         msg += f" Using {', '.join(frameworks[:2])} framework."
                 else:
-                    msg = "Hi! I am your active co-pilot. Right-click me to ask a question, or double-click to open my dashboard!"
+                    msg = "Hi! I am Digital Rain. Right-click me to ask a question, or double-click to open my dashboard!"
                     try:
                         br = requests.get(f"{self.api_base}/api/brainstorm?limit=1", timeout=10)
                         if br.ok:

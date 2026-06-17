@@ -93,7 +93,7 @@ def render_mcp_json(entries: list[dict], *, merge_into: dict | None = None) -> s
 
 
 def self_registration_snippet(server_path: str, *, python: str = "python") -> str:
-    """The mcp.json entry that registers THIS co-pilot server in Cursor."""
+    """The mcp.json entry that registers THIS Digital Rain server in Cursor."""
     doc = {
         "mcpServers": {
             "cursor-copilot": {

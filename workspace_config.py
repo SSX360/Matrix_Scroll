@@ -1,4 +1,4 @@
-"""Workspace resolution and per-project co-pilot configuration."""
+"""Workspace resolution and per-project Digital Rain configuration."""
 
 from __future__ import annotations
 
@@ -153,7 +153,7 @@ def scaffold_project_vault(workspace: Path, subdir: str = "docs/vault") -> Path:
     if not readme.exists():
         readme.write_text(
             "# Project Notes Vault\n\n"
-            "Personal notes grounded by Cursor Co-pilot for this repository.\n",
+            "Personal notes grounded by Digital Rain for this repository.\n",
             encoding="utf-8",
         )
 

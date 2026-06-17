@@ -1,4 +1,4 @@
-# Cursor Co-pilot
+# Digital Rain
 
 A context-aware assistant for working in [Cursor](https://cursor.com) — like a
 modern Clippy that actually helps. It understands the project you're building,
@@ -21,9 +21,9 @@ and run `ollama pull gemma4:e4b`. Cloud backends are used when keys are configur
 
 | Piece | File | What it does |
 | --- | --- | --- |
-| MCP server | `mcp_server.py` | 12 tools Cursor's agent can call (docs Q&A, project scan, notebook scan, brainstorm, MCP recommendations, artifact generation) |
+| MCP server | `mcp_server.py` | 13 tools Cursor's agent can call (docs Q&A, project scan, notebook scan, brainstorm, MCP recommendations, artifact generation, device identity) |
 | LLM backend | `llm.py` | Claude / Gemini / Ollama backend chain with fallthrough |
-| Project scanner | `scanner.py` | Infers your stack from manifests, configs, file tree, README |
+| Project scanner | `scanner.py` | Infers your stack, per-service components, and likely install/dev/build commands from manifests, configs, file tree, README |
 | Retrieval | `search.py` | Pure-Python BM25 over docs **and** an MCP catalog |
 | Ingestion | `ingest.py` | Scrapes Cursor docs + an MCP catalog (registry API, GitHub, mcpmarket) |
 | Artifacts | `cursor_artifacts.py` | Renders `.cursor/rules/*.mdc` and `.cursor/mcp.json` |
@@ -37,7 +37,7 @@ and run `ollama pull gemma4:e4b`. Cloud backends are used when keys are configur
 **Python 3.9+.** From the project directory:
 
 ```bash
-pip install -r requirements.txt    # flask, requests, mcp, anthropic, google-genai
+pip install -r requirements.txt    # flask, requests, mcp, anthropic, google-genai, cryptography
 python ingest.py                   # scrape docs + build the MCP catalog index
 ```
 
@@ -79,7 +79,7 @@ The companion supports:
 Try asking:
 
 ```text
-Co-pilot, scan my project and tell me what stack we are using.
+Digital Rain, scan my project and tell me what stack we are using.
 Does my Jupyter Notebook have any out-of-order execution issues?
 How do I configure project-specific rules in Cursor?
 ```
@@ -124,21 +124,22 @@ Once connected, Cursor's agent can call these tools:
 | `scan_notebooks(path)` | Report notebook imports, variables, and execution order health | no |
 | `search_knowledge_vault(query, ...)` | Search indexed Markdown/Obsidian notes | no |
 | `brainstorm_project(goal)` | Tailored next-step ideas from stack, notebooks, rules, vault | optional |
+| `device_identity()` | Active Matrix Scroll root-of-trust identity (device id, Ed25519 public key, mode) | no |
 
 Try asking Cursor: *"Use cursor-copilot to recommend MCP servers and rules for
 this project."*
 
-## 3b. Point co-pilot at your codebase
+## 3b. Point Digital Rain at your codebase
 
 Each project can ship a [`.cursor/co-pilot.json.example`](.cursor/co-pilot.json.example)
 as `.cursor/co-pilot.json` with workspace, vault, notebook, and brainstorm settings.
 
-For **desktop companion** mode (co-pilot installed separately), set the active
+For **desktop companion** mode (Digital Rain installed separately), set the active
 project in the dashboard sidebar (**Active Project → Set active project**). This
 writes `~/.cursor/co-pilot-active.json`.
 
 For **Cursor MCP** mode, add `"COPILOT_WORKSPACE": "${workspaceFolder}"` to
-`mcp.json` so scans target the repo you have open—not the co-pilot install folder.
+`mcp.json` so scans target the repo you have open—not the Digital Rain install folder.
 
 The dashboard **Brainstorm** hero loads tailored suggestion chips from
 `/api/brainstorm` based on your detected stack, notebooks, and rules.
@@ -158,8 +159,13 @@ backend to port `59712` and suppresses automatic browser focus.
 
 ```powershell
 Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/health"
+Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/diagnostics"
 Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/project/status"
+Invoke-RestMethod -Uri "http://127.0.0.1:59712/api/identity"
 ```
+
+Use `/api/diagnostics` for support handoff. It includes the active workspace,
+runtime, index, and LLM configuration while redacting secret-like fields.
 
 The chat endpoint streams Server-Sent Events:
 
@@ -170,6 +176,52 @@ Invoke-WebRequest -Uri "http://127.0.0.1:59712/api/chat" -Method POST -Body $bod
 
 Project-aware questions such as stack scans and notebook health include local
 scanner context before the LLM answers.
+
+For GTM release checks, run the fresh-project QA gate. It starts the backend
+against a brand-new synthetic workspace so stale active-project pointers cannot
+leak into launch evidence:
+
+```powershell
+.\.venv\Scripts\python.exe -m qa.run_gates --workspace empty --report out\qa-report.json
+```
+
+To create a full release evidence pack for Sales, support, and device-readiness
+reviews, run the matrix across empty, Python, TypeScript, monorepo, notebook,
+and security-sensitive fixtures. The pack also writes a CycloneDX-shaped SBOM
+and supply-chain summary for the release candidate:
+
+```powershell
+.\.venv\Scripts\python.exe -m qa.release_evidence --output-dir out\release-evidence
+```
+
+See [docs/GTM_PRODUCTION_READINESS.md](docs/GTM_PRODUCTION_READINESS.md) for the
+full production readiness checklist.
+
+The TypeScript and monorepo fixtures also validate launch readiness statically:
+suggested commands must stay inside the synthetic workspace, avoid destructive
+script patterns, and expose a sensible install/build/run order without executing
+installs or servers. The security fixture proves surfaced project scan payloads
+redact sentinel secret values from README and package script metadata while
+flagging sensitive local files without reading their contents. The stale-project
+gate uses neutral configurable markers so QA evidence never depends on a prior
+demo or customer repo.
+
+## 5b. Matrix Scroll root of trust (Ed25519 device identity)
+
+Digital Rain carries a device identity — the software emulation of the **Matrix
+Scroll** hardware key (`identity.py`). It generates an Ed25519 keypair, derives a
+human-readable device id (e.g. `MS-7F3A-9C21`), and signs release evidence so a
+build is attributable to a specific device, not just an account.
+
+- **Inspect it** — `GET /api/identity`, or ask any IDE: *"Use cursor-copilot's
+  device_identity tool."* Both return the device id, public key, and mode; the
+  private key never leaves the store.
+- **Signed releases** — `qa.release_evidence` signs `manifest.json` and records
+  the signer in `summary.md`. Verify any manifest with
+  `python -c "import json,identity; print(identity.verify_manifest(json.load(open('out/release-evidence/.../manifest.json'))))"`.
+- **Emulated vs. hardware** — `MATRIXSCROLL_MODE=emulated` (default) uses a local
+  software key; `hardware` is reserved for the physical device. The emulated key
+  store lives under `~/.matrixscroll` (directory `0700`, key file `0600`).
 
 ## 6. Use with Superpowers workflows
 
@@ -230,6 +282,8 @@ so it's treated as optional enrichment — the registry is the robust primary.
 | `OLLAMA_URL` | `http://localhost:11434` | Ollama server address |
 | `TOP_K` | `5` | Doc chunks retrieved per question (web UI) |
 | `COPILOT_WORKSPACE` | _(unset)_ | Absolute path to the user's active codebase (MCP: `${workspaceFolder}`) |
+| `MATRIXSCROLL_MODE` | `emulated` | Root-of-trust provider: `emulated` (software key) or `hardware` (Matrix Scroll device) |
+| `MATRIXSCROLL_HOME` | `~/.matrixscroll` | Directory for the emulated device key store (created `0700`, key file `0600`) |
 | `PORT` | _(random)_ | Force a specific port for the web UI |
 | `OPEN_BROWSER` | `1` | Set to `0` to keep `app.py` from opening the dashboard automatically |
 
@@ -242,7 +296,8 @@ with no cloud keys set it lands on Ollama and keeps working offline.
 
 ```
 cursor-co-pilot/
-  mcp_server.py           # MCP server (stdio) + 12 tools  <- the co-pilot
+  mcp_server.py           # MCP server (stdio) + 13 tools  <- Digital Rain
+  identity.py             # Matrix Scroll root of trust (Ed25519 device identity + signing)
   llm.py                  # Claude / Gemini / Ollama backend chain
   scanner.py              # project stack profiler
   cursor_artifacts.py     # .mdc rule + mcp.json renderers
@@ -260,7 +315,7 @@ cursor-co-pilot/
     index.json            # built BM25 index (docs + catalog)
 ```
 
-Optional dev dependency for regenerating `docs/Cursor-Co-pilot-Feature-Guide.pdf`:
+Optional dev dependency for regenerating `docs/Digital-Rain-Feature-Guide.pdf`:
 
 ```bash
 pip install -r requirements-dev.txt
