@@ -17,7 +17,7 @@ There are two halves, and you can use the software half on its own:
 - **Digital Rain** — a local MCP server and web dashboard. It scans your project, serves
   ranked context to your IDE, and produces signed release evidence. Runs entirely on
   `localhost`.
-- **Matrix Scroll** — the USB-C secure element that holds the signing key. Until your unit
+- **Matrix Scroll** — the hardware device (RP2040 + NXP SE050 secure element with LCD screen) that holds the signing key. Until your unit
   arrives, the *emulated provider* stands in for it with an on-disk key, so you can build
   and test the full flow now.
 

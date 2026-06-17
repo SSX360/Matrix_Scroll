@@ -71,10 +71,7 @@ ours.
 
 **What it does not (and cannot) defend against**
 
-- **A fully present, fully privileged attacker.** If someone owns your unlocked laptop
-  while the device is plugged in, they can request signatures during that session. The
-  key stays secret, but the session is theirs. Hardware presence checks (a touch-to-sign
-  button) narrow this; they do not eliminate it.
+- **A fully present, fully privileged attacker.** In traditional hardware keys, malware on your laptop can request signatures in the background while the key is plugged in. Matrix Scroll mitigates this via the UX of Consent: every signature request must be visually confirmed on the device's 1-bit Sharp Memory LCD and authorized by a physical capacitive touch. The mascot looks up, prompts confirmation, and will display an alarmed face if an unexpected request is made. The key remains secure inside the NXP SE050 secure element, and the user must physically tap the device to authorize any signature.
 - **Bad code that is correctly signed.** We prove *who and where*, not *whether the code
   is good*. A signed change can still be a bug or a deliberate backdoor by an authorized
   operator. Attestation complements review; it does not replace it.
@@ -106,10 +103,10 @@ Two layers, one trust boundary.
                   │  Identity layer  │  EmulatedProvider  (disk key, today)
                   │   (Ed25519)      │  HardwareProvider  (SE050, roadmap)
                   └────────┬─────────┘
-                           │ sign() — private key never crosses this line
+                           │ sign() — host OS cannot read key
                   ┌────────▼─────────┐
-                  │  Matrix Scroll   │  USB-C secure element
-                  │  (NXP SE050)     │  key generated & sealed in silicon
+                  │  Matrix Scroll   │  RP2040 MCU + LCD Screen (Consent UI)
+                  │  (Dual-Chip)     ├──[I2C]── NXP SE050 (EAL6+ Secure Element)
                   └──────────────────┘
 ```
 
@@ -147,11 +144,7 @@ your desk.
 
 ## 5. The hardware: Matrix Scroll
 
-The device is a USB-C dongle built around an **NXP SE050** secure element — the same class
-of chip used in payment terminals and passports. On first pairing it generates an Ed25519
-keypair *inside* the element. The public key comes out. The private key never does. When
-Digital Rain needs a signature, it hands the chip a digest; the chip signs and returns the
-signature. The host sees inputs and outputs, never the secret.
+The device is a keychain-sized, matte black anodized desktop object with a lime accent, built around a dual-chip architecture: an RP2040-class MCU to drive the USB communication, capacitive touch sensor, and a high-contrast 1.3" Sharp Memory LCD, coupled with an NXP SE050 secure element for key custody. The private signing keys are generated inside the SE050 and never cross the silicon boundary to the RP2040 or the host OS. The screen displays our character avatar (a desk companion living in software and silicon) which acts as a trust and consent surface: the avatar prompts touch confirmation for every signature, showing a signing state or an alarmed face on unexpected activity, neutralizing background malware signature requests.
 
 A stable, human-readable **device id** (for example `MS-4319-20D5`) is derived from the
 public key so humans can talk about "which device signed this" without pasting 32 bytes of
@@ -210,8 +203,8 @@ We would rather under-promise here.
 | Emulated Ed25519 identity, signed release manifests, verification | **Shipping** |
 | `/api/identity` + `device_identity` tool | **Shipping** |
 | Cross-IDE setup (Cursor, VS Code native, Cline/Roo, Claude Desktop) | **Shipping** |
-| NXP SE050 USB-C device (key sealed in silicon) | **Pre-order, target Q3 2026** |
-| Touch-to-sign presence check | **Planned with hardware** |
+| Matrix Scroll (Founders Edition) with LCD Avatar & RP2040 MCU | **Pre-order, target Q3 2026** |
+| Touch-to-sign presence check & avatar consent UI | **Planned with hardware** |
 | On-device signing of individual git commits | **Roadmap** |
 | Org-level attestation dashboard / fleet key registry | **Roadmap** |
 

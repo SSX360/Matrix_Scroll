@@ -228,80 +228,166 @@
         .product p { color: var(--muted); font-size: 15px; max-width: 38ch; margin-bottom: 22px; }
         .product .link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text); }
         .product .link:hover { color: var(--lime); }
-        .device-art { position: absolute; z-index: 1; top: 36px; left: 50%; transform: translateX(-50%) rotate(-12deg);
-            width: 130px; height: 230px; border-radius: 22px;
-            background: linear-gradient(160deg, #1c1a16, #050505); border: 1px solid var(--line-strong);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06); }
-        .device-art::before { content: ""; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; border-radius: 12px; background: radial-gradient(circle at 40% 35%, var(--sand), #6b5f49); box-shadow: 0 0 24px rgba(212,196,168,0.4); }
-        .device-art::after { content: ""; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 46px; height: 6px; border-radius: 4px; background: rgba(255,255,255,0.12); }
- 
-        /* Terminal Mock */
-        .terminal-mock {
-            background: #080808;
-            border: 1px solid var(--line-strong);
-            border-radius: 12px;
-            overflow: hidden;
-            font-family: var(--mono, monospace);
-            font-size: 12px;
-            margin-top: 24px;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.6);
-            text-align: left;
-            width: 100%;
+        .device-art {
+            position: absolute; z-index: 1; top: 32px; left: 50%; transform: translateX(-50%) rotate(-5deg);
+            width: 140px; height: 236px; border-radius: 20px;
+            background: #0c0c0d; border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.08);
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            padding: 14px 10px;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
         }
-        .term-header {
-            background: #111;
-            padding: 8px 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            border-bottom: 1px solid var(--line);
+        .device-art:hover {
+            transform: translateX(-50%) rotate(0deg) scale(1.03);
+            border-color: var(--lime);
         }
-        .term-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+        /* Enclosure side button/accent */
+        .device-art::before {
+            content: ""; position: absolute; left: -2px; top: 40px; width: 2px; height: 40px;
+            background: var(--lime); border-radius: 2px 0 0 2px;
+            box-shadow: 0 0 10px rgba(232, 255, 156, 0.5);
         }
-        .term-dot:nth-child(1) { background: #ff5f56; }
-        .term-dot:nth-child(2) { background: #ffbd2e; }
-        .term-dot:nth-child(3) { background: #27c93f; }
-        .term-title {
-            margin-left: 8px;
-            color: var(--muted);
-            font-size: 11px;
+        /* 1.3" LCD Screen */
+        .device-screen {
+            width: 116px; height: 116px; border-radius: 8px;
+            background: #070f0d; border: 2px solid #14221d;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .term-body {
-            padding: 14px;
-            line-height: 1.6;
-            color: #d4d4d4;
-            max-height: 160px;
-            overflow-y: auto;
+        /* LCD Grid scanline texture */
+        .device-screen::after {
+            content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.12;
+            background-image: linear-gradient(rgba(34, 255, 187, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 255, 187, 0.3) 1px, transparent 1px);
+            background-size: 2px 2px;
+            z-index: 10;
         }
-        .term-line {
-            margin-bottom: 4px;
-            white-space: nowrap;
+        /* Mascot Avatar Container */
+        .mascot-avatar {
+            width: 84px; height: 84px;
+            position: relative;
+            z-index: 2;
         }
-        .t-cyan { color: #4fc1ff; }
-        .t-green { color: var(--lime); }
-        .t-yellow { color: var(--sand); }
-        .t-gray { color: var(--muted); }
-        .t-lime { color: #a6e22e; }
+        /* Capacitive touch pad */
+        .device-touch-pad {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: radial-gradient(circle, #2e281d 10%, #6b5f49 60%, #1c1a16 90%);
+            border: 2px solid rgba(212, 196, 168, 0.4);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 0 10px rgba(212,196,168,0.1);
+            cursor: pointer;
+            position: relative;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .device-touch-pad:hover {
+            border-color: var(--lime);
+            box-shadow: 0 0 14px rgba(232, 255, 156, 0.4);
+        }
+        .device-touch-pad::after {
+            content: ""; position: absolute; inset: 5px; border-radius: 50%;
+            border: 1px dashed rgba(212, 196, 168, 0.5);
+        }
+        /* USB-C connector notch */
+        .device-usbc {
+            width: 30px; height: 6px; border-radius: 3px;
+            background: #141516; border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+            margin-top: 2px;
+        }
+        
+        /* Mascot Animations */
+        .visor-bar {
+            filter: drop-shadow(0 0 4px #ff3b30);
+            animation: visor-glow 3s infinite ease-in-out;
+        }
+        @keyframes visor-glow {
+            0%, 100% { stroke-width: 3px; opacity: 0.8; filter: drop-shadow(0 0 3px #ff3b30); }
+            50% { stroke-width: 4px; opacity: 1; filter: drop-shadow(0 0 6px #ff5e00); }
+        }
 
-        /* Secure Element State Indicator */
-        .device-indicator {
+        .visor-group {
+            animation: visor-loop 12s infinite ease-in-out;
+        }
+        @keyframes visor-loop {
+            0%, 40% { transform: translateY(0); }
+            45%, 55% { transform: translateY(-3px); }
+            56% { transform: translateY(-1px) translateX(-0.5px); }
+            58% { transform: translateY(-1px) translateX(0.5px); }
+            60% { transform: translateY(-1px) translateX(-0.5px); }
+            62% { transform: translateY(-1px) translateX(0.5px); }
+            64% { transform: translateY(-1px) translateX(-0.5px); }
+            66% { transform: translateY(-1px) translateX(0.5px); }
+            68% { transform: translateY(-1px) translateX(-0.5px); }
+            70% { transform: translateY(-1px) translateX(0.5px); }
+            72% { transform: translateY(-1px) translateX(-0.5px); }
+            74%, 85% { transform: translateY(0); }
+            86%, 100% { transform: translateY(0); }
+        }
+
+        .matrix-rain {
+            opacity: 0;
+            animation: rain-loop 12s infinite linear;
+        }
+        .rain-line {
+            stroke-dashoffset: 100;
+        }
+        @keyframes rain-loop {
+            0%, 55% { opacity: 0; }
+            55.1%, 74.9% { opacity: 0.5; }
+            75%, 100% { opacity: 0; }
+        }
+        .rain-1 { animation: rain-scroll-1 2s infinite linear; }
+        .rain-2 { animation: rain-scroll-2 1.5s infinite linear; }
+        @keyframes rain-scroll-1 { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+        @keyframes rain-scroll-2 { 0% { stroke-dashoffset: 80; } 100% { stroke-dashoffset: 0; } }
+
+        .signing-overlay {
+            opacity: 0;
+            transform: scale(0.6);
+            transform-origin: 50% 50%;
+            animation: signing-loop 12s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes signing-loop {
+            0%, 75% { opacity: 0; transform: scale(0.6); }
+            75.1%, 88% { opacity: 1; transform: scale(1); }
+            88.1%, 100% { opacity: 0; transform: scale(0.6); }
+        }
+
+        /* LCD Screen Status Texts */
+        .status-text {
+            font-family: var(--mono);
+            font-size: 7.5px;
             position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--lime);
-            box-shadow: 0 0 14px var(--lime);
-            animation: pulse-glow 2.5s infinite ease-in-out;
+            bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 5;
         }
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.5; transform: scale(0.9); box-shadow: 0 0 10px var(--lime); }
-            50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 18px var(--lime); }
+        .status-text.idle { color: #22ffbb; animation: idle-text-anim 12s infinite; }
+        .status-text.req { color: #ffbd2e; animation: req-text-anim 12s infinite; }
+        .status-text.signing { color: #ff5e00; animation: signing-text-anim 12s infinite; }
+        .status-text.verified { color: #5ccc84; animation: verified-text-anim 12s infinite; }
+
+        @keyframes idle-text-anim {
+            0%, 40% { opacity: 0.8; }
+            40.1%, 89.9% { opacity: 0; }
+            90%, 100% { opacity: 0.8; }
         }
+        @keyframes req-text-anim {
+            0%, 40% { opacity: 0; }
+            40.1%, 55% { opacity: 1; }
+            55.1%, 100% { opacity: 0; }
+        }
+        @keyframes signing-text-anim {
+            0%, 55% { opacity: 0; }
+            55.1%, 75% { opacity: 1; }
+            75.1%, 100% { opacity: 0; }
+        }
+        @keyframes verified-text-anim {
+            0%, 75% { opacity: 0; }
+            75.1%, 89.9% { opacity: 1; }
+            90%, 100% { opacity: 0; }
+        }     }
 
         /* FEATURE GRID */
         .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 64px; }
@@ -622,7 +708,49 @@
                 <div class="product device reveal">
                     <div class="glow"></div>
                     <div class="device-art">
-                        <div class="device-indicator"></div>
+                        <!-- LCD Screen -->
+                        <div class="device-screen">
+                            <div class="mascot-avatar">
+                                <!-- Animated Cyberpunk Mascot SVG -->
+                                <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Hair (Bob Cut) -->
+                                    <path d="M20,50 C20,20 80,20 80,50 C80,55 78,75 75,75 C70,75 68,52 68,50 C68,48 32,48 32,50 C32,52 30,75 25,75 C22,75 20,55 20,50 Z" fill="#0b1713" stroke="#22ffbb" stroke-width="1.5" />
+                                    <!-- Neck & turtleneck -->
+                                    <path d="M42,72 L58,72 L58,85 L42,85 Z" fill="#070e0b" stroke="#22ffbb" stroke-width="1.5" />
+                                    <path d="M36,82 Q50,86 64,82" fill="none" stroke="#22ffbb" stroke-width="1" />
+                                    <!-- Face -->
+                                    <path d="M30,50 C30,35 70,35 70,50 C70,68 62,76 50,76 C38,76 30,68 30,50 Z" fill="#0d241d" stroke="#22ffbb" stroke-width="1" />
+                                    <!-- Nose & Lips -->
+                                    <path d="M50,58 L49,63 L51,63 Z" fill="none" stroke="#22ffbb" stroke-width="1" />
+                                    <path d="M45,69 Q50,71 55,69" fill="none" stroke="#22ffbb" stroke-width="1" />
+                                    <!-- Visor / Goggles -->
+                                    <g class="visor-group">
+                                        <rect x="23" y="42" width="54" height="13" rx="4" fill="#150502" stroke="#ff3b30" stroke-width="1.5" />
+                                        <!-- Glowing Horizontal Bar -->
+                                        <line x1="28" y1="48" x2="72" y2="48" stroke="#ff5e00" stroke-width="3.5" stroke-linecap="round" class="visor-bar" />
+                                    </g>
+                                    <!-- Matrix Rain overlay inside screen -->
+                                    <g class="matrix-rain">
+                                        <line x1="15" y1="-10" x2="15" y2="100" stroke="#22ffbb" stroke-dasharray="10 20" stroke-width="1.5" class="rain-line rain-1" />
+                                        <line x1="85" y1="-10" x2="85" y2="100" stroke="#22ffbb" stroke-dasharray="8 15" stroke-width="1" class="rain-line rain-2" />
+                                    </g>
+                                    <!-- Verification Overlay -->
+                                    <g class="signing-overlay">
+                                        <circle cx="50" cy="50" r="15" fill="#08100e" stroke="#22ffbb" stroke-width="2" class="signing-circle" />
+                                        <path d="M45,50 L48,53 L55,46" fill="none" stroke="#22ffbb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="signing-check" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <!-- On-screen UI Status Texts -->
+                            <span class="status-text idle">MS-4319 IDLE</span>
+                            <span class="status-text req">SIGN REQ</span>
+                            <span class="status-text signing">SIGNING...</span>
+                            <span class="status-text verified">ATTESTED</span>
+                        </div>
+                        <!-- Capacitive Touch Pad -->
+                        <div class="device-touch-pad"></div>
+                        <!-- USB-C Connector -->
+                        <div class="device-usbc"></div>
                     </div>
                     <div class="scrim"></div>
                     <div class="pc">
@@ -664,6 +792,55 @@
             </div>
         </div>
     </section>
+
+    <!-- TECHNICAL SPECIFICATIONS -->
+    <section class="block" id="specs" style="border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.01);">
+        <div class="wrap">
+            <div class="head-center reveal">
+                <span class="eyebrow">Hardware Architecture</span>
+                <h2>Technical Specifications</h2>
+                <p>Designed for physical key custody and local user authorization. The perfect compromise between cryptographic isolation and human-in-the-loop consent.</p>
+            </div>
+            <div class="spec-grid reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 48px;">
+                <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
+                    <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">SECURE ELEMENT</div>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">NXP SE050 (CC EAL6+)</h4>
+                    <p style="color: var(--muted); font-size: 14px;">Generates and stores the Ed25519 identity inside secure silicon. Keys are mathematically non-extractable.</p>
+                </div>
+                <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
+                    <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">CONTROLLER</div>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">RP2040 MCU</h4>
+                    <p style="color: var(--muted); font-size: 14px;">Drives the 1-bit display, capacitive touch, and USB interface. The MCU never has access to the private signing key.</p>
+                </div>
+                <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
+                    <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">DISPLAY</div>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">1.3" Sharp Memory LCD</h4>
+                    <p style="color: var(--muted); font-size: 14px;">Ultra-low-power 1-bit reflective display. Crisp, high-contrast monochrome screen for the character avatar consent UX.</p>
+                </div>
+                <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
+                    <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">PRESENCE</div>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">Capacitive Touch-to-Sign</h4>
+                    <p style="color: var(--muted); font-size: 14px;">Physical presence sensor. Signature requests must be authorized with a manual touch, blocking background malware attacks.</p>
+                </div>
+                <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
+                    <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">CONNECTIVITY</div>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">USB-C Connector</h4>
+                    <p style="color: var(--muted); font-size: 14px;">Standard USB-C bus-powered interface. No battery to decay, no wireless radios to exploit, works with any modern workstation.</p>
+                </div>
+                <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
+                    <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">ENCLOSURE</div>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">Matte Anodized Metal</h4>
+                    <p style="color: var(--muted); font-size: 14px;">Keyring-sized CNC-milled aluminum chassis in matte black with a signature lime (#e8ff9c) accent strip.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .spec-card:hover {
+            border-color: rgba(232, 255, 156, 0.3) !important;
+        }
+    </style>
 
     <!-- FEATURES / SECURITY -->
     <section class="block" id="security">
@@ -752,10 +929,11 @@
         <div class="wrap">
             <div class="cta reveal">
                 <div class="cta-inner">
-                    <span class="eyebrow">Pre-order</span>
-                    <h2>Reserve your Matrix Scroll.</h2>
-                    <p style="margin-bottom: 8px;"><strong>$149 per device</strong> · Free reservation, pay on delivery · Est. Shipping: Q3 2026</p>
-                    <p style="margin-bottom: 32px; font-size:15px; color:var(--muted-2);">Lock in your early production unit and get immediate access to the Digital Rain software emulator before the hardware ships.</p>
+                    <span class="eyebrow">Acquire</span>
+                    <h2>Get Digital Rain &amp; Matrix Scroll</h2>
+                    <p style="margin-bottom: 8px;"><strong>Digital Rain Software License</strong>: $99 · Perpetual, available now</p>
+                    <p style="margin-bottom: 8px;"><strong>Matrix Scroll (Founders Edition)</strong>: $199 · Hardware LCD device (Est. Ship Q3 2026) · Includes lifetime software license</p>
+                    <p style="margin-bottom: 32px; font-size:15px; color:var(--muted-2);">Choose your option below. Hardware orders are a free reservation; you pay only when it ships.</p>
                     
                     <form class="preorder-form" id="preorderForm">
                         <div class="preorder-input-wrap">
@@ -765,14 +943,14 @@
                             </svg>
                             <input type="email" id="preorderEmail" required placeholder="Enter your email address..." class="preorder-input" />
                             <select id="preorderQty" class="preorder-select">
-                                <option value="1">1 Unit — Developer Kit ($149)</option>
-                                <option value="2">2 Units — Dual Workstation ($298)</option>
-                                <option value="5">5 Units — Team Pack ($745)</option>
-                                <option value="10">10 Units — Enterprise Tier ($1,490)</option>
+                                <option value="rain">Digital Rain Software Only ($99)</option>
+                                <option value="foundry_1">1x Matrix Scroll Founders Edition ($199)</option>
+                                <option value="foundry_2">2x Matrix Scroll Founders Edition ($398)</option>
+                                <option value="foundry_5">5x Matrix Scroll (Team Pack) ($995)</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary preorder-submit-btn">
-                            <span class="btn-text">Reserve a unit →</span>
+                            <span class="btn-text">Proceed →</span>
                             <span class="btn-spinner" style="display:none;"></span>
                         </button>
                     </form>
@@ -878,13 +1056,20 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ email, quantity: parseInt(qty) }),
+                        body: JSON.stringify({ email, quantity: qty }),
                     });
                     
                     const data = await response.json();
                     
                     if (response.ok) {
-                        preorderStatus.textContent = `🎉 Reservation confirmed for ${qty} unit${qty > 1 ? 's' : ''}! We'll contact you at ${email} soon.`;
+                        let confirmMsg = '';
+                        if (qty === 'rain') {
+                            confirmMsg = `🎉 License request received! We'll contact you at ${email} with early access download details.`;
+                        } else {
+                            const units = qty === 'foundry_1' ? '1 unit' : (qty === 'foundry_2' ? '2 units' : '5 units');
+                            confirmMsg = `🎉 Reservation confirmed for ${units} of Matrix Scroll Founders Edition! We'll contact you at ${email} soon.`;
+                        }
+                        preorderStatus.textContent = confirmMsg;
                         preorderStatus.className = 'preorder-status success';
                         preorderForm.reset();
                     } else {
