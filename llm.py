@@ -341,6 +341,8 @@ def stream(system: str, messages: list[dict], *,
             for text in _stream_one(backend, system, messages, max_tokens, temperature):
                 emitted = True
                 yield text
+            if not emitted:
+                raise LLMError(f"{backend} stream returned empty output")
             return
         except Exception as e:  # noqa: BLE001
             if emitted:

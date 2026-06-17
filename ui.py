@@ -762,7 +762,7 @@ INDEX_HTML = r'''<!doctype html>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
         </button>
       </div>
-      <div class="hint">Co-pilot uses BM25 retrieval over official Cursor documentation and configured packages.</div>
+      <div class="hint">Ask about your codebase strategy, Cursor setup, <b>generate a rule for …</b>, or <b>install postgres mcp</b>.</div>
     </div>
   </main>
   
@@ -1362,6 +1362,11 @@ function srcHTML(sources){
     <div class="src-list">${items}</div></details>`;
 }
 
+function advisorFooterHTML(){
+  return `<details class="sources" open><summary>📁 <b>Project context</b> (README, scan, vault, rules)</summary>
+    <div class="src-list"><div class="src"><span class="meta"><div class="t">Answer grounded in your active workspace</div></div></div></details>`;
+}
+
 async function ask(){
   const q = input.value.trim();
   if(!q || streaming) return;
@@ -1372,9 +1377,9 @@ async function ask(){
   const content = addMsg('bot');
   content.innerHTML = '<div class="think"><i></i><i></i><i></i></div>';
   setSending(true);
-  speak("Analyzing documentation and writing response...", 8000);
+  speak("Working on that...", 8000);
 
-  let answer = '', sources = [], started = false;
+  let answer = '', sources = [], started = false, actionDone = false, advisorMode = false;
   controller = new AbortController();
   try{
     const resp = await fetch('/api/chat', {
@@ -1397,6 +1402,15 @@ async function ask(){
         const type = tMatch[1].trim();
         let payload; try{ payload = JSON.parse(dMatch[1]); }catch(e){ payload = dMatch[1]; }
         if(type==='sources'){ sources = payload; }
+        else if(type==='mode'){
+          if(payload && payload.mode === 'advisor') advisorMode = true;
+        }
+        else if(type==='action'){
+          if(payload && payload.path) {
+            actionDone = true;
+            poll(true);
+          }
+        }
         else if(type==='token'){
           if(!started){ content.innerHTML=''; started=true; }
           answer += payload;
@@ -1411,9 +1425,15 @@ async function ask(){
         }
         else if(type==='done'){
           content.classList.remove('caret');
-          if(answer) content.innerHTML = md(answer) + srcHTML(sources);
+          if(answer) {
+            const footer = actionDone ? '' : (advisorMode ? advisorFooterHTML() : srcHTML(sources));
+            content.innerHTML = md(answer) + footer;
+          }
           history.push({role:'assistant', content: answer});
-          speak("Here is your answer! Check the citation links below.", 4000);
+          const msg = actionDone ? "Done — file written to your project."
+            : advisorMode ? "Here's a plan based on your project context."
+            : "Here is your answer! Check the citation links below.";
+          speak(msg, 4000);
         }
       }
     }

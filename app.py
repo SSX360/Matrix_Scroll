@@ -34,6 +34,8 @@ import cursor_artifacts as ca
 import vault
 import workspace_config as wc
 import brainstorm as bs
+import chat_actions as actions
+import chat_advisor as advisor
 
 
 ROOT = Path(__file__).resolve().parent
@@ -90,6 +92,7 @@ def wants_project_context(question: str) -> bool:
         "scan my project", "scan the project", "project scan", "what stack",
         "which stack", "tech stack", "stack we", "stack i'm", "stack i am",
         "jupyter", "notebook", "execution order", "out-of-order", "out of order",
+        "this codebase", "this project", "my repo", "this repo",
     )
     return any(signal in low for signal in signals)
 
@@ -256,6 +259,21 @@ def health():
     return jsonify(info)
 
 
+def _chat_messages(history: list[dict], prompt: str) -> list[dict]:
+    messages = []
+    for turn in history[-6:]:
+        role = turn.get("role")
+        content = turn.get("content", "")
+        if role in ("user", "assistant") and content:
+            messages.append({"role": role, "content": content})
+    messages.append({"role": "user", "content": prompt})
+    return messages
+
+
+def _search_cursor_docs(query: str, k: int) -> list[dict]:
+    return get_index().search(query, k=k, source_type="cursor_doc")
+
+
 @app.post("/api/chat")
 def chat():
     data = request.get_json(force=True)
@@ -264,20 +282,85 @@ def chat():
     if not question:
         return jsonify({"error": "empty message"}), 400
 
+    action = actions.detect_chat_action(question)
+    if action:
+        ws, _ = get_workspace()
+        profile = scan_active_profile()
+
+        def generate_action():
+            yield "event: action\ndata: " + json.dumps({"type": action["type"], "pending": True}) + "\n\n"
+            try:
+                message, meta = actions.execute_chat_action(
+                    action,
+                    ws,
+                    profile,
+                    search_docs=_search_cursor_docs,
+                    catalog_lookup=_catalog_lookup,
+                )
+                _clear_status_cache()
+                yield "event: token\ndata: " + json.dumps(message) + "\n\n"
+                yield "event: action\ndata: " + json.dumps(meta) + "\n\n"
+            except Exception as e:
+                yield "event: error\ndata: " + json.dumps(str(e)) + "\n\n"
+                return
+            yield "event: done\ndata: {}\n\n"
+
+        return Response(stream_with_context(generate_action()), mimetype="text/event-stream")
+
+    ws, cfg = get_workspace()
+    profile = scan_active_profile()
+    if advisor.wants_project_advice(question, profile):
+        doc_contexts = get_index().search(question, k=2, source_type="cursor_doc")
+        advisor_ctx = advisor.build_advisor_context(
+            question,
+            ws,
+            profile,
+            cfg,
+            list_rules=list_project_rules,
+            catalog_search=_catalog_search,
+        )
+        prompt = advisor.build_advisor_prompt(question, advisor_ctx, doc_contexts)
+        messages = _chat_messages(history, prompt)
+
+        def generate_advisor():
+            yield "event: mode\ndata: " + json.dumps({"mode": "advisor"}) + "\n\n"
+            collected: list[str] = []
+            try:
+                for token in llm.stream(advisor.ADVISOR_SYSTEM_PROMPT, messages):
+                    if token:
+                        collected.append(token)
+                        yield "event: token\ndata: " + json.dumps(token) + "\n\n"
+                if not collected:
+                    text = llm.generate(
+                        advisor.ADVISOR_SYSTEM_PROMPT,
+                        messages,
+                        ollama_num_predict=768,
+                    )
+                    if text.strip():
+                        yield "event: token\ndata: " + json.dumps(text) + "\n\n"
+                    else:
+                        offline = advisor.build_offline_advisor_answer(question, advisor_ctx)
+                        yield "event: token\ndata: " + json.dumps(offline) + "\n\n"
+            except llm.LLMError:
+                offline = advisor.build_offline_advisor_answer(question, advisor_ctx)
+                yield "event: token\ndata: " + json.dumps(offline) + "\n\n"
+                yield "event: done\ndata: {}\n\n"
+                return
+            except requests.RequestException:
+                msg = (f"Couldn't reach the local model at {OLLAMA_URL}. Is Ollama running? "
+                       f"Start it with 'ollama serve' and pull a model: 'ollama pull {OLLAMA_MODEL}'. "
+                       f"Or set ANTHROPIC_API_KEY to use Claude instead.")
+                yield "event: error\ndata: " + json.dumps(msg) + "\n\n"
+                return
+            yield "event: done\ndata: {}\n\n"
+
+        return Response(stream_with_context(generate_advisor()), mimetype="text/event-stream")
+
     bm25 = get_index()
     contexts = bm25.search(question, k=TOP_K)
     prompt = build_prompt(question, contexts)
     project_ctx = wants_project_context(question)
-
-    # The system prompt is passed separately to the LLM backend; messages hold
-    # only the user/assistant turns plus this question's grounded prompt.
-    messages = []
-    for turn in history[-6:]:
-        role = turn.get("role")
-        content = turn.get("content", "")
-        if role in ("user", "assistant") and content:
-            messages.append({"role": role, "content": content})
-    messages.append({"role": "user", "content": prompt})
+    messages = _chat_messages(history, prompt)
 
     sources = [
         {"n": i + 1, "title": c["doc_title"], "heading": c.get("heading", ""),
@@ -437,33 +520,15 @@ def create_rule():
     if not name or not intent:
         return jsonify({"error": "missing name or intent"}), 400
         
-    # Generate rule body using LLM
-    docs_ctx = ""
     try:
-        bm = get_index()
-        contexts = bm.search(f"Best practices and conventions relevant to: {intent}", k=4, source_type="cursor_doc")
-        blocks = []
-        for i, c in enumerate(contexts, 1):
-            head = f"{c['doc_title']} — {c['heading']}" if c.get("heading") else c["doc_title"]
-            blocks.append(f"[{i}] {head}\n{c['text']}")
-        docs_ctx = "\n\n".join(blocks)
-    except Exception:
-        pass
-
-    sys_prompt = ("You write Cursor project rules. Given an intent, produce a crisp, "
-                  "actionable rule body in markdown (imperative bullet points, no "
-                  "preamble, no frontmatter). Keep it under 200 words.")
-    user = (f"Intent: {intent}\n\nRelevant Cursor guidance (for grounding):\n"
-            f"{docs_ctx}\n\nWrite the rule body now.")
-            
-    try:
-        body = llm.generate(sys_prompt, [{"role": "user", "content": user}])
+        body = actions.generate_rule_body(intent, _search_cursor_docs)
     except Exception as e:
         body = f"- {intent}\n\n(Generated without an LLM backend: {e})"
-        
+
     try:
         description = intent if len(intent) <= 100 else intent[:97] + "…"
         file_path = ca.write_rule(str(get_workspace()[0]), name, description, body, globs=globs, always_apply=always_apply)
+        _clear_status_cache()
         return jsonify({"success": True, "path": str(file_path)})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
