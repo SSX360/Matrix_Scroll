@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Scroll — Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Host+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --panel: #0f0f0f;
+            --panel-light: #151516;
+            --line: rgba(255, 255, 255, 0.08);
+            --line-strong: rgba(255, 255, 255, 0.16);
+            --text: #ffffff;
+            --muted: #a5a5a5;
+            --muted-2: rgba(255, 255, 255, 0.7);
+            --lime: #e8ff9c;
+            --teal: #22ffbb;
+            --sand: #d4ba9f;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --mono: 'SFMono-Regular', ui-monospace, 'JetBrains Mono', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--lime); }
+
+        h1, h2, h3, h4 { font-family: 'Host Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.02em; color: var(--text); }
+        h1 { font-size: 36px; margin-bottom: 24px; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+        h2 { font-size: 24px; margin: 40px 0 20px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+        h3 { font-size: 18px; margin: 28px 0 14px; }
+        p { margin-bottom: 16px; color: var(--muted-2); font-size: 15px; }
+        a { color: var(--lime); text-decoration: none; transition: color 0.2s; }
+        a:hover { color: #ffffff; }
+
+        /* Left Sidebar navigation */
+        .sidebar {
+            width: 280px;
+            background: var(--panel);
+            border-right: 1px solid var(--line);
+            padding: 32px 24px;
+            position: fixed;
+            top: 0; bottom: 0; left: 0;
+            overflow-y: auto;
+            z-index: 10;
+        }
+        .sidebar-brand {
+            display: flex; align-items: center; gap: 8px;
+            font-family: 'Host Grotesk', sans-serif; font-weight: 700; font-size: 18px;
+            color: #ffffff; margin-bottom: 40px;
+        }
+        .sidebar-brand .dot {
+            width: 8px; height: 8px; border-radius: 2px;
+            background: var(--lime); box-shadow: 0 0 10px var(--lime);
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex; flex-direction: column; gap: 12px;
+        }
+        .sidebar-nav-heading {
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1.5px; color: var(--muted); margin-top: 16px; margin-bottom: 4px;
+        }
+        .sidebar-nav a {
+            font-size: 14px; color: var(--muted-2);
+            transition: color 0.15s, padding-left 0.15s;
+            display: block;
+        }
+        .sidebar-nav a:hover {
+            color: var(--lime);
+            padding-left: 4px;
+        }
+
+        /* Main content area */
+        .content-wrapper {
+            margin-left: 280px;
+            width: calc(100% - 280px);
+            padding: 64px 80px;
+            max-width: 960px;
+        }
+        
+        /* Tables styling */
+        table {
+            width: 100%; border-collapse: collapse; margin-bottom: 32px;
+            background: var(--panel); border-radius: var(--radius-md); overflow: hidden;
+            border: 1px solid var(--line);
+        }
+        th, td { padding: 14px 18px; text-align: left; font-size: 14px; }
+        th { background: rgba(255,255,255,0.02); font-weight: 500; color: #ffffff; border-bottom: 1px solid var(--line); }
+        td { border-bottom: 1px solid var(--line); color: var(--muted-2); }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { color: #ffffff; background: rgba(255,255,255,0.01); }
+
+        /* Code Blocks */
+        code {
+            font-family: var(--mono); font-size: 13.5px; background: rgba(255,255,255,0.06);
+            padding: 3px 6px; border-radius: 4px; color: var(--lime);
+        }
+        pre {
+            background: var(--panel-light); border: 1px solid var(--line);
+            border-radius: var(--radius-md); padding: 20px; overflow-x: auto;
+            margin-bottom: 24px; position: relative;
+        }
+        pre code {
+            background: none; padding: 0; border-radius: 0; color: #e5e5e5;
+            font-size: 13px; line-height: 1.5; display: block;
+        }
+
+        /* Callouts / Alerts */
+        .callout {
+            border-left: 4px solid var(--lime); background: rgba(232, 255, 156, 0.03);
+            padding: 18px 22px; border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-bottom: 28px;
+        }
+        .callout-title { font-weight: 700; color: var(--lime); font-size: 14px; margin-bottom: 6px; }
+        .callout p { margin-bottom: 0; font-size: 14px; }
+
+        @media (max-width: 960px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 24px; }
+            .sidebar-brand { margin-bottom: 20px; }
+            .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 12px 24px; }
+            .content-wrapper { margin-left: 0; width: 100%; padding: 40px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="dot"></span> Matrix Scroll
+        </div>
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-heading">Getting Started</li>
+            <li><a href="#install">1. Installation</a></li>
+            <li><a href="#run">2. Running Local Stack</a></li>
+            <li><a href="#ide">3. IDE Integration</a></li>
+            
+            <li class="sidebar-nav-heading">Reference</li>
+            <li><a href="#mcp">13 MCP Tools</a></li>
+            <li><a href="#api">Local REST API</a></li>
+            <li><a href="#trust">Root of Trust &amp; Keys</a></li>
+            <li><a href="#config">Configuration Map</a></li>
+            
+            <li class="sidebar-nav-heading">Support</li>
+            <li><a href="#trouble">Troubleshooting</a></li>
+            <li><a href="#faq">FAQ</a></li>
+            <li><a href="/docs/Whitepaper.md" style="color: var(--sand); margin-top: 12px;">→ View Whitepaper</a></li>
+            <li><a href="/" style="color: var(--muted); margin-top: 4px;">← Back to Home</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content-wrapper">
+        <h1>Matrix Scroll — Documentation</h1>
+        <p>This is the practical guide: how to get Digital Rain running, connect it to your editor, sign and verify a release, and reach for the right knob when something misbehaves. If you want the <em>why</em> — the threat model and the cryptography — read the <a href="/docs/Whitepaper.md">Whitepaper</a>.</p>
+        
+        <div class="callout">
+            <div class="callout-title">DEVELOPER NOTICE</div>
+            <p>Everything here works <strong>today in emulated mode</strong>, with no hardware required. When the physical Matrix Scroll device ships (target Q3 2026), the only thing that changes is one configuration environment variable; your commands and integration APIs stay identical.</p>
+        </div>
+
+        <h2 id="install">1. Installation</h2>
+        <p>Ensure you have Python 3.11+ installed. We recommend setting up a virtual environment inside your project directory to keep dependencies isolated:</p>
+        <pre><code>python -m venv .venv
+.\.venv\Scripts\activate          # Windows
+# source .venv/bin/activate       # macOS / Linux
+pip install -r requirements.txt</code></pre>
+        <p>This pulls in all required modules, including <code>cryptography</code>, which the identity layer uses to perform Ed25519 cryptographic signatures.</p>
+
+        <h2 id="run">2. Running the Local Stack</h2>
+        <p>Digital Rain runs entirely on <code>localhost</code>. The default backend port is <code>59712</code>.</p>
+        
+        <h3>Web Dashboard</h3>
+        <p>Launches on a random free port and automatically opens in your browser:</p>
+        <pre><code>python app.py</code></pre>
+
+        <h3>Desktop Companion</h3>
+        <p>Pins the backend specifically to port <code>59712</code>, suppresses browser focus, and launches the interactive desktop mascot widget:</p>
+        <pre><code>.\run_desktop_companion.bat</code></pre>
+        <p>The companion floats always-on-top. Left-click and drag to move it, right-click to open the quick-actions console, and double-click to access the full web dashboard. On startup, it performs a project scan and alerts you to files needing attention (e.g. Jupyter notebooks executed out-of-order).</p>
+
+        <p>To run the backend headlessly on the pinned port without opening a browser window:</p>
+        <pre><code>$env:PORT=59712; $env:OPEN_BROWSER=0; python app.py</code></pre>
+
+        <h2 id="ide">3. IDE Integration</h2>
+        <p>Digital Rain implements the Model Context Protocol (MCP). The server ID is <code>cursor-copilot</code> (retained for backward compatibility).</p>
+        
+        <h3>VS Code (Native Agent Mode, v1.102+)</h3>
+        <p>Commit a <code>.vscode/mcp.json</code> file to your workspace:</p>
+        <pre><code>{
+  "servers": {
+    "cursor-copilot": {
+      "type": "stdio",
+      "command": "C:/path/to/.venv/Scripts/python.exe",
+      "args": ["C:/path/to/mcp_server.py"],
+      "env": { "COPILOT_WORKSPACE": "${workspaceFolder}" }
+    }
+  }
+}</code></pre>
+        <p>Open the file and click <strong>Start</strong> on the server. The 13 tools will instantly become available in your agent tools picker.</p>
+
+        <h3>Cursor</h3>
+        <p>Create a <code>.cursor/mcp.json</code> configuration (there is a ready-to-use template in the workspace root named <code>.cursor/mcp.json.example</code>) and register it in <em>Cursor Settings → MCP</em>.</p>
+
+        <h3>Cline / Roo-Code / Windsurf</h3>
+        <p>Append the <code>cursor-copilot</code> configuration block directly to the extension's global <code>mcpServers</code> config file.</p>
+
+        <p>A great initial prompt in any IDE is: <em>"Use cursor-copilot to scan this project, then show the device_identity."</em></p>
+
+        <h2 id="mcp">4. The 13 MCP Tools</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tool Name</th>
+                    <th>Functional Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>ask_cursor_docs</code></td>
+                    <td>Answer IDE/Cursor questions grounded in official documentation.</td>
+                </tr>
+                <tr>
+                    <td><code>search_cursor_docs</code></td>
+                    <td>Return raw, ranked documentation chunks without LLM synthesis.</td>
+                </tr>
+                <tr>
+                    <td><code>scan_project</code></td>
+                    <td>Examine project languages, package configurations, SDKs, and notebook structures.</td>
+                </tr>
+                <tr>
+                    <td><code>scan_notebooks</code></td>
+                    <td>Analyze Jupyter notebooks for order execution and runtime health.</td>
+                </tr>
+                <tr>
+                    <td><code>suggest_mcp_servers</code></td>
+                    <td>Recommend catalog MCP servers/skills best suited for a specific task.</td>
+                </tr>
+                <tr>
+                    <td><code>scaffold_mcp_config</code></td>
+                    <td>Generate a merge-ready <code>mcp.json</code> block for IDE configurations.</td>
+                </tr>
+                <tr>
+                    <td><code>generate_cursor_rule</code></td>
+                    <td>Draft a <code>.cursor/rules/*.mdc</code> rule tailored to current stack files.</td>
+                </tr>
+                <tr>
+                    <td><code>create_cursor_rule</code></td>
+                    <td>Generate <strong>and physically write</strong> a new rule file to the filesystem.</td>
+                </tr>
+                <tr>
+                    <td><code>install_mcp_server</code></td>
+                    <td>Automatically download and install an MCP server into your local environment.</td>
+                </tr>
+                <tr>
+                    <td><code>recommend_setup</code></td>
+                    <td>Advisory tool: performs scan and provides full IDE config scaffolding.</td>
+                </tr>
+                <tr>
+                    <td><code>search_knowledge_vault</code></td>
+                    <td>Run a local BM25 query over markdown directories and Obsidian vault notes.</td>
+                </tr>
+                <tr>
+                    <td><code>brainstorm_project</code></td>
+                    <td>Generate structured execution paths based on workspace scans and user goals.</td>
+                </tr>
+                <tr>
+                    <td><code>device_identity</code></td>
+                    <td>Retrieve the active Ed25519 identity block for cryptographic attestation.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="api">5. Local REST API</h2>
+        <p>Useful for deployment scripts, CI/CD pipes, and simple terminal querying:</p>
+        <pre><code>Invoke-RestMethod "http://127.0.0.1:59712/api/health"
+Invoke-RestMethod "http://127.0.0.1:59712/api/diagnostics"
+Invoke-RestMethod "http://127.0.0.1:59712/api/project/status"
+Invoke-RestMethod "http://127.0.0.1:59712/api/identity"
+Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&amp;async=1"</code></pre>
+        <ul>
+            <li><code>/api/health</code>: Reports active LLM backend configuration, loaded files, and database chunk sizes.</li>
+            <li><code>/api/diagnostics</code>: Returns comprehensive local machine diagnostics with credentials and secrets redacted.</li>
+        </ul>
+
+        <h2 id="trust">6. Root of Trust: Identity, Signing &amp; Verification</h2>
+        <p>This is where software and physical hardware boundaries meet.</p>
+        
+        <h3>Identify this workstation:</h3>
+        <pre><code>Invoke-RestMethod "http://127.0.0.1:59712/api/identity"</code></pre>
+        <p>Returns a stable <code>device_id</code> (e.g. <code>MS-4319-20D5</code>), the <code>algorithm</code> (<code>ed25519</code>), the <code>public_key</code> (base64 encoded), and the provider <code>mode</code> (<code>emulated</code> or <code>hardware</code>). <strong>The private key is never returned or logged.</strong></p>
+
+        <h3>Signing a Release</h3>
+        <p>Running <code>qa/release_evidence.py</code> gathers the build metadata, computes a canonical JSON representation (recursively sorted keys, compact spacing, ASCII character escaping), signs it with the private key, and writes a sealed <code>manifest.json</code> alongside a human-readable <code>summary.md</code>.</p>
+
+        <h3>Verifying Signatures</h3>
+        <p>To verify a build manifest, strip the <code>signature</code> block, serialize the remaining keys canonically, and verify the resulting bytes against the base64-encoded public key from <code>/api/identity</code>. Python teams can use the built-in <code>identity.verify_manifest</code> function.</p>
+
+        <h3>Emulated vs. Hardware Mode</h3>
+        <p>Toggle between software emulation and physical chip custody using an environment variable:</p>
+        <pre><code>$env:MATRIXSCROLL_MODE = "emulated"   # Default, key stored on disk
+# $env:MATRIXSCROLL_MODE = "hardware" # Target mode for physical SE050 device</code></pre>
+        <p>In <code>emulated</code> mode, keys reside under <code>MATRIXSCROLL_HOME</code> (defaults to <code>~/.matrixscroll</code>) with strict owner-only permissions. Keep this directory out of version control and off shared drives.</p>
+
+        <h2 id="config">7. Configuration Reference</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Environment Variable</th>
+                    <th>Default Value</th>
+                    <th>Configuration Effect</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>COPILOT_WORKSPACE</code></td>
+                    <td>current directory</td>
+                    <td>Root path the workspace scanner and indexing tools will search.</td>
+                </tr>
+                <tr>
+                    <td><code>PORT</code></td>
+                    <td>random free port</td>
+                    <td>HTTP port for local REST APIs and dashboard (use <code>59712</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>OPEN_BROWSER</code></td>
+                    <td><code>1</code></td>
+                    <td>Enables (<code>1</code>) or disables (<code>0</code>) launching the web browser on startup.</td>
+                </tr>
+                <tr>
+                    <td><code>LLM_BACKEND</code></td>
+                    <td><code>anthropic</code></td>
+                    <td>Preferred primary LLM provider (<code>anthropic</code>, <code>gemini</code>, or <code>ollama</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>ANTHROPIC_API_KEY</code></td>
+                    <td>unset</td>
+                    <td>Authentication credential for Anthropic's Claude APIs.</td>
+                </tr>
+                <tr>
+                    <td><code>GEMINI_API_KEY</code></td>
+                    <td>unset</td>
+                    <td>Authentication credential for Google's Gemini APIs.</td>
+                </tr>
+                <tr>
+                    <td><code>OLLAMA_MODEL</code></td>
+                    <td><code>gemma4:e4b</code></td>
+                    <td>Name of the local model pulling weights from Ollama.</td>
+                </tr>
+                <tr>
+                    <td><code>OLLAMA_URL</code></td>
+                    <td><code>http://localhost:11434</code></td>
+                    <td>Connection endpoint for the local Ollama instance.</td>
+                </tr>
+                <tr>
+                    <td><code>MATRIXSCROLL_MODE</code></td>
+                    <td><code>emulated</code></td>
+                    <td>Cryptographic provider backend selection (<code>emulated</code> or <code>hardware</code>).</td>
+                </tr>
+                <tr>
+                    <td><code>MATRIXSCROLL_HOME</code></td>
+                    <td><code>~/.matrixscroll</code></td>
+                    <td>Storage folder for emulated private key files.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="trouble">8. Troubleshooting</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symptom</th>
+                    <th>Root Cause</th>
+                    <th>Resolution Steps</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>MCP server fails to load</td>
+                    <td>Python path error or missing dependency</td>
+                    <td>Ensure target command references the absolute <code>python.exe</code> inside the virtual environment; run <code>pip install -r requirements.txt</code>.</td>
+                </tr>
+                <tr>
+                    <td>Local model is unreachable</td>
+                    <td>Ollama is inactive or model weights are missing</td>
+                    <td>Run <code>ollama serve</code> in a background shell; pull the model weights with <code>ollama pull gemma4:e4b</code>.</td>
+                </tr>
+                <tr>
+                    <td>Gemini <code>429 RESOURCE_EXHAUSTED</code></td>
+                    <td>API quota limits exceeded</td>
+                    <td>Add billing credits to your key, or set <code>LLM_BACKEND=anthropic</code> to pivot back to Claude.</td>
+                </tr>
+                <tr>
+                    <td>API identity error</td>
+                    <td>Corrupt or missing private key store</td>
+                    <td>Confirm <code>MATRIXSCROLL_HOME</code> folders have proper read/write permissions. Regenerate if files were modified.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="faq">9. FAQ</h2>
+        
+        <h3>Do I need the hardware to use any of this?</h3>
+        <p>No. The software, BM25 indexing, MCP tools, and cryptographic signing/verification work completely in emulated mode using an on-disk key. The physical device is required only if you need to secure the private key in tamper-proof silicon.</p>
+
+        <h3>Does my code ever leave my machine?</h3>
+        <p>Only if you use cloud-based backends (Anthropic/Gemini) to process prompts. Everything else, including indexing, metadata extraction, key generation, and signing is done entirely on <code>localhost</code>. To operate in a 100% air-gapped, zero-data-sharing configuration, choose the <code>ollama</code> backend.</p>
+
+        <h3>Is the emulated key as secure as the device?</h3>
+        <p>No. An on-disk key, even with restricted filesystem permissions, is susceptible to extraction if the host operating system is compromised by root-level malware. The dual-chip hardware device seals keys behind an physical silicon boundary that cannot be read back by the host. That isolation is the core security value.</p>
+        
+        <p style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; font-size: 13px; color: var(--muted);">
+            Questions or deployment snags: <a href="mailto:operations@matrixscroll.com">operations@matrixscroll.com</a> · Digital Rain · Matrix Scroll
+        </p>
+    </main>
+
+</body>
+</html>
