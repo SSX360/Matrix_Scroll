@@ -22,8 +22,7 @@ who is allowed to use it.** It is two pieces that work together:
 
 - **Digital Rain** — the software. A local context engine and MCP server that grounds
   your AI agents in your actual codebase and produces signed release evidence.
-- **Matrix Scroll** — the hardware. A USB-C secure element that holds an Ed25519 key
-  the operating system can never read, so signatures can be produced but never forged.
+- **Scroll Key & Scroll Token** — the hardware. A physical USB-C secure element (Scroll Key) or interactive desk companion (Scroll Token) that holds an Ed25519 key the operating system can never read, ensuring signatures can be produced but never forged.
 
 This paper explains what problem we are solving, what we defend against (and what we
 do not), how the cryptography works, and — importantly — what ships today versus what
@@ -105,7 +104,7 @@ Two layers, one trust boundary.
                   └────────┬─────────┘
                            │ sign() — host OS cannot read key
                   ┌────────▼─────────┐
-                  │  Matrix Scroll   │  RP2040 MCU + LCD Screen (Consent UI)
+                  │  Matrix Scroll   │  RP2350 MCU + LCD Screen (Consent UI)
                   │  (Dual-Chip)     ├──[I2C]── NXP SE050 (EAL6+ Secure Element)
                   └──────────────────┘
 ```
@@ -142,9 +141,12 @@ your desk.
 
 ---
 
-## 5. The hardware: Matrix Scroll
+## 5. The hardware: Scroll Key & Scroll Token
 
-The device is a keychain-sized, matte black anodized desktop object with a lime accent, built around a dual-chip architecture: an RP2040-class MCU to drive the USB communication, capacitive touch sensor, and a high-contrast 1.3" Sharp Memory LCD, coupled with an NXP SE050 secure element for key custody. The private signing keys are generated inside the SE050 and never cross the silicon boundary to the RP2040 or the host OS. The screen displays our character avatar (a desk companion living in software and silicon) which acts as a trust and consent surface: the avatar prompts touch confirmation for every signature, showing a signing state or an alarmed face on unexpected activity, neutralizing background malware signature requests.
+We present two physical hardware form factors that offer different levels of security and user interaction:
+
+- **Scroll Key ($99)**: A minimalist, pocket-sized USB-C security key designed for zero-friction attestation. It houses the NXP SE050 secure element for key generation and cryptographic operations. Because it contains no screen or button, it relies on host driver logic for routing signing calls, providing robust key exfiltration protection but lacking out-of-band visual verification.
+- **Scroll Token ($199)**: A premium desk companion built around a dual-chip architecture combining an RP2350 microcontroller and the NXP SE050 secure element. It adds a high-contrast 1.3" Sharp Memory LCD displaying our mascot avatar and a capacitive touch-consent sensor. The avatar acts as an out-of-band consent surface: it prompts touch confirmation for every signature and shows an alarmed face on unexpected background activity, neutralizing unauthorized automated requests.
 
 A stable, human-readable **device id** (for example `MS-4319-20D5`) is derived from the
 public key so humans can talk about "which device signed this" without pasting 32 bytes of
@@ -203,8 +205,9 @@ We would rather under-promise here.
 | Emulated Ed25519 identity, signed release manifests, verification | **Shipping** |
 | `/api/identity` + `device_identity` tool | **Shipping** |
 | Cross-IDE setup (Cursor, VS Code native, Cline/Roo, Claude Desktop) | **Shipping** |
-| Matrix Scroll (Founders Edition) with LCD Avatar & RP2040 MCU | **Pre-order, target Q3 2026** |
-| Touch-to-sign presence check & avatar consent UI | **Planned with hardware** |
+| Scroll Key ($99 USB-C Security Key with NXP SE050) | **Pre-order, target Q3 2026** |
+| Scroll Token ($199 Desk Companion with LCD Avatar & RP2350) | **Pre-order, target Q3 2026** |
+| Touch-to-sign presence check & avatar consent UI (Scroll Token) | **Planned with hardware** |
 | On-device signing of individual git commits | **Roadmap** |
 | Org-level attestation dashboard / fleet key registry | **Roadmap** |
 

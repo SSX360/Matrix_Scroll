@@ -5,8 +5,8 @@ sign and verify a release, and reach for the right knob when something misbehave
 want the *why* — the threat model and the cryptography — read the [Whitepaper](./Whitepaper.md).
 
 Everything here works **today in emulated mode**, with no hardware required. When the
-physical Matrix Scroll device ships (target Q3 2026), the only thing that changes is one
-environment variable; the commands and the API stay the same.
+physical Scroll Key or Scroll Token devices ship (target Q3 2026), the only thing that changes
+is one environment variable; the commands and the API stay the same.
 
 ---
 
@@ -17,7 +17,7 @@ There are two halves, and you can use the software half on its own:
 - **Digital Rain** — a local MCP server and web dashboard. It scans your project, serves
   ranked context to your IDE, and produces signed release evidence. Runs entirely on
   `localhost`.
-- **Matrix Scroll** — the hardware device (RP2040 + NXP SE050 secure element with LCD screen) that holds the signing key. Until your unit
+- **Scroll Key & Scroll Token** — the physical hardware devices (Scroll Key for zero-friction secure element isolation, or Scroll Token for out-of-band visual consent via the LCD display) that hold the signing key. Until your unit
   arrives, the *emulated provider* stands in for it with an on-disk key, so you can build
   and test the full flow now.
 
@@ -173,7 +173,7 @@ does exactly this if you are already in Python.
 
 ```powershell
 $env:MATRIXSCROLL_MODE = "emulated"   # default, on-disk key (today)
-# $env:MATRIXSCROLL_MODE = "hardware" # NXP SE050 device (when it ships)
+# $env:MATRIXSCROLL_MODE = "hardware" # Secure element hardware key (when it ships)
 ```
 
 In emulated mode the key lives under `MATRIXSCROLL_HOME` (default `~/.matrixscroll`) with
@@ -196,6 +196,12 @@ it is the stand-in for your secure element.
 | `OLLAMA_URL` | `http://localhost:11434` | Ollama server URL |
 | `MATRIXSCROLL_MODE` | `emulated` | Identity provider: `emulated` or `hardware` |
 | `MATRIXSCROLL_HOME` | `~/.matrixscroll` | Key store directory (emulated mode) |
+| `SLACK_BOT_TOKEN` | unset | Slack bot token (`xoxb-…`) for the dev-team notifier; unset = inert |
+| `SLACK_CHANNEL_CICD` | `#feed-ci-cd-qa` | Channel for QA gate / release-evidence posts |
+| `SLACK_WEBHOOK_CICD` | unset | Optional Incoming Webhook for CI/QA; overrides the bot token |
+
+Set any of these in a gitignored `.env` at the repo root (copy `.env.example`).
+Real environment variables always override `.env`.
 
 Set keys as environment variables — never paste them into config files you commit. The
 repo's `.gitignore` already excludes `.env` and `.cursor/mcp.json` for this reason.
@@ -222,7 +228,7 @@ to stdout** from server code — logs go to stderr.
 
 **Do I need the hardware to use any of this?**
 No. The software and the entire signing/verification flow run today in emulated mode. The
-device moves the key behind silicon so it cannot be copied; that is what you reserve on
+hardware devices (Scroll Key or Scroll Token) move the key behind silicon so it cannot be copied; that is what you reserve on
 pre-order.
 
 **Does my code or prompts leave my machine?**
@@ -232,8 +238,8 @@ for fully offline operation.
 
 **Is the emulated key as safe as the device?**
 No, and we will not pretend otherwise. An on-disk key with strict permissions is fine for
-development and integration. A secure element is what stops a compromised host from copying
-the key. That difference is the whole product.
+development and integration. A hardware-secured secure element (on the Scroll Key or Scroll Token) is what stops a compromised host from copying
+the key. That physical boundary is the entire security benefit.
 
 **Which editors are supported?**
 Anything that speaks MCP: Cursor, VS Code (native agent mode), Cline, Roo-Code, Windsurf,

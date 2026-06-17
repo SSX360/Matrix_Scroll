@@ -228,6 +228,58 @@
         .product p { color: var(--muted); font-size: 15px; max-width: 38ch; margin-bottom: 22px; }
         .product .link { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text); }
         .product .link:hover { color: var(--lime); }
+        .key-art {
+            position: absolute; z-index: 1; top: 56px; left: 50%; transform: translateX(-50%) rotate(8deg);
+            width: 100px; height: 180px; border-radius: 12px;
+            background: #0d0d0e; border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.06);
+            display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            padding: 16px 10px;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+        }
+        .key-art:hover {
+            transform: translateX(-50%) rotate(0deg) scale(1.03);
+            border-color: var(--lime);
+        }
+        /* USB-C gold/copper connector tip */
+        .key-art::before {
+            content: ""; position: absolute; top: -14px; width: 28px; height: 14px;
+            background: linear-gradient(90deg, #b8860b, #daa520, #b8860b);
+            border-radius: 3px 3px 0 0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        /* Golden pins inside connector */
+        .key-art::after {
+            content: ""; position: absolute; top: -10px; width: 20px; height: 2px;
+            background: #1a1a1a; border-radius: 1px;
+        }
+        /* Keychain hole */
+        .key-hole {
+            width: 24px; height: 24px; border-radius: 50%;
+            background: #050505; border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.8);
+            margin-bottom: 8px;
+        }
+        /* LED Indicator light */
+        .key-led {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--lime);
+            box-shadow: 0 0 12px var(--lime);
+            animation: key-pulse 2s infinite ease-in-out;
+            margin-top: 24px;
+        }
+        @keyframes key-pulse {
+            0%, 100% { opacity: 0.6; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        /* Copper touch sensor ring */
+        .key-sensor {
+            width: 38px; height: 38px; border-radius: 50%;
+            background: radial-gradient(circle, #b8860b 20%, #8b6508 60%, #1c1a16 90%);
+            border: 1px solid rgba(212, 196, 168, 0.5);
+            box-shadow: 0 0 8px rgba(212,196,168,0.1);
+            margin-top: 16px;
+        }
         .device-art {
             position: absolute; z-index: 1; top: 32px; left: 50%; transform: translateX(-50%) rotate(-5deg);
             width: 140px; height: 236px; border-radius: 20px;
@@ -537,12 +589,12 @@
     <!-- HERO -->
     <header class="hero" id="top">
         <div class="wrap">
-            <span class="pill"><span class="pdot"></span> Emulator available now · Hardware Q3 2026</span>
+            <span class="pill"><span class="pdot"></span> Shipping Q3 2026 · Pre-orders Open</span>
             <h1>Provable, tamper-proof commits for every AI code change.</h1>
-            <p class="sub">Matrix Scroll is a physical USB-C secure element that signs AI-generated modifications on-device. Protect your codebase from unauthorized writes and satisfy compliance with cryptographic keys that never leave the hardware.</p>
+            <p class="sub">Matrix Scroll is a hardware root of trust for AI-assisted software delivery. Sign your commits with keys that never leave the device, choosing between the simple USB-C Scroll Key or the interactive Scroll Token desk companion.</p>
             <div class="hero-cta">
-                <a href="#preorder" class="btn btn-primary">Reserve Matrix Scroll →</a>
-                <a href="#preorder" class="btn btn-ghost">Request Emulator Access</a>
+                <a href="#preorder" class="btn btn-primary">Reserve a Unit →</a>
+                <a href="#specs" class="btn btn-ghost">Explore Specifications</a>
             </div>
         </div>
     </header>
@@ -700,11 +752,26 @@
     <section class="block" id="device">
         <div class="wrap">
             <div class="head-center reveal">
-                <span class="eyebrow">The product</span>
-                <h2>One device. One fabric. <span class="sand">Zero exposed keys.</span></h2>
-                <p>A USB-C secure element pairs with a cross-IDE context engine so every agent action is grounded, governed, and cryptographically attributable.</p>
+                <span class="eyebrow">The product lineup</span>
+                <h2>Two form factors. <span class="sand">One cryptographic root.</span></h2>
+                <p>Verify your AI commits with keys that never leave physical silicon. Choose between the zero-friction Scroll Key or the interactive Scroll Token desk companion.</p>
             </div>
             <div class="showcase">
+                <div class="product device reveal">
+                    <div class="glow"></div>
+                    <div class="key-art">
+                        <div class="key-led"></div>
+                        <div class="key-sensor"></div>
+                        <div class="key-hole"></div>
+                    </div>
+                    <div class="scrim"></div>
+                    <div class="pc">
+                        <div class="tag">Security Key · Scroll Key</div>
+                        <h3>Scroll Key</h3>
+                        <p><strong>$99</strong> · On-device secure element cryptography packed into a simple, pocket-sized USB-C stick. Direct encrypted MCP activation.</p>
+                        <a href="#specs" class="link">Explore hardware specs →</a>
+                    </div>
+                </div>
                 <div class="product device reveal">
                     <div class="glow"></div>
                     <div class="device-art">
@@ -754,39 +821,10 @@
                     </div>
                     <div class="scrim"></div>
                     <div class="pc">
-                        <div class="tag">Hardware · Matrix Scroll</div>
-                        <h3>The encrypted key</h3>
-                        <p>An NXP SE050 secure element generates and stores an Ed25519 identity on-device. Private keys are never extractable — signing happens behind the silicon.</p>
-                        <a href="#security" class="link">See the security model →</a>
-                    </div>
-                </div>
-                <div class="product software reveal" id="software">
-                    <div class="glow"></div>
-                    <div class="scrim"></div>
-                    <div class="pc">
-                        <div class="tag">Software · Digital Rain</div>
-                        <h3>The context fabric</h3>
-                        <p>An MCP server with project scanning, BM25-ranked knowledge vaults, and an Anthropic → Gemini → local Ollama fallback chain for air-gapped work.</p>
-                        <a href="#how" class="link">See how it works →</a>
-                        
-                        <div class="terminal-mock">
-                            <div class="term-header">
-                                <span class="term-dot"></span>
-                                <span class="term-dot"></span>
-                                <span class="term-dot"></span>
-                                <span class="term-title">digital-rain-emulator.sh (Emulated Preview)</span>
-                            </div>
-                            <div class="term-body">
-                                <div class="term-line"><span class="t-cyan">$</span> matrixscroll --pair</div>
-                                <div class="term-line t-green">[OK] Secure Element paired. PK: ed25519_pk_7a8f...</div>
-                                <div class="term-line"><span class="t-cyan">$</span> digital-rain status</div>
-                                <div class="term-line t-gray">Context engine active. Scanning workspace...</div>
-                                <div class="term-line t-lime">[SCAN] Indexing 42 files (BM25 ranker ready)</div>
-                                <div class="term-line"><span class="t-cyan">$</span> git commit -m "feat: signed deliverable"</div>
-                                <div class="term-line t-yellow">[SIGN] Attesting commit with Ed25519 signature...</div>
-                                <div class="term-line t-green">[SUCCESS] Hash signed. Audit log registered.</div>
-                            </div>
-                        </div>
+                        <div class="tag">Desk Companion · Scroll Token</div>
+                        <h3>Scroll Token</h3>
+                        <p><strong>$199</strong> · Premium desk character device. Adds the RP2040 display driver, 1.3" Sharp Memory LCD avatar, and physical touch-consent authorization.</p>
+                        <a href="#specs" class="link">Explore hardware specs →</a>
                     </div>
                 </div>
             </div>
@@ -809,7 +847,7 @@
                 </div>
                 <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
                     <div style="color: var(--lime); font-size: 12px; font-family: var(--mono); margin-bottom: 8px; letter-spacing: 1px;">CONTROLLER</div>
-                    <h4 style="font-size: 18px; margin-bottom: 8px;">RP2040 MCU</h4>
+                    <h4 style="font-size: 18px; margin-bottom: 8px;">RP2350 MCU</h4>
                     <p style="color: var(--muted); font-size: 14px;">Drives the 1-bit display, capacitive touch, and USB interface. The MCU never has access to the private signing key.</p>
                 </div>
                 <div class="spec-card" style="background: var(--panel); border: 1px solid var(--line); padding: 24px; border-radius: var(--radius-md); transition: border-color 0.3s ease;">
@@ -930,10 +968,10 @@
             <div class="cta reveal">
                 <div class="cta-inner">
                     <span class="eyebrow">Acquire</span>
-                    <h2>Get Digital Rain &amp; Matrix Scroll</h2>
-                    <p style="margin-bottom: 8px;"><strong>Digital Rain Software License</strong>: $99 · Perpetual, available now</p>
-                    <p style="margin-bottom: 8px;"><strong>Matrix Scroll (Founders Edition)</strong>: $199 · Hardware LCD device (Est. Ship Q3 2026) · Includes lifetime software license</p>
-                    <p style="margin-bottom: 32px; font-size:15px; color:var(--muted-2);">Choose your option below. Hardware orders are a free reservation; you pay only when it ships.</p>
+                    <h2>Acquire Matrix Scroll</h2>
+                    <p style="margin-bottom: 8px;"><strong>Scroll Key</strong>: $99 · Minimalist USB-C cryptographic key with secure element isolation (Est. Ship Q3 2026)</p>
+                    <p style="margin-bottom: 8px;"><strong>Scroll Token</strong>: $199 · Premium desktop companion with RP2350, LCD Avatar &amp; Touch-consent (Est. Ship Q3 2026)</p>
+                    <p style="margin-bottom: 32px; font-size:15px; color:var(--muted-2);">Choose your option below. Hardware reservations are free; you pay only when your unit ships. Digital Rain software is open-source and included.</p>
                     
                     <form class="preorder-form" id="preorderForm">
                         <div class="preorder-input-wrap">
@@ -943,10 +981,10 @@
                             </svg>
                             <input type="email" id="preorderEmail" required placeholder="Enter your email address..." class="preorder-input" />
                             <select id="preorderQty" class="preorder-select">
-                                <option value="rain">Digital Rain Software Only ($99)</option>
-                                <option value="foundry_1">1x Matrix Scroll Founders Edition ($199)</option>
-                                <option value="foundry_2">2x Matrix Scroll Founders Edition ($398)</option>
-                                <option value="foundry_5">5x Matrix Scroll (Team Pack) ($995)</option>
+                                <option value="key_1">1x Scroll Key ($99)</option>
+                                <option value="token_1">1x Scroll Token ($199)</option>
+                                <option value="token_2">2x Scroll Token ($398)</option>
+                                <option value="bundle_1">Developer Bundle: 1x Key + 1x Token ($298)</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary preorder-submit-btn">
@@ -1063,11 +1101,16 @@
                     
                     if (response.ok) {
                         let confirmMsg = '';
-                        if (qty === 'rain') {
-                            confirmMsg = `🎉 License request received! We'll contact you at ${email} with early access download details.`;
+                        if (qty === 'key_1') {
+                            confirmMsg = `🎉 Reservation confirmed for 1x Scroll Key ($99)! We'll contact you at ${email} with updates.`;
+                        } else if (qty === 'token_1') {
+                            confirmMsg = `🎉 Reservation confirmed for 1x Scroll Token ($199)! We'll contact you at ${email} with updates.`;
+                        } else if (qty === 'token_2') {
+                            confirmMsg = `🎉 Reservation confirmed for 2x Scroll Token ($398)! We'll contact you at ${email} with updates.`;
+                        } else if (qty === 'bundle_1') {
+                            confirmMsg = `🎉 Reservation confirmed for Developer Bundle (1x Key + 1x Token, $298)! We'll contact you at ${email} with updates.`;
                         } else {
-                            const units = qty === 'foundry_1' ? '1 unit' : (qty === 'foundry_2' ? '2 units' : '5 units');
-                            confirmMsg = `🎉 Reservation confirmed for ${units} of Matrix Scroll Founders Edition! We'll contact you at ${email} soon.`;
+                            confirmMsg = `🎉 Reservation confirmed! We'll contact you at ${email} soon.`;
                         }
                         preorderStatus.textContent = confirmMsg;
                         preorderStatus.className = 'preorder-status success';

@@ -173,7 +173,7 @@
         
         <div class="callout">
             <div class="callout-title">DEVELOPER NOTICE</div>
-            <p>Everything here works <strong>today in emulated mode</strong>, with no hardware required. When the physical Matrix Scroll device ships (target Q3 2026), the only thing that changes is one configuration environment variable; your commands and integration APIs stay identical.</p>
+            <p>Everything here works <strong>today in emulated mode</strong>, with no hardware required. When the physical Scroll Key or Scroll Token devices ship (target Q3 2026), the only thing that changes is one configuration environment variable; your commands and integration APIs stay identical.</p>
         </div>
 
         <h2 id="install">1. Installation</h2>
@@ -316,7 +316,7 @@ Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&amp;async=1"</c
         <h3>Emulated vs. Hardware Mode</h3>
         <p>Toggle between software emulation and physical chip custody using an environment variable:</p>
         <pre><code>$env:MATRIXSCROLL_MODE = "emulated"   # Default, key stored on disk
-# $env:MATRIXSCROLL_MODE = "hardware" # Target mode for physical SE050 device</code></pre>
+# $env:MATRIXSCROLL_MODE = "hardware" # Target mode for physical secure element keys</code></pre>
         <p>In <code>emulated</code> mode, keys reside under <code>MATRIXSCROLL_HOME</code> (defaults to <code>~/.matrixscroll</code>) with strict owner-only permissions. Keep this directory out of version control and off shared drives.</p>
 
         <h2 id="config">7. Configuration Reference</h2>
@@ -418,13 +418,13 @@ Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&amp;async=1"</c
         <h2 id="faq">9. FAQ</h2>
         
         <h3>Do I need the hardware to use any of this?</h3>
-        <p>No. The software, BM25 indexing, MCP tools, and cryptographic signing/verification work completely in emulated mode using an on-disk key. The physical device is required only if you need to secure the private key in tamper-proof silicon.</p>
+        <p>No. The software, BM25 indexing, MCP tools, and cryptographic signing/verification work completely in emulated mode using an on-disk key. The physical hardware (Scroll Key or Scroll Token) is required only if you need to secure the private key in tamper-proof silicon.</p>
 
         <h3>Does my code ever leave my machine?</h3>
         <p>Only if you use cloud-based backends (Anthropic/Gemini) to process prompts. Everything else, including indexing, metadata extraction, key generation, and signing is done entirely on <code>localhost</code>. To operate in a 100% air-gapped, zero-data-sharing configuration, choose the <code>ollama</code> backend.</p>
 
         <h3>Is the emulated key as secure as the device?</h3>
-        <p>No. An on-disk key, even with restricted filesystem permissions, is susceptible to extraction if the host operating system is compromised by root-level malware. The dual-chip hardware device seals keys behind an physical silicon boundary that cannot be read back by the host. That isolation is the core security value.</p>
+        <p>No. An on-disk key, even with restricted filesystem permissions, is susceptible to extraction if the host operating system is compromised by root-level malware. The physical hardware devices (Scroll Key or Scroll Token) seal keys behind a physical secure element boundary that cannot be read back by the host. That isolation is the core security value.</p>
         
         <p style="margin-top: 48px; border-top: 1px solid var(--line); padding-top: 24px; font-size: 13px; color: var(--muted);">
             Questions or deployment snags: <a href="mailto:operations@matrixscroll.com">operations@matrixscroll.com</a> · Digital Rain · Matrix Scroll

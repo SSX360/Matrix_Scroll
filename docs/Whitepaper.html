@@ -271,28 +271,28 @@
     <!-- ABSTRACT -->
     <div class="abstract-block">
         <div class="abstract-title">Abstract</div>
-        <p>AI agents now generate a substantial portion of code modifications entering production codebases. While this increases software delivery velocity, it introduces a severe provenance vacuum, leaving audit logs vulnerable to identity spoofing and unauthenticated automated writes. We propose Matrix Scroll, a physical USB-C trust element designed around an RP2040 microcontroller and an NXP SE050 secure element, paired with a local Model Context Protocol (MCP) server named Digital Rain. The proposed architecture separates USB communication, display rendering, and touch detection from private key custody. We demonstrate how combining hardware key generation, local context relevance filters, and physical presence consent screens mitigates host-level key exfiltration and background malware-driven signature forgery, satisfying SOC 2 Change Management CC8 and SLSA provenance compliance frameworks.</p>
+        <p>AI agents now generate a substantial portion of code modifications entering production codebases. While this increases software delivery velocity, it introduces a severe provenance vacuum, leaving audit logs vulnerable to identity spoofing and unauthenticated automated writes. We propose Matrix Scroll, a physical USB-C trust element designed around an RP2350 microcontroller and an NXP SE050 secure element, paired with a local Model Context Protocol (MCP) server named Digital Rain. The proposed architecture separates USB communication, display rendering, and touch detection from private key custody. We demonstrate how combining hardware key generation, local context relevance filters, and physical presence consent screens mitigates host-level key exfiltration and background malware-driven signature forgery, satisfying SOC 2 Change Management CC8 and SLSA provenance compliance frameworks.</p>
     </div>
 
     <!-- SECTION 1 -->
     <h2>1. Introduction</h2>
     <p class="no-indent">AI code generation models have transitioned from autocomplete utilities into active agentic entities capable of editing hundreds of files in single sessions. However, current software configuration management systems (e.g., Git) rely on client-asserted identities (e.g., name and email configurations) which lack verification properties. Signing keys, where utilized, typically reside in the host filesystem, rendering them vulnerable to copy operations and remote exfiltration.</p>
-    <p>We propose a hardware-secured solution consisting of two distinct components operating across a hardware-software boundary: <strong>Digital Rain</strong>, a local context engine, and <strong>Matrix Scroll</strong>, a physical trust device. Digital Rain indexes the codebase and packages modifications into canonical evidence records; Matrix Scroll generates an Ed25519 signing key inside a sealed secure element and provides a physical presence LCD and touch surface for manual confirmation. This prevents background agents or malware from signing modifications without active human participation.</p>
+    <p>We propose a hardware-secured solution consisting of two distinct components operating across a hardware-software boundary: <strong>Digital Rain</strong>, a local context engine, and the <strong>Scroll Key &amp; Scroll Token</strong> physical trust devices. Digital Rain indexes the codebase and packages modifications into canonical evidence records; our physical hardware generates an Ed25519 signing key inside a sealed secure element. For premium deployments, the Scroll Token also provides an interactive presence LCD and touch surface for manual out-of-band signature confirmation. This prevents background agents or malware from signing modifications without active human participation.</p>
 
     <!-- SECTION 2 -->
     <h2>2. Threat Model &amp; UX of Consent</h2>
     <p class="no-indent">A core challenge of hardware cryptographic keys is protecting against background signing attacks. If a secure key is permanently inserted into a host workstation, malware running on that host can execute requests to sign arbitrary payloads. The host CPU cannot extract the private key, but it can use it at will.</p>
-    <p>Matrix Scroll addresses this threat by introducing the <strong>UX of Consent</strong>. Built around a 1.3" high-contrast Sharp Memory LCD and a capacitive touch-to-sign sensor, the device acts as an out-of-band trust screen. The device lifecycle is strictly human-in-the-loop:</p>
+    <p>The premium Scroll Token addresses this threat by introducing the <strong>UX of Consent</strong>. Built around a 1.3" high-contrast Sharp Memory LCD and a capacitive touch-to-sign sensor, the device acts as an out-of-band trust screen. The device lifecycle is strictly human-in-the-loop:</p>
     <ul>
         <li><strong>Idle State:</strong> The device screen displays a resting character avatar and the derived device identifier.</li>
-        <li><strong>Verification Request:</strong> When a signing payload is sent by Digital Rain, the RP2040 microcontroller interrupts the screen, rendering the mascot "looking up" to prompt a physical presence confirmation.</li>
-        <li><strong>Authorization:</strong> The user must touch the capacitive copper plate. This triggers the RP2040 to signal the NXP SE050 to sign the hash.</li>
+        <li><strong>Verification Request:</strong> When a signing payload is sent by Digital Rain, the RP2350 microcontroller interrupts the screen, rendering the mascot "looking up" to prompt a physical presence confirmation.</li>
+        <li><strong>Authorization:</strong> The user must touch the capacitive copper plate. This triggers the RP2350 to signal the NXP SE050 to sign the hash.</li>
         <li><strong>Exception/Unexpected Requests:</strong> An unexpected background signing request triggers an alarmed avatar state, warning the operator of background activity.</li>
     </ul>
 
     <!-- SECTION 3 -->
     <h2>3. Architecture</h2>
-    <p class="no-indent">The architecture maintains a strict separation of concerns. The host operating system communicates with the RP2040 microcontroller. The RP2040 drives the display and presence sensors, but has no physical ability to read the private key. Key generation and signing are delegated via I2C to the NXP SE050 secure element.</p>
+    <p class="no-indent">The architecture maintains a strict separation of concerns. The host operating system communicates with the RP2350 microcontroller. The RP2350 drives the display and presence sensors, but has no physical ability to read the private key. Key generation and signing are delegated via I2C to the NXP SE050 secure element.</p>
 
     <pre>
         ┌─────────────────────────────────────────────┐
@@ -311,7 +311,7 @@
                   └────────┬─────────┘
                            │ sign() — host OS cannot read key
                   ┌────────▼─────────┐
-                  │  Matrix Scroll   │  RP2040 MCU + LCD Screen (Consent UI)
+                  │  Matrix Scroll   │  RP2350 MCU + LCD Screen (Consent UI)
                   │  (Dual-Chip)     ├──[I2C]── NXP SE050 (EAL6+ Secure Element)
                   └──────────────────┘
     </pre>
@@ -322,42 +322,47 @@
     <p>Digital Rain generates release manifests (`manifest.json`) by serializing the output files, the workspace state, and execution parameters. The serialization uses a strict canonical representation (sorted keys, compact delimiters, ASCII escaping) to ensure that verification behaves consistently across Windows, macOS, and Linux platforms.</p>
 
     <!-- SECTION 5 -->
-    <h2>5. Hardware Layer: Matrix Scroll Spec</h2>
-    <p class="no-indent">The physical unit is a keyring-sized, matte black anodized aluminum device with a signature lime accent. It utilizes the following configuration:</p>
+    <h2>5. Hardware Layer: Scroll Key &amp; Scroll Token Specifications</h2>
+    <p class="no-indent">Our hardware offering features two distinct physical configurations utilizing secure-element isolated cryptography:</p>
 
     <table>
         <thead>
             <tr>
-                <th>Component</th>
-                <th>Specification</th>
-                <th>Role in Architecture</th>
+                <th>Feature / Spec</th>
+                <th>Scroll Key ($99)</th>
+                <th>Scroll Token ($199)</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Secure Element</td>
+                <td><strong>Secure Element</strong></td>
                 <td>NXP SE050 (CC EAL6+)</td>
-                <td>On-chip Ed25519 generation and non-extractable key custody.</td>
+                <td>NXP SE050 (CC EAL6+)</td>
             </tr>
             <tr>
-                <td>Controller</td>
-                <td>RP2040 MCU</td>
-                <td>Drives LCD, capacitive sensor, and USB; isolated from private key.</td>
+                <td><strong>Controller</strong></td>
+                <td>USB-C interface bridge</td>
+                <td>RP2350 microcontroller (isolated from key)</td>
             </tr>
             <tr>
-                <td>Display</td>
-                <td>1.3" Sharp Memory LCD</td>
-                <td>High-contrast, ultra-low-power screen displaying the consent mascot.</td>
+                <td><strong>Consent Display</strong></td>
+                <td>None (LED status indicator only)</td>
+                <td>1.3" high-contrast Sharp Memory LCD (Mascot Avatar)</td>
             </tr>
             <tr>
-                <td>Presence Sensor</td>
-                <td>Capacitive Touch Plate</td>
-                <td>Blocks automated background signing by malware.</td>
+                <td><strong>Presence Check</strong></td>
+                <td>None (Zero-friction routing)</td>
+                <td>Capacitive Touch-consent plate</td>
             </tr>
             <tr>
-                <td>Interface</td>
+                <td><strong>Interface</strong></td>
                 <td>USB-C (Bus-Powered)</td>
-                <td>Standard connection to host system; no battery required.</td>
+                <td>USB-C (Bus-Powered)</td>
+            </tr>
+            <tr>
+                <td><strong>Form Factor</strong></td>
+                <td>Pocket security key stick</td>
+                <td>Premium desk companion (black &amp; lime aluminum)</td>
             </tr>
         </tbody>
     </table>
@@ -387,11 +392,15 @@
                 <td>Shipping (Emulated)</td>
             </tr>
             <tr>
-                <td>Matrix Scroll (Founders Edition) hardware unit</td>
+                <td>Scroll Key ($99 USB-C Security Key with NXP SE050)</td>
                 <td>Pre-order (Target Q3 2026)</td>
             </tr>
             <tr>
-                <td>Touch-to-sign presence check &amp; avatar consent UI</td>
+                <td>Scroll Token ($199 Desk Companion with LCD Avatar &amp; RP2350)</td>
+                <td>Pre-order (Target Q3 2026)</td>
+            </tr>
+            <tr>
+                <td>Touch-to-sign presence check &amp; avatar consent UI (Scroll Token)</td>
                 <td>Planned with hardware</td>
             </tr>
             <tr>
@@ -407,7 +416,7 @@
 
     <!-- SECTION 8 -->
     <h2>8. Conclusion</h2>
-    <p class="no-indent">By decoupling context indexing from key signing, and verifying user intent via a dedicated LCD consent mascot screen, Matrix Scroll establishes a robust trust bridge between AI agent automation and human accountability. Early adopters can integrate the entire software pipeline today using the emulated key provider.</p>
+    <p class="no-indent">By decoupling context indexing from key signing, and verifying user intent via a dedicated secure element key or an interactive LCD consent mascot screen, our hardware lineup establishes a robust trust bridge between AI agent automation and human accountability. Early adopters can integrate the entire software pipeline today using the emulated key provider.</p>
 
     <hr />
 
