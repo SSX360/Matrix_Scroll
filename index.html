@@ -568,6 +568,91 @@
             .showcase, .features, .steps { grid-template-columns: 1fr; }
             section.block { padding: 80px 0; }
             .hero { padding: 160px 0 90px; }
+        }
+
+        /* Hero split & globe styling */
+        .hero-split {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 48px;
+            align-items: center;
+            text-align: left;
+            position: relative;
+        }
+        .hero-content {
+            z-index: 2;
+        }
+        .hero-content h1 {
+            text-align: left;
+            margin: 0 0 24px 0;
+            max-width: 14ch;
+        }
+        .hero-content p.sub {
+            text-align: left;
+            margin: 0 0 36px 0;
+        }
+        .hero-content .hero-cta {
+            justify-content: flex-start;
+        }
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+        #hero-globe-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: grab;
+            transition: opacity 0.3s ease;
+        }
+        #hero-globe-canvas:active {
+            cursor: grabbing;
+        }
+        .globe-tooltip {
+            position: absolute;
+            display: none;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 14px;
+            width: 280px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 860px) {
+            .hero-split {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                text-align: center;
+            }
+            .hero-content h1 {
+                text-align: center;
+                margin: 0 auto 24px auto;
+            }
+            .hero-content p.sub {
+                text-align: center;
+                margin: 0 auto 36px auto;
+            }
+            .hero-content .hero-cta {
+                justify-content: center;
+            }
+            .hero-visual {
+                height: 400px;
+            }
+        }
     }
 </style>
 </head>
@@ -590,12 +675,29 @@
     <!-- HERO -->
     <header class="hero" id="top">
         <div class="wrap">
-            <span class="pill"><span class="pdot"></span> Shipping Q3 2026 · Waitlist Open</span>
-            <h1>Provable, tamperproof commits for every AI code change.</h1>
-            <p class="sub" style="font-size: clamp(15px, 1.8vw, 17px); max-width: 72ch;">Autonomous AI agents hijack local workstations when exposed to poisoned documentation (such as ContextCrush prompt injections). Traditional AppSec is blind to this vector. Digital Rain isolates the context fabric; Matrix Scroll secures the code via physical key custody.</p>
-            <div class="hero-cta">
-                <a href="#preorder" class="btn btn-primary">Join Waitlist (Coming Soon) →</a>
-                <a href="#specs" class="btn btn-ghost">Explore Specifications</a>
+            <div class="hero-split">
+                <div class="hero-content">
+                    <span class="pill"><span class="pdot"></span> Shipping Q3 2026 · Waitlist Open</span>
+                    <h1>Provable, tamperproof commits for every AI code change.</h1>
+                    <p class="sub" style="font-size: clamp(15px, 1.8vw, 17px); max-width: 64ch;">Autonomous AI agents hijack local workstations when exposed to poisoned documentation (such as ContextCrush prompt injections). Traditional AppSec is blind to this vector. Digital Rain isolates the context fabric; Matrix Scroll secures the code via physical key custody.</p>
+                    <div class="hero-cta">
+                        <a href="#preorder" class="btn btn-primary">Join Waitlist (Coming Soon) →</a>
+                        <a href="#specs" class="btn btn-ghost">Explore Specifications</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <canvas id="hero-globe-canvas"></canvas>
+                    
+                    <!-- Floating Info Panel overlay (Kyiv, Paris, New York) -->
+                    <div id="globe-node-panel" class="globe-tooltip">
+                        <div style="font-weight: bold; color: var(--lime); margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                            <span id="globe-node-name">KYIV</span>
+                            <span style="font-size: 9px; color: var(--muted-2);">NODE // SECURE</span>
+                        </div>
+                        <div id="globe-node-coords" style="color: var(--sand); margin-bottom: 8px; font-size: 11px;">50° 27' 0.360'' N, 30° 31' 24.240'' E</div>
+                        <div id="globe-node-desc" style="color: var(--muted); line-height: 1.4; font-size: 11px;">Central attestation gateway. Direct socket integration for local workstations and secure containers.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -2590,6 +2692,401 @@
                 setInterval(addSectionLogLine, 2800);
             }
         });
+
+        // ==========================================
+        // INTERACTIVE 3D GLOBE ENGINE
+        // ==========================================
+        (function() {
+            const canvas = document.getElementById('hero-globe-canvas');
+            const tooltip = document.getElementById('globe-node-panel');
+            const tooltipName = document.getElementById('globe-node-name');
+            const tooltipCoords = document.getElementById('globe-node-coords');
+            const tooltipDesc = document.getElementById('globe-node-desc');
+            
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            let width = 0;
+            let height = 0;
+            
+            function resize() {
+                const rect = canvas.getBoundingClientRect();
+                width = canvas.width = rect.width * window.devicePixelRatio;
+                height = canvas.height = rect.height * window.devicePixelRatio;
+                ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+                width = rect.width;
+                height = rect.height;
+            }
+            
+            window.addEventListener('resize', resize);
+            resize();
+            setTimeout(resize, 100);
+            
+            // Sphere radius
+            const baseR = 140;
+            
+            // 3D coordinates
+            const points = [];
+            const numPoints = 180;
+            
+            // Fibonacci sphere distribution
+            for (let i = 0; i < numPoints; i++) {
+                const y = 1 - (i / (numPoints - 1)) * 2;
+                const rAtY = Math.sqrt(1 - y * y);
+                const theta = 2.3999632297286533 * i;
+                const x = Math.cos(theta) * rAtY;
+                const z = Math.sin(theta) * rAtY;
+                points.push({ x: x * baseR, y: y * baseR, z: z * baseR });
+            }
+            
+            // Helper to convert lat/lon to 3D Cartesian
+            function convertLatLon(lat, lon, r) {
+                const phi = (90 - lat) * (Math.PI / 180);
+                const theta = (lon + 180) * (Math.PI / 180);
+                return {
+                    x: r * Math.sin(phi) * Math.cos(theta),
+                    y: r * Math.cos(phi),
+                    z: r * Math.sin(phi) * Math.sin(theta)
+                };
+            }
+            
+            // Special nodes with coordinates
+            const specialNodes = [
+                {
+                    name: 'NEW YORK',
+                    lat: 40.7128,
+                    lon: -74.0060,
+                    coords: "40° 42' 46.020'' N, 74° 0' 21.384'' W",
+                    desc: "Secure element provisioning node. Direct HSM signing authority for East Coast developer flows.",
+                    color: '#ff9f0a'
+                },
+                {
+                    name: 'PARIS',
+                    lat: 48.8566,
+                    lon: 2.3522,
+                    coords: "48° 51' 23.810'' N, 2° 20' 56.412'' E",
+                    desc: "European key escrow checkpoint. Runs hardware-bound policies checking dev identity manifests.",
+                    color: '#22ffbb'
+                },
+                {
+                    name: 'KYIV',
+                    lat: 50.4501,
+                    lon: 30.5234,
+                    coords: "50° 27' 0.360'' N, 30° 31' 24.240'' E",
+                    desc: "Central attestation gateway. Direct socket integration for local workstations and secure containers.",
+                    color: '#e8ff9c'
+                }
+            ];
+            
+            // Map special nodes to 3D coordinates
+            specialNodes.forEach(node => {
+                const pos = convertLatLon(node.lat, node.lon, baseR);
+                node.x = pos.x;
+                node.y = pos.y;
+                node.z = pos.z;
+            });
+            
+            // Precompute connections/edges (faint lines connecting points)
+            const edges = [];
+            const threshold = 55;
+            const allPoints = [...points, ...specialNodes];
+            
+            for (let i = 0; i < allPoints.length; i++) {
+                let connections = 0;
+                for (let j = i + 1; j < allPoints.length; j++) {
+                    const dx = allPoints[i].x - allPoints[j].x;
+                    const dy = allPoints[i].y - allPoints[j].y;
+                    const dz = allPoints[i].z - allPoints[j].z;
+                    const dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                    if (dist < threshold) {
+                        edges.push([i, j]);
+                        connections++;
+                        if (connections > 2) break;
+                    }
+                }
+            }
+            
+            // Rotations
+            let angleX = 0.25;
+            let angleY = 0;
+            let autoSpeedY = 0.0025;
+            
+            // Drag interaction
+            let isDragging = false;
+            let startMouseX = 0;
+            let startMouseY = 0;
+            let startAngleX = 0;
+            let startAngleY = 0;
+            
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startMouseX = e.clientX;
+                startMouseY = e.clientY;
+                startAngleX = angleX;
+                startAngleY = angleY;
+                canvas.style.cursor = 'grabbing';
+            });
+            
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const dx = e.clientX - startMouseX;
+                const dy = e.clientY - startMouseY;
+                angleY = startAngleY + dx * 0.007;
+                angleX = startAngleX + dy * 0.007;
+                angleX = Math.max(-Math.PI / 2.5, Math.min(Math.PI / 2.5, angleX));
+            });
+            
+            window.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    canvas.style.cursor = 'grab';
+                }
+            });
+            
+            // Mobile touch
+            canvas.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    isDragging = true;
+                    startMouseX = e.touches[0].clientX;
+                    startMouseY = e.touches[0].clientY;
+                    startAngleX = angleX;
+                    startAngleY = angleY;
+                }
+            });
+            
+            canvas.addEventListener('touchmove', (e) => {
+                if (!isDragging || e.touches.length !== 1) return;
+                const dx = e.touches[0].clientX - startMouseX;
+                const dy = e.touches[0].clientY - startMouseY;
+                angleY = startAngleY + dx * 0.007;
+                angleX = startAngleX + dy * 0.007;
+                angleX = Math.max(-Math.PI / 2.5, Math.min(Math.PI / 2.5, angleX));
+            });
+            
+            canvas.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+            
+            // Hover nodes
+            let hoveredNode = null;
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDragging) return;
+                const rect = canvas.getBoundingClientRect();
+                const mx = e.clientX - rect.left;
+                const my = e.clientY - rect.top;
+                
+                let found = null;
+                let minDist = 22;
+                
+                specialNodes.forEach(node => {
+                    if (node.projX !== undefined && node.projY !== undefined && node.projZ <= 0) {
+                        const dist = Math.hypot(node.projX - mx, node.projY - my);
+                        if (dist < minDist) {
+                            found = node;
+                            minDist = dist;
+                        }
+                    }
+                });
+                
+                if (found !== hoveredNode) {
+                    hoveredNode = found;
+                    if (hoveredNode) {
+                        canvas.style.cursor = 'pointer';
+                        tooltip.style.display = 'block';
+                        tooltip.style.opacity = '1';
+                        const tRect = tooltip.getBoundingClientRect();
+                        let tx = hoveredNode.projX + 20;
+                        let ty = hoveredNode.projY - 30;
+                        if (tx + tRect.width > rect.width) tx = hoveredNode.projX - tRect.width - 20;
+                        tooltip.style.left = `${tx}px`;
+                        tooltip.style.top = `${ty}px`;
+                        
+                        tooltipName.textContent = hoveredNode.name;
+                        tooltipCoords.textContent = hoveredNode.coords;
+                        tooltipDesc.textContent = hoveredNode.desc;
+                    } else {
+                        canvas.style.cursor = 'grab';
+                        tooltip.style.display = 'none';
+                    }
+                } else if (hoveredNode) {
+                    const tRect = tooltip.getBoundingClientRect();
+                    let tx = hoveredNode.projX + 20;
+                    let ty = hoveredNode.projY - 30;
+                    if (tx + tRect.width > rect.width) tx = hoveredNode.projX - tRect.width - 20;
+                    tooltip.style.left = `${tx}px`;
+                    tooltip.style.top = `${ty}px`;
+                }
+            });
+            
+            let scrollY = 0;
+            window.addEventListener('scroll', () => {
+                scrollY = window.scrollY;
+                if (scrollY > 350) {
+                    canvas.style.opacity = '0';
+                    tooltip.style.display = 'none';
+                    hoveredNode = null;
+                } else {
+                    canvas.style.opacity = '1';
+                }
+            }, { passive: true });
+            
+            function draw() {
+                if (scrollY > 350) {
+                    requestAnimationFrame(draw);
+                    return;
+                }
+                
+                ctx.clearRect(0, 0, width, height);
+                
+                const centerX = width / 2;
+                const centerY = height / 2;
+                const fov = 350;
+                const cameraDistance = 500;
+                
+                if (!isDragging) {
+                    angleY += autoSpeedY;
+                }
+                
+                const scrollProgress = Math.min(1, scrollY / 320);
+                const zoom = 1 + scrollProgress * 1.8;
+                const alphaFade = 1 - scrollProgress;
+                const lineAlphaFade = Math.max(0, 1 - scrollProgress * 2.0);
+                const starStretch = scrollProgress * 55.0;
+                
+                const cosX = Math.cos(angleX);
+                const sinX = Math.sin(angleX);
+                const cosY = Math.cos(angleY);
+                const sinY = Math.sin(angleY);
+                
+                const projected = allPoints.map((p, idx) => {
+                    let rx1 = p.x;
+                    let ry1 = p.y * cosX - p.z * sinX;
+                    let rz1 = p.y * sinX + p.z * cosX;
+                    
+                    let rx2 = rx1 * cosY + rz1 * sinY;
+                    let ry2 = ry1;
+                    let rz2 = -rx1 * sinY + rz1 * cosY;
+                    
+                    rx2 *= zoom;
+                    ry2 *= zoom;
+                    rz2 *= zoom;
+                    
+                    const depth = rz2 + cameraDistance;
+                    const scale = fov / Math.max(1, depth);
+                    const screenX = rx2 * scale + centerX;
+                    const screenY = ry2 * scale + centerY;
+                    
+                    return {
+                        x: screenX,
+                        y: screenY,
+                        z: rz2,
+                        origX: rx2,
+                        origY: ry2,
+                        scale: scale,
+                        isSpecial: idx >= points.length,
+                        nodeRef: idx >= points.length ? allPoints[idx] : null
+                    };
+                });
+                
+                specialNodes.forEach(node => {
+                    const idx = allPoints.indexOf(node);
+                    if (idx !== -1) {
+                        node.projX = projected[idx].x;
+                        node.projY = projected[idx].y;
+                        node.projZ = projected[idx].z;
+                    }
+                });
+                
+                if (lineAlphaFade > 0.01) {
+                    ctx.lineWidth = 0.5;
+                    edges.forEach(edge => {
+                        const p1 = projected[edge[0]];
+                        const p2 = projected[edge[1]];
+                        if (p1.z < 150 && p2.z < 150) {
+                            const avgZ = (p1.z + p2.z) / 2;
+                            const depthOpacity = Math.max(0, 1 - (avgZ + baseR) / (2 * baseR));
+                            ctx.strokeStyle = `rgba(34, 255, 187, ${depthOpacity * 0.08 * lineAlphaFade})`;
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.stroke();
+                        }
+                    });
+                }
+                
+                const indices = projected.map((p, i) => i);
+                indices.sort((a, b) => projected[b].z - projected[a].z);
+                
+                indices.forEach(idx => {
+                    const p = projected[idx];
+                    const depthOpacity = Math.max(0, 1 - (p.z + baseR) / (2 * baseR));
+                    let dotAlpha = depthOpacity * 0.45 * alphaFade;
+                    
+                    if (p.isSpecial) {
+                        if (p.z <= 0) {
+                            const isHovered = (hoveredNode === p.nodeRef);
+                            const nodeColor = p.nodeRef.color;
+                            
+                            ctx.fillStyle = nodeColor;
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, isHovered ? 6 : 4, 0, Math.PI * 2);
+                            ctx.fill();
+                            
+                            ctx.strokeStyle = nodeColor;
+                            ctx.lineWidth = 1;
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, isHovered ? 12 : 8, 0, Math.PI * 2);
+                            ctx.stroke();
+                            
+                            if (isHovered) {
+                                ctx.strokeStyle = nodeColor;
+                                ctx.lineWidth = 0.5;
+                                ctx.beginPath();
+                                ctx.arc(p.x, p.y, 18 + Math.sin(Date.now() / 100) * 3, 0, Math.PI * 2);
+                                ctx.stroke();
+                            }
+                            
+                            ctx.font = 'bold 9px monospace';
+                            ctx.fillStyle = '#fff';
+                            ctx.fillText(`+ ${p.nodeRef.name}`, p.x + 10, p.y + 3);
+                        }
+                    } else {
+                        let r = 1.2;
+                        let cx = p.x;
+                        let cy = p.y;
+                        
+                        if (scrollProgress > 0.01) {
+                            const dx = p.x - centerX;
+                            const dy = p.y - centerY;
+                            const dist = Math.sqrt(dx*dx + dy*dy);
+                            
+                            if (dist > 0) {
+                                const stretchFactor = starStretch * (depthOpacity + 0.1);
+                                const endX = p.x + (dx / dist) * stretchFactor;
+                                const endY = p.y + (dy / dist) * stretchFactor;
+                                
+                                ctx.strokeStyle = `rgba(34, 255, 187, ${dotAlpha * 0.75})`;
+                                ctx.lineWidth = 1.0;
+                                ctx.beginPath();
+                                ctx.moveTo(p.x, p.y);
+                                ctx.lineTo(endX, endY);
+                                ctx.stroke();
+                                return;
+                            }
+                        }
+                        
+                        ctx.fillStyle = `rgba(34, 255, 187, ${dotAlpha})`;
+                        ctx.beginPath();
+                        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+                
+                requestAnimationFrame(draw);
+            }
+            
+            draw();
+        })();
     </script>
 
     <!-- Live Attestation Stream Widget -->
