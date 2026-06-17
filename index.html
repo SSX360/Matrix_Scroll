@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrix Scroll — Provable, Tamper-Proof AI Commits</title>
+    <title>Matrix Scroll — Provable, Tamperproof AI Commits</title>
     <meta name="description" content="Matrix Scroll is a physical USB-C secure element that signs AI-generated code edits on-device. Protect your codebase from unauthorized writes and prove compliance.">
     <link rel="canonical" href="https://matrixscroll.com/">
     <meta name="theme-color" content="#050505">
@@ -11,13 +11,13 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Matrix Scroll">
     <meta property="og:url" content="https://matrixscroll.com/">
-    <meta property="og:title" content="Matrix Scroll — Provable, Tamper-Proof AI Commits">
+    <meta property="og:title" content="Matrix Scroll — Provable, Tamperproof AI Commits">
     <meta property="og:description" content="Matrix Scroll is a physical USB-C secure element that signs AI-generated code edits on-device. Protect your codebase from unauthorized writes and prove compliance.">
     <meta property="og:image" content="https://matrixscroll.com/og-image.png">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://matrixscroll.com/">
-    <meta name="twitter:title" content="Matrix Scroll — Provable, Tamper-Proof AI Commits">
+    <meta name="twitter:title" content="Matrix Scroll — Provable, Tamperproof AI Commits">
     <meta name="twitter:description" content="Matrix Scroll is a physical USB-C secure element that signs AI-generated code edits on-device. Protect your codebase from unauthorized writes and prove compliance.">
     <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -591,8 +591,8 @@
     <header class="hero" id="top">
         <div class="wrap">
             <span class="pill"><span class="pdot"></span> Shipping Q3 2026 · Waitlist Open</span>
-            <h1>Provable, tamper-proof commits for every AI code change.</h1>
-            <p class="sub" style="font-size: clamp(15px, 1.8vw, 17px); max-width: 72ch;">Traditional AppSec is blind to AI Agent hijacking. As developers use autonomous AI tools, public prompt-injection vulnerabilities (like ContextCrush) allow attackers to poison AI documentation, manipulate your agents, and silently exfiltrate enterprise .env keys. Digital Rain isolates the context; Matrix Scroll seals the code.</p>
+            <h1>Provable, tamperproof commits for every AI code change.</h1>
+            <p class="sub" style="font-size: clamp(15px, 1.8vw, 17px); max-width: 72ch;">Autonomous AI agents hijack local workstations when exposed to poisoned documentation (such as ContextCrush prompt injections). Traditional AppSec is blind to this vector. Digital Rain isolates the context fabric; Matrix Scroll secures the code via physical key custody.</p>
             <div class="hero-cta">
                 <a href="#preorder" class="btn btn-primary">Join Waitlist (Coming Soon) →</a>
                 <a href="#specs" class="btn btn-ghost">Explore Specifications</a>
@@ -1251,7 +1251,7 @@
                     <div style="color: var(--lime); font-weight: bold;">[SECURE_ELEMENT]</div>
                     <div>
                         <strong style="color: #fff; font-size: 14px; display: block; margin-bottom: 4px;">NXP SE050 (CC EAL6+ Certified)</strong>
-                        <span style="color: var(--muted); line-height: 1.5; display: block;">Mints and stores the cryptographic identity key pairs (Ed25519) in isolated, tamper-proof hardware. The private key cannot be read, copied, or extracted by the host operating system or the local microcontroller.</span>
+                        <span style="color: var(--muted); line-height: 1.5; display: block;">Mints and stores the cryptographic identity key pairs (Ed25519) in isolated, tamperproof hardware. The private key cannot be read, copied, or extracted by the host operating system or the local microcontroller.</span>
                     </div>
                 </div>
                 
@@ -1622,7 +1622,7 @@
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
                     </div>
                     <h4>Attested Supply Chain Evidence</h4>
-                    <p>Audit-ready compliance. Generates tamper-proof, hardware-attested evidence for every single AI modification. This produces hardware-attested evidence that maps onto SOC 2 CC8 / SLSA provenance controls.</p>
+                    <p>Audit-ready compliance. Generates tamperproof, hardware-attested evidence for every single AI modification. This produces hardware-attested evidence that maps onto SOC 2 CC8 / SLSA provenance controls.</p>
                 </div>
             </div>
         </div>
@@ -2005,6 +2005,37 @@
                 ctx.font = '9px monospace';
                 ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
                 ctx.fillText(`SYS_MONITOR // X: ${Math.floor(mouseX)} Y: ${Math.floor(mouseY + scrollY)} [ACTIVE]`, mouseX + 16, mouseY + 16);
+
+                // Draw flickering telemetry indicators (Matrix Scroll and Digital Rain) in the background of the hero
+                let flickerAlpha1 = 0.08;
+                let flickerAlpha2 = 0.08;
+                
+                if (Math.random() < 0.12) {
+                    flickerAlpha1 = Math.random() < 0.35 ? 0.005 : Math.random() * 0.15 + 0.03;
+                } else {
+                    flickerAlpha1 = (Math.sin(Date.now() / 150) * 0.03 + 0.07);
+                }
+                if (Math.random() < 0.12) {
+                    flickerAlpha2 = Math.random() < 0.35 ? 0.005 : Math.random() * 0.15 + 0.03;
+                } else {
+                    flickerAlpha2 = (Math.cos(Date.now() / 200) * 0.03 + 0.07);
+                }
+
+                if (scrollY < 800) {
+                    ctx.font = 'bold 10px monospace';
+                    
+                    // Left side indicator
+                    ctx.fillStyle = `rgba(34, 255, 187, ${flickerAlpha1})`;
+                    ctx.fillText("MATRIX SCROLL // SECURE ELEMENT CORE", 48, 120);
+                    ctx.fillRect(48, 126, 120, 1.5);
+                    
+                    // Right side indicator
+                    ctx.fillStyle = `rgba(232, 255, 156, ${flickerAlpha2})`;
+                    ctx.textAlign = 'right';
+                    ctx.fillText("DIGITAL RAIN // LOCAL CONTEXT FABRIC", width - 48, 120);
+                    ctx.fillRect(width - 168, 126, 120, 1.5);
+                    ctx.textAlign = 'left'; // Reset alignment
+                }
 
                 // Draw packets
                 packets.forEach(p => {
