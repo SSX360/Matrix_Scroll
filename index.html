@@ -1711,10 +1711,55 @@
                     <p style="margin-bottom: 8px;"><strong>Scroll Token waitlist</strong>: $199 · Est. Ship Q3 2026 (No payment required today)</p>
                     <p style="margin-bottom: 32px; font-size:15px; color:var(--muted-2);">Hardware units are in final testing and not available for direct order yet. Join the waitlist below to reserve your slot. No credit card is needed; you will only be notified when units are ready to ship.</p>
                     
-                    <div class="tally-embed-wrap" style="margin-top: 32px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(0,0,0,0.2); padding: 12px; overflow: hidden;">
-                        <iframe data-tally-src="https://tally.so/embed/68Vo2Y?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="340" frameborder="0" marginheight="0" marginwidth="0" title="Matrix Scroll Waitlist"></iframe>
+                    <div class="waitlist-card" style="margin-top: 36px; border: 1px solid var(--line); border-radius: var(--radius-md); background: rgba(10, 10, 10, 0.85); padding: 32px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto; box-shadow: 0 15px 40px rgba(0,0,0,0.6); position: relative; overflow: hidden; backdrop-filter: blur(10px);">
+                        <div class="terminal-header" style="border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--lime); animation: pulse-green-glow 1.2s infinite;"></span>
+                                <span style="font-family: var(--mono); font-size: 11px; font-weight: bold; color: var(--lime); letter-spacing: 1px;">WAITLIST_RESERVATION_PORTAL</span>
+                            </div>
+                            <span style="font-family: var(--mono); font-size: 10px; color: var(--muted-2);">v1.0.4 // SECURE</span>
+                        </div>
+
+                        <!-- Sleek Monospaced Form Metadata -->
+                        <div class="terminal-meta" style="font-family: var(--mono); font-size: 11px; color: var(--muted-2); margin-bottom: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px; line-height: 1.4;">
+                            <div>HOST_NODE: <span style="color: #fff;">matrixscroll.com</span></div>
+                            <div>GATEWAY_IP: <span style="color: #fff;">185.199.108.153</span></div>
+                            <div>FORWARDING_ADDR: <span style="color: var(--lime);">operations@matrixscroll.com</span></div>
+                            <div>ATT_STATE: <span id="portalAttState" style="color: var(--lime); font-weight: bold;">WAITING_FOR_DATA</span></div>
+                        </div>
+                        
+                        <form id="preorderForm" style="display: flex; flex-direction: column; gap: 20px;">
+                            <input type="hidden" name="_captcha" value="false">
+                            
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <label for="preorderEmail" style="font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.5px;">[01] WORKSTATION EMAIL ADDRESS</label>
+                                <div style="position: relative; display: flex; align-items: center;">
+                                    <svg style="position: absolute; left: 16px; color: var(--muted-2);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="20" height="16" x="2" y="4" rx="2"/>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                                    </svg>
+                                    <input type="email" id="preorderEmail" required placeholder="Enter your email (e.g. dev@enterprise.com)" style="width: 100%; height: 48px; padding-left: 48px; padding-right: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; outline: none; transition: all 0.2s;" onfocus="this.style.borderColor='var(--lime)'; this.style.boxShadow='0 0 8px rgba(232, 255, 156, 0.15)'" onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'" />
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
+                                <label for="preorderQty" style="font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.5px;">[02] HARDWARE TARGET TIER</label>
+                                <select id="preorderQty" style="width: 100%; height: 48px; padding: 0 16px; background: #0f0f0f; border: 1px solid var(--line); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; outline: none; cursor: pointer; transition: all 0.2s;" onfocus="this.style.borderColor='var(--lime)'; this.style.boxShadow='0 0 8px rgba(232, 255, 156, 0.15)'" onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'">
+                                    <option value="Scroll Key Waitlist ($99)">Scroll Key Waitlist ($99) — Simple USB-C Secure Element</option>
+                                    <option value="Scroll Token Waitlist ($199)">Scroll Token Waitlist ($199) — Premium Desk Companion</option>
+                                    <option value="Dual Workstation Waitlist ($398)">Dual Workstation Waitlist ($398) — 2x Scroll Token</option>
+                                    <option value="Developer Bundle Waitlist ($298)">Developer Bundle Waitlist ($298) — 1x Key + 1x Token</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary preorder-submit-btn" style="height: 48px; border-radius: 6px; justify-content: center; font-weight: bold; font-family: var(--mono); letter-spacing: 1px; width: 100%; margin-top: 12px;">
+                                <span class="btn-text">TRANSMIT RESERVATION →</span>
+                                <span class="btn-spinner" style="display:none; margin: 0 auto;"></span>
+                            </button>
+                        </form>
+                        
+                        <div class="preorder-status" id="preorderStatus" style="margin-top: 20px; font-family: var(--mono); font-size: 12px; line-height: 1.6; text-align: left; background: rgba(0, 0, 0, 0.3); border: 1px solid transparent; border-radius: 4px; padding: 0; display: none;"></div>
                     </div>
-                    <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.getAttribute("data-tally-src")}))};if("undefined"!=typeof Tally)v();else{var g=d.createElement("script");g.src=w,g.onload=v,g.onerror=v,d.body.appendChild(g);}</script>
                     
                     <!-- Social Proof / Documentation Links -->
                     <div style="margin-top: 36px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 14px;">
@@ -1786,9 +1831,10 @@
             });
         });
 
-        // Pre-order form submission logic
+        // Pre-order form submission logic (Custom FormSubmit.co AJAX integration)
         const preorderForm = document.getElementById('preorderForm');
         const preorderStatus = document.getElementById('preorderStatus');
+        const portalAttState = document.getElementById('portalAttState');
         
         if (preorderForm) {
             preorderForm.addEventListener('submit', async (e) => {
@@ -1805,49 +1851,71 @@
                 
                 // Show loading state
                 submitBtn.disabled = true;
-                btnText.style.display = 'none';
-                btnSpinner.style.display = 'inline-block';
-                preorderStatus.textContent = '';
-                preorderStatus.className = 'preorder-status';
+                if (btnText) btnText.style.display = 'none';
+                if (btnSpinner) btnSpinner.style.display = 'inline-block';
+                
+                if (portalAttState) {
+                    portalAttState.textContent = 'TRANSMITTING';
+                    portalAttState.style.color = 'var(--sand)';
+                }
+                
+                preorderStatus.style.display = 'block';
+                preorderStatus.style.padding = '12px 16px';
+                preorderStatus.style.border = '1px solid rgba(255, 159, 10, 0.2)';
+                preorderStatus.style.color = 'var(--sand)';
+                preorderStatus.innerHTML = `[PING] Establishing secure socket connection...<br>[INFO] Handshaking with FormSubmit gateway...<br>[SEND] Encrypting waitlist payload...`;
                 
                 try {
-                    const response = await fetch('/api/preorder', {
+                    const response = await fetch('https://formsubmit.co/ajax/operations@matrixscroll.com', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
+                            'Accept': 'application/json'
                         },
-                        body: JSON.stringify({ email, quantity: qty }),
+                        body: JSON.stringify({
+                            email: email,
+                            tier: qty,
+                            _captcha: "false",
+                            _subject: `Matrix Scroll Waitlist Signup: ${email}`
+                        })
                     });
                     
                     const data = await response.json();
                     
-                    if (response.ok) {
-                        let confirmMsg = '';
-                        if (qty === 'key_1') {
-                            confirmMsg = `🎉 Waitlist reservation confirmed for 1x Scroll Key ($99)! We'll notify you at ${email} when it's ready to ship.`;
-                        } else if (qty === 'token_1') {
-                            confirmMsg = `🎉 Waitlist reservation confirmed for 1x Scroll Token ($199)! We'll notify you at ${email} when it's ready to ship.`;
-                        } else if (qty === 'token_2') {
-                            confirmMsg = `🎉 Waitlist reservation confirmed for 2x Scroll Token ($398)! We'll notify you at ${email} when it's ready to ship.`;
-                        } else if (qty === 'bundle_1') {
-                            confirmMsg = `🎉 Waitlist reservation confirmed for Developer Bundle (1x Key + 1x Token, $298)! We'll notify you at ${email} when it's ready to ship.`;
-                        } else {
-                            confirmMsg = `🎉 Waitlist reservation confirmed! We'll contact you at ${email} soon.`;
+                    if (data.success === "true" || data.success === true) {
+                        if (portalAttState) {
+                            portalAttState.textContent = 'VERIFIED';
+                            portalAttState.style.color = 'var(--lime)';
                         }
-                        preorderStatus.textContent = confirmMsg;
-                        preorderStatus.className = 'preorder-status success';
+                        preorderStatus.style.border = '1px solid rgba(232, 255, 156, 0.2)';
+                        preorderStatus.style.color = 'var(--lime)';
+                        preorderStatus.innerHTML = `[SUCCESS] Secure packet attestation signed.<br>[SUCCESS] Tier: ${qty}<br>[SUCCESS] Identity: ${email}<br><br>🎉 Waitlist slot reserved! We will notify you when units are ready.`;
+                        preorderForm.reset();
+                    } else if (data.message && data.message.toLowerCase().includes("activation")) {
+                        if (portalAttState) {
+                            portalAttState.textContent = 'PENDING_ACT';
+                            portalAttState.style.color = 'var(--sand)';
+                        }
+                        preorderStatus.style.border = '1px solid rgba(255, 159, 10, 0.2)';
+                        preorderStatus.style.color = 'var(--sand)';
+                        preorderStatus.innerHTML = `📩 FORM ACTIVATION REQUIRED:<br>An activation link has been sent to operations@matrixscroll.com.<br><br>👉 Please check the inbox and click 'Activate Form' to authorize waitlist submissions.`;
                         preorderForm.reset();
                     } else {
-                        throw new Error(data.error || 'Failed to complete reservation');
+                        throw new Error(data.message || 'Submission failed');
                     }
                 } catch (error) {
-                    console.error('Pre-order error:', error);
-                    preorderStatus.textContent = `❌ Error: ${error.message}. Please try again later or contact operations@matrixscroll.com`;
-                    preorderStatus.className = 'preorder-status error';
+                    console.error('Waitlist submission error:', error);
+                    if (portalAttState) {
+                        portalAttState.textContent = 'ERR_FAIL';
+                        portalAttState.style.color = '#ff3b30';
+                    }
+                    preorderStatus.style.border = '1px solid rgba(255, 59, 48, 0.2)';
+                    preorderStatus.style.color = '#ff3b30';
+                    preorderStatus.innerHTML = `❌ TRANSMISSION ERROR:<br>${error.message || 'Verification rejected by peer.'}<br><br>Please retry or contact operations@matrixscroll.com directly.`;
                 } finally {
                     submitBtn.disabled = false;
-                    btnText.style.display = 'inline';
-                    btnSpinner.style.display = 'none';
+                    if (btnText) btnText.style.display = 'inline';
+                    if (btnSpinner) btnSpinner.style.display = 'none';
                 }
             });
         }
