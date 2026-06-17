@@ -101,7 +101,7 @@
         @media (max-width: 860px) { .nav-links { display: none; } }
  
         /* HERO */
-        .hero { position: relative; padding: 170px 0 120px; text-align: center; overflow: hidden; }
+        .hero { position: relative; padding: 110px 0 70px; text-align: center; overflow: hidden; }
         .hero::before {
             content: ""; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
             width: 900px; height: 700px; pointer-events: none;
@@ -567,7 +567,7 @@
         @media (max-width: 860px) {
             .showcase, .features, .steps { grid-template-columns: 1fr; }
             section.block { padding: 80px 0; }
-            .hero { padding: 120px 0 80px; }
+            .hero { padding: 80px 0 50px; }
         }
     }
 </style>
@@ -1739,13 +1739,13 @@
                                         <rect width="20" height="16" x="2" y="4" rx="2"/>
                                         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                                     </svg>
-                                    <input type="email" id="preorderEmail" required placeholder="Enter your email (e.g. dev@enterprise.com)" style="width: 100%; height: 48px; padding-left: 48px; padding-right: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; outline: none; transition: all 0.2s;" onfocus="this.style.borderColor='var(--lime)'; this.style.boxShadow='0 0 8px rgba(232, 255, 156, 0.15)'" onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'" />
+                                    <input type="email" id="preorderEmail" name="email" required placeholder="Enter your email (e.g. dev@enterprise.com)" style="width: 100%; height: 48px; padding-left: 48px; padding-right: 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--line); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; outline: none; transition: all 0.2s;" onfocus="this.style.borderColor='var(--lime)'; this.style.boxShadow='0 0 8px rgba(232, 255, 156, 0.15)'" onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'" />
                                 </div>
                             </div>
                             
                             <div style="display: flex; flex-direction: column; gap: 8px;">
                                 <label for="preorderQty" style="font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.5px;">[02] HARDWARE TARGET TIER</label>
-                                <select id="preorderQty" style="width: 100%; height: 48px; padding: 0 16px; background: #0f0f0f; border: 1px solid var(--line); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; outline: none; cursor: pointer; transition: all 0.2s;" onfocus="this.style.borderColor='var(--lime)'; this.style.boxShadow='0 0 8px rgba(232, 255, 156, 0.15)'" onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'">
+                                <select id="preorderQty" name="tier" style="width: 100%; height: 48px; padding: 0 16px; background: #0f0f0f; border: 1px solid var(--line); border-radius: 6px; color: #fff; font-family: inherit; font-size: 14px; outline: none; cursor: pointer; transition: all 0.2s;" onfocus="this.style.borderColor='var(--lime)'; this.style.boxShadow='0 0 8px rgba(232, 255, 156, 0.15)'" onblur="this.style.borderColor='var(--line)'; this.style.boxShadow='none'">
                                     <option value="Scroll Key Waitlist ($99)">Scroll Key Waitlist ($99) — Simple USB-C Secure Element</option>
                                     <option value="Scroll Token Waitlist ($199)">Scroll Token Waitlist ($199) — Premium Desk Companion</option>
                                     <option value="Dual Workstation Waitlist ($398)">Dual Workstation Waitlist ($398) — 2x Scroll Token</option>
@@ -1870,10 +1870,10 @@
                     const response = await fetch('https://formsubmit.co/ajax/operations@matrixscroll.com', {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'application/x-www-form-urlencoded',
                             'Accept': 'application/json'
                         },
-                        body: JSON.stringify({
+                        body: new URLSearchParams({
                             email: email,
                             tier: qty,
                             _captcha: "false",
