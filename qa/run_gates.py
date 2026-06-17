@@ -33,6 +33,18 @@ FORBIDDEN_WORKSPACE_MARKERS = tuple(
     if marker.strip()
 )
 
+# Optional dev-team notifier. Kept defensive so QA never breaks if the notifier
+# or its deps are unavailable (e.g. run from an unusual working directory).
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+try:
+    import env_loader
+    import notifications
+
+    env_loader.load()
+except Exception:  # pragma: no cover - notifier is strictly optional
+    notifications = None  # type: ignore[assignment]
+
 
 @dataclass
 class GateResult:
@@ -595,6 +607,23 @@ def run_gates(workspace_kind: str, *, timeout_s: float = 45, live_model: bool = 
     }
 
 
+def _notify_gate_result(workspace_kind: str, report: dict[str, Any]) -> None:
+    if notifications is None or not notifications.enabled("cicd"):
+        return
+    gates = report.get("gates") or []
+    failed = [g.get("name") for g in gates if not g.get("passed")]
+    passed = report.get("passed")
+    emoji = ":white_check_mark:" if passed else ":x:"
+    status = "PASS" if passed else "FAIL"
+    text = (
+        f"{emoji} QA gates {status} — workspace `{workspace_kind}` "
+        f"({len(gates)} gates, {report.get('duration_ms', 0)} ms)"
+    )
+    if failed:
+        text += "\nFailed: " + ", ".join(f"`{n}`" for n in failed)
+    notifications.notify("cicd", text)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run Digital Rain GTM QA gates.")
     parser.add_argument(
@@ -617,6 +646,7 @@ def main(argv: list[str] | None = None) -> int:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(text + "\n", encoding="utf-8")
     print(text)
+    _notify_gate_result(args.workspace, report)
     return 0 if report["passed"] else 1
 
 

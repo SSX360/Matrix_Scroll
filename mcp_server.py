@@ -32,6 +32,9 @@ def _safe_mcp_print(*args, **kwargs):
 builtins.print = _safe_mcp_print
 
 
+import env_loader
+env_loader.load()
+
 import search as S
 import scanner
 import llm

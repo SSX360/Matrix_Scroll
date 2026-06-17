@@ -17,6 +17,16 @@ from qa import run_gates, supply_chain
 
 ROOT = Path(__file__).resolve().parents[1]
 
+# Optional dev-team notifier (see notifications.py). Defensive: evidence runs
+# must never fail because the notifier or its config is unavailable.
+try:
+    import env_loader
+    import notifications
+
+    env_loader.load()
+except Exception:  # pragma: no cover - notifier is strictly optional
+    notifications = None  # type: ignore[assignment]
+
 
 def _sign_manifest(manifest: dict[str, Any]) -> dict[str, Any]:
     """Attach a Matrix Scroll root-of-trust signature to the manifest.
@@ -329,10 +339,13 @@ def git_metadata() -> dict[str, Any]:
             return None
         return completed.stdout.strip()
 
+    tag_out = run_git(["tag", "--points-at", "HEAD"])
+    tag = tag_out.splitlines()[0].strip() if tag_out else None
     return {
         "commit": run_git(["rev-parse", "HEAD"]),
         "branch": run_git(["branch", "--show-current"]),
         "dirty": bool(run_git(["status", "--porcelain"])),
+        "tag": tag or None,
     }
 
 
@@ -529,6 +542,35 @@ def generate_evidence(
     return manifest
 
 
+def _notify_release(manifest: dict[str, Any]) -> None:
+    if notifications is None:
+        return
+    decision = manifest.get("release_decision", {})
+    sw = bool(decision.get("software_release_candidate"))
+    dev = bool(decision.get("device_gtm_ready"))
+    sig = manifest.get("signature") or {}
+    signer = sig.get("device_id", "unknown") if sig.get("value") else "unsigned"
+    run_id = manifest.get("run_id")
+
+    if notifications.enabled("cicd"):
+        emoji = ":white_check_mark:" if sw else ":x:"
+        notifications.notify(
+            "cicd",
+            f"{emoji} Release evidence `{run_id}` — "
+            f"software_release_candidate=`{str(sw).lower()}`, "
+            f"device_gtm_ready=`{str(dev).lower()}`, signer=`{signer}`",
+        )
+
+    # Announce only a real, tagged release candidate to the broader channel.
+    tag = (manifest.get("git") or {}).get("tag")
+    if sw and tag and notifications.enabled("announce"):
+        notifications.notify(
+            "announce",
+            f":tada: Digital Rain `{tag}` is a release candidate "
+            f"(run `{run_id}`, signed by `{signer}`).",
+        )
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Build a GTM release evidence pack.")
     parser.add_argument("--output-dir", type=Path, default=ROOT / "out" / "release-evidence")
@@ -561,6 +603,7 @@ def main(argv: list[str] | None = None) -> int:
         "summary": manifest["artifacts"]["summary"],
         "manifest": manifest["artifacts"]["manifest"],
     }, indent=2))
+    _notify_release(manifest)
     return 0 if manifest["release_decision"]["software_release_candidate"] else 1
 
 

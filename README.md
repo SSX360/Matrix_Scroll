@@ -286,6 +286,12 @@ so it's treated as optional enrichment — the registry is the robust primary.
 | `MATRIXSCROLL_HOME` | `~/.matrixscroll` | Directory for the emulated device key store (created `0700`, key file `0600`) |
 | `PORT` | _(random)_ | Force a specific port for the web UI |
 | `OPEN_BROWSER` | `1` | Set to `0` to keep `app.py` from opening the dashboard automatically |
+| `SLACK_BOT_TOKEN` | _(unset)_ | Slack bot token (`xoxb-…`) for the dev-team notifier; unset = notifier inert |
+| `SLACK_CHANNEL_CICD` | `#feed-ci-cd-qa` | Channel for QA gate / release-evidence posts |
+| `SLACK_WEBHOOK_CICD` | _(unset)_ | Optional Incoming Webhook for CI/QA; overrides the bot token for that channel |
+
+Any of these can be set in a gitignored **`.env`** at the repo root (copy
+`.env.example`). Real OS environment variables always override `.env` values.
 
 Backend resolution walks the chain **anthropic → gemini → ollama** (with the
 `LLM_BACKEND` choice moved to the front) and uses the first backend that has its
