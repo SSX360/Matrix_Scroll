@@ -25,9 +25,6 @@ import webbrowser
 from pathlib import Path
 from typing import Any
 
-import env_loader
-env_loader.load()
-
 import requests
 from flask import Flask, Response, jsonify, request, stream_with_context
 

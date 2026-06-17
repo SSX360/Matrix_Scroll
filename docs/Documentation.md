@@ -196,12 +196,6 @@ it is the stand-in for your secure element.
 | `OLLAMA_URL` | `http://localhost:11434` | Ollama server URL |
 | `MATRIXSCROLL_MODE` | `emulated` | Identity provider: `emulated` or `hardware` |
 | `MATRIXSCROLL_HOME` | `~/.matrixscroll` | Key store directory (emulated mode) |
-| `SLACK_BOT_TOKEN` | unset | Slack bot token (`xoxb-…`) for the dev-team notifier; unset = inert |
-| `SLACK_CHANNEL_CICD` | `#feed-ci-cd-qa` | Channel for QA gate / release-evidence posts |
-| `SLACK_WEBHOOK_CICD` | unset | Optional Incoming Webhook for CI/QA; overrides the bot token |
-
-Set any of these in a gitignored `.env` at the repo root (copy `.env.example`).
-Real environment variables always override `.env`.
 
 Set keys as environment variables — never paste them into config files you commit. The
 repo's `.gitignore` already excludes `.env` and `.cursor/mcp.json` for this reason.
