@@ -70,7 +70,7 @@ ours.
 
 **What it does not (and cannot) defend against**
 
-- **A fully present, fully privileged attacker.** In traditional hardware keys, malware on your laptop can request signatures in the background while the key is plugged in. Matrix Scroll mitigates this via the UX of Consent: every signature request must be visually confirmed on the device's 1-bit Sharp Memory LCD and authorized by a physical capacitive touch. The mascot looks up, prompts confirmation, and will display an alarmed face if an unexpected request is made. The key remains secure inside the NXP SE050 secure element, and the user must physically tap the device to authorize any signature.
+- **A fully present, fully privileged attacker.** In traditional hardware keys, malware on your laptop can request signatures in the background while the key is plugged in. Matrix Scroll mitigates this via the UX of Consent: every signature request must be visually confirmed on the device's 1-bit Sharp Memory LCD and authorized by a physical capacitive touch. The mascot looks up, prompts confirmation, and will display an alarmed face if an unexpected request is made. The key remains secure inside the [REDACTED] secure element, and the user must physically tap the device to authorize any signature.
 - **Bad code that is correctly signed.** We prove *who and where*, not *whether the code
   is good*. A signed change can still be a bug or a deliberate backdoor by an authorized
   operator. Attestation complements review; it does not replace it.
@@ -100,12 +100,12 @@ Two layers, one trust boundary.
                            │ asks for a signature over a manifest
                   ┌────────▼─────────┐
                   │  Identity layer  │  EmulatedProvider  (disk key, today)
-                  │   (Ed25519)      │  HardwareProvider  (SE050, roadmap)
+                  │   (Ed25519)      │  HardwareProvider  ([REDACTED], roadmap)
                   └────────┬─────────┘
                            │ sign() — host OS cannot read key
                   ┌────────▼─────────┐
-                  │  Matrix Scroll   │  RP2350 MCU + LCD Screen (Consent UI)
-                  │  (Dual-Chip)     ├──[I2C]── NXP SE050 (EAL6+ Secure Element)
+                  │  Matrix Scroll   │  [REDACTED] MCU + LCD Screen (Consent UI)
+                  │  (Dual-Chip)     ├──[I2C]── [REDACTED] (EAL6+ Secure Element)
                   └──────────────────┘
 ```
 
@@ -145,8 +145,8 @@ your desk.
 
 We present two physical hardware form factors that offer different levels of security and user interaction:
 
-- **Scroll Key ($99)**: A minimalist, pocket-sized USB-C security key designed for zero-friction attestation. It houses the NXP SE050 secure element for key generation and cryptographic operations. Because it contains no screen or button, it relies on host driver logic for routing signing calls, providing robust key exfiltration protection but lacking out-of-band visual verification.
-- **Scroll Token ($199)**: A premium desk companion built around a dual-chip architecture combining an RP2350 microcontroller and the NXP SE050 secure element. It adds a high-contrast 1.3" Sharp Memory LCD displaying our mascot avatar and a capacitive touch-consent sensor. The avatar acts as an out-of-band consent surface: it prompts touch confirmation for every signature and shows an alarmed face on unexpected background activity, neutralizing unauthorized automated requests.
+- **Scroll Key ($99)**: A minimalist, pocket-sized USB-C security key designed for zero-friction attestation. It houses the [REDACTED] secure element for key generation and cryptographic operations. Because it contains no screen or button, it relies on host driver logic for routing signing calls, providing robust key exfiltration protection but lacking out-of-band visual verification.
+- **Scroll Token ($199)**: A premium desk companion built around a dual-chip architecture combining a [REDACTED] microcontroller and the [REDACTED] secure element. It adds a high-contrast 1.3" Sharp Memory LCD displaying our mascot avatar and a capacitive touch-consent sensor. The avatar acts as an out-of-band consent surface: it prompts touch confirmation for every signature and shows an alarmed face on unexpected background activity, neutralizing unauthorized automated requests.
 
 A stable, human-readable **device id** (for example `MS-4319-20D5`) is derived from the
 public key so humans can talk about "which device signed this" without pasting 32 bytes of
@@ -205,8 +205,8 @@ We would rather under-promise here.
 | Emulated Ed25519 identity, signed release manifests, verification | **Shipping** |
 | `/api/identity` + `device_identity` tool | **Shipping** |
 | Cross-IDE setup (Cursor, VS Code native, Cline/Roo, Claude Desktop) | **Shipping** |
-| Scroll Key ($99 USB-C Security Key with NXP SE050) | **Pre-order, target Q3 2026** |
-| Scroll Token ($199 Desk Companion with LCD Avatar & RP2350) | **Pre-order, target Q3 2026** |
+| Scroll Key ($99 USB-C Security Key with [REDACTED]) | **Pre-order, target Q3 2026** |
+| Scroll Token ($199 Desk Companion with LCD Avatar & [REDACTED]) | **Pre-order, target Q3 2026** |
 | Touch-to-sign presence check & avatar consent UI (Scroll Token) | **Planned with hardware** |
 | On-device signing of individual git commits | **Roadmap** |
 | Org-level attestation dashboard / fleet key registry | **Roadmap** |

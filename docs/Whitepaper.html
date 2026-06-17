@@ -238,6 +238,29 @@
             html { background: #ffffff; }
         }
 
+        .redacted {
+            background-color: #000;
+            color: #000;
+            user-select: none;
+            padding: 0 2px;
+            border-radius: 2px;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .redacted::after {
+            content: "REDACTED";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'SFMono-Regular', Consolas, monospace;
+            font-size: 8px;
+            color: rgba(255, 59, 48, 0.7);
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 40px 24px;
@@ -271,7 +294,7 @@
     <!-- ABSTRACT -->
     <div class="abstract-block">
         <div class="abstract-title">Abstract</div>
-        <p>AI agents now generate a substantial portion of code modifications entering production codebases. While this increases software delivery velocity, it introduces a severe provenance vacuum, leaving audit logs vulnerable to identity spoofing and unauthenticated automated writes. We propose Matrix Scroll, a physical USB-C trust element designed around an RP2350 microcontroller and an NXP SE050 secure element, paired with a local Model Context Protocol (MCP) server named Digital Rain. The proposed architecture separates USB communication, display rendering, and touch detection from private key custody. We demonstrate how combining hardware key generation, local context relevance filters, and physical presence consent screens mitigates host-level key exfiltration and background malware-driven signature forgery, satisfying SOC 2 Change Management CC8 and SLSA provenance compliance frameworks.</p>
+        <p>AI agents now generate a substantial portion of code modifications entering production codebases. While this increases software delivery velocity, it introduces a severe provenance vacuum, leaving audit logs vulnerable to identity spoofing and unauthenticated automated writes. We propose Matrix Scroll, a physical USB-C trust element designed around an <span class="redacted">RP2350 microcontroller</span> and an <span class="redacted">NXP SE050 secure element</span>, paired with a local Model Context Protocol (MCP) server named Digital Rain. The proposed architecture separates USB communication, display rendering, and touch detection from private key custody. We demonstrate how combining hardware key generation, local context relevance filters, and physical presence consent screens mitigates host-level key exfiltration and background malware-driven signature forgery, satisfying SOC 2 Change Management CC8 and SLSA provenance compliance frameworks.</p>
     </div>
 
     <!-- SECTION 1 -->
@@ -336,13 +359,13 @@
         <tbody>
             <tr>
                 <td><strong>Secure Element</strong></td>
-                <td>NXP SE050 (CC EAL6+)</td>
-                <td>NXP SE050 (CC EAL6+)</td>
+                <td><span class="redacted">NXP SE050</span> (CC EAL6+)</td>
+                <td><span class="redacted">NXP SE050</span> (CC EAL6+)</td>
             </tr>
             <tr>
                 <td><strong>Controller</strong></td>
                 <td>USB-C interface bridge</td>
-                <td>RP2350 microcontroller (isolated from key)</td>
+                <td><span class="redacted">RP2350</span> microcontroller (isolated from key)</td>
             </tr>
             <tr>
                 <td><strong>Consent Display</strong></td>

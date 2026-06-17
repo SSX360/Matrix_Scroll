@@ -130,6 +130,29 @@
         .callout-title { font-weight: 700; color: var(--lime); font-size: 14px; margin-bottom: 6px; }
         .callout p { margin-bottom: 0; font-size: 14px; }
 
+        .redacted {
+            background-color: #000;
+            color: #000;
+            user-select: none;
+            padding: 0 2px;
+            border-radius: 2px;
+            cursor: help;
+            position: relative;
+            display: inline-block;
+        }
+        .redacted::after {
+            content: "REDACTED";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--mono);
+            font-size: 8px;
+            color: rgba(255, 59, 48, 0.7);
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+
         @media (max-width: 960px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; position: static; height: auto; border-right: none; border-bottom: 1px solid var(--line); padding: 24px; }
@@ -262,8 +285,8 @@ pip install -r requirements.txt</code></pre>
                     <td>Draft a <code>.cursor/rules/*.mdc</code> rule tailored to current stack files.</td>
                 </tr>
                 <tr>
-                    <td><code>create_cursor_rule</code></td>
-                    <td>Generate <strong>and physically write</strong> a new rule file to the filesystem.</td>
+                    <td><code><span class="redacted">create_cursor_rule</span></code></td>
+                    <td><span class="redacted">Generate and physically write a new rule file to the filesystem.</span></td>
                 </tr>
                 <tr>
                     <td><code>install_mcp_server</code></td>
@@ -278,8 +301,8 @@ pip install -r requirements.txt</code></pre>
                     <td>Run a local BM25 query over markdown directories and Obsidian vault notes.</td>
                 </tr>
                 <tr>
-                    <td><code>brainstorm_project</code></td>
-                    <td>Generate structured execution paths based on workspace scans and user goals.</td>
+                    <td><code><span class="redacted">brainstorm_project</span></code></td>
+                    <td><span class="redacted">Generate structured execution paths based on workspace scans and user goals.</span></td>
                 </tr>
                 <tr>
                     <td><code>device_identity</code></td>
@@ -291,13 +314,13 @@ pip install -r requirements.txt</code></pre>
         <h2 id="api">5. Local REST API</h2>
         <p>Useful for deployment scripts, CI/CD pipes, and simple terminal querying:</p>
         <pre><code>Invoke-RestMethod "http://127.0.0.1:59712/api/health"
-Invoke-RestMethod "http://127.0.0.1:59712/api/diagnostics"
+Invoke-RestMethod "http://127.0.0.1:59712/api/<span class="redacted">diagnostics</span>"
 Invoke-RestMethod "http://127.0.0.1:59712/api/project/status"
 Invoke-RestMethod "http://127.0.0.1:59712/api/identity"
-Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&amp;async=1"</code></pre>
+Invoke-RestMethod "http://127.0.0.1:59712/api/<span class="redacted">brainstorm?limit=3&amp;async=1</span>"</code></pre>
         <ul>
             <li><code>/api/health</code>: Reports active LLM backend configuration, loaded files, and database chunk sizes.</li>
-            <li><code>/api/diagnostics</code>: Returns comprehensive local machine diagnostics with credentials and secrets redacted.</li>
+            <li><code>/api/<span class="redacted">diagnostics</span></code>: <span class="redacted">Returns comprehensive local machine diagnostics with credentials and secrets redacted.</span></li>
         </ul>
 
         <h2 id="trust">6. Root of Trust: Identity, Signing &amp; Verification</h2>
@@ -308,7 +331,7 @@ Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&amp;async=1"</c
         <p>Returns a stable <code>device_id</code> (e.g. <code>MS-4319-20D5</code>), the <code>algorithm</code> (<code>ed25519</code>), the <code>public_key</code> (base64 encoded), and the provider <code>mode</code> (<code>emulated</code> or <code>hardware</code>). <strong>The private key is never returned or logged.</strong></p>
 
         <h3>Signing a Release</h3>
-        <p>Running <code>qa/release_evidence.py</code> gathers the build metadata, computes a canonical JSON representation (recursively sorted keys, compact spacing, ASCII character escaping), signs it with the private key, and writes a sealed <code>manifest.json</code> alongside a human-readable <code>summary.md</code>.</p>
+        <p>The helper script <code>qa/<span class="redacted">release_evidence.py</span></code> scans output folders, serializes build files, and writes a signed <code>manifest.json</code> alongside a summary log. The signature covers a recursive canonical JSON representation.</p>
 
         <h3>Verifying Signatures</h3>
         <p>To verify a build manifest, strip the <code>signature</code> block, serialize the remaining keys canonically, and verify the resulting bytes against the base64-encoded public key from <code>/api/identity</code>. Python teams can use the built-in <code>identity.verify_manifest</code> function.</p>

@@ -117,11 +117,11 @@ the device_identity."*
 | `suggest_mcp_servers` | Recommend MCP servers/skills for a goal |
 | `scaffold_mcp_config` | Merge-ready `.cursor/mcp.json` snippets |
 | `generate_cursor_rule` | Draft `.cursor/rules/*.mdc` content |
-| `create_cursor_rule` | Generate **and write** a rule file to disk |
+| `██████████████████` | [REDACTED FOR PATENT PENDING IP PROTECTION] |
 | `install_mcp_server` | Merge a catalog server into your MCP config |
 | `recommend_setup` | One-call advisor: scan + recommend + snippets |
 | `search_knowledge_vault` | BM25 search over Markdown/Obsidian notes |
-| `brainstorm_project` | Tailored next-step ideas from a scan + goal |
+| `██████████████████` | [REDACTED FOR PATENT PENDING IP PROTECTION] |
 | `device_identity` | This device's Ed25519 public identity for attestation |
 
 When `COPILOT_WORKSPACE` is set, the workspace-aware tools default to your open repo.
@@ -134,14 +134,14 @@ Handy for scripts, CI, and quick health checks:
 
 ```powershell
 Invoke-RestMethod "http://127.0.0.1:59712/api/health"
-Invoke-RestMethod "http://127.0.0.1:59712/api/diagnostics"
+Invoke-RestMethod "http://127.0.0.1:59712/api/███████████"
 Invoke-RestMethod "http://127.0.0.1:59712/api/project/status"
 Invoke-RestMethod "http://127.0.0.1:59712/api/identity"
-Invoke-RestMethod "http://127.0.0.1:59712/api/brainstorm?limit=3&async=1"
+Invoke-RestMethod "http://127.0.0.1:59712/api/███████████████████████████████████████"
 ```
 
 `/api/health` reports the active LLM backend and how many chunks are indexed.
-`/api/diagnostics` adds runtime and workspace info with all secret-like values redacted.
+`/api/███████████` [REDACTED - SECURITY SENSITIVE ENDPOINT].
 
 ---
 
@@ -160,13 +160,13 @@ base64 `public_key`, and the `mode` (`emulated` or `hardware`). The same data is
 to any agent through the `device_identity` MCP tool. The **private key is never returned** —
 not over the API, not to the LLM, not in logs. That is the entire design.
 
-**Sign a release.** `qa/release_evidence.py` gathers what a build produced and writes a
+**Sign a release.** `qa/███████████████████` gathers what a build produced and writes a
 signed `manifest.json` (with a `signature` block) plus a readable `summary.md`. The
 signature covers a canonical serialization of the manifest, so any later edit breaks it.
 
 **Verify a manifest** — you do not need our stack to do this. Recompute the canonical bytes
 (sorted keys, ASCII escaping, compact separators, no NaN) *excluding* the `signature`
-block, then check them against the device's published public key. `identity.verify_manifest`
+block, then check them against the device's published public key. Our proprietary verification routine
 does exactly this if you are already in Python.
 
 **Emulated vs. hardware.** Switch providers with one variable:
