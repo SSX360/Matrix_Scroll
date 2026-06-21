@@ -1,4 +1,15 @@
-# Digital Rain Integrations
+# Archived Digital Rain Integrations
+
+Historical note: this file documents older pre-launch local MCP and desktop
+companion workflows from the Digital Rain phase of the project. It is not the
+current Matrix Scroll public product surface.
+
+Current public truth lives here first:
+
+- `https://matrixscroll.com`
+- `https://matrixscroll.com/docs/`
+- `https://github.com/SSX360/matrixscroll`
+- `Matrix_Scroll/README.md`
 
 Digital Rain is designed to be highly interoperable, working across multiple editors, agent platforms, and directly on your desktop.
 
