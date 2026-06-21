@@ -49,6 +49,19 @@ This site is currently a static HTML surface rooted at
 - Keep version pins and quickstart steps aligned with the SDK README
 - Validate preview deploys before promotion
 
+## Workflow guardrails
+
+- Public-surface and workflow changes are maintainer-reviewed through
+  [`.github/CODEOWNERS`](./.github/CODEOWNERS).
+- The test workflow is the public release-health gate for this repo: it runs on
+  Ubuntu, Windows, and macOS across Python `3.11` and `3.12`, uses least-privilege
+  `contents: read` permissions, supports manual `workflow_dispatch`, and cancels
+  superseded in-flight runs via concurrency control.
+- The local evidence pass on `2026-06-21` succeeded after installing the declared
+  requirements in an isolated environment: `python -m unittest discover -v tests`,
+  `python -m qa.run_gates --workspace empty --report out/qa-report.json`, and
+  `python -m qa.release_evidence --skip-unit-tests --skip-compile --workspace typescript --workspace monorepo --output-dir out/release-evidence-ci`.
+
 ## Historical note
 
 This repository still contains earlier experiments and supporting artifacts from
