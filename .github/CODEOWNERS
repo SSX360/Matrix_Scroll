@@ -1,0 +1,9 @@
+# Public-site and workflow changes require maintainer review.
+/.github/workflows/ @SSX360
+/README.md @SSX360
+/index.html @SSX360
+/vercel.json @SSX360
+/docs/ @SSX360
+/qa/ @SSX360
+/requirements.txt @SSX360
+/requirements-dev.txt @SSX360
