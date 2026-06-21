@@ -39,6 +39,12 @@ Pinned public release: `matrixscroll==0.2.6`
 - SDK repo: [SSX360/matrixscroll](https://github.com/SSX360/matrixscroll)
 - Public CI proof: [SSX360/matrixscroll-verify-action](https://github.com/SSX360/matrixscroll-verify-action)
 
+## Core evaluation questions
+
+- [What is Matrix Scroll and how does it secure Git?](https://matrixscroll.com/#answers)
+- [How do hardware and emulated modes differ in Matrix Scroll?](https://matrixscroll.com/#answers)
+- [How can I integrate Matrix Scroll into a CI/CD workflow?](https://matrixscroll.com/#answers)
+
 ## Local workflow
 
 This site is currently a static HTML surface rooted at

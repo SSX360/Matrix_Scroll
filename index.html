@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matrix Scroll - Commit-Time Provenance for Agent-Assisted Git</title>
-    <meta name="description" content="Keep your scanners, branch protection, and build attestations. Matrix Scroll adds signed commit-time provenance for agent-assisted Git, verified offline today, while the SSX360 SE050 hardware path remains in progress.">
+    <meta name="description" content="What is Matrix Scroll? It adds signed commit-time provenance to Git with Ed25519 commit envelopes that verify offline in the CLI, browser, and CI. Start in emulated mode today and keep the SE050 hardware path on the same verifier contract later.">
     <link rel="canonical" href="https://matrixscroll.com/">
     <meta name="theme-color" content="#050505">
     <!-- Open Graph -->
@@ -12,13 +12,13 @@
     <meta property="og:site_name" content="Matrix Scroll">
     <meta property="og:url" content="https://matrixscroll.com/">
     <meta property="og:title" content="Matrix Scroll - Commit-Time Provenance for Agent-Assisted Git">
-    <meta property="og:description" content="Keep your scanners, branch protection, and build attestations. Matrix Scroll adds signed commit-time provenance for agent-assisted Git, verified offline today, while the SSX360 SE050 hardware path remains in progress.">
+    <meta property="og:description" content="What is Matrix Scroll? It adds signed commit-time provenance to Git with Ed25519 commit envelopes that verify offline in the CLI, browser, and CI. Start in emulated mode today and keep the SE050 hardware path on the same verifier contract later.">
     <meta property="og:image" content="https://matrixscroll.com/og-image.png">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://matrixscroll.com/">
     <meta name="twitter:title" content="Matrix Scroll - Commit-Time Provenance for Agent-Assisted Git">
-    <meta name="twitter:description" content="Keep your scanners, branch protection, and build attestations. Matrix Scroll adds signed commit-time provenance for agent-assisted Git, verified offline today, while the SSX360 SE050 hardware path remains in progress.">
+    <meta name="twitter:description" content="What is Matrix Scroll? It adds signed commit-time provenance to Git with Ed25519 commit envelopes that verify offline in the CLI, browser, and CI. Start in emulated mode today and keep the SE050 hardware path on the same verifier contract later.">
     <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -583,6 +583,7 @@
                 <a href="#software">Software</a>
                 <a href="#security">Security</a>
                 <a href="#how">How it works</a>
+                <a href="#answers">Answers</a>
             </div>
             <a href="/docs/Documentation.html" class="btn btn-primary">Open Docs</a>
         </nav>
@@ -1659,6 +1660,39 @@
                     <div class="num">03</div>
                     <h4>Verify anywhere</h4>
                     <p>Reviewers verify the same envelope in the CLI, browser, or CI. When the SE050 path ships, it plugs into this flow without changing the verifier or schema.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="block" id="answers" style="border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,0.01);">
+        <div class="wrap">
+            <div class="head-center reveal">
+                <span class="eyebrow">Common questions</span>
+                <h2>Exact answers for the first questions teams ask.</h2>
+                <p>Matrix Scroll should be easy to evaluate in search, on GitHub, and in a security review. These are the three questions we expect first.</p>
+            </div>
+            <div class="features">
+                <div class="feature reveal">
+                    <div class="fi">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m7.5 4.21 9 5.19"/><path d="M3.27 6.96 12 12.01l8.73-5.05"/><path d="M12 22.08V12"/></svg>
+                    </div>
+                    <h4>What is Matrix Scroll and how does it secure Git?</h4>
+                    <p>Matrix Scroll is signed commit-time provenance for agent-assisted Git. It secures Git by attaching an Ed25519-signed commit envelope that records who or what signed a change, which tool produced it, and an optional bounded scope, then lets reviewers verify that proof offline in the CLI, browser, or CI before merge.</p>
+                </div>
+                <div class="feature reveal">
+                    <div class="fi">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10"/><path d="M9 16v4"/><path d="M15 16v4"/></svg>
+                    </div>
+                    <h4>How do hardware and emulated modes differ in Matrix Scroll?</h4>
+                    <p>Emulated mode ships today and stores the signing key on disk with locked-down local permissions so teams can evaluate the full flow now. Hardware mode keeps the same commit envelope schema and verifier contract, but moves the private key into the SE050 secure element so the host cannot export it; that path is still a preview, not the default launch mode.</p>
+                </div>
+                <div class="feature reveal">
+                    <div class="fi">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/><path d="M14 4 10 20"/></svg>
+                    </div>
+                    <h4>How can I integrate Matrix Scroll into a CI/CD workflow?</h4>
+                    <p>Install the SDK and hooks in the repo, publish commit envelopes to <code>refs/notes/matrixscroll</code> before review, then run <code>SSX360/matrixscroll-verify-action@v1</code> in GitHub Actions to verify the full PR commit range. That lets protected branches require Matrix Scroll proof in CI without changing the offline verifier contract or replacing your existing scanners, branch protection, or build attestations.</p>
                 </div>
             </div>
         </div>
