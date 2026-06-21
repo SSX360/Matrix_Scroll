@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Scroll Compare</title>
+  <meta name="description" content="How Matrix Scroll compares to Sigstore, SLSA, GitHub attestations, agentmark, Alien Agent ID, and other adjacent supply-chain security tools.">
+  <link rel="canonical" href="https://matrixscroll.com/compare/">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/site-shell.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/"><span class="brand-dot"></span><span>Matrix Scroll</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/verify/">Verify</a>
+        <a href="/compare/" aria-current="page">Compare</a>
+        <a href="/spec/">Spec</a>
+        <a href="/device/">Device</a>
+        <a href="/docs/">Docs</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button" href="https://github.com/SSX360/matrixscroll">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="shell">
+      <section class="hero">
+        <span class="eyebrow">Where it fits</span>
+        <h1>Keep your current controls. Add commit-time provenance.</h1>
+        <p>Sigstore, SLSA, GitHub artifact attestations, Semgrep, branch protection, and Matrix Scroll answer different questions. Matrix Scroll focuses on who signed a change before push, then lets reviewers verify that proof offline or in CI.</p>
+        <div class="status-block">
+          <div><strong>Shipping now:</strong> PyPI <code>matrixscroll==0.2.6</code>, browser verify at <a href="/verify/">/verify/</a>, and PR verification with <code>SSX360/matrixscroll-verify-action@v1</code>.</div>
+          <div><strong>In progress:</strong> SE050 hardware preview, external Ed25519 signer guidance, and deeper evidence export paths.</div>
+          <div><strong>Not:</strong> A replacement for scanners, branch protection, artifact attestations, or runtime sandboxes.</div>
+        </div>
+      </section>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Tool</th>
+              <th>Layer</th>
+              <th>Signs commits?</th>
+              <th>Agent identity?</th>
+              <th>Hardware path?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Matrix Scroll</strong></td>
+              <td>Commit</td>
+              <td>Yes, commit envelope</td>
+              <td>Yes</td>
+              <td>Yes, preview path</td>
+            </tr>
+            <tr>
+              <td>agentmark</td>
+              <td>Commit + CI gate</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Alien Agent ID</td>
+              <td>Commit + identity network</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>ForgeProof</td>
+              <td>File-level provenance</td>
+              <td>No</td>
+              <td>Partial</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>Sigstore / cosign</td>
+              <td>Artifact / container</td>
+              <td>No</td>
+              <td>No</td>
+              <td>No</td>
+            </tr>
+            <tr>
+              <td>GitHub artifact attestations / SLSA</td>
+              <td>Build / artifact</td>
+              <td>No</td>
+              <td>No</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <h2 class="section-title">What Matrix Scroll adds</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>Commit-time proof</h3>
+          <p>Matrix Scroll signs a provenance envelope before merge, not only a build artifact after CI. That keeps the proof attached to the commit history itself.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Actor and tool metadata</h3>
+          <p>The envelope records actor type, tool, mode, and optional bounded scope. That is the missing context most artifact systems do not model.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Offline verification</h3>
+          <p>Reviewers can verify the same proof in the CLI, browser, and CI without a hosted control plane. Start at <a href="/verify/">/verify/</a> and carry the same contract into CI.</p>
+        </article>
+      </section>
+
+      <h2 class="section-title">Honest gaps we are still building</h2>
+      <section class="grid">
+        <article class="card span-6">
+          <h3>Hardware is preview-only</h3>
+          <p>The SE050 path is real roadmap work, but the public launch mode is still emulated. We do not claim non-exportable keys are shipping broadly today.</p>
+        </article>
+        <article class="card span-6">
+          <h3>Adoption proof is early</h3>
+          <p>Matrix Scroll is still building public case studies, multi-agent envelopes, and deeper Rekor or GUAC export stories. The core verifier contract ships now; the surrounding enterprise plane is still growing.</p>
+        </article>
+      </section>
+
+      <footer class="site-footer">
+        <span>Matrix Scroll compare page</span>
+        <span><a href="/verify/">Verify</a> | <a href="/spec/">Spec</a> | <a href="/device/">Device</a></span>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

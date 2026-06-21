@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Scroll Docs</title>
+  <meta name="description" content="Matrix Scroll documentation hub with quickstart, whitepaper, schemas, vectors, and CI integration links.">
+  <link rel="canonical" href="https://matrixscroll.com/docs/">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/site-shell.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/"><span class="brand-dot"></span><span>Matrix Scroll</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/verify/">Verify</a>
+        <a href="/compare/">Compare</a>
+        <a href="/spec/">Spec</a>
+        <a href="/device/">Device</a>
+        <a href="/docs/" aria-current="page">Docs</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button" href="https://github.com/SSX360/matrixscroll">SDK repo</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="shell">
+      <section class="hero">
+        <span class="eyebrow">Documentation hub</span>
+        <h1>Install, verify, and wire Matrix Scroll into CI.</h1>
+        <p>Start with the shipping path, verify one signed commit locally, then carry the same proof into PR verification. The canonical public release stays pinned to <code>matrixscroll==0.2.6</code> and <code>SSX360/matrixscroll-verify-action@v1</code>.</p>
+        <div class="status-block">
+          <div><strong>Shipping now:</strong> PyPI <code>matrixscroll==0.2.6</code>, browser verify at <a href="/verify/">/verify/</a>, compare guidance at <a href="/compare/">/compare/</a>, and CI verification with <code>SSX360/matrixscroll-verify-action@v1</code>.</div>
+          <div><strong>In progress:</strong> More public proof assets, hardware preview docs, and deeper evidence export paths.</div>
+          <div><strong>Not:</strong> A docs rewrite that changes the current verifier contract or public release pin during launch week.</div>
+        </div>
+      </section>
+
+      <div class="code-block"><pre>pip install "matrixscroll==0.2.6"
+matrixscroll hook-install
+matrixscroll envelope-publish-notes --base origin/main --head HEAD
+git push origin refs/notes/matrixscroll
+
+- uses: SSX360/matrixscroll-verify-action@v1</pre></div>
+
+      <h2 class="section-title">Core docs</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>Documentation</h3>
+          <p>Product architecture, CLI workflows, and public-surface notes.</p>
+          <div class="link-list">
+            <a href="/docs/Documentation.html">Documentation.html</a>
+          </div>
+        </article>
+        <article class="card span-4">
+          <h3>Whitepaper</h3>
+          <p>Threat model, envelope design, and why commit-time provenance matters.</p>
+          <div class="link-list">
+            <a href="/docs/Whitepaper.html">Whitepaper.html</a>
+          </div>
+        </article>
+        <article class="card span-4">
+          <h3>Protocol and vectors</h3>
+          <p>Wire format, canonicalization rules, and conformance fixtures.</p>
+          <div class="link-list">
+            <a href="https://github.com/SSX360/matrixscroll/blob/main/SPEC.md">SPEC.md</a>
+            <a href="https://github.com/SSX360/matrixscroll/tree/main/vectors">vectors/</a>
+          </div>
+        </article>
+      </section>
+
+      <h2 class="section-title">Proof links first</h2>
+      <section class="grid">
+        <article class="card span-6">
+          <h3>Browser and compare</h3>
+          <div class="link-list">
+            <a href="/verify/">matrixscroll.com/verify/</a>
+            <a href="/compare/">matrixscroll.com/compare/</a>
+            <a href="/spec/">matrixscroll.com/spec/</a>
+          </div>
+        </article>
+        <article class="card span-6">
+          <h3>Release and CI</h3>
+          <div class="link-list">
+            <a href="https://pypi.org/project/matrixscroll/0.2.6/">PyPI 0.2.6</a>
+            <a href="https://github.com/SSX360/matrixscroll-verify-action">matrixscroll-verify-action</a>
+            <a href="https://matrixscroll.com/schemas/commit-envelope.v1.json">commit-envelope schema</a>
+          </div>
+        </article>
+      </section>
+
+      <h2 class="section-title">Fast answers</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>What is Matrix Scroll?</h3>
+          <p>Matrix Scroll is signed commit-time provenance for agent-assisted Git. It secures Git by attaching an Ed25519-signed commit envelope that records who or what signed a change, which tool produced it, and an optional bounded scope, then lets reviewers verify that proof offline before merge.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Hardware vs emulated</h3>
+          <p>Emulated mode ships now and stores the signing key locally so teams can trial the full flow immediately. The SE050 hardware path keeps the same envelope schema and verifier contract, but moves the private key into the secure element as a preview trust upgrade.</p>
+        </article>
+        <article class="card span-4">
+          <h3>CI/CD integration</h3>
+          <p>Install the SDK and hook, publish commit envelopes to <code>refs/notes/matrixscroll</code>, then run <code>SSX360/matrixscroll-verify-action@v1</code> in GitHub Actions to verify the full PR range alongside your existing scanners and branch rules.</p>
+        </article>
+      </section>
+
+      <footer class="site-footer">
+        <span>Matrix Scroll docs hub</span>
+        <span><a href="/verify/">Verify</a> | <a href="/compare/">Compare</a> | <a href="/device/">Device</a></span>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>

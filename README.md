@@ -32,12 +32,14 @@ Pinned public release: `matrixscroll==0.2.6`
 ## Canonical proof links
 
 - Product site: [matrixscroll.com](https://matrixscroll.com/)
+- Docs hub: [matrixscroll.com/docs](https://matrixscroll.com/docs/)
 - Browser verifier: [matrixscroll.com/verify](https://matrixscroll.com/verify/)
 - Compare page: [matrixscroll.com/compare](https://matrixscroll.com/compare/)
+- Spec page: [matrixscroll.com/spec](https://matrixscroll.com/spec/)
 - Device preview: [matrixscroll.com/device](https://matrixscroll.com/device/)
 - PyPI release provenance: [matrixscroll 0.2.6](https://pypi.org/project/matrixscroll/0.2.6/)
 - SDK repo: [SSX360/matrixscroll](https://github.com/SSX360/matrixscroll)
-- Public CI proof: [SSX360/matrixscroll-verify-action](https://github.com/SSX360/matrixscroll-verify-action)
+- Public CI proof: [SSX360/matrixscroll-verify-action@v1](https://github.com/SSX360/matrixscroll-verify-action)
 
 ## Core evaluation questions
 
@@ -48,8 +50,10 @@ Pinned public release: `matrixscroll==0.2.6`
 ## Local workflow
 
 This site is currently a static HTML surface rooted at
-[`index.html`](./index.html) with lightweight Vercel rewrites in
-[`vercel.json`](./vercel.json).
+[`index.html`](./index.html) plus route directories such as
+[`verify/`](./verify/), [`compare/`](./compare/), [`spec/`](./spec/),
+[`device/`](./device/), and [`docs/`](./docs/) with lightweight Vercel
+rewrites in [`vercel.json`](./vercel.json).
 
 - Edit public copy here first when changing `matrixscroll.com`
 - Keep version pins and quickstart steps aligned with the SDK README

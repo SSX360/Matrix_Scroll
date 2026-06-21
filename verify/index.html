@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Scroll Verify</title>
+  <meta name="description" content="Client-side Matrix Scroll verifier for signed commit envelopes. Paste JSON, verify Ed25519 signatures in the browser, and test tamper detection.">
+  <link rel="canonical" href="https://matrixscroll.com/verify/">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/site-shell.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/">
+        <span class="brand-dot"></span>
+        <span>Matrix Scroll</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/verify/" aria-current="page">Verify</a>
+        <a href="/compare/">Compare</a>
+        <a href="/spec/">Spec</a>
+        <a href="/device/">Device</a>
+        <a href="/docs/">Docs</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button" href="https://github.com/SSX360/matrixscroll">GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="shell">
+      <section class="hero">
+        <span class="eyebrow">Browser verifier</span>
+        <h1>Verify signed commit envelopes in your browser.</h1>
+        <p>Matrix Scroll uses the same public Ed25519 contract in the CLI, browser, and CI. Paste an envelope, load a known-good sample, or tamper it to watch verification fail loud.</p>
+        <div class="status-block">
+          <div><strong>Shipping now:</strong> Browser verify, PyPI <code>matrixscroll==0.2.6</code>, Git hooks, PR verification with <code>SSX360/matrixscroll-verify-action@v1</code>, and emulated-mode evaluation.</div>
+          <div><strong>In progress:</strong> SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
+          <div><strong>Not:</strong> IAM, sandboxing, prompt filtering, or an agent runtime.</div>
+        </div>
+      </section>
+
+      <section class="panel verifier-layout">
+        <div>
+          <h2>Envelope JSON</h2>
+          <p>All verification happens client-side in this page. No envelope leaves your browser when you paste or edit it here.</p>
+          <textarea id="manifestInput" spellcheck="false" aria-label="Matrix Scroll envelope JSON"></textarea>
+          <div class="action-row">
+            <button id="loadSample" class="button-primary" type="button">Load Sample</button>
+            <button id="loadTampered" type="button">Tamper Sample</button>
+            <button id="clearManifest" type="button">Clear</button>
+            <button id="runVerify" type="button">Verify</button>
+          </div>
+        </div>
+
+        <div>
+          <div id="verifyResult" class="result-banner ok">
+            <span class="label">Pass</span>
+            <div class="headline">Signature valid</div>
+            <div class="body">Signature valid for canonical commit envelope.</div>
+          </div>
+
+          <div id="verifyDetails" class="detail-list"></div>
+
+          <div class="card" style="margin-top: 18px;">
+            <h3>What this checks</h3>
+            <p>The verifier removes the top-level <code>signature</code> block, canonicalizes the remaining JSON, derives the expected <code>device_id</code> from the public key, and runs Ed25519 verification over the canonical bytes.</p>
+            <div class="link-list">
+              <a href="https://matrixscroll.com/schemas/commit-envelope.v1.json">Commit-envelope schema</a>
+              <a href="https://github.com/SSX360/matrixscroll/tree/main/vectors">Conformance vectors</a>
+              <a href="https://github.com/SSX360/matrixscroll-verify-action">GitHub Action</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <h2 class="section-title">Proof surfaces that stay aligned</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>Same contract everywhere</h3>
+          <p>The browser verifier checks the same canonical bytes, public key, device ID, mode, and signature block that the SDK and Scroll Gate check in CI.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Fails loud on tampering</h3>
+          <p>Device ID mismatches, invalid base64, unsupported algorithms, or broken signatures all surface directly in the verifier so reviewers can see why a manifest does not pass.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Software-first today</h3>
+          <p><code>MATRIXSCROLL_MODE=emulated</code> is the launch path. Hardware is a preview trust upgrade, not a prerequisite to try Matrix Scroll.</p>
+        </article>
+      </section>
+
+      <footer class="site-footer">
+        <span>Matrix Scroll browser verifier</span>
+        <span><a href="/compare/">Compare</a> | <a href="/spec/">Spec</a> | <a href="/docs/">Docs</a></span>
+      </footer>
+    </div>
+  </main>
+
+  <script src="/static/verify.js"></script>
+</body>
+</html>

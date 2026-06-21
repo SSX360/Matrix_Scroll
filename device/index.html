@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matrix Scroll Device Preview</title>
+  <meta name="description" content="Matrix Scroll hardware preview for SE050-backed signing. Software ships now; hardware remains a preview trust upgrade for design partners.">
+  <link rel="canonical" href="https://matrixscroll.com/device/">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/site-shell.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/"><span class="brand-dot"></span><span>Matrix Scroll</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/verify/">Verify</a>
+        <a href="/compare/">Compare</a>
+        <a href="/spec/">Spec</a>
+        <a href="/device/" aria-current="page">Device</a>
+        <a href="/docs/">Docs</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button" href="mailto:operations@matrixscroll.com">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="shell">
+      <section class="hero">
+        <span class="eyebrow">Hardware preview</span>
+        <h1>Software first. Preview trust upgrade next.</h1>
+        <p>Matrix Scroll ships as software today. The SSX360 SE050 lane is a design-partner preview for teams that want non-exportable Ed25519 signing without changing the commit envelope schema or the verifier used in the CLI, browser, and CI.</p>
+        <div class="status-block">
+          <div><strong>Shipping now:</strong> Emulated-mode evaluation with <code>matrixscroll==0.2.6</code>, browser verify at <a href="/verify/">/verify/</a>, and PR verification with <code>SSX360/matrixscroll-verify-action@v1</code>.</div>
+          <div><strong>In progress:</strong> SE050 host transport, latency reporting, provisioning boundaries, and fixed-scope design-partner packaging.</div>
+          <div><strong>Not:</strong> A GA hardware product, a mandatory launch dependency, or a second verifier stack.</div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card span-6">
+          <h3>Scroll Key preview</h3>
+          <p>A USB-C secure-element reference path built to keep the private key inside the device while signing the same canonical manifest bytes Matrix Scroll already uses today.</p>
+        </article>
+        <article class="card span-6">
+          <h3>Scroll Token concept</h3>
+          <p>A future packaging concept for teams that want a portable, tangible trust anchor. The public launch story stays software-first until the acceptance package is complete.</p>
+        </article>
+      </section>
+
+      <h2 class="section-title">Why this path exists</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>Same verifier contract</h3>
+          <p>The hardware path does not introduce a new schema, algorithm, or review flow. It signs the same canonical bytes and lands on the same proof surfaces.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Host cannot export the key</h3>
+          <p>The goal is to keep the private key sealed inside the secure element so local compromise does not turn into silent key exfiltration.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Design-partner only</h3>
+          <p>Preview access is intentionally narrow until latency, provisioning, and acceptance criteria are all documented against the existing verifier contract.</p>
+        </article>
+      </section>
+
+      <footer class="site-footer">
+        <span>Matrix Scroll device preview</span>
+        <span><a href="/spec/">Spec</a> | <a href="/verify/">Verify</a> | <a href="/docs/">Docs</a></span>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
