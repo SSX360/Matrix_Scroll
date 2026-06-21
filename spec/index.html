@@ -34,9 +34,9 @@
         <h1>Pure Ed25519 over canonical JSON bytes.</h1>
         <p>Matrix Scroll v1 keeps the trust contract narrow: canonicalize the manifest, remove the top-level signature block, derive a human-readable device ID from the public key, and verify the Ed25519 signature over the resulting bytes.</p>
         <div class="status-block">
-          <div><strong>Shipping now:</strong> Public schemas, conformance vectors, browser verify at <a href="/verify/">/verify/</a>, the pinned SDK path at <code>matrixscroll==0.2.6</code>, and CI verification with <code>SSX360/matrixscroll-verify-action@v1</code>.</div>
-          <div><strong>In progress:</strong> Hardware preview transport and evidence export work that preserves the same verifier contract.</div>
-          <div><strong>Not:</strong> Alternate signature algorithms, new schema versions, or a second verification model in this launch pass.</div>
+          <div><strong>Shipping now:</strong> PyPI <code>0.2.6</code>, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.</div>
+          <div><strong>In progress:</strong> SSX360 SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
+          <div><strong>Not:</strong> IAM, sandboxing, prompt filtering, or an agent runtime.</div>
         </div>
       </section>
 

@@ -34,18 +34,22 @@
         <h1>Install, verify, and wire Matrix Scroll into CI.</h1>
         <p>Start with the shipping path, verify one signed commit locally, then carry the same proof into PR verification. The canonical public release stays pinned to <code>matrixscroll==0.2.6</code> and <code>SSX360/matrixscroll-verify-action@v1</code>.</p>
         <div class="status-block">
-          <div><strong>Shipping now:</strong> PyPI <code>matrixscroll==0.2.6</code>, browser verify at <a href="/verify/">/verify/</a>, compare guidance at <a href="/compare/">/compare/</a>, and CI verification with <code>SSX360/matrixscroll-verify-action@v1</code>.</div>
-          <div><strong>In progress:</strong> More public proof assets, hardware preview docs, and deeper evidence export paths.</div>
-          <div><strong>Not:</strong> A docs rewrite that changes the current verifier contract or public release pin during launch week.</div>
+          <div><strong>Shipping now:</strong> PyPI <code>0.2.6</code>, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.</div>
+          <div><strong>In progress:</strong> SSX360 SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
+          <div><strong>Not:</strong> IAM, sandboxing, prompt filtering, or an agent runtime.</div>
         </div>
       </section>
 
       <div class="code-block"><pre>pip install "matrixscroll==0.2.6"
 matrixscroll hook-install
+matrixscroll hook-status
 matrixscroll envelope-publish-notes --base origin/main --head HEAD
 git push origin refs/notes/matrixscroll
 
-- uses: SSX360/matrixscroll-verify-action@v1</pre></div>
+- uses: SSX360/matrixscroll-verify-action@v1
+  with:
+    matrixscroll-version: "0.2.6"
+    require-mode: emulated</pre></div>
 
       <h2 class="section-title">Core docs</h2>
       <section class="grid">
@@ -96,16 +100,16 @@ git push origin refs/notes/matrixscroll
       <h2 class="section-title">Fast answers</h2>
       <section class="grid">
         <article class="card span-4">
-          <h3>What is Matrix Scroll?</h3>
-          <p>Matrix Scroll is signed commit-time provenance for agent-assisted Git. It secures Git by attaching an Ed25519-signed commit envelope that records who or what signed a change, which tool produced it, and an optional bounded scope, then lets reviewers verify that proof offline before merge.</p>
+          <h3>What is Matrix Scroll and how does it secure Git?</h3>
+          <p>Matrix Scroll is signed commit-time provenance for agent-assisted Git. It secures Git by attaching an Ed25519-signed commit envelope that records who or what signed a change, which tool produced it, and an optional bounded scope, then lets reviewers verify that proof offline in the CLI, browser, or CI before merge.</p>
         </article>
         <article class="card span-4">
-          <h3>Hardware vs emulated</h3>
-          <p>Emulated mode ships now and stores the signing key locally so teams can trial the full flow immediately. The SE050 hardware path keeps the same envelope schema and verifier contract, but moves the private key into the secure element as a preview trust upgrade.</p>
+          <h3>How do hardware and emulated modes differ in Matrix Scroll?</h3>
+          <p>Emulated mode ships today and stores the signing key locally so teams can evaluate the full flow now. Hardware mode keeps the same commit envelope schema and verifier contract, but moves the private key into the SE050 secure element so the host cannot export it; that path is still a preview, not the default launch mode.</p>
         </article>
         <article class="card span-4">
-          <h3>CI/CD integration</h3>
-          <p>Install the SDK and hook, publish commit envelopes to <code>refs/notes/matrixscroll</code>, then run <code>SSX360/matrixscroll-verify-action@v1</code> in GitHub Actions to verify the full PR range alongside your existing scanners and branch rules.</p>
+          <h3>How can I integrate Matrix Scroll into a CI/CD workflow?</h3>
+          <p>Install the SDK and hooks in the repo, publish commit envelopes to <code>refs/notes/matrixscroll</code> before review, then run <code>SSX360/matrixscroll-verify-action@v1</code> in GitHub Actions to verify the full PR commit range. That lets protected branches require Matrix Scroll proof in CI without replacing your existing scanners, branch protection, or build attestations.</p>
         </article>
       </section>
 

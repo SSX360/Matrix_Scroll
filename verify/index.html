@@ -37,8 +37,8 @@
         <h1>Verify signed commit envelopes in your browser.</h1>
         <p>Matrix Scroll uses the same public Ed25519 contract in the CLI, browser, and CI. Paste an envelope, load a known-good sample, or tamper it to watch verification fail loud.</p>
         <div class="status-block">
-          <div><strong>Shipping now:</strong> Browser verify, PyPI <code>matrixscroll==0.2.6</code>, Git hooks, PR verification with <code>SSX360/matrixscroll-verify-action@v1</code>, and emulated-mode evaluation.</div>
-          <div><strong>In progress:</strong> SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
+          <div><strong>Shipping now:</strong> PyPI <code>0.2.6</code>, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.</div>
+          <div><strong>In progress:</strong> SSX360 SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
           <div><strong>Not:</strong> IAM, sandboxing, prompt filtering, or an agent runtime.</div>
         </div>
       </section>
@@ -89,7 +89,7 @@
         </article>
         <article class="card span-4">
           <h3>Software-first today</h3>
-          <p><code>MATRIXSCROLL_MODE=emulated</code> is the launch path. Hardware is a preview trust upgrade, not a prerequisite to try Matrix Scroll.</p>
+          <p><code>matrixscroll==0.2.6</code> and <code>SSX360/matrixscroll-verify-action@v1</code> stay pinned for the launch path. <code>MATRIXSCROLL_MODE=emulated</code> is the launch path, and hardware is a preview trust upgrade rather than a prerequisite to try Matrix Scroll.</p>
         </article>
       </section>
 
