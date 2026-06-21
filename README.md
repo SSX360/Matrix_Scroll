@@ -55,3 +55,10 @@ This repository still contains earlier experiments and supporting artifacts from
 older Digital Rain and companion-style work. Treat those materials as
 historical or secondary. Public messaging, deployment decisions, and README copy
 should all follow the Matrix Scroll product story above.
+
+Archived examples to treat as historical notes, not current launch surfaces:
+
+- `INTEGRATIONS.md`
+- `docs/DAILY_USE.md`
+- `docs/Documentation.md`
+- `docs/Documentation.html`

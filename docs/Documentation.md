@@ -1,8 +1,20 @@
-# Matrix Scroll — Documentation
+# Archived Digital Rain Notes - Matrix Scroll
 
-This is the practical guide: how to get Digital Rain running, connect it to your editor,
-sign and verify a release, and reach for the right knob when something misbehaves. If you
-want the *why* — the threat model and the cryptography — read the [Whitepaper](./Whitepaper.md).
+Historical note: this file documents an older Digital Rain local MCP workflow.
+It is archived for reference and should not be treated as the canonical Matrix
+Scroll public docs set.
+
+Use these surfaces first for the current product story and proof path:
+
+- `https://matrixscroll.com`
+- `https://matrixscroll.com/docs/`
+- `https://github.com/SSX360/matrixscroll`
+- [`../README.md`](../README.md)
+
+This is the practical guide: how to get Digital Rain running, connect it to
+your editor, sign and verify a release, and reach for the right knob when
+something misbehaves. If you want the *why* - the threat model and the
+cryptography - read the [Whitepaper](./Whitepaper.md).
 
 Everything here works **today in emulated mode**, with no hardware required. When the
 physical Scroll Key or Scroll Token devices ship (target Q3 2026), the only thing that changes

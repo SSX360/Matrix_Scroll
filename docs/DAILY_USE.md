@@ -1,4 +1,14 @@
-# Daily Use — Digital Rain
+# Archived Daily Use - Digital Rain
+
+Historical note: this file covers an older Digital Rain local workflow. It is
+retained for reference only and should not be used as the current Matrix Scroll
+public quickstart.
+
+Use these canonical surfaces for current launch messaging and evaluation:
+
+- `https://matrixscroll.com`
+- `https://matrixscroll.com/docs/`
+- `https://github.com/SSX360/matrixscroll`
 
 ## One-command launch
 
