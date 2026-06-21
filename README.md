@@ -4,7 +4,7 @@ This repository is the source for the public Matrix Scroll product site and
 proof surfaces at [matrixscroll.com](https://matrixscroll.com/).
 
 **Matrix Scroll is signed commit-time provenance for agent-assisted Git,
-verified offline, with hardware as an optional trust upgrade.**
+verified offline, with hardware as an optional preview trust upgrade.**
 
 Pinned public release: `matrixscroll==0.2.6`
 
