@@ -1808,7 +1808,7 @@
                     </div>
                     
                     <!-- Social Proof / Documentation Links -->
-                    <div style="margin-top: 36px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 14px;">
+                    <div id="docs-links" style="margin-top: 36px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; font-size: 14px;">
                         <a href="/docs/Documentation.html" class="link" style="display: inline-flex; align-items: center; gap: 8px; color: var(--lime);">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                             Documentation
@@ -2624,8 +2624,38 @@
             secLogIndex = (secLogIndex + 1) % sectionLogMessages.length;
         }
 
+        const routeSectionMap = {
+            '/docs': 'docs-links',
+            '/docs/': 'docs-links',
+            '/compare': 'matrix',
+            '/compare/': 'matrix',
+            '/verify': 'terminal-ux',
+            '/verify/': 'terminal-ux',
+            '/spec': 'specs',
+            '/spec/': 'specs',
+            '/device': 'device',
+            '/device/': 'device'
+        };
+
+        function focusSectionForRoute() {
+            const targetId = routeSectionMap[window.location.pathname];
+            if (!targetId) {
+                return;
+            }
+
+            const target = document.getElementById(targetId);
+            if (!target) {
+                return;
+            }
+
+            requestAnimationFrame(() => {
+                target.scrollIntoView({ behavior: 'auto', block: 'start' });
+            });
+        }
+
         // Initialize section audit logs
         document.addEventListener('DOMContentLoaded', () => {
+            focusSectionForRoute();
             const body = document.getElementById('sectionAuditBody');
             if (body) {
                 for(let i=0; i<6; i++) {

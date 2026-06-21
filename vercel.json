@@ -1,6 +1,16 @@
 {
   "rewrites": [
     { "source": "/docs/Documentation.md", "destination": "/docs/Documentation.html" },
-    { "source": "/docs/Whitepaper.md", "destination": "/docs/Whitepaper.html" }
+    { "source": "/docs/Whitepaper.md", "destination": "/docs/Whitepaper.html" },
+    { "source": "/docs", "destination": "/index.html" },
+    { "source": "/docs/", "destination": "/index.html" },
+    { "source": "/compare", "destination": "/index.html" },
+    { "source": "/compare/", "destination": "/index.html" },
+    { "source": "/verify", "destination": "/index.html" },
+    { "source": "/verify/", "destination": "/index.html" },
+    { "source": "/spec", "destination": "/index.html" },
+    { "source": "/spec/", "destination": "/index.html" },
+    { "source": "/device", "destination": "/index.html" },
+    { "source": "/device/", "destination": "/index.html" }
   ]
 }
