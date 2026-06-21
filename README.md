@@ -62,3 +62,7 @@ Archived examples to treat as historical notes, not current launch surfaces:
 - `docs/DAILY_USE.md`
 - `docs/Documentation.md`
 - `docs/Documentation.html`
+
+## License
+
+- Code and site source: **Apache-2.0** (`LICENSE`).
