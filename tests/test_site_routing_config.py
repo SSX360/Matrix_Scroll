@@ -31,6 +31,19 @@ class SiteRoutingConfigTests(unittest.TestCase):
         self.assertIn(("/docs/Documentation.md", "/docs/Documentation.html"), rewrites)
         self.assertIn(("/docs/Whitepaper.md", "/docs/Whitepaper.html"), rewrites)
 
+    def test_public_schema_files_match_published_urls(self):
+        schema_dir = Path(__file__).resolve().parents[1] / "schemas"
+
+        for filename in (
+            "commit-envelope.v1.json",
+            "evidence-pack.v1.json",
+            "release-manifest.v1.json",
+        ):
+            schema_path = schema_dir / filename
+            self.assertTrue(schema_path.exists(), filename)
+            text = schema_path.read_text(encoding="utf-8")
+            self.assertIn(f'"$id": "https://matrixscroll.com/schemas/{filename}"', text)
+
 
 if __name__ == "__main__":
     unittest.main()
