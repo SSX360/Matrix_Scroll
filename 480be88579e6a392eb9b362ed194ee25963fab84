@@ -1,0 +1,39 @@
+{
+  "commit": {
+    "actual_id": "480be88579e6a392eb9b362ed194ee25963fab84",
+    "author": {
+      "date": "1782514819 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "committer": {
+      "date": "1782514828 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "message": "ci: enforce/warn gate; static vercel config and deploy ignore\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n",
+    "parents": [
+      "eba05e8c15ab2009a45fe7a39568272b5e3cebe0"
+    ],
+    "tree": "e7c80e9437e58ae7464a4d105e9f91a4bda3c43c"
+  },
+  "provenance": {
+    "actor_type": "human",
+    "tool": "git-cli"
+  },
+  "repository": {
+    "branch": "master",
+    "name": "Matrix_Scroll",
+    "remote_url": "https://github.com/SSX360/Matrix_Scroll.git"
+  },
+  "schema": "matrixscroll.commit_envelope.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-26T23:00:29Z",
+    "value": "fcdx6ruuCkQqoD/PKIPlri9O+3jadFJ98Sd5qmAa+tSxPnqCW3DrG0O5HPliNLr+5K7KFKR8e0xwz0uENLvPAA=="
+  }
+}
