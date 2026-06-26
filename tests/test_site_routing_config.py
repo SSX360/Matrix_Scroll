@@ -16,7 +16,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
         site_root = Path(__file__).resolve().parents[1]
 
         expected_pages = {
-            "index.html": "Signed provenance for agent-assisted Git commits.",
+            "index.html": "Signed proof of who — or what — wrote every commit.",
             "compare/index.html": "Keep your current controls. Add commit-time provenance.",
             "device/index.html": "Software first. Preview trust upgrade next.",
             "docs/index.html": 'matrixscroll==0.2.6',
