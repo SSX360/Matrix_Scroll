@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+out/
+scratch/
+qa/
+tests/
+docs/Digital-Rain-Feature-Guide.pdf
+*.pyc
