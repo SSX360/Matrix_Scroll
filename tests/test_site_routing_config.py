@@ -16,7 +16,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
         site_root = Path(__file__).resolve().parents[1]
 
         expected_pages = {
-            "index.html": "Signed proof of who — or what — wrote every commit.",
+            "index.html": "wrote every commit.",
             "compare/index.html": "Keep your current controls. Add commit-time provenance.",
             "device/index.html": "Software first. Preview trust upgrade next.",
             "docs/index.html": 'matrixscroll==0.2.6',
@@ -32,8 +32,10 @@ class SiteRoutingConfigTests(unittest.TestCase):
     def test_public_pages_share_status_language(self):
         site_root = Path(__file__).resolve().parents[1]
 
+        # The stripped-down homepage carries the same honest-limits content in a
+        # dedicated section, not the shared one-line status markers. The deeper
+        # routes still share the canonical status language.
         for relative_path in (
-            "index.html",
             "docs/index.html",
             "compare/index.html",
             "verify/index.html",
@@ -44,6 +46,22 @@ class SiteRoutingConfigTests(unittest.TestCase):
             for marker in self._status_markers():
                 self.assertIn(marker, text, relative_path)
 
+    def test_homepage_carries_provenance_anchors(self):
+        homepage = (Path(__file__).resolve().parents[1] / "index.html").read_text(encoding="utf-8")
+        for marker in (
+            "Signed proof of who",
+            "wrote every commit.",
+            "Install the MCP",
+            "Verify a commit",
+            "https://matrixscroll.com/verify/",
+            "https://ssx360.com",
+            "Provenance%20Pilot%20Inquiry",
+        ):
+            self.assertIn(marker, homepage)
+        # Compliance language rule: never claim a regulation requires signing.
+        for forbidden in ("required by", "mandated", "audit repo trust", "repo intelligence"):
+            self.assertNotIn(forbidden, homepage)
+
     def test_homepage_and_docs_answer_exact_evaluator_questions(self):
         site_root = Path(__file__).resolve().parents[1]
         questions = (
@@ -52,7 +70,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "How can I integrate Matrix Scroll into a CI/CD workflow?",
         )
 
-        for relative_path in ("index.html", "docs/index.html"):
+        for relative_path in ("docs/index.html",):
             text = (site_root / relative_path).read_text(encoding="utf-8")
             for question in questions:
                 self.assertIn(question, text, relative_path)
