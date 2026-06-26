@@ -1,0 +1,39 @@
+{
+  "commit": {
+    "actual_id": "e3d2f677358a4491a66e4472e2491f55cd429758",
+    "author": {
+      "date": "1782515668 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "committer": {
+      "date": "1782515668 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "message": "site: stripped-down provenance homepage \u2014 two CTAs, envelope hero, no drift\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n",
+    "parents": [
+      "cfccbc09faf8a9d89d37101cf1a41614f6253b1a"
+    ],
+    "tree": "0b180f9bb6a2a92330ed34a56368aee0639ac6fe"
+  },
+  "provenance": {
+    "actor_type": "human",
+    "tool": "git-cli"
+  },
+  "repository": {
+    "branch": "master",
+    "name": "Matrix_Scroll",
+    "remote_url": "https://github.com/SSX360/Matrix_Scroll.git"
+  },
+  "schema": "matrixscroll.commit_envelope.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-26T23:14:29Z",
+    "value": "0nEkobgszuriDmkTXELtUpopG6+pISJSkXpc9BE34m3u9clDm6Q7QoiSKYG/G7qv16G4VJmeZKLQLCZiiuUZAQ=="
+  }
+}
