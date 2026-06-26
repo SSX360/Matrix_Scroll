@@ -1,0 +1,39 @@
+{
+  "commit": {
+    "actual_id": "cfccbc09faf8a9d89d37101cf1a41614f6253b1a",
+    "author": {
+      "date": "1782515041 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "committer": {
+      "date": "1782515041 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "message": "chore: ignore local env files from Vercel link\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n",
+    "parents": [
+      "480be88579e6a392eb9b362ed194ee25963fab84"
+    ],
+    "tree": "093002e2e53b3f79a22cd65b205c6e2474f7e685"
+  },
+  "provenance": {
+    "actor_type": "human",
+    "tool": "git-cli"
+  },
+  "repository": {
+    "branch": "master",
+    "name": "Matrix_Scroll",
+    "remote_url": "https://github.com/SSX360/Matrix_Scroll.git"
+  },
+  "schema": "matrixscroll.commit_envelope.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-26T23:04:02Z",
+    "value": "QyqxIlBN6Lgqphax3YboXDbNZd9X5KeKo5joKfMSxPmOcolHSrtUuE7hSNemoDkoAbwCfSBue5jwKTJE2SiDBQ=="
+  }
+}
