@@ -27,3 +27,4 @@ desktop.ini
 *.swp
 weeping_angels*.html
 .vercel
+.env*
