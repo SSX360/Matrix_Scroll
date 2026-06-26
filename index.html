@@ -388,6 +388,43 @@
             border-top: 1px solid rgba(255, 193, 94, 0.14);
         }
 
+        .control-plane {
+            padding: 0 0 72px;
+        }
+
+        .control-plane-card {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 28px 32px;
+            border: 1px solid var(--line-strong);
+            border-radius: 4px;
+            background: linear-gradient(135deg, rgba(100, 211, 188, 0.08) 0%, rgba(247, 181, 71, 0.06) 100%);
+            box-shadow: var(--shadow);
+        }
+
+        .control-plane-card h2 {
+            margin: 0 0 8px;
+            font-family: var(--mono);
+            font-size: 13px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--teal);
+        }
+
+        .control-plane-card p {
+            margin: 0;
+            max-width: 640px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        .control-plane-card .button {
+            flex-shrink: 0;
+        }
+
         @media (max-width: 1040px) {
             .hero-grid,
             .answer-grid,
@@ -491,6 +528,7 @@
                         <a class="chip" href="https://github.com/SSX360/matrixscroll/tree/main/vectors">Conformance vectors</a>
                         <a class="chip" href="https://github.com/SSX360/matrixscroll-verify-action">GitHub Action</a>
                         <a class="chip" href="https://github.com/SSX360/matrixscroll/tree/main/tests">Tests and policy docs</a>
+                        <a class="chip" href="https://ssx360.com/">SSX360 control plane</a>
                     </div>
                 </div>
 
@@ -510,6 +548,18 @@
                     </div>
                     <div class="proof-foot">● ok: true / actor: agent / tool: agent-runner</div>
                 </aside>
+            </div>
+        </section>
+
+        <section class="control-plane">
+            <div class="shell">
+                <div class="control-plane-card">
+                    <div>
+                        <h2>Hosted control plane</h2>
+                        <p><strong>SSX360</strong> is the hosted control plane for Digital Rain — identity, billing, device activation, policy registry, and audit history. Matrix Scroll handles the open protocol; SSX360 runs the account layer teams use to deploy provenance at scale.</p>
+                    </div>
+                    <a class="button teal" href="https://ssx360.com/">Open ssx360.com ↗</a>
+                </div>
             </div>
         </section>
 
@@ -541,7 +591,7 @@
     <footer class="footer">
         <div class="shell">
             <span>Matrix Scroll | signed commit-time provenance for agent-assisted Git</span>
-            <span><a href="/docs/">Docs</a> | <a href="/verify/">Verify</a> | <a href="/compare/">Compare</a> | <a href="/device/">Device preview</a></span>
+            <span><a href="https://ssx360.com/">SSX360</a> | <a href="/docs/">Docs</a> | <a href="/verify/">Verify</a> | <a href="/compare/">Compare</a> | <a href="/device/">Device preview</a></span>
         </div>
     </footer>
 </body>
