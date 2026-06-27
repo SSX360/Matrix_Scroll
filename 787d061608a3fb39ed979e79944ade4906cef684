@@ -1,0 +1,39 @@
+{
+  "commit": {
+    "actual_id": "787d061608a3fb39ed979e79944ade4906cef684",
+    "author": {
+      "date": "1782551104 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "committer": {
+      "date": "1782551104 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "message": "site: verifier trust copy, favicon, and MCP example config.\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n",
+    "parents": [
+      "0ba0bc64d7e7f7cb6e55f69f3ecbbb87dea7359a"
+    ],
+    "tree": "e630364b876acbb404b8d101a502bbe49a14981f"
+  },
+  "provenance": {
+    "actor_type": "human",
+    "tool": "git-cli"
+  },
+  "repository": {
+    "branch": "master",
+    "name": "Matrix_Scroll",
+    "remote_url": "https://github.com/SSX360/Matrix_Scroll.git"
+  },
+  "schema": "matrixscroll.commit_envelope.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-27T09:05:04Z",
+    "value": "mvRL5IZMFq3kzS596IsuMoNsKThSqmN20jV2t59VeJQzWawCvkyFmD47DFqXZQzdNfkKNwBqEWlyWfRatZODCA=="
+  }
+}
