@@ -1,0 +1,39 @@
+{
+  "commit": {
+    "actual_id": "0ba0bc64d7e7f7cb6e55f69f3ecbbb87dea7359a",
+    "author": {
+      "date": "1782550247 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "committer": {
+      "date": "1782550247 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "message": "site: restore MIST editorial homepage with 0.2.6 install block.\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n",
+    "parents": [
+      "f2da5254e3c109f18861cdb3792830b76d0c655e"
+    ],
+    "tree": "d5d6830a76db8e905b8af8826cc82dc7508e1732"
+  },
+  "provenance": {
+    "actor_type": "human",
+    "tool": "git-cli"
+  },
+  "repository": {
+    "branch": "master",
+    "name": "Matrix_Scroll",
+    "remote_url": "https://github.com/SSX360/Matrix_Scroll.git"
+  },
+  "schema": "matrixscroll.commit_envelope.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-27T08:50:48Z",
+    "value": "Q9sy+q/lusVx6SBv5jf72vbRUB7RtbPSwjLYZ+Z9gHkdvCO8t9dZkSOwIrnG8rzuG3eZF/u/Jp9nV9xmofp5DA=="
+  }
+}
