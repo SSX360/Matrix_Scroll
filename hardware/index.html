@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hardware Specifications - Matrix Scroll</title>
+    <meta name="description" content="Explore Matrix Scroll hardware-rooted cryptographic integrations, including Scroll Passes, AP2 Vault Cards, and NXP secure elements.">
+    <link rel="canonical" href="https://matrixscroll.com/hardware/">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <style>
+      /* Page specific styles for Hardware Spec */
+      .hardware-display {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        align-items: center;
+        margin: 40px 0;
+        padding: clamp(20px, 4vw, 40px);
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+      }
+      
+      .telemetry-console {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 24px;
+        font-family: var(--mono);
+        color: #c9d1d9;
+        font-size: 13px;
+        height: 100%;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      
+      .telemetry-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #21262d;
+        padding-bottom: 12px;
+        margin-bottom: 16px;
+      }
+      
+      .telemetry-status {
+        color: #58a6ff;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      
+      .telemetry-dot-blue {
+        width: 6px;
+        height: 6px;
+        background: #58a6ff;
+        border-radius: 50%;
+        box-shadow: 0 0 6px #58a6ff;
+      }
+      
+      .console-line {
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+      
+      .console-prompt {
+        color: #8b949e;
+      }
+      
+      .console-success {
+        color: #56d364;
+      }
+      
+      .console-warn {
+        color: #e3b341;
+      }
+
+      /* Holographic Card Interactive Component */
+      .card-3d-wrapper {
+        perspective: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .holo-card {
+        width: 300px;
+        height: 440px;
+        background: linear-gradient(135deg, #151a5c 0%, #060721 100%);
+        border-radius: 20px;
+        border: 1px solid rgba(147, 197, 253, 0.25);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        position: relative;
+        padding: 24px;
+        color: #fff;
+        font-family: var(--interface);
+        overflow: hidden;
+        transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+        transform-style: preserve-3d;
+        cursor: pointer;
+      }
+      
+      .holo-card:hover {
+        transform: rotateY(15deg) rotateX(5deg);
+        box-shadow: 0 35px 70px -10px rgba(0, 0, 0, 0.4), 0 0 30px rgba(99, 102, 241, 0.2);
+      }
+      
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      
+      .card-kicker {
+        font-size: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      
+      .card-brand {
+        font-size: 15px;
+        font-weight: 700;
+        margin-top: 4px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #fff;
+      }
+      
+      .card-dot-green {
+        width: 6px;
+        height: 6px;
+        background: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 6px #10b981;
+      }
+      
+      .gold-chip {
+        width: 36px;
+        height: 26px;
+        background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+        border-radius: 4px;
+        border: 1px solid #b45309;
+        position: relative;
+      }
+      
+      .gold-chip::after {
+        content: '';
+        position: absolute;
+        inset: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-image: linear-gradient(90deg, transparent 50%, rgba(0,0,0,0.15) 50%);
+        background-size: 6px 100%;
+      }
+      
+      .card-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 180px;
+        position: relative;
+      }
+      
+      .dashed-ring {
+        width: 130px;
+        height: 130px;
+        border: 1px dashed rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: spin-ring 25s linear infinite;
+      }
+      
+      .bolt-icon {
+        font-size: 38px;
+        color: #f97316;
+        filter: drop-shadow(0 0 10px #f97316);
+        position: absolute;
+      }
+      
+      .card-label-center {
+        position: absolute;
+        bottom: 120px;
+        left: 0;
+        right: 0;
+        text-align: center;
+      }
+      
+      .card-title-main {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 2px;
+      }
+      
+      .card-sub-id {
+        font-size: 9px;
+        color: rgba(255, 255, 255, 0.4);
+        font-family: var(--mono);
+      }
+      
+      .card-footer-row {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        right: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      
+      .card-meta-left {
+        font-size: 10px;
+        line-height: 1.5;
+      }
+      
+      .card-meta-left span {
+        display: block;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      
+      .card-meta-left strong {
+        color: #fff;
+      }
+      
+      .pixel-qr {
+        width: 60px;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        border-radius: 6px;
+        padding: 5px;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .pixel-qr::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: #10b981;
+        box-shadow: 0 0 6px #10b981;
+        animation: scan-laser 2.5s ease-in-out infinite;
+      }
+      
+      .qr-dot {
+        background: transparent;
+        border-radius: 1px;
+      }
+      
+      .qr-dot.active {
+        background: #10b981;
+        box-shadow: 0 0 2px #10b981;
+      }
+      
+      @keyframes scan-laser {
+        0%, 100% { top: 0%; }
+        50% { top: 100%; }
+      }
+      
+      @keyframes spin-ring {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Matrix Scroll home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Matrix Scroll</span>
+        </a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ap2/">AP2</a>
+          <a href="/hardware/" aria-current="page">Hardware</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="shell page-hero" style="padding: 48px 0 24px;">
+        <span class="eyebrow">matrixscroll.hardware.v2</span>
+        <h1>Sovereign Trust Networks</h1>
+        <p class="hero-subtitle">IoT &amp; Local AI Spec v2.0 &bull; Secure Edge Custody</p>
+      </section>
+
+      <!-- Interactive Hardware / Telemetry Telemetry Display -->
+      <section class="shell">
+        <h2>Sovereign Local Execution</h2>
+        <p>By marrying NXP-based hardware keys to local computational units, we enable complete security for offline operations. Whether executing offline LLM decisions, translating critical speech, or conducting localized personal home-agent logic, Matrix Scroll anchors every generation with unforgeable physical signatures.</p>
+        
+        <div class="hardware-display">
+          <!-- Card Widget -->
+          <div class="card-3d-wrapper">
+            <div class="holo-card" id="holo-card-widget">
+              <div class="card-header">
+                <div>
+                  <span class="card-kicker">
+                    <span class="card-dot-green"></span>
+                    LOCAL INFRA OK
+                  </span>
+                  <div class="card-brand">Matrix Scroll</div>
+                </div>
+                <div class="gold-chip" aria-label="Secure Cryptographic Chip"></div>
+              </div>
+              
+              <div class="card-center">
+                <div class="dashed-ring"></div>
+                <span class="bolt-icon" aria-hidden="true">&#9889;</span>
+              </div>
+              
+              <div class="card-label-center">
+                <div class="card-title-main">Developer Tier Pass</div>
+                <div class="card-sub-id">ID: SCROLL-DEV-0922</div>
+              </div>
+              
+              <div class="card-footer-row">
+                <div class="card-meta-left">
+                  <span>Algo</span><strong>ED25519</strong>
+                  <span>Status</span><strong>SIGNED</strong>
+                  <span style="font-size: 8px; margin-top: 4px; color: rgba(255,255,255,0.3);">PyPI Verified v0.2.6</span>
+                </div>
+                
+                <div class="pixel-qr" aria-label="Telemetry QR Matrix">
+                  <!-- 6x6 QR layout dots -->
+                  <div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div>
+                  <div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot active"></div><div class="qr-dot"></div>
+                  <div class="qr-dot active"></div><div class="qr-dot active"></div><div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot active"></div>
+                  <div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div>
+                  <div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot active"></div>
+                  <div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div><div class="qr-dot active"></div><div class="qr-dot"></div><div class="qr-dot active"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Console Widget -->
+          <div class="telemetry-console">
+            <div class="telemetry-header">
+              <span class="telemetry-status">
+                <span class="telemetry-dot-blue"></span>
+                SDK Interface Active
+              </span>
+              <a href="/verify/" class="console-success" style="font-size: 11px; text-decoration: underline;">Verify Profile</a>
+            </div>
+            <div>
+              <div class="console-line"><span class="console-prompt">system$</span> matrixscroll status --local</div>
+              <div class="console-line console-success">[READY] NXP SE050 cryptographic hardware bound.</div>
+              <div class="console-line console-warn">[IDLE] Waiting for secure intent event execution...</div>
+              <div class="console-line" style="color: #8b949e;">SE-ID: 0x228FB...</div>
+              <div class="console-line" style="color: #8b949e;">Active Model: The</div>
+            </div>
+            <div style="font-size: 10px; color: #8b949e; text-align: center; border-top: 1px solid #21262d; padding-top: 8px; margin-top: 12px;">
+              Hover/move over card to inspect telemetry
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hardware Ecosystem Options -->
+      <section class="shell content-section">
+        <h2>01. Hardware Ecosystem Options</h2>
+        <div class="pillar-grid">
+          <article class="panel">
+            <span class="panel-kicker">MS-C1-PASS</span>
+            <h3>The Scroll Pass</h3>
+            <p style="font-size: 13.5px; color: var(--soft); font-style: italic;">Holo-Identity Core</p>
+            <p>Transparent frosted PVC card, printed dynamic high-contrast green QR, metallic holographic hot stamp overlays.</p>
+            <div style="margin-top: 16px; font-family: var(--interface); font-size: 12px; font-weight: 600;">
+              Est. COGS: $1.20
+            </div>
+          </article>
+
+          <article class="panel">
+            <span class="panel-kicker">MS-C2-VAULT</span>
+            <h3>AP2 Vault Card</h3>
+            <p style="font-size: 13.5px; color: var(--soft); font-style: italic;">Tap-To-Authorize Agent Payments</p>
+            <p>Semi-transparent thick PET plastic with embedded, custom circular copper antenna coils (visible layout), scratch-resistant double-sided coating, iridescent gradient foil print.</p>
+            <div style="margin-top: 16px; font-family: var(--interface); font-size: 12px; font-weight: 600;">
+              Est. COGS: $2.90
+            </div>
+          </article>
+
+          <article class="panel">
+            <span class="panel-kicker">MS-C3-HARD</span>
+            <h3>SSX360 Crystal Signer</h3>
+            <p style="font-size: 13.5px; color: var(--soft); font-style: italic;">Hardware Root of Trust</p>
+            <p>Frosted composite glass casing, ultra-thin polished steel frame, laser-etched serial numbers, glowing green LED indicator (inside the internal PCB transparent window).</p>
+            <div style="margin-top: 16px; font-family: var(--interface); font-size: 12px; font-weight: 600;">
+              Est. COGS: $13.50
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Product Specs & Integration Logic -->
+      <section class="shell content-section">
+        <h2>02. Product Specs &amp; Integration Logic</h2>
+        <div class="doc-callout" style="background: var(--panel);">
+          <div class="details-list" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+            <div class="detail-item">
+              <strong>MODEL-ID / Selected Hardware</strong>
+              <span>MODEL-ID: MS-C1-PASS / The Scroll Pass (Holo-Identity Core)</span>
+            </div>
+            <div class="detail-item">
+              <strong>Target Production COGS</strong>
+              <span>$1.20 per unit</span>
+            </div>
+            <div class="detail-item">
+              <strong>Form-Factor Composition</strong>
+              <span>Transparent frosted PVC card, printed dynamic high-contrast green QR, metallic holographic hot stamp overlays.</span>
+            </div>
+            <div class="detail-item">
+              <strong>NXP Cryptographic Integration Scheme</strong>
+              <span>Offline cryptographic proof via highly scan-optimized QR. Resolves straight to a verified public key directory or customizable Developer Profile hosted on Matrix Scroll.</span>
+            </div>
+            <div class="detail-item">
+              <strong>Local Rollout Ecosystem Strategy</strong>
+              <span>Sent to top 500 open-source contributors and developers who configure their first local Git-hook signed via the PyPI package. Drives viral exposure and showcases proof-of-identity on X / GitHub.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive Manifest Integrity Chain -->
+      <section class="shell content-section">
+        <h2>03. Interactive Manifest Integrity Chain</h2>
+        <p>How the Matrix Scroll offline loop mirrors our core Git Hook process to ensure secure execution:</p>
+        
+        <div class="flow-grid">
+          <div class="flow-step">
+            <span class="panel-kicker">Step 1</span>
+            <h3>Input Trigger</h3>
+            <p>Prompt, speech, or smart-home action registered locally on unit.</p>
+          </div>
+          <div class="flow-step">
+            <span class="panel-kicker">Step 2</span>
+            <h3>Manifest Lock</h3>
+            <p>Model input &amp; state hash converted into localized manifest block.</p>
+          </div>
+          <div class="flow-step">
+            <span class="panel-kicker">Step 3</span>
+            <h3>SE-050 Sign</h3>
+            <p>NXP secure element signs cryptographic manifest on-chip.</p>
+          </div>
+          <div class="flow-step">
+            <span class="panel-kicker">Step 4</span>
+            <h3>Trust Audit</h3>
+            <p>Outbound reports or logs carry tamper-proof signature audits.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Capturing the Zero-Trust Edge Market -->
+      <section class="shell content-section">
+        <h2>🎯 Capturing the Zero-Trust Edge Market (Strategic Analysis)</h2>
+        <p>Why adding physical, local-first computational units turns Matrix Scroll into a highly defense-compliant business model.</p>
+        
+        <div class="layers" style="display: flex; flex-direction: column; gap: 24px; margin-top: 24px;">
+          <article class="panel layer">
+            <span class="panel-kicker">A</span>
+            <h3>Sovereign Computational Custody</h3>
+            <p>Enterprises in defense, medicine, and high-finance completely ban public LLM API calls due to data leaks. By moving models to offline edge units and anchoring telemetry outputs using Matrix Scroll signatures, compliance departments get cryptographic guarantees that no unverified data leaves local custody.</p>
+            <p style="font-size: 13.5px; font-weight: 600; color: var(--text);">Target Audience: Government contractors, healthcare networks, corporate executive suites.</p>
+          </article>
+
+          <article class="panel layer">
+            <span class="panel-kicker">B</span>
+            <h3>Zero-Tamper AI Audit Trails</h3>
+            <p>If an autonomous AI assistant makes a critical action (e.g., locking a vault or purchasing local supplies), how do you prove the decision was authenticated? Standard local servers are vulnerable to file system modifications. Housing the private signing keys in a secure NXP SE050 element ensures the AI's operation trail is completely immutable.</p>
+            <p style="font-size: 13.5px; font-weight: 600; color: var(--text);">Target Audience: Automated manufacturing systems, logistical planners, agentic-payment nodes.</p>
+          </article>
+
+          <article class="panel layer">
+            <span class="panel-kicker">C</span>
+            <h3>Physical-First Subscription Drivers</h3>
+            <p>SaaS subscription companies face heavy attrition. Physical units sitting on desks act as daily, permanent reminders of the product ecosystem. When high-value developers or managers tap their secure units to run verified offline prompts, the brand affinity turns into an unbreakable lock-in.</p>
+            <p style="font-size: 13.5px; font-weight: 600; color: var(--text);">Economic Impact: Extends user lifetime value (LTV) from 18 months to over 5 years.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Unit Economics Table -->
+      <section class="shell content-section" style="margin-bottom: 80px;">
+        <h2>Full Hardware Suite Unit Economics</h2>
+        <p>Estimations based on specialized manufacturing batches (1k - 5k runs)</p>
+        
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Hardware Unit</th>
+                <th>Category</th>
+                <th>Est. COGS</th>
+                <th>Suggested Retail / Bundle</th>
+                <th>Core Verification Value</th>
+                <th>Target Margin (Direct)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>The Scroll Pass (Holo-Identity Core)</strong></td>
+                <td>Secure Card</td>
+                <td>$1.20</td>
+                <td>$19.00 / mo</td>
+                <td>Home Assistant Sandbox</td>
+                <td>High Margin Hook LTV</td>
+              </tr>
+              <tr>
+                <td><strong>AP2 Vault Card (Tap-To-Authorize Agent Payments)</strong></td>
+                <td>Secure Card</td>
+                <td>$2.90</td>
+                <td>$29.00</td>
+                <td>Home Assistant Sandbox</td>
+                <td>High Margin Hook LTV</td>
+              </tr>
+              <tr>
+                <td><strong>SSX360 Crystal Signer (Hardware Root of Trust)</strong></td>
+                <td>Secure Card</td>
+                <td>$13.50</td>
+                <td>$99.00</td>
+                <td>Home Assistant Sandbox</td>
+                <td>High Margin Hook LTV</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Matrix Scroll</span>
+          </a>
+          <p>Open protocol for signed agent-assisted Git commits. Matrix Scroll Hosted Authority is the trust mapping issuer for keys and profiles.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+        </div>
+        <div>
+          <h2>Protocol</h2>
+          <a href="/spec/">Spec</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ap2/">AP2</a>
+          <a href="/hardware/">Hardware Spec</a>
+          <a href="/ecosystem/">Ecosystem</a>
+        </div>
+        <div>
+          <h2>Resources</h2>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/compare/">Compare</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Mousemove 3D Hover Tilt Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const card = document.getElementById("holo-card-widget");
+        if (card) {
+          card.addEventListener("mousemove", (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x position inside element
+            const y = e.clientY - rect.top;  // y position inside element
+            
+            // Normalize coordinates between -1 and 1
+            const normalizedX = (x / rect.width) * 2 - 1;
+            const normalizedY = (y / rect.height) * 2 - 1;
+            
+            // Calculate rotation degrees (max 18 degrees rotation)
+            const rotateY = normalizedX * 18;
+            const rotateX = -normalizedY * 18;
+            
+            card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.02)`;
+          });
+          
+          card.addEventListener("mouseleave", () => {
+            card.style.transform = "rotateY(0deg) rotateX(0deg) scale(1)";
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
