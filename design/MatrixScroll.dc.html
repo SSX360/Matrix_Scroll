@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..500;1,6..72,200..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#d7dbd4}
+  ::selection{background:rgba(92,122,105,0.28)}
+  @keyframes ms-fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes ms-scrollcue{0%{transform:translateY(0);opacity:0.2}50%{opacity:1}100%{transform:translateY(8px);opacity:0.2}}
+  a{color:inherit;text-decoration:none}
+</style>
+</helmet>
+<div style="{{ themeStyle }}">
+<div style="min-height:100vh;background:var(--bg,#d7dbd4);color:var(--ink,#2b312d);font-family:Newsreader,Georgia,serif;font-weight:300;-webkit-font-smoothing:antialiased;transition:background 0.6s ease,color 0.6s ease;position:relative">
+
+  <!-- ====================== TOP BAR ====================== -->
+  <header style="position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(24px,5vw,64px);backdrop-filter:blur(6px);background:linear-gradient(var(--bg,#d7dbd4),transparent 180%)">
+    <a href="#top" style="display:flex;align-items:center;gap:12px">
+      <span style="display:grid;grid-template-columns:repeat(3,5px);grid-auto-rows:5px;gap:2px">
+        <i style="background:var(--ink);opacity:.9"></i><i style="background:var(--ink);opacity:.35"></i><i style="background:var(--ink);opacity:.9"></i>
+        <i style="background:var(--ink);opacity:.35"></i><i style="background:var(--ink);opacity:.9"></i><i style="background:var(--ink);opacity:.35"></i>
+        <i style="background:var(--ink);opacity:.9"></i><i style="background:var(--ink);opacity:.35"></i><i style="background:var(--ink);opacity:.9"></i>
+      </span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.34em;font-weight:500">MATRIX&thinsp;/&thinsp;SCROLL</span>
+    </a>
+    <nav style="display:flex;align-items:center;gap:clamp(18px,3vw,40px);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em">
+      <span style="display:flex;gap:14px"><a style="opacity:1">EN</a><a style="opacity:.4">JA</a></span>
+      <a onClick="{{ toggleMenu }}" style="cursor:pointer;display:flex;align-items:center;gap:8px"><span style="width:5px;height:5px;border-radius:50%;background:var(--acc)"></span>MENU</a>
+    </nav>
+  </header>
+
+  <!-- ====================== HERO ====================== -->
+  <section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 clamp(24px,7vw,96px)">
+    <!-- atmospheric fog (theme-agnostic light bloom + dark vignette over bg) -->
+    <div style="position:absolute;inset:0;background:radial-gradient(120% 90% at 8% 12%,rgba(255,255,255,0.42),transparent 46%),radial-gradient(90% 70% at 78% 96%,rgba(0,0,0,0.20),transparent 60%),radial-gradient(140% 120% at 50% 120%,rgba(0,0,0,0.16),transparent 55%)"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(60% 40% at 30% 70%,rgba(255,255,255,0.10),transparent 70%),radial-gradient(50% 36% at 70% 40%,rgba(255,255,255,0.08),transparent 70%);mix-blend-mode:soft-light"></div>
+    <div style="position:absolute;inset:0;opacity:{{ grainOpacity }};mix-blend-mode:overlay;pointer-events:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;)"></div>
+    <div style="position:absolute;inset:0;box-shadow:inset 0 0 200px 40px rgba(0,0,0,0.10)"></div>
+
+    <div style="position:relative;max-width:1100px;animation:ms-fade 1.2s ease both">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.32em;color:var(--mut);margin-bottom:34px;text-transform:uppercase">Signed commit-time provenance &nbsp;·&nbsp; for agent-assisted git</div>
+      <h1 style="font-size:clamp(40px,7.4vw,108px);line-height:1.02;font-weight:200;letter-spacing:-0.01em;text-wrap:balance">{{ heroLine }}</h1>
+    </div>
+
+    <!-- hero chrome -->
+    <div style="position:absolute;left:clamp(24px,7vw,96px);right:clamp(24px,7vw,96px);bottom:34px;display:flex;align-items:flex-end;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--mut)">
+      <span>©2026</span>
+      <div style="display:flex;gap:clamp(20px,4vw,56px)">
+        <span><b data-clock="gst" style="color:var(--ink);font-weight:500">00:00:00</b> &nbsp;GST · DUBAI UAE</span>
+        <span><b data-clock="jst" style="color:var(--ink);font-weight:500">00:00:00</b> &nbsp;JST · TOKYO JPN</span>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <span style="writing-mode:vertical-rl;letter-spacing:0.3em">SCROLL</span>
+        <span style="display:block;width:1px;height:30px;background:linear-gradient(var(--mut),transparent);animation:ms-scrollcue 1.8s ease-in-out infinite"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 01 STATEMENT ====================== -->
+  <section data-screen-label="Statement" style="position:relative;padding:clamp(90px,14vh,180px) clamp(24px,7vw,96px)">
+    <div style="display:flex;gap:18px;align-items:baseline;margin-bottom:46px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--acc)">01</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--mut);text-transform:uppercase">The envelope</span>
+      <span style="flex:1;height:1px;background:var(--ln)"></span>
+    </div>
+    <p style="max-width:980px;font-size:clamp(24px,3.6vw,48px);line-height:1.34;font-weight:200;letter-spacing:-0.005em;text-wrap:pretty">An <span style="font-style:italic">Ed25519 commit envelope</span> records the actor, tool, and scope behind every commit. Anyone verifies it offline — in the CLI, in CI, or in the browser — <span style="color:var(--mut)">with no trust in the editor session that produced it.</span></p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:54px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.16em">
+      <span style="border:1px solid var(--ln);padding:8px 14px">READ-ONLY <span style="color:var(--mut)">BY DEFAULT</span></span>
+      <span style="border:1px solid var(--ln);padding:8px 14px">NO <span style="color:var(--mut)">AUTO-INSTALLS</span></span>
+      <span style="border:1px solid var(--ln);padding:8px 14px">OFFLINE <span style="color:var(--mut)">VERIFIABLE</span></span>
+      <span style="border:1px solid var(--ln);padding:8px 14px">SIGNED <span style="color:var(--mut)">BEFORE MERGE</span></span>
+    </div>
+  </section>
+
+  <!-- ====================== ENVELOPE SPECIMEN ====================== -->
+  <section data-screen-label="Envelope specimen" style="position:relative;padding:0 clamp(24px,7vw,96px) clamp(90px,14vh,180px)">
+    <div style="max-width:860px;margin:0 auto;border:1px solid var(--ln);background:var(--panel,#ccd1c9);position:relative">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 26px;border-bottom:1px solid var(--ln);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.2em;color:var(--mut)">
+        <span>COMMIT ENVELOPE · MATRIXSCROLL.IDENTITY.V1</span>
+        <span style="display:flex;gap:6px"><i style="width:6px;height:6px;border-radius:50%;background:var(--ln)"></i><i style="width:6px;height:6px;border-radius:50%;background:var(--ln)"></i><i style="width:6px;height:6px;border-radius:50%;background:var(--acc)"></i></span>
+      </div>
+      <div style="padding:30px 26px 8px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.1">
+        <sc-for list="{{ envelope }}" as="row" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:110px 1fr;gap:18px;padding:13px 0;border-bottom:1px solid var(--ln);align-items:center">
+            <span style="color:var(--mut);font-size:10.5px;letter-spacing:0.18em">{{ row.k }}</span>
+            <span style="display:flex;align-items:center;gap:12px">{{ row.v }}<sc-if value="{{ row.ok }}" hint-placeholder-val="{{ false }}"><span style="color:var(--acc);font-size:11px;letter-spacing:0.14em;border:1px solid var(--acc);padding:3px 9px;border-radius:2px">✓ VERIFIED</span></sc-if></span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:18px 26px 26px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--mut);letter-spacing:0.04em;line-height:1.6">Verified offline against canonical manifest bytes. No trust in the editor, the host, or the portal.</div>
+    </div>
+  </section>
+
+  <!-- ====================== 02 WHERE IT FITS ====================== -->
+  <section id="fit" data-screen-label="Where it fits" style="position:relative;padding:clamp(90px,14vh,180px) clamp(24px,7vw,96px);background:var(--panel,#ccd1c9);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)">
+    <div style="display:flex;gap:18px;align-items:baseline;margin-bottom:46px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--acc)">02</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--mut);text-transform:uppercase">Where it fits</span>
+      <span style="flex:1;height:1px;background:var(--ln)"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(40px,7vw,110px);align-items:start">
+      <p style="font-size:clamp(24px,3.2vw,42px);line-height:1.32;font-weight:200;text-wrap:pretty">Sigstore and SLSA answer <span style="font-style:italic;color:var(--acc)">what was built in CI.</span> Matrix Scroll answers <span style="font-style:italic;color:var(--acc)">who signed the commit before push.</span> Keep both.</p>
+      <p style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.95;color:var(--mut);letter-spacing:0.02em;padding-top:10px">Scanners and branch protection catch code and policy issues. Build attestations sign outputs later in the chain. Matrix Scroll covers the one gap they leave — cryptographic authorship at commit time, before the merge.</p>
+    </div>
+  </section>
+
+  <!-- ====================== 03 INSTALL ====================== -->
+  <section id="install" data-screen-label="Install" style="position:relative;padding:clamp(90px,14vh,180px) clamp(24px,7vw,96px)">
+    <div style="display:flex;gap:18px;align-items:baseline;margin-bottom:46px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--acc)">03</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--mut);text-transform:uppercase">Install — the agent signs its own commits</span>
+      <span style="flex:1;height:1px;background:var(--ln)"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px);align-items:start">
+      <div>
+        <div style="position:relative;border:1px solid var(--ln);background:var(--panel,#ccd1c9)">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--ln);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--mut)"><span>SHELL</span><a onClick="{{ copyA }}" style="cursor:pointer;letter-spacing:0.16em">{{ copyAlabel }}</a></div>
+          <pre style="margin:0;padding:22px 18px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.9;white-space:pre-wrap"><span style="color:var(--mut)">$ </span>pip install <span style="color:var(--acc)">"matrixscroll[mcp]"</span>
+<span style="color:var(--mut)">$ </span>python -m matrixscroll.mcp</pre>
+        </div>
+        <p style="margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.85;color:var(--mut)">Add the server to Cursor, VS&nbsp;Code, or Claude Desktop. The agent signs its own commits in-loop — provenance verbs only. <a style="color:var(--ink);border-bottom:1px solid var(--ln)">MCP install on GitHub →</a></p>
+      </div>
+      <div>
+        <div style="position:relative;border:1px solid var(--ln);background:var(--panel,#ccd1c9)">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--ln);font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.2em;color:var(--mut)"><span>.GITHUB/WORKFLOWS — GATE IT IN CI</span><a onClick="{{ copyB }}" style="cursor:pointer;letter-spacing:0.16em">{{ copyBlabel }}</a></div>
+          <pre style="margin:0;padding:22px 18px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.85;white-space:pre-wrap">- uses: <span style="color:var(--acc)">SSX360/matrixscroll-verify-action@v1</span>
+  with:
+    head-ref: {{ headRef }}
+    base-ref: {{ baseRef }}
+    source: notes</pre>
+        </div>
+        <p style="margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.85;color:var(--mut)">Scroll Gate verifies the full PR commit range — signed, unsigned, trusted or untrusted actor — and can be required on protected branches. <a style="color:var(--ink);border-bottom:1px solid var(--ln)">The GitHub Action →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== 04 PROOF INDEX ====================== -->
+  <section id="proof" data-screen-label="Proof index" style="position:relative;padding:clamp(90px,14vh,180px) clamp(24px,7vw,96px);background:var(--panel,#ccd1c9);border-top:1px solid var(--ln);border-bottom:1px solid var(--ln)">
+    <div style="display:flex;gap:18px;align-items:baseline;margin-bottom:46px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--acc)">04</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--mut);text-transform:uppercase">Verify the claims yourself</span>
+      <span style="flex:1;height:1px;background:var(--ln)"></span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(40px,7vw,110px)">
+      <sc-for list="{{ proof }}" as="item" hint-placeholder-count="8">
+        <a style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--ln);cursor:pointer" style-hover="padding-left:10px">
+          <span style="font-size:clamp(18px,2vw,24px);font-weight:300">{{ item.t }}</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--mut);white-space:nowrap">{{ item.tag }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ====================== 05 COMPLIANCE ====================== -->
+  <section data-screen-label="Compliance" style="position:relative;padding:clamp(90px,14vh,180px) clamp(24px,7vw,96px)">
+    <div style="display:flex;gap:18px;align-items:baseline;margin-bottom:46px">
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--acc)">05</span>
+      <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.26em;color:var(--mut);text-transform:uppercase">Compliance mapping</span>
+      <span style="flex:1;height:1px;background:var(--ln)"></span>
+    </div>
+    <p style="max-width:980px;font-size:clamp(22px,3vw,40px);line-height:1.36;font-weight:200;text-wrap:pretty">Produces evidence for <span style="font-style:italic">Five Eyes agentic-AI guidance</span> (Apr 2026), <span style="font-style:italic">EU AI Act traceability</span> (Aug 2026), and federal <span style="font-style:italic">SSDF self-attestation</span> — exported as machine-readable conformance vectors.</p>
+  </section>
+
+  <!-- ====================== CTA + FOOTER ====================== -->
+  <section data-screen-label="Footer" style="position:relative;padding:clamp(90px,14vh,170px) clamp(24px,7vw,96px) 40px;background:var(--panel,#ccd1c9);border-top:1px solid var(--ln);overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:{{ grainOpacity }};mix-blend-mode:overlay;pointer-events:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)'/%3E%3C/svg%3E&quot;)"></div>
+    <h2 style="position:relative;font-size:clamp(40px,7vw,104px);line-height:1;font-weight:200;letter-spacing:-0.01em;margin-bottom:48px">Sign the first commit.</h2>
+    <div style="position:relative;display:flex;flex-wrap:wrap;gap:16px;margin-bottom:clamp(70px,12vh,130px)">
+      <a style="display:inline-flex;align-items:center;gap:14px;padding:16px 28px;background:var(--ink);color:var(--bg);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.16em;cursor:pointer" style-hover="opacity:0.86">INSTALL THE MCP →</a>
+      <a style="display:inline-flex;align-items:center;gap:14px;padding:16px 28px;border:1px solid var(--ln);font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.16em;cursor:pointer" style-hover="border-color:var(--ink)">VERIFY A COMMIT →</a>
+    </div>
+    <div style="position:relative;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;color:var(--mut);padding-top:26px;border-top:1px solid var(--ln)">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:500;letter-spacing:0.3em">MATRIX&thinsp;/&thinsp;SCROLL</span>
+        <span>©2026 — SIGNED COMMIT-TIME PROVENANCE</span>
+      </div>
+      <div style="display:flex;gap:clamp(20px,4vw,48px)">
+        <span><b data-clock="gst" style="color:var(--ink);font-weight:500">00:00:00</b> GST · DUBAI</span>
+        <span><b data-clock="jst" style="color:var(--ink);font-weight:500">00:00:00</b> JST · TOKYO</span>
+      </div>
+      <div style="display:flex;gap:22px">
+        <a style="cursor:pointer">SPEC</a><a style="cursor:pointer">WHITEPAPER</a><a style="cursor:pointer">GITHUB</a><a style="cursor:pointer">PyPI</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== THEME SWITCHER ====================== -->
+  <div style="position:fixed;left:clamp(24px,5vw,64px);bottom:26px;z-index:45;display:flex;align-items:center;gap:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.22em;padding:9px 14px;border:1px solid var(--ln);background:var(--bg);backdrop-filter:blur(6px)">
+    <span style="color:var(--mut)">THEME</span>
+    <a onClick="{{ setMist }}" style="cursor:pointer;color:{{ mistColor }}">MIST</a>
+    <span style="color:var(--ln)">/</span>
+    <a onClick="{{ setInk }}" style="cursor:pointer;color:{{ inkColor }}">INK</a>
+  </div>
+
+  <!-- ====================== MENU OVERLAY ====================== -->
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:60;background:var(--bg);animation:ms-fade 0.4s ease both;display:flex;flex-direction:column;padding:clamp(24px,5vw,64px)">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.34em;font-weight:500">MATRIX&thinsp;/&thinsp;SCROLL</span>
+        <a onClick="{{ closeMenu }}" style="cursor:pointer;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.22em">CLOSE ✕</a>
+      </div>
+      <nav style="margin:auto 0;display:flex;flex-direction:column;gap:6px">
+        <sc-for list="{{ menu }}" as="m" hint-placeholder-count="5">
+          <a onClick="{{ closeMenu }}" href="{{ m.href }}" style="display:flex;align-items:baseline;gap:24px;font-size:clamp(40px,8vw,96px);font-weight:200;line-height:1.05;cursor:pointer" style-hover="color:var(--acc)"><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.2em;color:var(--mut)">{{ m.n }}</span>{{ m.t }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </sc-if>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mist&quot;,&quot;ink&quot;],&quot;default&quot;:&quot;mist&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Direction&quot;},&quot;heroLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Know who — or what — wrote every commit.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#5c7a69&quot;,&quot;options&quot;:[&quot;#5c7a69&quot;,&quot;#90b39d&quot;,&quot;#8a7d5c&quot;,&quot;#6e6f78&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Direction&quot;},&quot;grain&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Direction&quot;}}">
+class Component extends DCLogic {
+  state = { theme: null, menuOpen: false, copied: null };
+
+  componentDidMount() {
+    this.tick();
+    this._iv = setInterval(() => this.tick(), 1000);
+  }
+  componentWillUnmount() { clearInterval(this._iv); }
+
+  fmt(offset) {
+    const now = new Date();
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    const d = new Date(utc + offset * 3600000);
+    const p = n => String(n).padStart(2, '0');
+    return p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+  }
+  tick() {
+    const set = (sel, off) => document.querySelectorAll('[data-clock="' + sel + '"]').forEach(el => { el.textContent = this.fmt(off); });
+    set('gst', 4); set('jst', 9);
+  }
+
+  copy(text, id) {
+    try { navigator.clipboard.writeText(text); } catch (e) {}
+    this.setState({ copied: id });
+    setTimeout(() => this.setState(s => (s.copied === id ? { copied: null } : null)), 1300);
+  }
+
+  renderVals() {
+    const theme = this.state.theme || this.props.theme || 'mist';
+    const ink = theme === 'ink';
+    const acc = this.props.accent || (ink ? '#90b39d' : '#5c7a69');
+    const grainOpacity = (this.props.grain === false) ? 0 : (ink ? 0.05 : 0.07);
+
+    const themeStyle = ink ? {
+      '--bg': '#1a1f1c', '--panel': '#21271f', '--ink': '#d9ddd2',
+      '--mut': '#878d83', '--ln': 'rgba(217,221,210,0.13)', '--acc': acc
+    } : {
+      '--bg': '#d7dbd4', '--panel': '#ccd1c9', '--ink': '#2b312d',
+      '--mut': '#717771', '--ln': 'rgba(43,49,45,0.16)', '--acc': acc
+    };
+
+    const muted = ink ? '#878d83' : '#717771';
+    const inked = ink ? '#d9ddd2' : '#2b312d';
+
+    return {
+      themeStyle,
+      grainOpacity,
+      heroLine: this.props.heroLine || 'Know who — or what — wrote every commit.',
+      headRef: '${{ github.event.pull_request.head.sha }}',
+      baseRef: '${{ github.event.pull_request.base.sha }}',
+      menuOpen: this.state.menuOpen,
+      mistColor: theme === 'mist' ? inked : muted,
+      inkColor: theme === 'ink' ? inked : muted,
+      copyAlabel: this.state.copied === 'a' ? 'COPIED' : 'COPY',
+      copyBlabel: this.state.copied === 'b' ? 'COPIED' : 'COPY',
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      setMist: () => this.setState({ theme: 'mist' }),
+      setInk: () => this.setState({ theme: 'ink' }),
+      copyA: () => this.copy('pip install "matrixscroll[mcp]"\npython -m matrixscroll.mcp', 'a'),
+      copyB: () => this.copy('- uses: SSX360/matrixscroll-verify-action@v1', 'b'),
+      envelope: [
+        { k: 'COMMIT', v: 'a3ef6c8  feat: agent-assisted change', ok: false },
+        { k: 'ACTOR', v: 'agent', ok: false },
+        { k: 'TOOL', v: 'agent-runner', ok: false },
+        { k: 'SCOPE', v: 'src/**', ok: false },
+        { k: 'MODE', v: 'emulated — device MS-A3F2-9C81', ok: false },
+        { k: 'ED25519', v: '9f2c4e1a…d7b68b81', ok: true }
+      ],
+      proof: [
+        { t: 'Browser verifier', tag: 'LIVE' },
+        { t: 'Compare vs Sigstore', tag: 'POSITIONING' },
+        { t: 'Specification', tag: 'v1.0' },
+        { t: 'Whitepaper', tag: 'DOCS' },
+        { t: 'Commit envelope schema', tag: 'JSON' },
+        { t: 'Conformance vectors', tag: 'SELF-CERTIFY' },
+        { t: 'Agentic-AI controls matrix', tag: 'MACHINE-READABLE' },
+        { t: 'Source & PyPI', tag: 'APACHE-2.0' }
+      ],
+      menu: [
+        { n: '01', t: 'The envelope', href: '#top' },
+        { n: '02', t: 'Where it fits', href: '#fit' },
+        { n: '03', t: 'Install', href: '#install' },
+        { n: '04', t: 'Proof', href: '#proof' },
+        { n: '05', t: 'Verify a commit', href: '#install' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

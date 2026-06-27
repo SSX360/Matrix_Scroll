@@ -49,7 +49,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
     def test_homepage_carries_provenance_anchors(self):
         homepage = (Path(__file__).resolve().parents[1] / "index.html").read_text(encoding="utf-8")
         for marker in (
-            "Signed proof of who",
+            "Know who",
             "wrote every commit.",
             "Install the MCP",
             "Verify a commit",
