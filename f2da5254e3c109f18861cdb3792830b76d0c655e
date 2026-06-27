@@ -1,0 +1,39 @@
+{
+  "commit": {
+    "actual_id": "f2da5254e3c109f18861cdb3792830b76d0c655e",
+    "author": {
+      "date": "1782525172 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "committer": {
+      "date": "1782525172 -0400",
+      "email": "mission@ssx360.com",
+      "name": "SSX360 Agent"
+    },
+    "message": "site: align MCP install block with quickstart 0.2.6.\n\nPin matrixscroll[mcp] on the homepage, add inline mcp.json copy block, split MCP vs CLI paths on the docs hub, and extend routing tests.\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n",
+    "parents": [
+      "e3d2f677358a4491a66e4472e2491f55cd429758"
+    ],
+    "tree": "fb21eecfd94f7e784fb0d4771120a796d92a939a"
+  },
+  "provenance": {
+    "actor_type": "human",
+    "tool": "git-cli"
+  },
+  "repository": {
+    "branch": "master",
+    "name": "Matrix_Scroll",
+    "remote_url": "https://github.com/SSX360/Matrix_Scroll.git"
+  },
+  "schema": "matrixscroll.commit_envelope.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-27T01:52:52Z",
+    "value": "L/JRj0YmRyY2bNXOUr6HEFZVYlFpnLgjMh6q1hNOAxcnpjf5yjtRo9Al0dKN1+xETuCDQ6wGT+dn5d7NtlYNCw=="
+  }
+}
