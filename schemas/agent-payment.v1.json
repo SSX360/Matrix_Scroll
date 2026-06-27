@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Agent Payment Attestation V1",
+  "type": "object",
+  "required": [
+    "schema",
+    "transaction_id",
+    "amount",
+    "currency",
+    "merchant",
+    "payment_method",
+    "agent_device_id",
+    "timestamp",
+    "signature"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "matrixscroll.agent_payment.v1"
+    },
+    "transaction_id": {
+      "type": "string",
+      "pattern": "^tx_[a-zA-Z0-9]+$"
+    },
+    "amount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3,4}$"
+    },
+    "merchant": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payment_method": {
+      "type": "object",
+      "required": ["type", "identifier_hash"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["virtual_card", "crypto_wallet", "bank_account"]
+        },
+        "identifier_hash": {
+          "type": "string",
+          "pattern": "^[a-fA-F0-9]{64}$"
+        }
+      }
+    },
+    "agent_device_id": {
+      "type": "string",
+      "pattern": "^MS-[0-9A-F]{4}-[0-9A-F]{4}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "object",
+      "required": [
+        "schema",
+        "algorithm",
+        "device_id",
+        "public_key",
+        "mode",
+        "signed_at",
+        "value"
+      ],
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "matrixscroll.signature.v1"
+        },
+        "algorithm": {
+          "type": "string",
+          "const": "ed25519"
+        },
+        "device_id": {
+          "type": "string",
+          "pattern": "^MS-[0-9A-F]{4}-[0-9A-F]{4}$"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["hardware", "emulated"]
+        },
+        "signed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -69,6 +69,27 @@ const SAMPLE_RELEASE_MANIFEST = `{
     "signed_at": "2026-06-19T09:43:35Z",
     "value": "SQPMBxv3MvjlB0lN9SURLoqrQJ4IWzNd62fCOqwSu/fg2S3KCrZ2dsFcUNIkw4iiTwxFSryL7v+fdBpVW0ICCA=="
   }
+}`;const SAMPLE_AGENT_PAYMENT = `{
+  "agent_device_id": "MS-4319-20D5",
+  "amount": 250.0,
+  "currency": "USD",
+  "merchant": "OpenAI",
+  "payment_method": {
+    "identifier_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "type": "virtual_card"
+  },
+  "schema": "matrixscroll.agent_payment.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-27T04:29:41Z",
+    "value": "+dRjYqhW+Bf/1L7Ka0jZzOeS37Wj7iFqCdCnQvE6fK+9W50t9q5E1ZKQWZ5+tPnTarZtaxo/KYPBMCciLxLDDA=="
+  },
+  "timestamp": "2026-06-27T04:29:41Z",
+  "transaction_id": "tx_ok12345"
 }`;
 
 class JsonParser {
@@ -374,6 +395,13 @@ function describeManifest(rootNode) {
       details: [{ label: "Schema", value: "evidence pack" }]
     };
   }
+  if (schema === "matrixscroll.agent_payment.v1") {
+    return {
+      successTitle: "Agent payment attestation verified.",
+      successMessage: "The transaction amount, merchant, and method match the agent signature.",
+      details: [{ label: "Schema", value: "agent payment attestation" }]
+    };
+  }
   return {
     successTitle: "Signature valid.",
     successMessage: "The manifest body matches the embedded Ed25519 signature.",
@@ -456,6 +484,22 @@ async function verifyManifest(root) {
       pushStringDetail(details, "Tool", getField(provenance, "tool"));
     }
     pushStringDetail(details, "Project", getField(manifest, "project"));
+    
+    const manifestSchemaNode = getField(manifest, "schema");
+    const manifestSchema = manifestSchemaNode && manifestSchemaNode.type === "string" ? manifestSchemaNode.value : "";
+    if (manifestSchema === "matrixscroll.agent_payment.v1") {
+      pushStringDetail(details, "Transaction ID", getField(manifest, "transaction_id"));
+      const amountNode = getField(manifest, "amount");
+      const currencyNode = getField(manifest, "currency");
+      if (amountNode && amountNode.type === "number" && currencyNode && currencyNode.type === "string") {
+        details.push({ label: "Amount", value: `${amountNode.value} ${currencyNode.value}` });
+      }
+      pushStringDetail(details, "Merchant", getField(manifest, "merchant"));
+      const methodNode = getField(manifest, "payment_method");
+      if (methodNode && methodNode.type === "object") {
+        pushStringDetail(details, "Payment Method", getField(methodNode, "type"));
+      }
+    }
     details.push(
       { label: "Device", value: deviceId },
       { label: "Mode", value: mode },
@@ -530,10 +574,15 @@ async function verifyManifest(root) {
 }
 
 function getSampleValue(sampleName) {
-  return sampleName === "release" ? SAMPLE_RELEASE_MANIFEST : SAMPLE_COMMIT_ENVELOPE;
+  if (sampleName === "release") return SAMPLE_RELEASE_MANIFEST;
+  if (sampleName === "payment") return SAMPLE_AGENT_PAYMENT;
+  return SAMPLE_COMMIT_ENVELOPE;
 }
 
 function tamperValue(source) {
+  if (source.includes("\"amount\": 250.0")) {
+    return source.replace("\"amount\": 250.0", "\"amount\": 999.99");
+  }
   if (source.includes("\"tool\": \"git-cli\"")) {
     return source.replace("\"tool\": \"git-cli\"", "\"tool\": \"tampered-cli\"");
   }

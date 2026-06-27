@@ -1,0 +1,22 @@
+{
+  "agent_device_id": "MS-4319-20D5",
+  "amount": 999.99,
+  "currency": "USD",
+  "merchant": "OpenAI",
+  "payment_method": {
+    "identifier_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "type": "virtual_card"
+  },
+  "schema": "matrixscroll.agent_payment.v1",
+  "signature": {
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "mode": "emulated",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "schema": "matrixscroll.signature.v1",
+    "signed_at": "2026-06-27T04:29:41Z",
+    "value": "+dRjYqhW+Bf/1L7Ka0jZzOeS37Wj7iFqCdCnQvE6fK+9W50t9q5E1ZKQWZ5+tPnTarZtaxo/KYPBMCciLxLDDA=="
+  },
+  "timestamp": "2026-06-27T04:29:41Z",
+  "transaction_id": "tx_ok12345"
+}

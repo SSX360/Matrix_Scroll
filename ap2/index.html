@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AP2 Agent Payments Trust Layer - Matrix Scroll</title>
+    <meta name="description" content="Authorized Agent Payment (AP2) cryptographic attestation layer for secure autonomous transactions.">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <style>
+      .ap2-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 48px 24px;
+      }
+      .ap2-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+      .ap2-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        background: rgba(99, 102, 241, 0.1);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 16px;
+      }
+      .spec-h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-top: 40px;
+        margin-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
+        color: #fff;
+      }
+      .spec-card {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 24px 0;
+      }
+      .partner-logo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+        text-align: center;
+      }
+      .partner-logo-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Matrix Scroll home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Matrix Scroll</span>
+        </a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ap2/" aria-current="page">AP2</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="ap2-container">
+        <div class="ap2-header">
+          <span class="ap2-badge">Authorized Payment Agent (AP2)</span>
+          <h1 style="font-size: 36px; font-weight: 800; line-height: 1.2; margin-top: 0;">The Cryptographic Trust Layer for Autonomous Agent Payments</h1>
+          <p class="lead" style="margin-top: 16px;">Preventing agent transaction hijacking and establishing human-to-agent delegation rules for 60+ payment network partners.</p>
+        </div>
+
+        <section class="spec-card">
+          <h2 style="margin-top: 0; font-size: 20px; color: #fff;">Why Agent Payments Need a Trust Layer</h2>
+          <p style="font-size: 15px; line-height: 1.6; color: var(--muted); margin-bottom: 0;">
+            When an AI agent initiates a transaction via a virtual credit card or a cryptocurrency wallet, traditional banking rails only see the card token or wallet key. They cannot distinguish between an authorized purchase ordered by the human owner and a hijacked transaction executed by a rogue agent or prompt injection. Matrix Scroll provides the cryptographic attestation linking the specific payment intent to the owner's identity certificate.
+          </p>
+        </section>
+
+        <h2 class="spec-h2">1. The Delegation & Trust Chain</h2>
+        <p style="line-height: 1.6; color: var(--muted);">
+          The AP2 specification operates on a strict chain-of-custody model:
+        </p>
+        <ol style="line-height: 1.8; color: var(--muted); padding-left: 20px;">
+          <li><strong>Identity Certificate (Scroll Pass):</strong> The human owner signs their agent's public key, binding it to a verified profile (e.g. GitHub, Google) via the Hosted Identity Authority.</li>
+          <li><strong>Agent Signature:</strong> The agent signs the specific transaction intent (specifying transaction ID, merchant, amount, currency, and payment card token hash).</li>
+          <li><strong>Verification:</strong> The merchant or payment processor fetches the trust root and verifies that the agent signature is cryptographically valid and chained to an authorized owner.</li>
+        </ol>
+
+        <h2 class="spec-h2">2. Supported Payment Networks</h2>
+        <p style="line-height: 1.6; color: var(--muted);">
+          Our standardized open wire format allows seamless integration across 60+ payment networks and crypto institutions:
+        </p>
+        <div class="partner-logo-grid">
+          <div class="partner-logo-card" style="color: #FF5F00;">Mastercard</div>
+          <div class="partner-logo-card" style="color: #003087;">PayPal</div>
+          <div class="partner-logo-card" style="color: #0070cd;">Amex</div>
+          <div class="partner-logo-card" style="color: #0052FF;">Coinbase</div>
+        </div>
+
+        <h2 class="spec-h2">3. Attestation JSON Schema</h2>
+        <p style="line-height: 1.6; color: var(--muted);">
+          Every AP2 transaction attestation is packaged as a standard `matrixscroll.agent_payment.v1` envelope:
+        </p>
+        <pre style="background: rgba(0,0,0,0.3); border: 1px solid var(--line); padding: 16px; border-radius: 8px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; color: #e2e8f0;"><code>{
+  "schema": "matrixscroll.agent_payment.v1",
+  "transaction_id": "tx_ok12345",
+  "amount": 250.0,
+  "currency": "USD",
+  "merchant": "OpenAI",
+  "payment_method": {
+    "type": "virtual_card",
+    "identifier_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b..."
+  },
+  "agent_device_id": "MS-4319-20D5",
+  "timestamp": "2026-06-27T04:29:41Z",
+  "signature": {
+    "schema": "matrixscroll.signature.v1",
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "public_key": "bsVoWgUYK+NZNcSNIoWj...",
+    "value": "+dRjYqhW+Bf/1L7Ka0jZz..."
+  }
+}</code></pre>
+
+        <h2 class="spec-h2">4. Verifying in the SDK</h2>
+        <pre style="background: rgba(0,0,0,0.3); border: 1px solid var(--line); padding: 16px; border-radius: 8px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; color: #e2e8f0;"><code># Install the SDK
+pip install "matrixscroll>=0.3.0"
+
+# Verify the payment attestation envelope
+matrixscroll verify vectors/valid_agent_payment.json</code></pre>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Matrix Scroll</span>
+          </a>
+          <p>Signed provenance for the agent economy. Secure commit attestation, release evidence verification, and autonomous agent payment authorization (AP2).</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="/verify/">Verifier</a><a href="/ap2/">AP2 Attestation</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

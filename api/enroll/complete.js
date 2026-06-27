@@ -2,12 +2,28 @@ const crypto = require("crypto");
 const { createClient } = require("@supabase/supabase-js");
 const { verifyManifest, canonicalBytes, deviceIdFromPub } = require("../lib/canonical");
 
-// Generate a static mock keypair for simulation mode so verification works locally
+// Initialize static mock keypair for simulation mode so verification works locally and matches the trust root
 let mockKeyPair;
 try {
-  mockKeyPair = crypto.generateKeyPairSync("ed25519");
+  const seed = Buffer.from("VIrbCwzz0bgprbmtSzLBh17FN10BRYiNZty+u6+quwU=", "base64");
+  const pkcs8 = Buffer.concat([
+    Buffer.from("302e020100300506032b657004220420", "hex"),
+    seed
+  ]);
+  const privateKey = crypto.createPrivateKey({
+    key: pkcs8,
+    format: "der",
+    type: "pkcs8"
+  });
+  const publicKey = crypto.createPublicKey(privateKey);
+  mockKeyPair = { privateKey, publicKey };
 } catch (e) {
-  console.warn("Failed to generate mock keypair", e);
+  console.warn("Failed to construct static mock keypair, generating dynamic fallback", e);
+  try {
+    mockKeyPair = crypto.generateKeyPairSync("ed25519");
+  } catch (err) {
+    console.error("Failed to generate fallback mock keypair", err);
+  }
 }
 
 module.exports = async (req, res) => {

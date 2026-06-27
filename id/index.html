@@ -336,21 +336,31 @@
         }
       }
 
+      function escapeHtml(str) {
+        if (typeof str !== "string") return "";
+        return str
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
       function renderProfile(subject, authority) {
-        document.getElementById("prof-name").textContent = subject.display_name;
-        document.getElementById("prof-device-id").textContent = subject.device_id;
-        document.getElementById("prof-pubkey").textContent = subject.public_key;
-        document.getElementById("prof-plan").textContent = subject.plan.toUpperCase();
+        document.getElementById("prof-name").innerHTML = escapeHtml(subject.display_name);
+        document.getElementById("prof-device-id").innerHTML = escapeHtml(subject.device_id);
+        document.getElementById("prof-pubkey").innerHTML = escapeHtml(subject.public_key);
+        document.getElementById("prof-plan").innerHTML = escapeHtml(subject.plan.toUpperCase());
         
         const expDate = new Date(subject.expires_at).toLocaleDateString(undefined, {
           year: 'numeric', month: 'long', day: 'numeric'
         });
-        document.getElementById("prof-expires").textContent = expDate;
-        document.getElementById("prof-issuer").textContent = authority;
+        document.getElementById("prof-expires").innerHTML = escapeHtml(expDate);
+        document.getElementById("prof-issuer").innerHTML = escapeHtml(authority);
 
         const acct = subject.verified_accounts && subject.verified_accounts[0];
         if (acct) {
-          document.getElementById("prof-account").textContent = `${acct.type}:${acct.value}`;
+          document.getElementById("prof-account").innerHTML = escapeHtml(`${acct.type}:${acct.value}`);
           document.getElementById("prof-account").style.display = "inline-flex";
         } else {
           document.getElementById("prof-account").style.display = "none";
