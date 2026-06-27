@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrix Scroll Verifier</title>
+    <meta name="description" content="Verify Matrix Scroll signed commit envelopes and manifests locally in your browser without uploading them.">
+    <link rel="canonical" href="https://matrixscroll.com/verify/">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/verify.js?v=20260622" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/" aria-current="page">Verifier</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <p class="eyebrow">Client-side proof</p>
+        <h1>Verifier</h1>
+        <p class="lead">Paste or drop signed JSON - a commit envelope, release manifest, or evidence pack. Verification runs locally in your browser with the embedded public key and Ed25519 signature. Nothing is uploaded.</p>
+        <p class="small-note">This page matches the 0.2.6 reference SDK and demonstrates the public envelope contract without requiring external enclaves.</p>
+        <div class="button-row">
+          <a class="button primary" href="#verify-tool">Open verifier</a>
+          <a class="button secondary" href="/docs/">Install the SDK</a>
+          <a class="button ghost" href="/spec/">Read the spec</a>
+        </div>
+        <div class="signal-grid" aria-label="Verifier guarantees">
+          <article class="signal-card">
+            <strong>Private by default</strong>
+            <p>The check happens in your browser, so sample documents never leave the page.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Shared contract</strong>
+            <p>The same canonicalization rules match the reference SDK, schemas, and CI verification path.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Three payload types</strong>
+            <p>Commit envelopes, release manifests, and evidence packs all ride the same signature contract.</p>
+          </article>
+        </div>
+        <div class="proof-strip">
+          <a class="proof-link" href="/docs/">Git quickstart</a>
+          <a class="proof-link" href="/mcp/">Matrix Scroll MCP</a>
+          <a class="proof-link" href="/spec/">Protocol Spec</a>
+          <a class="proof-link" href="/compare/">Compare page</a>
+          <a class="proof-link" href="https://pypi.org/project/matrixscroll/0.2.6/" rel="noopener">PyPI provenance</a>
+        </div>
+      </section>
+
+      <section class="shell" style="margin-top: 28px;">
+        <div class="verifier-callout-panel">
+          <div class="verifier-callout-text">
+            <h3>Unverified Issuer? Vouch for your keys.</h3>
+            <p>Matrix Scroll L1 keys verify offline but show as "Unverified" issuers. Attest your signing identity through the <strong>Hosted Identity Authority</strong> to bind your Ed25519 public keys to your organization profile and bypass team CI policy gates.</p>
+          </div>
+          <a class="button primary" href="/authority/">Claim Hosted Identity</a>
+        </div>
+      </section>
+
+      <section id="verify-tool" class="shell verify-layout" data-verifier-root data-empty-title="No document checked yet." data-empty-message="Load a sample or paste signed JSON to verify it locally.">
+        <div class="verify-card">
+          <label for="manifestInput">Signed JSON</label>
+          <div id="dropZone" class="drop-zone" data-drop-zone>Drop signed JSON here, or paste below.</div>
+          <textarea id="manifestInput" data-manifest-input spellcheck="false" autocomplete="off" placeholder="{&#10;  &quot;schema&quot;: &quot;matrixscroll.commit_envelope.v1&quot;,&#10;  &quot;signature&quot;: { ... }&#10;}"></textarea>
+          <div class="verify-actions">
+            <button id="verifyButton" data-verify-button class="button primary" type="button">Verify signature</button>
+            <button id="sampleEnvelopeButton" data-load-sample="envelope" class="button secondary" type="button">Load commit envelope</button>
+            <button id="sampleReleaseButton" data-load-sample="release" class="button ghost" type="button">Load release manifest</button>
+            <button id="tamperButton" data-tamper-button class="button ghost" type="button">Tamper sample</button>
+            <button id="clearButton" data-clear-button class="button ghost" type="button">Clear</button>
+          </div>
+        </div>
+
+        <aside class="result-box" aria-live="polite">
+          <div id="resultStatus" data-result-status class="result-status">Waiting</div>
+          <h2 id="resultTitle" data-result-title>No document checked yet.</h2>
+          <p id="resultMessage" data-result-message>Load a sample or paste signed JSON to verify it locally.</p>
+          <ul id="resultList" data-result-list class="result-list"></ul>
+          <p class="small-note">Mirrors the reference Python contract: sorted keys, ASCII escaping, compact separators, no NaN, and no top-level <code>signature</code> in the signing input.</p>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a><p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.2.6, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p></div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/docs/">SDK quickstart</a><a href="/verify/">Verifier</a></div>
+        
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

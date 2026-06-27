@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/docs/Documentation.md", "destination": "/docs/", "permanent": false },
+    { "source": "/docs/Documentation.html", "destination": "/docs/", "permanent": false },
+    { "source": "/docs/Whitepaper.md", "destination": "https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md", "permanent": false }
+  ]
+}

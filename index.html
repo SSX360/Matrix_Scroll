@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrix Scroll - Prove who or what made the commit</title>
+    <meta name="description" content="Prove who or what produced a code change with signed commit envelopes that verify offline, in CI, and in the browser.">
+    <link rel="canonical" href="https://matrixscroll.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Matrix Scroll">
+    <meta property="og:url" content="https://matrixscroll.com/">
+    <meta property="og:title" content="Matrix Scroll - Prove who or what made the commit">
+    <meta property="og:description" content="Signed commit provenance for humans, agents, and CI with offline verification and browser proof.">
+    <meta property="og:image" content="https://matrixscroll.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrix Scroll - Prove who or what made the commit">
+    <meta name="twitter:description" content="Signed commit provenance for humans, agents, and CI with offline verification and browser proof.">
+    <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/verify.js?v=20260622" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Matrix Scroll home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Matrix Scroll</span>
+        </a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero shell">
+        <div class="hero-copy">
+          <p class="eyebrow">matrixscroll.identity.v1</p>
+          <h1>Attest who or what made the commit.</h1>
+          <p class="hero-subtitle">Signed commit provenance for humans, agents, and CI.</p>
+          <p class="lead">
+            Matrix Scroll attaches a signed envelope to each Git commit so reviewers can verify developer and agent signatures offline, in CI, or in the browser long after the IDE session is gone.
+          </p>
+          <div class="button-row" aria-label="Primary actions">
+            <a class="button primary" href="/mcp/">Get the MCP Server</a>
+            <a class="button secondary" href="/docs/">Start free &mdash; pip install</a>
+            <a class="button ghost" href="/verify/">Verifier</a>
+          </div>
+          <div class="evidence-grid" aria-label="Public proof">
+            <a class="evidence-link" href="https://pypi.org/project/matrixscroll/0.2.6/" rel="noopener">
+              <strong>PyPI 0.2.6</strong>
+              <span>Reference SDK and package provenance are public right now.</span>
+            </a>
+            <a class="evidence-link" href="https://github.com/SSX360/matrixscroll/tree/main/vectors" rel="noopener">
+              <strong>Conformance vectors</strong>
+              <span>Published test vectors make the signature contract auditable.</span>
+            </a>
+            <a class="evidence-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">
+              <strong>Live GitHub Action</strong>
+              <span>Scroll Gate already verifies commit ranges in CI.</span>
+            </a>
+            <a class="evidence-link" href="/mcp/">
+              <strong>MCP Server</strong>
+              <span>Attest and verify agent commits directly inside Cursor, Claude, or VS Code.</span>
+            </a>
+          </div>
+          <div class="compare-callout">
+            <strong>Why not Sigstore or artifact attestations?</strong>
+            <p>Those tools attest build outputs after CI. Matrix Scroll records metadata and signatures before merge, keeping that attestation verifiable offline. <a href="/compare/">See the comparison.</a></p>
+          </div>
+          <div class="status-grid" aria-label="Honest product status">
+            <article class="status-card">
+              <strong>Shipping now</strong>
+              <p>PyPI 0.2.6, Git post-commit hooks, Scroll Gate PR checks, the browser verifier, and the public MCP server.</p>
+            </article>
+            <article class="status-card">
+              <strong>In progress</strong>
+              <p>Transparency-log integrations, custom verification policies, and additional language SDKs are next.</p>
+            </article>
+            <article class="status-card">
+              <strong>Scope</strong>
+              <p>Matrix Scroll adds provenance. It does not replace IAM, sandboxing, prompt controls, or agent runtimes.</p>
+            </article>
+          </div>
+        </div>
+        <div class="hero-proof-card" data-verifier-root data-autoload="envelope" data-empty-title="No sample loaded yet." data-empty-message="Choose a signed sample to verify it locally.">
+          <div>
+            <p class="panel-kicker">Live proof / client-side</p>
+            <h2>Inspect a real signed sample above the fold.</h2>
+            <p>Load a commit envelope or release manifest and watch the browser verifier validate it without leaving the homepage.</p>
+          </div>
+          <div class="hero-proof-actions">
+            <button class="button secondary" type="button" data-load-sample="envelope">Commit sample</button>
+            <button class="button ghost" type="button" data-load-sample="release">Release manifest</button>
+            <button class="button ghost" type="button" data-tamper-button>Run tamper check</button>
+          </div>
+          <aside class="result-box" aria-live="polite">
+            <div data-result-status class="result-status">Waiting</div>
+            <h2 data-result-title>No document checked yet.</h2>
+            <p data-result-message>Load a sample to verify it locally.</p>
+            <ul data-result-list class="result-list"></ul>
+          </aside>
+          <div class="code-block hero-proof-code" aria-label="Signed sample manifest">
+            <div class="terminal-top">
+              <span>sample manifest</span>
+              <span>ed25519 / browser verify</span>
+            </div>
+            <pre data-manifest-display></pre>
+          </div>
+          <p class="small-note">No upload, no backend call, no IDE dependency. Open the full <a href="/verify/">browser verifier</a> for paste, drag-and-drop, and broader sample testing.</p>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="shell">
+          <div class="section-heading compact">
+            <p class="eyebrow">What you can verify today</p>
+            <h2>Start in software. Keep the proof portable.</h2>
+          </div>
+          <div class="pillar-grid">
+            <article class="panel">
+              <p class="panel-kicker">Shipping today</p>
+              <h3>Install the SDK and verify a real commit.</h3>
+              <p>Matrix Scroll works today as a software-backed provenance layer for developer machines and CI.</p>
+            </article>
+            <article class="panel">
+              <p class="panel-kicker">Public wire format</p>
+              <h3>The byte contract is open.</h3>
+              <p>Canonical JSON rules, schemas, public keys, and conformance vectors are published so anyone can implement or audit the format.</p>
+            </article>
+            <article class="panel">
+              <p class="panel-kicker">CI-ready proof</p>
+              <h3>Bring the proof into every pull request.</h3>
+              <p>Scroll Gate verifies each commit in a PR range before merge, and the browser verifier gives reviewers a zero-install check.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell split-section">
+        <div>
+          <p class="eyebrow">Why it exists</p>
+          <h2>AI code needs provenance that survives the chat window.</h2>
+          <p>
+            Agent-assisted commits often lose their provenance as soon as the
+            chat window closes. Traditional audit trails can show that a
+            workstation pushed a commit, but not whether an agent, model, CI
+            task, or vendor tool produced the change. Matrix Scroll turns that
+            gap into a signed commit envelope anyone can verify offline.
+          </p>
+          <p>
+            The protocol stays intentionally small: canonicalize the manifest,
+            exclude the signature block, sign the bytes, publish the public
+            key, and let anyone verify the result.
+          </p>
+        </div>
+        <div class="manifest-card" aria-label="Example signature block">
+          <pre><code>{
+  "signature": {
+    "schema": "matrixscroll.signature.v1",
+    "algorithm": "ed25519",
+    "device_id": "MS-EAB9-1217",
+    "mode": "emulated",
+    "signed_at": "2026-06-19T14:32:00Z",
+    "public_key": "Vxee...",
+    "value": "SQPM..."
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Protocol flow</p>
+            <h2>From agent output to durable proof.</h2>
+          </div>
+          <div class="flow-grid" aria-label="Matrix Scroll protocol flow">
+            <article class="flow-step">
+              <span>01</span>
+              <h3>IDE or agent</h3>
+              <p>Creates a release, commit, evidence pack, or policy manifest.</p>
+            </article>
+            <article class="flow-step">
+              <span>02</span>
+              <h3>SDK canonicalizes</h3>
+              <p>Sorted keys, compact separators, ASCII escaping, no NaN, and no top-level signature input.</p>
+            </article>
+            <article class="flow-step">
+              <span>03</span>
+              <h3>The active signer signs</h3>
+              <p>Today that means the emulated provider. Later it can support external keyrings and secure enclaves using the same public contract.</p>
+            </article>
+            <article class="flow-step">
+              <span>04</span>
+              <h3>Anyone verifies</h3>
+              <p>Public key, device ID, algorithm, timestamp, and signature travel with the manifest.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Threat Model &amp; Security Assumptions</p>
+            <h2>Attestation limits and L1 software-key assumptions.</h2>
+          </div>
+          <div class="status-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));" aria-label="Security model details">
+            <article class="status-card">
+              <strong>What is defeated</strong>
+              <p>Protects against silent out-of-band commit modification, signature stripping in transit, and unrecorded agent contribution. Once signed, any downstream tampering of the commit message, author, or canonical schema metadata will break the signature verification offline and in CI.</p>
+            </article>
+            <article class="status-card">
+              <strong>What is NOT defeated (L1 Limits)</strong>
+              <p>An emulated software key (L1) proves possession of the private key file, not the physical identity of the actor. A compromised developer machine, a malicious local agent, or an attacker with write access to the filesystem can sign envelopes that verify perfectly. In L1 mode, actor binding is advisory and relies on workstation access controls.</p>
+            </article>
+          </div>
+          <div class="compare-callout" style="margin-top: 24px;">
+            <strong>Trust anchor distribution &amp; key rotation</strong>
+            <p>Organizations establish trust by distributing public keys to verifiers (e.g., CI/CD runners using the <code>--trusted-keys</code> parameter). Revocation, multi-maintainer key rotation, and transparency-log integrations are active areas of protocol development. Matrix Scroll commits represent advisory self-attestations until external trust anchors or transparency logs are integrated.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+        <div class="shell pricing-section">
+          <div class="pricing-header">
+            <p class="eyebrow">Trust Tiers</p>
+            <h2>Simple, developer-first pricing</h2>
+            
+            <div class="billing-toggle-container">
+              <span id="label-monthly" class="active">Monthly</span>
+              <button class="toggle-button" id="billing-toggle" aria-label="Toggle annual billing" aria-checked="false">
+                <span class="toggle-handle"></span>
+              </button>
+              <span id="label-annually">Annually <span class="discount-badge">Save 20%</span></span>
+            </div>
+          </div>
+
+          <div class="pricing-grid">
+            <!-- Freedom -->
+            <article class="pricing-card">
+              <h3>Freedom</h3>
+              <p class="description">Local signing and offline verification tools for individuals.</p>
+              <div class="price-container">
+                <span class="currency">$</span>
+                <span class="amount" id="price-freedom">0</span>
+                <span class="period">/mo</span>
+              </div>
+              <a href="/docs/" class="cta-button secondary">Get Started</a>
+              <ul class="features-list">
+                <li><span class="check-icon">✓</span> Local Ed25519 SDK</li>
+                <li><span class="check-icon">✓</span> Public MCP Server</li>
+                <li><span class="check-icon">✓</span> Unlimited offline verification</li>
+                <li><span class="check-icon">✓</span> Git hooks integration</li>
+              </ul>
+            </article>
+
+            <!-- Basic (Pro/Individual) -->
+            <article class="pricing-card popular">
+              <div class="popular-badge">GTM Focus SKU</div>
+              <h3>Basic</h3>
+              <p class="description">Hosted verified identity authority. Establish trusted proof others rely on.</p>
+              <div class="price-container">
+                <span class="currency">$</span>
+                <span class="amount" id="price-basic">24.99</span>
+                <span class="period" id="period-basic">/mo</span>
+              </div>
+              <a href="/authority/" class="cta-button primary">Claim Hosted Identity</a>
+              <ul class="features-list">
+                <li><span class="check-icon">✓</span> Hosted Issuer Registry</li>
+                <li><span class="check-icon">✓</span> Public-key status lookup</li>
+                <li><span class="check-icon">✓</span> Interactive Verifier badges</li>
+                <li><span class="check-icon">✓</span> Anti-spoofing protection</li>
+                <li><span class="check-icon">✓</span> Priority support</li>
+              </ul>
+            </article>
+
+            <!-- Team -->
+            <article class="pricing-card">
+              <h3>Team</h3>
+              <p class="description">Shared trust anchors and enforcement logs for developer teams.</p>
+              <div class="price-container">
+                <span class="currency">$</span>
+                <span class="amount" id="price-team">40</span>
+                <span class="period" id="period-team">/seat/mo</span>
+              </div>
+              <a href="/authority/" class="cta-button secondary">Start Team Trial</a>
+              <ul class="features-list">
+                <li><span class="check-icon">✓</span> Everything in Basic</li>
+                <li><span class="check-icon">✓</span> Shared authority ledger</li>
+                <li><span class="check-icon">✓</span> Team SSO & SAML</li>
+                <li><span class="check-icon">✓</span> Centralized audit logs</li>
+                <li><span class="check-icon">✓</span> Rollout telemetry dashboards</li>
+              </ul>
+            </article>
+
+            <!-- Enterprise -->
+            <article class="pricing-card">
+              <h3>Enterprise</h3>
+              <p class="description">On-premise enclaves and compliance packs for regulated security.</p>
+              <div class="price-container">
+                <span class="custom-price">Contact</span>
+              </div>
+              <a href="mailto:security@matrixscroll.com?subject=Enterprise%20Enquiry" class="cta-button secondary">Contact Sales</a>
+              <ul class="features-list">
+                <li><span class="check-icon">✓</span> Everything in Team</li>
+                <li><span class="check-icon">✓</span> On-prem authority issuer</li>
+                <li><span class="check-icon">✓</span> Secure enclave & FIPS configs</li>
+                <li><span class="check-icon">✓</span> EU AI Act evidence exporter</li>
+                <li><span class="check-icon">✓</span> Dedicated support SLA</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="why-explainer">
+            <div style="font-size: 24px; color: var(--accent);">💡</div>
+            <div class="explainer-content">
+              <h4>Why the Hosted Identity Authority? ("You can't fork trust")</h4>
+              <p>
+                Anyone can copy the open-source SDK or fork the protocol. However, you cannot fork the hosted issuer registry others rely on. The Hosted Identity Authority cryptographically vouches for your key's binding (linking public keys to verified email domains or GitHub profiles) and handles revocation checks in real-time. Without a trusted authority, signature keys remain advisory and are vulnerable to machine-level spoofing.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell cta-grid">
+        <article class="cta-panel">
+          <p class="eyebrow">Build</p>
+          <h2>Start with the open SDK.</h2>
+          <p>Install hooks, sign one commit, and add a PR gate without changing your existing Git flow.</p>
+          <a class="button primary" href="/docs/">Open quickstart</a>
+        </article>
+        <article class="cta-panel">
+          <p class="eyebrow">Verify</p>
+          <h2>Test a signed manifest in-browser.</h2>
+          <p>The verifier runs client-side. Paste a signed commit envelope, release manifest, or evidence pack and check it locally.</p>
+          <a class="button secondary" href="/verify/">Open verifier</a>
+        </article>
+        <article class="cta-panel">
+          <p class="eyebrow">Spec</p>
+          <h2>Review the open specification.</h2>
+          <p>Read the canonical wire format, JSON schemas, public key derivations, and compliance test vectors on GitHub.</p>
+          <a class="button primary" href="/spec/">Read the spec</a>
+        </article>
+        <article class="cta-panel">
+          <p class="eyebrow">MCP Server</p>
+          <h2>Agent Self-Attestation</h2>
+          <p>Enable AI agents to sign their own commits in-loop. Integrates with Claude Desktop, Cursor, and VS Code to cryptographically attest code changes using Ed25519.</p>
+          <a class="button primary" href="/mcp/">Install MCP Server</a>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Matrix Scroll</span>
+          </a>
+          <p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.2.6, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="/verify/">Verifier</a></div>
+        
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const toggle = document.getElementById("billing-toggle");
+        const monthlyLabel = document.getElementById("label-monthly");
+        const annuallyLabel = document.getElementById("label-annually");
+        
+        const priceBasic = document.getElementById("price-basic");
+        const priceTeam = document.getElementById("price-team");
+        const periodBasic = document.getElementById("period-basic");
+        const periodTeam = document.getElementById("period-team");
+        
+        if (toggle) {
+          toggle.addEventListener("click", () => {
+            const isAnnual = toggle.classList.toggle("active");
+            toggle.setAttribute("aria-checked", isAnnual ? "true" : "false");
+            
+            if (isAnnual) {
+              monthlyLabel.classList.remove("active");
+              annuallyLabel.classList.add("active");
+              
+              priceBasic.textContent = "19.99";
+              priceTeam.textContent = "32";
+              periodBasic.textContent = " /mo (billed annually)";
+              periodTeam.textContent = " /seat/mo (billed annually)";
+            } else {
+              monthlyLabel.classList.add("active");
+              annuallyLabel.classList.remove("active");
+              
+              priceBasic.textContent = "24.99";
+              priceTeam.textContent = "40";
+              periodBasic.textContent = "/mo";
+              periodTeam.textContent = "/seat/mo";
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

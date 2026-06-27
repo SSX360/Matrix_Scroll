@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrix Scroll Docs</title>
+    <meta name="description" content="Install Matrix Scroll, verify signed commit envelopes offline, and add CI checks with the reference SDK.">
+    <link rel="canonical" href="https://matrixscroll.com/docs/">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/" aria-current="page">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <p class="eyebrow">SDK quickstart</p>
+        <h1>Docs</h1>
+        <p class="lead">Install Matrix Scroll, add the Git hooks, and verify signed commit envelopes today. The same format can later support secure enclaves and SSH-agent keychains without changing verification.</p>
+        <div class="button-row">
+          <a class="button primary" href="#install-flow">Install 0.2.6</a>
+          <a class="button secondary" href="/verify/">Try the verifier</a>
+          <a class="button ghost" href="https://github.com/SSX360/matrixscroll" rel="noopener">View GitHub</a>
+        </div>
+        <div class="signal-grid" aria-label="Docs highlights">
+          <article class="signal-card">
+            <strong>Quick start</strong>
+            <p>Install, hook, and verify a signed commit envelope in a few commands.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Public contract</strong>
+            <p>Every example maps back to the same published byte rules and public schemas.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Start with proof</strong>
+            <p>Use the browser verifier and PR gate before you spend time on deeper rollout work.</p>
+          </article>
+        </div>
+        <div class="status-grid" aria-label="Honest product status">
+          <article class="status-card">
+            <strong>Shipping now</strong>
+            <p>PyPI 0.2.6, Git hooks, the browser verifier, and PR-range checks through the GitHub Action.</p>
+          </article>
+          <article class="status-card">
+            <strong>In progress</strong>
+            <p>Transparency-log integrations and custom validation policies for enterprise environments.</p>
+          </article>
+          <article class="status-card">
+            <strong>Scope</strong>
+            <p>Matrix Scroll adds commit provenance. It does not replace IAM, sandboxing, or build attestations.</p>
+          </article>
+        </div>
+        <div class="proof-strip">
+          <a class="proof-link" href="/verify/">Browser verifier</a>
+          <a class="proof-link" href="/mcp/">Matrix Scroll MCP</a>
+          <a class="proof-link" href="/compare/">Compare page</a>
+          <a class="proof-link" href="https://pypi.org/project/matrixscroll/0.2.6/" rel="noopener">PyPI provenance</a>
+          <a class="proof-link" href="https://github.com/SSX360/matrixscroll/tree/main/vectors" rel="noopener">Conformance vectors</a>
+          <a class="proof-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">GitHub Action</a>
+          <a class="proof-link" href="https://github.com/SSX360/matrixscroll/blob/main/docs/AGENTIC_AI_SECURITY.md" rel="noopener">Tests and policy docs</a>
+        </div>
+      </section>
+
+      <section id="install-flow" class="content-section shell">
+        <div class="interface-grid">
+          <div class="code-block">
+            <div class="terminal-top"><span>install</span><span>v0.2.6</span></div>
+            <pre><code>pip install "matrixscroll==0.2.6"
+matrixscroll hook-install
+matrixscroll hook-status</code></pre>
+          </div>
+          <div class="code-block">
+            <div class="terminal-top"><span>agent commit</span><span>post-commit hook</span></div>
+            <pre><code>export MATRIXSCROLL_ACTOR_TYPE=agent
+export MATRIXSCROLL_TOOL=agent-runner
+git commit -m "feat: agent change"
+matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
+          </div>
+          <div class="code-block">
+            <div class="terminal-top"><span>CI gate</span><span>v0.2.6</span></div>
+            <pre><code>- uses: SSX360/matrixscroll-verify-action@v1
+  with:
+    matrixscroll-version: "0.2.6"
+    require-mode: emulated</code></pre>
+          </div>
+        </div>
+        <p class="small-note">Hooks default to warn mode; set <code>"enforce": true</code> in <code>.git/matrixscroll/config.json</code> to block failed signing. Windows support landed in <strong>0.2.1</strong>; the public examples on this page pin <strong>0.2.6</strong>. Source of truth: <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>, <a href="https://github.com/SSX360/matrixscroll/blob/main/SPEC.md" rel="noopener">SPEC.md</a>, <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md" rel="noopener">whitepaper</a>.</p>
+
+        <div class="compare-callout" style="margin-top: 32px; border-color: rgba(99,102,241,0.24); background: rgba(99,102,241,0.025);">
+          <strong>Threat Model &amp; L1 Security Limits</strong>
+          <p>
+            Matrix Scroll L1 software mode proves <em>possession</em> of the private signing seed file, not the verified physical identity of the human developer. A compromised machine or an attacker with write access to your local filesystem can sign envelopes that verify successfully in CI. Actor binding under emulated mode remains advisory. For the full specification of cryptographic assumptions, see <a href="/docs/Whitepaper.html">the whitepaper</a>.
+          </p>
+        </div>
+
+        <div class="section-heading compact resource-grid">
+          <p class="eyebrow">Resources</p>
+          <h2>Read the proof before you roll it out.</h2>
+        </div>
+        <div class="pillar-grid">
+          <article class="panel">
+            <p class="panel-kicker">Tutorial</p>
+            <h3>Add commit provenance to a repo in 5 minutes.</h3>
+            <p>The shortest path from installation to a verifiable commit envelope in a real repository.</p>
+            <a class="button ghost" href="https://github.com/SSX360/matrixscroll/blob/main/docs/FIVE_MINUTES.md" rel="noopener">Open guide</a>
+          </article>
+          <article class="panel">
+            <p class="panel-kicker">Comparison</p>
+            <h3>Commit-time proof vs artifact-time proof.</h3>
+            <p>See exactly where Matrix Scroll fits alongside Sigstore, GitHub attestations, and SLSA.</p>
+            <a class="button ghost" href="https://github.com/SSX360/matrixscroll/blob/main/docs/COMMIT_TIME_VS_ARTIFACT_TIME.md" rel="noopener">Read comparison</a>
+          </article>
+          <article class="panel">
+            <p class="panel-kicker">Adopter kit</p>
+            <h3>Run a small pilot without changing your workflow.</h3>
+            <p>One repository, one PR gate, and one clear success metric for teams evaluating the SDK.</p>
+            <a class="button ghost" href="https://github.com/SSX360/matrixscroll/blob/main/docs/ADOPTER_KIT.md" rel="noopener">Open adopter kit</a>
+          </article>
+          <article class="panel">
+            <p class="panel-kicker">Matrix Scroll MCP</p>
+            <h3>Use the public MCP with the SDK.</h3>
+            <p>Install the MCP in Cursor, VS Code, or Claude Desktop to audit proof surfaces, preview editor integration safely, and generate a public rollout plan around the SDK.</p>
+            <a class="button ghost" href="/mcp/">MCP guide</a>
+          </article>
+          <article class="panel">
+            <p class="panel-kicker">Roadmap</p>
+            <h3>Track the rollout milestones.</h3>
+            <p>Stabilization, first adopter proof, and the next protocol integration phases in our roadmap.</p>
+            <a class="button ghost" href="/roadmap/">See the rollout phases</a>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a><p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.2.6, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p></div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/docs/">SDK quickstart</a><a href="/verify/">Verifier</a></div>
+        
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

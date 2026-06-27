@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrix Scroll MCP - Agent Self-Attestation</title>
+    <meta name="description" content="Enable AI agents to cryptographically sign their own commits in-loop inside Cursor, VS Code, and Claude Desktop.">
+    <link rel="canonical" href="https://matrixscroll.com/mcp/">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <style>
+      .terminal-mockup {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+        font-family: 'Courier New', Courier, monospace;
+        margin: 40px auto;
+        max-width: 800px;
+        text-align: left;
+      }
+      .terminal-header {
+        background: #161b22;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #30363d;
+      }
+      .terminal-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 8px;
+        display: inline-block;
+      }
+      .terminal-dot.red { background: #ff5f56; }
+      .terminal-dot.yellow { background: #ffbd2e; }
+      .terminal-dot.green { background: #27c93f; }
+      .terminal-title {
+        color: #8b949e;
+        font-size: 13px;
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: bold;
+      }
+      .terminal-body {
+        padding: 20px;
+        color: #c9d1d9;
+        font-size: 14px;
+        line-height: 1.6;
+        min-height: 380px;
+        max-height: 500px;
+        overflow-y: auto;
+        background: #0d1117;
+      }
+      .terminal-line {
+        margin-bottom: 14px;
+      }
+      .command-line {
+        color: #58a6ff;
+      }
+      .command-line .prompt {
+        color: #ff7b72;
+        font-weight: bold;
+        margin-right: 8px;
+      }
+      .output-line {
+        color: #c9d1d9;
+      }
+      .output-line pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+        font-family: inherit;
+        color: #79c0ff;
+      }
+      .output-line .success-tag {
+        color: #3fb950;
+        font-weight: bold;
+      }
+      .tool-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin: 40px 0;
+      }
+      .tool-card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 8px;
+        padding: 24px;
+        text-align: left;
+      }
+      .tool-card h3 {
+        margin-top: 0;
+        color: #58a6ff;
+        font-family: monospace;
+      }
+      .tool-card p {
+        color: #8b949e;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 0;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const terminal = document.getElementById("terminal-content");
+        const steps = [
+          { type: "input", text: "claude-code: edit app.py && git add app.py" },
+          { type: "output", text: "[+] Staged changes in app.py (feat: add Ed25519 signing)" },
+          { type: "input", text: "claude-code: call_mcp_tool(\"create_envelope\", {workspace: \".\", actor: \"agent\", tool: \"claude-code\"})" },
+          { type: "output", text: "{\n  \"ok\": true,\n  \"path\": \".git/matrixscroll/envelopes/de573e8...json\",\n  \"envelope\": {\n    \"schema\": \"matrixscroll.commit_envelope.v1\",\n    \"provenance\": {\n      \"actor_type\": \"agent\",\n      \"tool\": \"claude-code\"\n    },\n    \"signature\": {\n      \"algorithm\": \"ed25519\",\n      \"public_key\": \"Vxee91mK...\"\n    }\n  }\n}" },
+          { type: "input", text: "git commit -m \"feat: add Ed25519 signing\"" },
+          { type: "output", text: "[master de573e8] feat: add Ed25519 signing\n 1 file changed, 10 insertions(+)" },
+          { type: "input", text: "scroll-gate: verify_pr_range(base=\"main\", head=\"HEAD\")" },
+          { type: "output", text: "{\n  \"ok\": true,\n  \"total\": 1,\n  \"verified_count\": 1,\n  \"agent_count\": 1,\n  \"human_count\": 0,\n  \"modes\": [\"emulated\"]\n}\n\n<span class=\"success-tag\">[SUCCESS] PR Range self-attestation verified offline!</span>" }
+        ];
+
+        let stepIdx = 0;
+
+        function runTerminal() {
+          terminal.innerHTML = "";
+          stepIdx = 0;
+          executeStep();
+        }
+
+        function executeStep() {
+          if (stepIdx >= steps.length) {
+            setTimeout(runTerminal, 6000); // Loop restart
+            return;
+          }
+
+          const step = steps[stepIdx];
+          const line = document.createElement("div");
+          line.className = step.type === "input" ? "terminal-line command-line" : "terminal-line output-line";
+          terminal.appendChild(line);
+
+          if (step.type === "input") {
+            let charIdx = 0;
+            line.innerHTML = `<span class="prompt">$</span>`;
+            const textNode = document.createElement("span");
+            line.appendChild(textNode);
+
+            function typeChar() {
+              if (charIdx < step.text.length) {
+                textNode.textContent += step.text[charIdx];
+                charIdx++;
+                setTimeout(typeChar, 25);
+              } else {
+                stepIdx++;
+                setTimeout(executeStep, 800);
+              }
+            }
+            typeChar();
+          } else {
+            line.innerHTML = `<pre>${step.text}</pre>`;
+            stepIdx++;
+            setTimeout(executeStep, 1500);
+          }
+          terminal.scrollTop = terminal.scrollHeight;
+        }
+
+        runTerminal();
+      });
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/" aria-current="page">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell" style="text-align: center;">
+        <p class="eyebrow">Model Context Protocol / Agent Provenance</p>
+        <h1>Agent Self-Attestation Surface</h1>
+        <p class="lead">Matrix Scroll MCP provides the cryptographic attestation layer for AI coding assistants. When Cursor or Claude Code performs an engineering task, they can attest their changes directly through the MCP server, generating offline-verifiable signatures before merge.</p>
+        
+        <div class="button-row" style="justify-content: center;">
+          <a class="button primary" href="#setup-blocks">Copy Setup Blocks</a>
+          <a class="button secondary" href="https://github.com/SSX360/matrixscroll" rel="noopener">View GitHub</a>
+          <a class="button ghost" href="/verify/">Open Verifier</a>
+        </div>
+
+        <div class="terminal-mockup">
+          <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">agent-self-attestation-loop</span>
+          </div>
+          <div class="terminal-body" id="terminal-content"></div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="shell">
+          <div class="section-heading">
+            <p class="eyebrow">Exposed Provenance Verbs</p>
+            <h2>6 Core Attestation &amp; Verification Tools</h2>
+          </div>
+          <p class="lead" style="max-width: 800px; margin: 0 auto 30px auto;">We have dropped generic advisors and ecosystem search tools to focus 100% on the core security loop. The server exposes only the following attestation actions:</p>
+          
+          <div class="tool-grid">
+            <article class="tool-card">
+              <h3>create_envelope</h3>
+              <p>Build, sign, and save a cryptographic commit envelope for staged changes or an existing commit in the workspace using Ed25519 (actor=agent).</p>
+            </article>
+            <article class="tool-card">
+              <h3>verify_envelope</h3>
+              <p>Verify the cryptographic signature and integrity of a signed commit envelope for a specific commit SHA in the workspace.</p>
+            </article>
+            <article class="tool-card">
+              <h3>verify_pr_range</h3>
+              <p>Verify every commit envelope in a given PR or commit range (base..head) offline against validation policies.</p>
+            </article>
+            <article class="tool-card">
+              <h3>envelope_publish_notes</h3>
+              <p>Publish local signed commit envelopes to git notes (refs/notes/matrixscroll) for transport and remote verification.</p>
+            </article>
+            <article class="tool-card">
+              <h3>status</h3>
+              <p>Retrieve the active cryptographic identity provider status, device ID, public key, and mode.</p>
+            </article>
+            <article class="tool-card">
+              <h3>audit_export</h3>
+              <p>Export local commit envelopes for a given range in the workspace into a deterministic bundle directory for audit logs.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+        <div class="shell">
+          <div class="verifier-callout-panel" style="margin: 0;">
+            <div class="verifier-callout-text">
+              <h3>Secure Agent Enforce Gates in CI</h3>
+              <p>While the MCP server signs commits locally inside VS Code or Cursor using emulated (L1) keys for free, team repositories require establishing trust. Upgrade to the <strong>Hosted Identity Authority</strong> to link agent-signed commits to verified organizational trust anchors and pass CI PR gates.</p>
+            </div>
+            <a class="button primary" href="/authority/">Vouch for Agent Keys</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="setup-blocks" class="band" style="background: #161b22; border-top: 1px solid #30363d;">
+        <div class="shell">
+          <div class="section-heading compact">
+            <p class="eyebrow">Copyable Setup</p>
+            <h2>Enable Self-Attestation in Your Editor</h2>
+          </div>
+          <p class="lead">Add the following configurations to enable the <code>matrixscroll-mcp</code> server in your workspace or global editor setup.</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px;">
+            <article class="compat-card" style="text-align: left;">
+              <p class="panel-kicker">Cursor</p>
+              <h3><code>.cursor/mcp.json</code></h3>
+              <div class="code-block">
+                <div class="terminal-top"><span>project config</span><span>cursor</span></div>
+                <pre><code>{
+  "mcpServers": {
+    "matrixscroll-mcp": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-m", "matrixscroll.mcp"],
+      "env": {
+        "COPILOT_WORKSPACE": "${workspaceFolder}"
+      }
+    }
+  }
+}</code></pre>
+              </div>
+            </article>
+
+            <article class="compat-card" style="text-align: left;">
+              <p class="panel-kicker">Claude Desktop</p>
+              <h3><code>claude_desktop_config.json</code></h3>
+              <div class="code-block">
+                <div class="terminal-top"><span>global config</span><span>claude desktop</span></div>
+                <pre><code>{
+  "mcpServers": {
+    "matrixscroll-mcp": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-m", "matrixscroll.mcp"],
+      "env": {
+        "COPILOT_WORKSPACE": "/path/to/target-repo"
+      }
+    }
+  }
+}</code></pre>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>Matrix Scroll</span>
+          </a>
+          <p>Open protocol for signed agent-assisted Git commits. Matrix Scroll MCP is the self-attestation surface for agents running in-loop.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a><a href="/ecosystem/">Ecosystem</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

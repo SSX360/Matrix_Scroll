@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Matrix Scroll Spec</title>
+    <meta name="description" content="Matrix Scroll signature and identity specification for signed agent-assisted Git commit manifests and envelopes.">
+    <link rel="canonical" href="https://matrixscroll.com/spec/">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links">
+          <a href="/spec/" aria-current="page">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <p class="eyebrow">Open specification / v1</p>
+        <h1>Spec</h1>
+        <p class="lead">The Matrix Scroll protocol uses a compact JSON signature envelope for agent-assisted Git commit provenance. The full normative spec lives on GitHub; this page is the quick tour.</p>
+        <div class="button-row">
+          <a class="button primary" href="https://github.com/SSX360/matrixscroll/blob/main/SPEC.md" rel="noopener">Read SPEC.md</a>
+          <a class="button secondary" href="/schemas/commit-envelope.v1.json">Open schema</a>
+          <a class="button ghost" href="/verify/">Test the verifier</a>
+        </div>
+        <div class="signal-grid" aria-label="Specification highlights">
+          <article class="signal-card">
+            <strong>Canonical bytes</strong>
+            <p>Sorted keys, ASCII escaping, compact separators, and the top-level signature removed before signing.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Embedded proof</strong>
+            <p>Public key, device ID, mode, timestamp, and signature value travel with the document.</p>
+          </article>
+          <article class="signal-card">
+            <strong>One wire format</strong>
+            <p>The same public contract spans release manifests, commit envelopes, and evidence packs.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section shell">
+        <div class="spec-table" aria-label="Matrix Scroll protocol specification">
+          <div class="spec-row"><strong>Identity schema</strong><span><code>matrixscroll.identity.v1</code></span></div>
+          <div class="spec-row"><strong>Signature schema</strong><span><code>matrixscroll.signature.v1</code></span></div>
+          <div class="spec-row"><strong>Commit envelope schema</strong><span><code>matrixscroll.commit_envelope.v1</code> - <a href="/schemas/commit-envelope.v1.json">JSON schema</a> - <a href="https://github.com/SSX360/matrixscroll/blob/main/schemas/commit-envelope.v1.json" rel="noopener">GitHub</a></span></div>
+          <div class="spec-row"><strong>Release manifest schema</strong><span><a href="/schemas/release-manifest.v1.json">release-manifest.v1.json</a></span></div>
+          <div class="spec-row"><strong>Evidence pack schema</strong><span><a href="/schemas/evidence-pack.v1.json">evidence-pack.v1.json</a></span></div>
+          <div class="spec-row"><strong>Algorithm</strong><span>Ed25519 signatures as defined by RFC 8032.</span></div>
+          <div class="spec-row"><strong>Canonical input</strong><span>JSON object with the top-level <code>signature</code> property excluded before signing.</span></div>
+          <div class="spec-row"><strong>Encoding</strong><span>Sorted object keys, compact separators, ASCII escaping, UTF-8 bytes, and no NaN or Infinity values.</span></div>
+          <div class="spec-row"><strong>Device ID</strong><span><code>MS-XXXX-XXXX</code> derived from <code>SHA-256(public_key)</code>, first eight uppercase hex characters split 4-4.</span></div>
+          <div class="spec-row"><strong>Wire format</strong><span>Embeddable JSON signature block carried inside release, commit, evidence, or vendor manifests.</span></div>
+          <div class="spec-row"><strong>Verifier rule</strong><span>Verify the canonical manifest bytes with the embedded public key and signature value. Key access is never required.</span></div>
+        </div>
+
+        <div class="split-section">
+          <div>
+            <p class="eyebrow">Canonical encoding</p>
+            <h2>The byte contract.</h2>
+            <p>The top-level <code>signature</code> block is excluded, keys are sorted recursively, whitespace is stripped, non-ASCII is escaped with <code>ensure_ascii</code>, NaN and Infinity are rejected with <code>allow_nan=False</code>, compact separators are <code>(",", ":")</code>, and the resulting UTF-8 bytes are signed.</p>
+          </div>
+          <div class="manifest-card">
+            <pre><code>body = {k: v for k, v in payload.items() if k != "signature"}
+json.dumps(
+    body,
+    sort_keys=True,
+    ensure_ascii=True,
+    allow_nan=False,
+    separators=(",", ":"),
+).encode("utf-8")</code></pre>
+          </div>
+        </div>
+
+        <div class="split-section">
+          <div class="manifest-card">
+            <pre><code>"signature": {
+  "schema": "matrixscroll.signature.v1",
+  "algorithm": "ed25519",
+  "device_id": "MS-EAB9-1217",
+  "public_key": "Vxee+i1db9b...",
+  "mode": "emulated",
+  "signed_at": "2026-06-19T09:43:35Z",
+  "value": "SQPMBxv3Mvjl..."
+}</code></pre>
+          </div>
+          <div>
+            <p class="eyebrow">Signature block</p>
+            <h2>Minimum public envelope.</h2>
+            <p>Every verifier should require the signature schema, Ed25519 algorithm, public key, device ID, mode, timestamp, and signature value. Unknown fields may be shown, but they should not be required for verification.</p>
+          </div>
+        </div>
+
+        <div class="section-heading compact">
+          <p class="eyebrow">Compliance levels</p>
+          <h2>One format, multiple roots of trust.</h2>
+        </div>
+        <div class="compat-grid">
+          <article class="compat-card">
+            <span class="badge">L1 Emulated</span>
+            <h3>Software key</h3>
+            <p>File-backed key for local development, demos, tests, and CI. Shipping today as the reference path.</p>
+          </article>
+          <article class="compat-card">
+            <span class="badge">L2 Enclave</span>
+            <h3>Secure enclave</h3>
+            <p>Enclave profile: signing key is generated and managed inside secure enclaves, TPMs, or local keychains. Roadmap, not the default shipping SDK path today.</p>
+          </article>
+          <article class="compat-card">
+            <span class="badge">L3 Attested</span>
+            <h3>Durable attestation</h3>
+            <p>Enclave signing combined with transparency logs and remote identity verification registries. Roadmap.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a><p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.2.6, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p></div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/docs/">SDK quickstart</a><a href="/verify/">Verifier</a></div>
+        
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

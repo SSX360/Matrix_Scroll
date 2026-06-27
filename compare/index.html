@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Compare - Matrix Scroll</title>
+    <meta name="description" content="How Matrix Scroll fits beside Sigstore, GitHub attestations, agentmark, and other adjacent systems for commit-time provenance.">
+    <link rel="canonical" href="https://matrixscroll.com/compare/">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links">
+          <a href="/spec/">Spec</a>
+          <a href="/docs/">Docs</a>
+          <a href="/mcp/">MCP</a>
+          <a href="/docs/Whitepaper.html">Whitepaper</a>
+          <a href="/compare/" aria-current="page">Compare</a>
+          <a href="/verify/">Verifier</a>
+          <a href="/ecosystem/">Ecosystem</a>
+          <a href="/roadmap/">Roadmap</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell">
+        <p class="eyebrow">Honest positioning</p>
+        <h1>How Matrix Scroll compares</h1>
+        <p class="lead">Matrix Scroll signs <strong>Git commit envelopes</strong>: portable attestations of who produced a change, attached to the commit itself. Most adjacent tools are complements, not substitutes.</p>
+        <p class="small-note"><strong>One line:</strong> Sigstore and SLSA answer "what did CI build?" Matrix Scroll answers "who attested this commit before it was pushed?"</p>
+        <div class="button-row">
+          <a class="button primary" href="/verify/">Try the verifier</a>
+          <a class="button secondary" href="/spec/">Read the spec</a>
+          <a class="button ghost" href="/docs/">Install the SDK</a>
+        </div>
+        <div class="signal-grid" aria-label="Comparison anchors">
+          <article class="signal-card">
+            <strong>Commit-time</strong>
+            <p>Matrix Scroll focuses on signatures attached before push, not only on metadata created after CI builds artifacts.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Offline</strong>
+            <p>The verifier path stays local in the CLI or browser instead of assuming a connected trust service.</p>
+          </article>
+          <article class="signal-card">
+            <strong>Open schema</strong>
+            <p>The standard JSON envelope format is designed to be easily parsed and verified by any client.</p>
+          </article>
+        </div>
+        <div class="proof-strip">
+          <a class="proof-link" href="/verify/">Try the verifier</a>
+          <a class="proof-link" href="/mcp/">Matrix Scroll MCP</a>
+          <a class="proof-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">GitHub Action</a>
+          <a class="proof-link" href="https://github.com/SSX360/matrixscroll/blob/main/docs/COMMIT_TIME_VS_ARTIFACT_TIME.md" rel="noopener">Long-form comparison</a>
+        </div>
+      </section>
+
+      <section class="content-section shell prose">
+        <h2>At a glance</h2>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr><th>Tool</th><th>Layer</th><th>Signs commits?</th><th>Agent identity</th><th>Key isolation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Matrix Scroll</strong></td><td>Commit</td><td>Yes</td><td>Yes</td><td>Yes (L1 emulated)</td></tr>
+              <tr><td><a href="https://github.com/karta-oss/karta" rel="noopener">agentmark</a></td><td>Commit + CI</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+              <tr><td><a href="https://github.com/alien-id" rel="noopener">Alien Agent ID</a></td><td>Commit</td><td>Yes</td><td>Yes (owner-bound)</td><td>No</td></tr>
+              <tr><td><a href="https://github.com/forgeproof/forgeproof" rel="noopener">ForgeProof</a></td><td>File-level</td><td>No</td><td>Partial</td><td>No</td></tr>
+              <tr><td><a href="https://docs.sigstore.dev/" rel="noopener">Sigstore / cosign</a></td><td>Artifact</td><td>No</td><td>No</td><td>No</td></tr>
+              <tr><td><a href="https://docs.github.com/en/actions/concepts/security/artifact-attestations" rel="noopener">GitHub attestations</a></td><td>CI artifact</td><td>No</td><td>No</td><td>No</td></tr>
+              <tr><td><a href="https://slsa.dev/" rel="noopener">SLSA</a></td><td>Build framework</td><td>No</td><td>No</td><td>N/A</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Closest commit-level peers</h2>
+        <h3>agentmark</h3>
+        <p><strong>Similar:</strong> Commit-time Ed25519 manifests and a CI verification gate.</p>
+        <p><strong>Different:</strong> Primarily software pipeline keys today. Matrix Scroll offers a structured, open-source schema with standardized verification tools.</p>
+
+        <h3>Alien Agent ID</h3>
+        <p><strong>Similar:</strong> Ed25519 commit signing and public verification.</p>
+        <p><strong>Different:</strong> Identity binding through cloud OIDC / DPoP. Matrix Scroll emphasizes offline verification and a transparent offline signature contract.</p>
+
+        <h3>ForgeProof</h3>
+        <p><strong>Similar:</strong> Provenance for AI-assisted code.</p>
+        <p><strong>Different:</strong> File-level receipts before build, not commit envelopes that travel with every clone.</p>
+
+        <h2>Established supply chain (CI / artifact)</h2>
+        <p>Sigstore, GitHub attestations, SLSA, in-toto, and GUAC secure <strong>build outputs</strong>. They do not record which AI tool authored a line at commit time. Matrix Scroll envelopes can feed those systems instead of competing with them.</p>
+
+        
+
+        <h2>What Matrix Scroll combines</h2>
+        <ol>
+          <li>Commit-time signing instead of only post-build artifact attestation</li>
+          <li>Agent and human actor data in the envelope schema</li>
+          <li>An emulated developer mode with standardized verification</li>
+          <li>Offline verification in the CLI or browser</li>
+        </ol>
+
+        <h2>Honest gaps we are still building</h2>
+        <ul>
+          <li>More public adopter proof</li>
+          <li>Multi-agent commits in one envelope</li>
+          <li>Rekor / transparency log integration</li>
+          
+        </ul>
+
+        <h2>Where Matrix Scroll MCP fits</h2>
+        <p>Matrix Scroll MCP is the public operator layer around this compare story. Teams can install it today in Cursor, VS Code, or Claude Desktop to audit whether the verifier, compare hook, GitHub Action, and security docs are visible, then package a rollout path and safe editor setup without turning it into a generic coding assistant.</p>
+        <div class="proof-strip">
+          <a class="proof-link" href="/mcp/">Open Matrix Scroll MCP</a>
+          <a class="proof-link" href="/mcp/">Self-Attestation loop</a>
+          <a class="proof-link" href="/ecosystem/">See the ecosystem fit</a>
+        </div>
+
+        <p class="small-note">Full comparison with citations: <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/COMPARISON.md" rel="noopener">docs/COMPARISON.md</a> on GitHub. Schemas: <a href="/schemas/commit-envelope.v1.json">commit-envelope.v1.json</a></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a><p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.2.6, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p></div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="/verify/">Verifier</a></div>
+        
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

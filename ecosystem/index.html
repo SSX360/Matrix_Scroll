@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ecosystem - Matrix Scroll</title>
+  <meta name="description" content="How the Matrix Scroll SDK, Git hooks, Scroll Gate action, and MCP server work together as a unified signing ecosystem.">
+  <link rel="canonical" href="https://matrixscroll.com/ecosystem/">
+  <meta property="og:title" content="Ecosystem - Matrix Scroll">
+  <meta property="og:description" content="A unified cryptographic signature ecosystem for developer and agent commit verification.">
+  <meta property="og:image" content="https://matrixscroll.com/og-image.png">
+  <link rel="icon" type="image/png" href="/og-image.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .layers {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .layer {
+      border-left: 3px solid var(--accent);
+      padding-left: 16px;
+    }
+    .layer.sub {
+      border-left-color: var(--accent-2);
+    }
+    .layer h3 {
+      margin: 4px 0 8px;
+      font-size: 19px;
+      font-weight: 700;
+    }
+    .layer ul {
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+    .layer li {
+      margin: 4px 0;
+    }
+    .layer li strong {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+      <div class="nav-links">
+        <a href="/spec/">Spec</a>
+        <a href="/docs/">Docs</a>
+        <a href="/mcp/">MCP</a>
+        <a href="/docs/Whitepaper.html">Whitepaper</a>
+        <a href="/compare/">Compare</a>
+        <a href="/verify/">Verifier</a>
+        <a href="/ecosystem/" aria-current="page">Ecosystem</a>
+        <a href="/roadmap/">Roadmap</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="shell page-hero">
+      <p class="eyebrow">matrixscroll.ecosystem.v1</p>
+      <h1>One signing layer.<br>Unified toolings.</h1>
+      <p class="lead">Matrix Scroll provides the core signing SDK and verification layer. Git hooks, Scroll Gate, the browser verifier, and the MCP server build on top of this layer to ensure secure, verifiable commit provenance from the editor to CI/CD pipelines.</p>
+      <div class="button-row">
+        <a class="button primary" href="/verify/">Verifier</a>
+        <a class="button secondary" href="/roadmap/">View rollout phases</a>
+        <a class="button ghost" href="/mcp/">Open Matrix Scroll MCP</a>
+      </div>
+      <div class="proof-strip">
+        <a class="proof-link" href="/mcp/">Public MCP guide</a>
+        <a class="proof-link" href="/spec/">Protocol Spec</a>
+        <a class="proof-link" href="/verify/">Browser verifier</a>
+        <a class="proof-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">GitHub Action</a>
+      </div>
+      <div class="signal-grid" aria-label="Ecosystem layers">
+        <article class="signal-card">
+          <strong>SDK &amp; Hooks</strong>
+          <p>The core python library and local Git hooks that generate cryptographic envelopes on developer machines.</p>
+        </article>
+        <article class="signal-card">
+          <strong>Scroll Gate CI</strong>
+          <p>The automated GitHub Action that validates commit ranges and enforces signing policies before merge.</p>
+        </article>
+        <article class="signal-card">
+          <strong>MCP Server</strong>
+          <p>The editor operator layer that audits repositories, scaffolds configurations, and builds rollout plans.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell content-section">
+      <div class="layers">
+        <article class="panel layer">
+          <p class="panel-kicker">Core SDK &amp; Wire Protocol</p>
+          <h3>Matrix Scroll SDK</h3>
+          <p>The foundation of the signing system. Writes canonical JSON envelopes, handles public key derivation, and runs fast client-side verification.</p>
+          <ul>
+            <li><strong>matrixscroll</strong> - Core Python package on PyPI (<code>pip install matrixscroll</code>)</li>
+            <li><strong>Git Hooks</strong> - Local post-commit scripts that run the signer on every workspace commit</li>
+            <li><strong>JSON Schemas</strong> - Public schemas defining the commit envelope and signature formats</li>
+          </ul>
+        </article>
+
+        <article class="panel layer sub">
+          <p class="panel-kicker">CI/CD Gate</p>
+          <h3>Scroll Gate CI</h3>
+          <p>Runs as a GitHub Action to enforce repository-wide signing policies. Verifies entire pull request commit ranges before merging.</p>
+          <ul>
+            <li><strong>matrixscroll-verify-action</strong> - Official verification action</li>
+            <li><strong>Verification Policies</strong> - Require specific signing modes (e.g., emulated keys) and list trusted public keys</li>
+          </ul>
+        </article>
+
+        <article class="panel layer sub">
+          <p class="panel-kicker">Editor Integration</p>
+          <h3>Matrix Scroll MCP</h3>
+          <p>Model Context Protocol server for AI code assistants. Scans repositories to assess trust boundaries and configures hooks safely.</p>
+          <ul>
+            <li><strong>Trust Audits</strong> - Identifies unsigned commits and tracks developer-to-agent contribution ratios</li>
+            <li><strong>Integration Scaffolding</strong> - Previews and generates clean editor configuration setups</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="shell">
+        <div class="section-heading compact">
+          <p class="eyebrow">Unified Verification</p>
+          <h2>One signature format. Consistent validation.</h2>
+        </div>
+        <p class="lead">Whether verified locally via the Python CLI, automated inside a GitHub Action, or checked by an auditor in the browser verifier, Matrix Scroll envelopes always validate against the same canonical cryptographic format.</p>
+        <div class="button-row">
+          <a class="button primary" href="/mcp/">See the MCP layer</a>
+          <a class="button secondary" href="/verify/">Try the Verifier</a>
+          <a class="button ghost" href="/roadmap/">See the rollout phases</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <p>Signed provenance for agent-assisted code. One unified cryptographic signature ecosystem from the local workspace to CI/CD pipelines.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+      </div>
+      <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a><a href="/ecosystem/">Ecosystem</a></div>
+      <div><h2>Product</h2><a href="/roadmap/">Roadmap</a></div>
+      <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="https://pypi.org/project/matrixscroll/" rel="noopener">PyPI 0.2.6</a></div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Attestation for Git Commits - Matrix Scroll</title>
+    <meta name="description" content="Signed provenance for agent-assisted Git commits. Public whitepaper for the Matrix Scroll commit envelope protocol.">
+    <link rel="canonical" href="https://matrixscroll.com/docs/Whitepaper.html">
+    <link rel="stylesheet" href="/assets/site.css">
+    <style>
+        :root {
+            --paper: #0c0c0e;
+            --ink: #e4e4e7;
+            --muted: #a1a1aa;
+            --border: #27272a;
+            --accent: #fafafa;
+            --highlight: #6366f1;
+            --mono: "JetBrains Mono", ui-monospace, monospace;
+        }
+        * { box-sizing: border-box; }
+        html { background: #09090b; }
+        body {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 48px 40px 64px;
+            background: var(--paper);
+            color: var(--ink);
+            font: 16px/1.8 Georgia, serif;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        h1, h2, h3, .eyebrow {
+            font-family: "Inter", system-ui, sans-serif;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        h1 {
+            font-size: 2.2rem;
+            line-height: 1.15;
+            margin: 0 0 0.75rem;
+            letter-spacing: -0.03em;
+        }
+        h2 {
+            font-size: 1.4rem;
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: -0.02em;
+        }
+        h3 {
+            font-size: 1.05rem;
+            margin: 1.6rem 0 0.6rem;
+        }
+        p, li { margin: 0 0 1.2rem; }
+        ul, ol { padding-left: 1.4rem; margin-bottom: 1.2rem; }
+        pre {
+            margin: 1.2rem 0 1.4rem;
+            padding: 16px 20px;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #09090b;
+            font: 13px/1.6 var(--mono);
+            color: #f4f4f5;
+        }
+        code {
+            font-family: var(--mono);
+            font-size: 0.9em;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 4px;
+            border-radius: 4px;
+            color: #f4f4f5;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.6rem 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            font-family: "Inter", system-ui, sans-serif;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        a {
+            color: var(--highlight);
+            text-underline-offset: 3px;
+            text-decoration: underline;
+            transition: color 150ms ease;
+        }
+        a:hover {
+            color: #818cf8;
+        }
+        .eyebrow {
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 1.8rem;
+            font-size: 1.1rem;
+        }
+        .summary,
+        .honest-limits {
+            margin: 1.8rem 0;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.01);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            font-style: italic;
+            color: var(--muted);
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            font: 600 0.8rem/1 "Inter", system-ui, sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: var(--highlight);
+        }
+        .footer-note {
+            margin-top: 3rem;
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-align: center;
+        }
+        @media (max-width: 720px) {
+            body {
+                margin: 0;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 32px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="back-link" href="/docs/">Back to docs</a>
+    <div class="eyebrow">Matrix Scroll public whitepaper</div>
+    <h1>Agent Attestation for Git Commits</h1>
+    <p class="subtitle">Signed provenance for agent-assisted Git commits - verify offline, one command.</p>
+
+    <div class="summary">
+        Agentic coding tools can create and push code without a durable, portable record of who acted or which tool produced the change. Matrix Scroll adds a signed commit envelope so teams can verify that provenance offline, in CI, or in a browser without trusting the IDE session that created it.
+    </div>
+
+    <h2>Scope and audience</h2>
+    <p><strong>Audience:</strong> engineers, DevSecOps teams, auditors, and OSS skeptics evaluating agent provenance.</p>
+    <p><strong>Covers:</strong> why Git commits are the first wedge, what ships today, how to try it, and what is still in progress.</p>
+    <p><strong>Does not cover:</strong> IAM replacement, prompt filtering, runtime sandboxing, or broader agent orchestration.</p>
+
+    <h2>What Matrix Scroll is</h2>
+    <p>Matrix Scroll is signed provenance for agent-assisted Git commits. It records a structured commit envelope with actor metadata and signs it with Ed25519 so the envelope can be checked locally, in CI, or in the browser.</p>
+
+    <h2>Why start at the Git commit layer</h2>
+    <table>
+        <thead>
+            <tr><th>Layer</th><th>Question answered</th><th>Why it matters</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Commit time</td><td>Who acted, with which tool, before push?</td><td>Reviewers need evidence before build artifacts exist.</td></tr>
+            <tr><td>Artifact time</td><td>What did CI build and sign?</td><td>Best served by Sigstore, attestations, and SLSA.</td></tr>
+            <tr><td>Runtime</td><td>What code is executing in production?</td><td>Important, but outside Matrix Scroll's current scope.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>Regulatory context</h2>
+    <p>Matrix Scroll links its controls to the joint "Careful Adoption of Agentic AI Services" guidance. See the canonical mapping in <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/AGENTIC_AI_SECURITY.md" rel="noopener">AGENTIC_AI_SECURITY.md</a>.</p>
+
+    <h2>Protocol overview</h2>
+    <ol>
+        <li><strong>Identity</strong>: an Ed25519 keypair plus a derived device identifier.</li>
+        <li><strong>Commit envelope</strong>: canonical JSON with commit data and provenance metadata.</li>
+        <li><strong>Verification</strong>: deterministic canonical bytes, detached signature check, offline verification path.</li>
+    </ol>
+    <p>Canonical references: <a href="https://github.com/SSX360/matrixscroll/blob/main/SPEC.md" rel="noopener">SPEC.md</a> and <a href="https://github.com/SSX360/matrixscroll/blob/main/schemas/commit-envelope.v1.json" rel="noopener">commit-envelope.v1.json</a>.</p>
+
+    <pre><code>agent / IDE / CI
+   |
+   v
+git commit --> post-commit hook signs envelope
+   |
+   v
+.git/matrixscroll/envelopes/&lt;sha&gt;.json
+   |
+   v
+matrixscroll envelope-verify &lt;sha&gt;</code></pre>
+
+    <h2>Implementation</h2>
+    <h3>1. Install</h3>
+    <pre><code>pip install "matrixscroll==0.2.6"
+matrixscroll hook-install
+matrixscroll hook-status</code></pre>
+
+    <h3>2. Agent provenance</h3>
+    <pre><code>export MATRIXSCROLL_ACTOR_TYPE=agent
+export MATRIXSCROLL_TOOL=agent-runner
+git commit -m "feat: agent-assisted change"
+matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
+    <p>Hooks default to <strong>warn mode</strong>. Set <code>"enforce": true</code> in <code>.git/matrixscroll/config.json</code> to block commits when signing fails. Windows support landed in <strong>0.2.1</strong>; the public examples on this page pin <strong>0.2.6</strong>.</p>
+
+    <h3>3. CI gate</h3>
+    <pre><code>- uses: SSX360/matrixscroll-verify-action@v1
+  with:
+    matrixscroll-version: "0.2.6"
+    require-mode: emulated
+    trusted-keys: trusted-keys.json</code></pre>
+    <p>Policy flags such as <code>--require-mode</code> and <code>--trusted-keys</code> ship in the current <strong>0.2.x</strong> line; public examples pin <strong>0.2.6</strong>.</p>
+
+    <h2>Trust levels</h2>
+    <table>
+        <thead>
+            <tr><th>Level</th><th>Provider</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>L1 Emulated</td><td>software key in the local Matrix Scroll profile</td><td>Shipping</td></tr>
+            <tr><td>L2 Enclaves</td><td>Secure enclaves, SSH-agent, HSMs</td><td>In progress</td></tr>
+            <tr><td>L3 Attested</td><td>Remote cryptographic attestation</td><td>Roadmap</td></tr>
+        </tbody>
+    </table>
+
+    <div class="honest-limits">
+        <strong>Honest limits:</strong> Shipping now: PyPI 0.2.6, Git hooks, Scroll Gate PR verification, browser verifier. In progress: External Ed25519-capable key backends and transparency-log integrations. Not: IAM, sandbox, prompt filter, or agent runtime.
+    </div>
+
+    <h2>Next steps</h2>
+    <ol>
+        <li>Run the five-minute repo pilot: <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/FIVE_MINUTES.md" rel="noopener">FIVE_MINUTES.md</a>.</li>
+        <li>Wire the GitHub Action into a protected branch.</li>
+        <li>Use the browser verifier to inspect a sample or live envelope.</li>
+        <li>Compare the commit-time layer to artifact-time tools: <a href="https://matrixscroll.com/compare/" rel="noopener">matrixscroll.com/compare/</a>.</li>
+    </ol>
+
+    <p class="footer-note">Canonical source: <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md" rel="noopener">docs/WHITEPAPER.md</a>. Questions: <a href="https://github.com/SSX360/matrixscroll/discussions" rel="noopener">GitHub Discussions</a>. &bull; Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com">security@matrixscroll.com</a></p>
+</body>
+</html>

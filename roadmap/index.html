@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roadmap - Matrix Scroll</title>
+  <meta name="description" content="What is live now, what is being activated next, and what comes after that for Matrix Scroll.">
+  <link rel="canonical" href="https://matrixscroll.com/roadmap/">
+  <meta property="og:title" content="Roadmap - Matrix Scroll">
+  <meta property="og:description" content="Foundation shipped. Open-source verification gate ready. Transparency log and key custody integrations next.">
+  <meta property="og:image" content="https://matrixscroll.com/og-image.png">
+  <link rel="icon" type="image/png" href="/og-image.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    .phases {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .phase {
+      border-left: 3px solid var(--line-strong);
+      padding-left: 16px;
+    }
+    .phase.done {
+      border-left-color: var(--accent-2);
+    }
+    .phase.prog {
+      border-left-color: var(--accent);
+    }
+    .phase .top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+    .phase h3 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .badge.ok {
+      color: var(--ok);
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.04);
+    }
+    .badge.prog {
+      color: var(--accent);
+      border-color: rgba(99, 102, 241, 0.4);
+      background: rgba(99, 102, 241, 0.04);
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+      <div class="nav-links">
+        <a href="/spec/">Spec</a>
+        <a href="/docs/">Docs</a>
+        <a href="/mcp/">MCP</a>
+        <a href="/docs/Whitepaper.html">Whitepaper</a>
+        <a href="/compare/">Compare</a>
+        <a href="/verify/">Verifier</a>
+        <a href="/ecosystem/">Ecosystem</a>
+        <a href="/roadmap/" aria-current="page">Roadmap</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="shell page-hero">
+      <p class="eyebrow">matrixscroll.roadmap.v1</p>
+      <h1>Foundation shipped.<br>Verification gate ready.</h1>
+      <p class="lead">What is live today, what is being activated now, and what follows as the protocol and community toolings mature.</p>
+      <div class="button-row">
+        <a class="button primary" href="/verify/">Verifier</a>
+        <a class="button secondary" href="/verify/">Try the verifier</a>
+        <a class="button ghost" href="/docs/">Start free</a>
+      </div>
+      <div class="signal-grid" aria-label="Roadmap phases">
+        <article class="signal-card">
+          <strong>Shipped</strong>
+          <p>PyPI distribution, hooks, verifier, PR verification, and the MCP server are public and usable today.</p>
+        </article>
+        <article class="signal-card">
+          <strong>Activating</strong>
+          <p>Hosted Identity Authority (MVP) for verified developer claims and active team enforcement policies.</p>
+        </article>
+        <article class="signal-card">
+          <strong>Next</strong>
+          <p>Team ledgers, SSO, audit exports, and transparency logs build on the same open envelope.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell content-section">
+      <div class="phases">
+        <article class="panel phase done">
+          <div class="top"><span class="badge ok">Shipped</span><span class="panel-kicker" style="margin:0">Phase 1 to 3</span></div>
+          <h3>Foundation, distribution and validation</h3>
+          <p>The Ed25519 SDK on PyPI 0.2.6, the MCP server in Cursor / Claude / VS Code, Git hooks, Scroll Gate, the browser verifier, and cross-stack validation are already in place.</p>
+        </article>
+
+        <article class="panel phase prog">
+          <div class="top"><span class="badge prog">In progress</span><span class="panel-kicker" style="margin:0">Phase 4</span></div>
+          <h3>Hosted Identity Authority MVP</h3>
+          <p>Standing up the Hosted Identity Authority portal (via Supabase + Stripe) to allow developers and agents to verify their signing public keys and bind them to trusted organization profiles.</p>
+        </article>
+
+        <article class="panel phase">
+          <div class="top"><span class="badge">Roadmap</span><span class="panel-kicker" style="margin:0">Phase 5</span></div>
+          <h3>Team ledger &amp; Audit Exporters</h3>
+          <p>Centralized team ledgers, SSO/SAML integration, repository trust dashboards, and EU AI Act compliance evidence pack exports.</p>
+        </article>
+
+        <article class="panel phase">
+          <div class="top"><span class="badge">Roadmap</span><span class="panel-kicker" style="margin:0">Phase 6</span></div>
+          <h3>Key Custody, Enclaves &amp; Ledger Logs</h3>
+          <p>Integration with secure enclaves (TPM/keychains), transparency logs, and local cryptographic hardware backends (FIDO2/YubiKey) using standard open wire formats.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="shell">
+        <div class="section-heading compact">
+          <p class="eyebrow">Start now</p>
+          <h2>The foundation is live today.</h2>
+        </div>
+        <div class="button-row">
+          <a class="button primary" href="/verify/">Verifier</a>
+          <a class="button secondary" href="/verify/">Try the verifier</a>
+          <a class="button ghost" href="/ecosystem/">Ecosystem</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <div>
+        <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <p>Signed provenance for agent-assisted code. Foundation shipped; transparency log and enclave integration next.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+      </div>
+      <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a><a href="/ecosystem/">Ecosystem</a></div>
+      <div><h2>Product</h2><a href="/roadmap/">Roadmap</a></div>
+      <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="https://pypi.org/project/matrixscroll/" rel="noopener">PyPI 0.2.6</a></div>
+    </div>
+  </footer>
+</body>
+</html>
