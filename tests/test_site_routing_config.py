@@ -123,6 +123,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
         for marker in (
             "Load Sample",
             "Tamper Sample",
+            "Private by default",
             "matrixscroll==0.2.6",
             "SSX360/matrixscroll-verify-action@v1",
         ):

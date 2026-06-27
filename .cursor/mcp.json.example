@@ -1,5 +1,10 @@
 {
   "mcpServers": {
+    "matrixscroll-mcp": {
+      "type": "stdio",
+      "command": "matrixscroll-mcp",
+      "args": []
+    },
     "cursor-copilot": {
       "command": "path/to/cursor-co-pilot/.venv/Scripts/python.exe",
       "args": [
