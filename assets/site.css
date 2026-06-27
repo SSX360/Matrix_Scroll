@@ -28,6 +28,25 @@
   box-sizing: border-box;
 }
 
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.skip-link:focus {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: var(--bg);
+  color: var(--accent);
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  z-index: 100;
+  border-radius: var(--radius-sm);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
