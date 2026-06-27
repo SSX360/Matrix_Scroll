@@ -397,6 +397,22 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
+let cachedTrustKeys = null;
+
+async function getTrustKeys() {
+  if (cachedTrustKeys) return cachedTrustKeys;
+  try {
+    const response = await fetch("/.well-known/matrixscroll-trust.json");
+    if (response.ok) {
+      const data = await response.json();
+      cachedTrustKeys = (data.keys || []).map(k => k.public_key);
+    }
+  } catch (e) {
+    console.error("Failed to fetch trust root", e);
+  }
+  return cachedTrustKeys || [];
+}
+
 async function verifyManifest(root) {
   try {
     const input = getManifestValue(root);
@@ -453,14 +469,34 @@ async function verifyManifest(root) {
         if (response.ok) {
           const cert = await response.json();
           if (cert && cert.subject && cert.subject.device_id === deviceId) {
-            const escapedName = escapeHtml(cert.subject.display_name);
-            const escapedAccts = (cert.subject.verified_accounts || [])
-              .map(a => `${escapeHtml(a.type)}:${escapeHtml(a.value)}`)
-              .join(", ");
-            details.unshift({
-              label: "Identity",
-              value: `<span style="color: #10B981; font-weight: 600;">✅ Verified Identity: ${escapedName} (${escapedAccts})</span>`
-            });
+            let certValid = false;
+            try {
+              const certSigPub = base64ToBytes(cert.signature.public_key);
+              const certSigVal = base64ToBytes(cert.signature.value);
+              const certCanon = new TextEncoder().encode(canonicalize(cert, { omitTopLevelSignature: true }));
+              certValid = await verifyEd25519(certSigPub, certSigVal, certCanon);
+            } catch (err) {
+              console.error("Certificate crypto verification failed", err);
+            }
+
+            const trustKeys = await getTrustKeys();
+            const isChained = trustKeys.includes(cert.signature.public_key);
+
+            if (certValid && isChained) {
+              const escapedName = escapeHtml(cert.subject.display_name);
+              const escapedAccts = (cert.subject.verified_accounts || [])
+                .map(a => `${escapeHtml(a.type)}:${escapeHtml(a.value)}`)
+                .join(", ");
+              details.unshift({
+                label: "Identity",
+                value: `<span style="color: #10B981; font-weight: 600;">✅ Verified Identity: ${escapedName} (${escapedAccts})</span>`
+              });
+            } else {
+              details.unshift({
+                label: "Identity",
+                value: `<span style="color: #EF4444; font-weight: 600;">❌ Forged Certificate: Signature invalid or not chained to trust root</span>`
+              });
+            }
           } else {
             details.unshift({
               label: "Identity",

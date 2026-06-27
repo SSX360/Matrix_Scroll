@@ -203,6 +203,71 @@
         });
       });
 
+      let cachedTrustKeys = null;
+
+      async function getTrustKeys() {
+        if (cachedTrustKeys) return cachedTrustKeys;
+        try {
+          const response = await fetch("/.well-known/matrixscroll-trust.json");
+          if (response.ok) {
+            const data = await response.json();
+            cachedTrustKeys = (data.keys || []).map(k => k.public_key);
+          }
+        } catch (e) {
+          console.error("Failed to fetch trust root", e);
+        }
+        return cachedTrustKeys || [];
+      }
+
+      function deepSort(v) {
+        if (Array.isArray(v)) return v.map(deepSort);
+        if (v && typeof v === "object") {
+          const out = {};
+          for (const k of Object.keys(v).sort()) out[k] = deepSort(v[k]);
+          return out;
+        }
+        return v;
+      }
+
+      function asciiEscape(s) {
+        let out = "";
+        for (let i = 0; i < s.length; i++) {
+          const c = s.charCodeAt(i);
+          out += c >= 0x80 ? "\\u" + c.toString(16).padStart(4, "0") : s[i];
+        }
+        return out;
+      }
+
+      function canonicalizeCert(cert) {
+        const { signature, ...body } = cert;
+        return asciiEscape(JSON.stringify(deepSort(body)));
+      }
+
+      function base64ToBytes(base64) {
+        const binaryString = atob(base64);
+        const bytes = new Uint8Array(binaryString.length);
+        for (let i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes;
+      }
+
+      async function verifyCert(cert) {
+        try {
+          if (!cert.signature || !cert.signature.public_key || !cert.signature.value) return false;
+          const pubKeyBytes = base64ToBytes(cert.signature.public_key);
+          const sigBytes = base64ToBytes(cert.signature.value);
+          const canonicalStr = canonicalizeCert(cert);
+          const canonicalBytes = new TextEncoder().encode(canonicalStr);
+
+          const key = await crypto.subtle.importKey("raw", pubKeyBytes, "Ed25519", false, ["verify"]);
+          return await crypto.subtle.verify("Ed25519", key, sigBytes, canonicalBytes);
+        } catch (e) {
+          console.error("Signature verification error", e);
+          return false;
+        }
+      }
+
       async function loadProfile(deviceId) {
         document.getElementById("error-card").style.display = "none";
         document.getElementById("profile-card").style.display = "block";
@@ -211,7 +276,28 @@
           const response = await fetch(`/id/${deviceId}.json`);
           if (response.ok) {
             const cert = await response.json();
-            renderProfile(cert.subject, cert.issuer.authority);
+            
+            // Validate cert signature and trust chain
+            const isSigValid = await verifyCert(cert);
+            const trustKeys = await getTrustKeys();
+            const isChained = trustKeys.includes(cert.signature.public_key);
+
+            if (isSigValid && isChained) {
+              document.getElementById("prof-badge").textContent = "Verified Identity";
+              document.getElementById("prof-badge").style.background = "#10B981";
+              renderProfile(cert.subject, cert.issuer.authority);
+            } else {
+              // Forged cert
+              document.getElementById("prof-badge").textContent = "FORGED PROFILE";
+              document.getElementById("prof-badge").style.background = "#EF4444";
+              document.getElementById("prof-name").textContent = "🚨 Cryptographic Validation Failed";
+              document.getElementById("prof-account").style.display = "none";
+              document.getElementById("prof-device-id").textContent = deviceId;
+              document.getElementById("prof-pubkey").textContent = "SIGNATURE MISMATCH OR UNTRUSTED ISSUER KEY";
+              document.getElementById("prof-plan").textContent = "NONE";
+              document.getElementById("prof-expires").textContent = "EXPIRED/REVOKED";
+              document.getElementById("prof-issuer").textContent = cert.issuer ? cert.issuer.authority : "unknown";
+            }
           } else {
             // Check if mock matches locally stored simulation keys
             const localKeys = JSON.parse(localStorage.getItem("ms_mock_keys")) || [];
@@ -225,6 +311,8 @@
                 plan: "basic",
                 expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
               };
+              document.getElementById("prof-badge").textContent = "Simulated Identity";
+              document.getElementById("prof-badge").style.background = "var(--accent)";
               renderProfile(mockCert, "matrixscroll-simulated-authority");
             } else if (deviceId === "MS-EAB9-1217") {
               // Static mock sample
@@ -236,6 +324,8 @@
                 plan: "basic",
                 expires_at: "2026-07-27T00:00:00Z"
               };
+              document.getElementById("prof-badge").textContent = "Simulated Identity";
+              document.getElementById("prof-badge").style.background = "var(--accent)";
               renderProfile(mockCert, "matrixscroll-simulated-authority");
             } else {
               showError();
