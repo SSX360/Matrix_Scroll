@@ -387,6 +387,16 @@ function pushStringDetail(details, label, node) {
   }
 }
 
+function escapeHtml(str) {
+  if (typeof str !== "string") return "";
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 async function verifyManifest(root) {
   try {
     const input = getManifestValue(root);
@@ -443,10 +453,13 @@ async function verifyManifest(root) {
         if (response.ok) {
           const cert = await response.json();
           if (cert && cert.subject && cert.subject.device_id === deviceId) {
-            const acctStrings = (cert.subject.verified_accounts || []).map(a => `${a.type}:${a.value}`).join(", ");
+            const escapedName = escapeHtml(cert.subject.display_name);
+            const escapedAccts = (cert.subject.verified_accounts || [])
+              .map(a => `${escapeHtml(a.type)}:${escapeHtml(a.value)}`)
+              .join(", ");
             details.unshift({
               label: "Identity",
-              value: `<span style="color: #10B981; font-weight: 600;">✅ Verified Identity: ${cert.subject.display_name} (${acctStrings})</span>`
+              value: `<span style="color: #10B981; font-weight: 600;">✅ Verified Identity: ${escapedName} (${escapedAccts})</span>`
             });
           } else {
             details.unshift({
