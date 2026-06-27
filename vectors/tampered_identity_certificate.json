@@ -1,8 +1,8 @@
 {
   "schema": "matrixscroll.identity_certificate.v1",
   "subject": {
-    "public_key": "06L17FGlY75vnqmoRO8SV6Nbx5WcLT3ITzmOuYSvis4=",
-    "device_id": "MS-B63D-BD9A",
+    "public_key": "CWznv6HLNBD8DyLjO9qexegHccGAq99V/nwkN3gRLTA=",
+    "device_id": "MS-562F-0D25",
     "display_name": "Mallory",
     "verified_accounts": [
       {
@@ -17,8 +17,8 @@
       }
     ],
     "plan": "basic",
-    "issued_at": "2026-06-27T04:07:19Z",
-    "expires_at": "2026-07-27T04:07:19Z"
+    "issued_at": "2026-06-27T04:19:25Z",
+    "expires_at": "2026-07-27T04:19:25Z"
   },
   "issuer": {
     "authority": "matrixscroll-authority-v1",
@@ -31,7 +31,7 @@
     "device_id": "MS-4319-20D5",
     "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
     "mode": "emulated",
-    "signed_at": "2026-06-27T04:07:19Z",
-    "value": "C/MH4u1ifQYPZM4SsW65Cm3BdoyRAV9IT9/Akf6WmMg2264ffKipPj6/leIPn/C8mkfLfag+OHfFB2VzolRXDw=="
+    "signed_at": "2026-06-27T04:19:25Z",
+    "value": "7ZzBREnZRWHPKaluyyAe2yW1RjBQVq7CDOgDaEdcqKUC+t/Kop9p1TIHVpNIIlxh3YEbCIPBkCEgIfZGsr3lAA=="
   }
 }

@@ -48,7 +48,7 @@ def issue_certificate(*, subject_public_key: str, display_name: str,
     return signed
 
 
-def publish(cert: dict, out_dir: str = "public/id") -> str:
+def publish(cert: dict, out_dir: str = "id") -> str:
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, f"{cert['subject']['device_id']}.json")
     with open(path, "w") as f:
@@ -56,7 +56,7 @@ def publish(cert: dict, out_dir: str = "public/id") -> str:
     return path
 
 
-def write_trust_root(out_dir: str = "public/.well-known") -> str:
+def write_trust_root(out_dir: str = ".well-known") -> str:
     os.makedirs(out_dir, exist_ok=True)
     auth = matrixscroll.status()
     root = {
