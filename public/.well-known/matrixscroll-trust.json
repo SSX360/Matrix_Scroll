@@ -1,0 +1,12 @@
+{
+  "schema": "matrixscroll.trust_root.v1",
+  "authority": "matrixscroll-authority-v1",
+  "keys": [
+    {
+      "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+      "device_id": "MS-4319-20D5",
+      "valid_from": "2026-07-01T00:00:00Z",
+      "valid_to": "2027-07-01T00:00:00Z"
+    }
+  ]
+}

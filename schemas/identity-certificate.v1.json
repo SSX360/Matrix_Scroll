@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://matrixscroll.com/schemas/identity-certificate.v1.json",
+  "title": "Matrix Scroll Identity Certificate v1",
+  "description": "A Matrix Scroll signed manifest (per SPEC.md §5) issued by the Hosted Identity Authority that binds a user-controlled Ed25519 public key to a verified real-world identity. Verification follows SPEC.md §6. Format is CC0; issuance by a trusted Authority key is the commercial moat.",
+  "type": "object",
+  "required": ["schema", "subject", "issuer", "signature"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "matrixscroll.identity_certificate.v1" },
+    "subject": {
+      "type": "object",
+      "required": ["public_key", "device_id", "display_name", "verified_accounts", "plan", "issued_at", "expires_at"],
+      "additionalProperties": false,
+      "properties": {
+        "public_key": { "type": "string", "description": "base64(raw 32-byte Ed25519 public key) of the SUBJECT/user. Authoritative identity per SPEC §3." },
+        "device_id": { "type": "string", "pattern": "^MS-[0-9A-F]{4}-[0-9A-F]{4}$", "description": "Derived handle MS-<sha256(pubkey)[0:4]>-<[4:8]>. Verifiers MUST recompute from public_key." },
+        "display_name": { "type": "string", "minLength": 1, "maxLength": 120 },
+        "verified_accounts": {
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["type", "value", "method"],
+            "additionalProperties": false,
+            "properties": {
+              "type": { "enum": ["github", "email", "domain", "gitlab", "google"] },
+              "value": { "type": "string", "minLength": 1 },
+              "method": { "enum": ["oauth", "dns-txt", "well-known"] }
+            }
+          }
+        },
+        "plan": { "enum": ["basic", "team", "enterprise"] },
+        "issued_at": { "type": "string", "format": "date-time" },
+        "expires_at": { "type": "string", "format": "date-time", "description": "Short-lived (<= 30 days). Billing state == cert validity." }
+      }
+    },
+    "issuer": {
+      "type": "object",
+      "required": ["authority", "public_key", "device_id"],
+      "additionalProperties": false,
+      "properties": {
+        "authority": { "type": "string" },
+        "public_key": { "type": "string", "description": "Authority pubkey; must match /.well-known/matrixscroll-trust.json." },
+        "device_id": { "type": "string", "pattern": "^MS-[0-9A-Z]{4}-[0-9A-Z]{4}$" }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "description": "Per SPEC.md §5, produced by the AUTHORITY key over canonical(cert-without-signature).",
+      "required": ["schema", "algorithm", "device_id", "public_key", "mode", "signed_at", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "schema": { "const": "matrixscroll.signature.v1" },
+        "algorithm": { "const": "ed25519" },
+        "device_id": { "type": "string" },
+        "public_key": { "type": "string" },
+        "mode": { "enum": ["emulated", "hardware"] },
+        "signed_at": { "type": "string", "format": "date-time" },
+        "value": { "type": "string" }
+      }
+    }
+  }
+}

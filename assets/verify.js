@@ -321,7 +321,7 @@ function setResult(root, status, title, message, details = []) {
     const label = document.createElement("span");
     const value = document.createElement("span");
     label.textContent = detail.label;
-    value.textContent = detail.value || "-";
+    value.innerHTML = detail.value || "-";
     item.append(label, value);
     listEl.appendChild(item);
   }
@@ -437,11 +437,42 @@ async function verifyManifest(root) {
       { label: "Canonical", value: `${canonicalBytes.length} bytes` }
     );
 
+    if (ok) {
+      try {
+        const response = await fetch(`/id/${deviceId}.json`);
+        if (response.ok) {
+          const cert = await response.json();
+          if (cert && cert.subject && cert.subject.device_id === deviceId) {
+            const acctStrings = (cert.subject.verified_accounts || []).map(a => `${a.type}:${a.value}`).join(", ");
+            details.unshift({
+              label: "Identity",
+              value: `<span style="color: #10B981; font-weight: 600;">✅ Verified Identity: ${cert.subject.display_name} (${acctStrings})</span>`
+            });
+          } else {
+            details.unshift({
+              label: "Identity",
+              value: `<span style="color: #F59E0B; font-weight: 500;">⚠️ Self-signed (unverified) — <a href="/authority/" style="color: var(--accent); text-decoration: underline;">Claim Yours</a></span>`
+            });
+          }
+        } else {
+          details.unshift({
+            label: "Identity",
+            value: `<span style="color: #F59E0B; font-weight: 500;">⚠️ Self-signed (unverified) — <a href="/authority/" style="color: var(--accent); text-decoration: underline;">Claim Yours</a></span>`
+          });
+        }
+      } catch (e) {
+        details.unshift({
+          label: "Identity",
+          value: `<span style="color: #F59E0B; font-weight: 500;">⚠️ Self-signed (unverified) — <a href="/authority/" style="color: var(--accent); text-decoration: underline;">Claim Yours</a></span>`
+        });
+      }
+    }
+
     setResult(
       root,
       ok ? "valid" : "invalid",
       ok ? manifestSummary.successTitle : "Signature did not verify.",
-      ok ? manifestSummary.successMessage : "The manifest was parsed, but the signed bytes do not match the signature.",
+      ok ? (details.some(d => d.label === "Identity" && d.value.includes("✅")) ? "The cryptographic signature and identity binding are fully verified." : manifestSummary.successMessage) : "The manifest was parsed, but the signed bytes do not match the signature.",
       details
     );
   } catch (error) {

@@ -46,10 +46,9 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Missing stripe-signature header' });
   }
 
-  // Cryptographic Webhook Signature Verification in Vanilla Node.js
+  // Webhook Signature Verification in Vanilla Node.js
   let event;
   try {
-    // Parse signature header components
     const parts = sigHeader.split(',');
     const timestampPart = parts.find(p => p.startsWith('t='));
     const signaturePart = parts.find(p => p.startsWith('v1='));
@@ -61,14 +60,12 @@ module.exports = async (req, res) => {
     const timestamp = timestampPart.split('=')[1];
     const signature = signaturePart.split('=')[1];
 
-    // Compute signature hash
     const signedPayload = `${timestamp}.${rawBody.toString()}`;
     const expectedSignature = crypto
       .createHmac('sha256', webhookSecret)
       .update(signedPayload)
       .digest('hex');
 
-    // Time-constant comparison to protect against timing attacks
     const hmacMatches = crypto.timingSafeEqual(
       Buffer.from(signature, 'hex'),
       Buffer.from(expectedSignature, 'hex')
@@ -87,26 +84,99 @@ module.exports = async (req, res) => {
   // Handle Stripe Webhook Events
   try {
     const session = event.data.object;
-    
+    const fetch = require('node-fetch'); // globally available in Vercel Node 18+
+
     switch (event.type) {
       case 'checkout.session.completed': {
         const customerId = session.customer;
         const subscriptionId = session.subscription;
-        const supabaseUserId = session.metadata.supabase_user_id;
+        const challengeId = session.metadata?.challenge_id || session.client_reference_id;
 
-        if (!supabaseUserId) {
-          console.warn('[WEBHOOK WARNING] No supabase_user_id found in session metadata');
+        if (!challengeId) {
+          console.warn('[WEBHOOK WARNING] No challenge_id found in checkout session metadata');
           break;
         }
 
-        // Retrieve subscription info to verify status
+        // Retrieve subscription info from Stripe
         const subResponse = await fetch(`https://api.stripe.com/v1/subscriptions/${subscriptionId}`, {
           headers: { 'Authorization': `Bearer ${stripeSecretKey}` }
         });
         const subscription = await subResponse.json();
 
-        // Update profile subscription status in Supabase Database (RLS bypassed using Service Role key)
-        const updateResponse = await fetch(`${supabaseUrl}/rest/v1/profiles?id=eq.${supabaseUserId}`, {
+        // Extract customer name/email for display
+        const customerResponse = await fetch(`https://api.stripe.com/v1/customers/${customerId}`, {
+          headers: { 'Authorization': `Bearer ${stripeSecretKey}` }
+        });
+        const customer = await customerResponse.json();
+
+        const displayName = customer.name || 'Developer Profile';
+        const verifiedAccounts = [
+          { type: 'email', value: customer.email || 'dev@matrixscroll.com', method: 'oauth' }
+        ];
+
+        // Upsert subscription into Supabase
+        const updateResponse = await fetch(`${supabaseUrl}/rest/v1/subscriptions`, {
+          method: 'POST',
+          headers: {
+            'apikey': supabaseServiceRoleKey,
+            'Authorization': `Bearer ${supabaseServiceRoleKey}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'resolution=merge-duplicates'
+          },
+          body: JSON.stringify({
+            enroll_challenge_id: challengeId,
+            stripe_customer_id: customerId,
+            stripe_sub_id: subscriptionId,
+            status: subscription.status,
+            plan: 'basic',
+            display_name: displayName,
+            verified_accounts: verifiedAccounts,
+            current_period_end: new Date(subscription.current_period_end * 1000).toISOString()
+          })
+        });
+
+        if (!updateResponse.ok) {
+          const updateError = await updateResponse.text();
+          console.error('[WEBHOOK DB SUBSCRIPTION INSERT ERROR]', updateError);
+        } else {
+          console.log(`[WEBHOOK SUCCESS] Subscription ${subscriptionId} synchronized for challenge ${challengeId}.`);
+        }
+        break;
+      }
+
+      case 'customer.subscription.updated': {
+        const subscription = session;
+        const subscriptionId = subscription.id;
+
+        // Sync status to subscriptions table
+        const updateResponse = await fetch(`${supabaseUrl}/rest/v1/subscriptions?stripe_sub_id=eq.${subscriptionId}`, {
+          method: 'PATCH',
+          headers: {
+            'apikey': supabaseServiceRoleKey,
+            'Authorization': `Bearer ${supabaseServiceRoleKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            status: subscription.status,
+            current_period_end: new Date(subscription.current_period_end * 1000).toISOString()
+          })
+        });
+
+        if (!updateResponse.ok) {
+          const updateError = await updateResponse.text();
+          console.error('[WEBHOOK DB UPDATE ERROR]', updateError);
+        } else {
+          console.log(`[WEBHOOK SUCCESS] Subscription ${subscriptionId} status updated to: ${subscription.status}`);
+        }
+        break;
+      }
+
+      case 'customer.subscription.deleted': {
+        const subscription = session;
+        const subscriptionId = subscription.id;
+
+        // 1. Mark subscription as canceled
+        const updateResponse = await fetch(`${supabaseUrl}/rest/v1/subscriptions?stripe_sub_id=eq.${subscriptionId}`, {
           method: 'PATCH',
           headers: {
             'apikey': supabaseServiceRoleKey,
@@ -115,72 +185,50 @@ module.exports = async (req, res) => {
             'Prefer': 'return=representation'
           },
           body: JSON.stringify({
-            stripe_customer_id: customerId,
-            stripe_subscription_id: subscriptionId,
-            subscription_status: subscription.status,
-            price_id: subscription.items.data[0]?.price.id
+            status: 'canceled'
           })
         });
 
         if (!updateResponse.ok) {
           const updateError = await updateResponse.text();
-          console.error('[WEBHOOK DB UPDATE ERROR]', updateError);
-        } else {
-          console.log(`[WEBHOOK SUCCESS] Profile ${supabaseUserId} updated to active subscription.`);
+          console.error('[WEBHOOK DB DOWNGRADE ERROR]', updateError);
+          break;
         }
-        break;
-      }
 
-      case 'customer.subscription.updated': {
-        const subscription = session;
-        const customerId = subscription.customer;
+        const subRecords = await updateResponse.json();
+        const challengeId = subRecords[0]?.enroll_challenge_id;
 
-        // Sync updated status to Database
-        const updateResponse = await fetch(`${supabaseUrl}/rest/v1/profiles?stripe_customer_id=eq.${customerId}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': supabaseServiceRoleKey,
-            'Authorization': `Bearer ${supabaseServiceRoleKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            subscription_status: subscription.status,
-            price_id: subscription.items.data[0]?.price.id
-          })
-        });
+        if (challengeId) {
+          // 2. Fetch challenge details to resolve device_id / public_key
+          const chResponse = await fetch(`${supabaseUrl}/rest/v1/enroll_challenges?challenge_id=eq.${challengeId}`, {
+            headers: {
+              'apikey': supabaseServiceRoleKey,
+              'Authorization': `Bearer ${supabaseServiceRoleKey}`
+            }
+          });
+          const chRecords = await chResponse.json();
+          const publicKey = chRecords[0]?.public_key;
 
-        if (!updateResponse.ok) {
-          const updateError = await updateResponse.text();
-          console.error('[WEBHOOK DB UPDATE ERROR]', updateError);
-        } else {
-          console.log(`[WEBHOOK SUCCESS] Customer ${customerId} subscription updated to: ${subscription.status}`);
-        }
-        break;
-      }
+          if (publicKey) {
+            // 3. Mark the identity certificate as revoked
+            const revokeResponse = await fetch(`${supabaseUrl}/rest/v1/identities?public_key=eq.${publicKey}`, {
+              method: 'PATCH',
+              headers: {
+                'apikey': supabaseServiceRoleKey,
+                'Authorization': `Bearer ${supabaseServiceRoleKey}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                revoked_at: new Date().toISOString()
+              })
+            });
 
-      case 'customer.subscription.deleted': {
-        const subscription = session;
-        const customerId = subscription.customer;
-
-        // Downgrade user back to free tier (status: canceled, price_id: null)
-        const updateResponse = await fetch(`${supabaseUrl}/rest/v1/profiles?stripe_customer_id=eq.${customerId}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': supabaseServiceRoleKey,
-            'Authorization': `Bearer ${supabaseServiceRoleKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            subscription_status: 'canceled',
-            price_id: null
-          })
-        });
-
-        if (!updateResponse.ok) {
-          const updateError = await updateResponse.text();
-          console.error('[WEBHOOK DB UPDATE ERROR]', updateError);
-        } else {
-          console.log(`[WEBHOOK SUCCESS] Customer ${customerId} subscription canceled.`);
+            if (!revokeResponse.ok) {
+              console.error('[WEBHOOK DB REVOCATION ERROR]', await revokeResponse.text());
+            } else {
+              console.log(`[WEBHOOK SUCCESS] Key ${publicKey} successfully revoked due to subscription cancellation.`);
+            }
+          }
         }
         break;
       }

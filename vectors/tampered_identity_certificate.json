@@ -1,0 +1,37 @@
+{
+  "schema": "matrixscroll.identity_certificate.v1",
+  "subject": {
+    "public_key": "06L17FGlY75vnqmoRO8SV6Nbx5WcLT3ITzmOuYSvis4=",
+    "device_id": "MS-B63D-BD9A",
+    "display_name": "Mallory",
+    "verified_accounts": [
+      {
+        "type": "github",
+        "value": "ssx360",
+        "method": "oauth"
+      },
+      {
+        "type": "email",
+        "value": "ryan@matrixscroll.com",
+        "method": "oauth"
+      }
+    ],
+    "plan": "basic",
+    "issued_at": "2026-06-27T04:07:19Z",
+    "expires_at": "2026-07-27T04:07:19Z"
+  },
+  "issuer": {
+    "authority": "matrixscroll-authority-v1",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "device_id": "MS-4319-20D5"
+  },
+  "signature": {
+    "schema": "matrixscroll.signature.v1",
+    "algorithm": "ed25519",
+    "device_id": "MS-4319-20D5",
+    "public_key": "bsVoWgUYK+NZNcSNIoWjO3IiTK/xT6U6mXFzBJgPUKc=",
+    "mode": "emulated",
+    "signed_at": "2026-06-27T04:07:19Z",
+    "value": "C/MH4u1ifQYPZM4SsW65Cm3BdoyRAV9IT9/Akf6WmMg2264ffKipPj6/leIPn/C8mkfLfag+OHfFB2VzolRXDw=="
+  }
+}
