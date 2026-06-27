@@ -333,6 +333,10 @@ function setResult(root, status, title, message, details = []) {
   const listEl = root.querySelector("[data-result-list]");
   if (!statusEl || !titleEl || !messageEl || !listEl) return;
   statusEl.className = `result-status ${status}`;
+  const container = statusEl.closest(".result-box");
+  if (container) {
+    container.className = `result-box ${status}`;
+  }
   statusEl.textContent = status === "valid" ? "Valid" : status === "invalid" ? "Invalid" : "Waiting";
   titleEl.textContent = title;
   messageEl.textContent = message;
