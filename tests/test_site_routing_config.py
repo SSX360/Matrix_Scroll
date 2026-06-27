@@ -7,7 +7,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
     @staticmethod
     def _status_markers() -> tuple[str, ...]:
         return (
-            "PyPI <code>0.2.6</code>, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.",
+            "PyPI <code>0.2.6</code>",
             "SSX360 SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.",
             "IAM, sandboxing, prompt filtering, or an agent runtime.",
         )
@@ -19,7 +19,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "index.html": "wrote every commit.",
             "compare/index.html": "Keep your current controls. Add commit-time provenance.",
             "device/index.html": "Software first. Preview trust upgrade next.",
-            "docs/index.html": 'matrixscroll==0.2.6',
+            "docs/index.html": "quickstart-mcp.md",
             "spec/index.html": "Pure Ed25519 over canonical JSON bytes.",
             "verify/index.html": "Tamper Sample",
         }
@@ -56,8 +56,12 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "https://matrixscroll.com/verify/",
             "https://ssx360.com",
             "Provenance%20Pilot%20Inquiry",
+            'matrixscroll[mcp]==0.2.6',
+            "matrixscroll-mcp",
+            '"mcpServers"',
         ):
             self.assertIn(marker, homepage)
+        self.assertNotIn('pip install <span class="st">"matrixscroll[mcp]"</span>', homepage)
         # Compliance language rule: never claim a regulation requires signing.
         for forbidden in ("required by", "mandated", "audit repo trust", "repo intelligence"):
             self.assertNotIn(forbidden, homepage)
@@ -72,6 +76,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
 
         for relative_path in ("docs/index.html",):
             text = (site_root / relative_path).read_text(encoding="utf-8")
+            self.assertIn("MCP server", text, relative_path)
             for question in questions:
                 self.assertIn(question, text, relative_path)
 

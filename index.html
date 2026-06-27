@@ -291,11 +291,24 @@
   <section class="wrap" id="install">
     <p class="sec-label">Install — the agent signs its own commits</p>
     <div class="code">
-      <button class="copy" data-copy="pip install &quot;matrixscroll[mcp]&quot;&#10;python -m matrixscroll.mcp">Copy</button>
-      <pre><span class="pr">$ </span>pip install <span class="st">"matrixscroll[mcp]"</span>
-<span class="pr">$ </span>python -m matrixscroll.mcp</pre>
+      <button class="copy" data-copy="pip install &quot;matrixscroll[mcp]==0.2.6&quot;&#10;matrixscroll-mcp">Copy</button>
+      <pre><span class="pr">$ </span>pip install <span class="st">"matrixscroll[mcp]==0.2.6"</span>
+<span class="pr">$ </span>matrixscroll-mcp</pre>
     </div>
-    <p class="note">Add the server to Cursor, VS Code, or Claude Desktop and the agent signs its own commits in-loop — provenance verbs only. Full editor config and the tool surface: <a href="https://github.com/SSX360/matrixscroll#model-context-protocol-mcp-server">MCP install on GitHub →</a></p>
+    <div class="code" style="margin-top:14px;">
+      <button class="copy" data-copy="{&#10;  &quot;mcpServers&quot;: {&#10;    &quot;matrixscroll-mcp&quot;: {&#10;      &quot;type&quot;: &quot;stdio&quot;,&#10;      &quot;command&quot;: &quot;matrixscroll-mcp&quot;,&#10;      &quot;args&quot;: []&#10;    }&#10;  }&#10;}">Copy</button>
+      <pre><span class="pr">// </span>.cursor/mcp.json
+{
+  <span class="st">"mcpServers"</span>: {
+    <span class="st">"matrixscroll-mcp"</span>: {
+      <span class="st">"type"</span>: <span class="st">"stdio"</span>,
+      <span class="st">"command"</span>: <span class="st">"matrixscroll-mcp"</span>,
+      <span class="st">"args"</span>: []
+    }
+  }
+}</pre>
+    </div>
+    <p class="note">Paste into Cursor, VS Code, or Claude Desktop — provenance verbs only. Invoke <code>status</code> to confirm the connection. Full guide: <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/quickstart-mcp.md">MCP quickstart →</a> · Desktop app: <a href="https://ssx360.com/download">ssx360.com/download</a></p>
   </section>
 
   <hr class="rule" />
@@ -350,7 +363,7 @@
       <div class="lim now">
         <h4>Shipping now</h4>
         <ul>
-          <li>PyPI matrixscroll 0.2.6</li>
+          <li>PyPI matrixscroll 0.2.6 + MCP server</li>
           <li>Git post-commit hooks</li>
           <li>envelope-verify + Scroll Gate</li>
           <li>Browser verifier + GitHub Action</li>

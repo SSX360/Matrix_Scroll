@@ -31,15 +31,32 @@
     <div class="shell">
       <section class="hero">
         <span class="eyebrow">Documentation hub</span>
-        <h1>Install, verify, and wire Matrix Scroll into CI.</h1>
-        <p>Start with the shipping path, verify one signed commit locally, then carry the same proof into PR verification. The canonical public release stays pinned to <code>matrixscroll==0.2.6</code> and <code>SSX360/matrixscroll-verify-action@v1</code>.</p>
+        <h1>Install Matrix Scroll — MCP for agents, CLI for repos.</h1>
+        <p>Choose the path that matches your workflow. MCP registers provenance verbs in your editor. CLI + hooks wire commit signing into Git and CI without MCP.</p>
         <div class="status-block">
-          <div><strong>Shipping now:</strong> PyPI <code>0.2.6</code>, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.</div>
+          <div><strong>Shipping now:</strong> PyPI <code>0.2.6</code>, MCP server, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.</div>
           <div><strong>In progress:</strong> SSX360 SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
           <div><strong>Not:</strong> IAM, sandboxing, prompt filtering, or an agent runtime.</div>
         </div>
       </section>
 
+      <h2 class="section-title">Install MCP (agents)</h2>
+      <div class="code-block"><pre>pip install "matrixscroll[mcp]==0.2.6"
+matrixscroll-mcp
+
+# .cursor/mcp.json
+{
+  "mcpServers": {
+    "matrixscroll-mcp": {
+      "type": "stdio",
+      "command": "matrixscroll-mcp",
+      "args": []
+    }
+  }
+}</pre></div>
+      <p><a href="https://github.com/SSX360/matrixscroll/blob/main/docs/quickstart-mcp.md">Full MCP quickstart →</a> · Desktop signing: <a href="https://ssx360.com/download">ssx360.com/download</a></p>
+
+      <h2 class="section-title">Install CLI &amp; hooks (repos)</h2>
       <div class="code-block"><pre>pip install "matrixscroll==0.2.6"
 matrixscroll hook-install
 matrixscroll hook-status
@@ -54,10 +71,17 @@ git push origin refs/notes/matrixscroll
       <h2 class="section-title">Core docs</h2>
       <section class="grid">
         <article class="card span-4">
-          <h3>Documentation</h3>
-          <p>Product architecture, CLI workflows, and public-surface notes.</p>
+          <h3>MCP quickstart</h3>
+          <p>Editor config, status check, and provenance-only verb surface.</p>
           <div class="link-list">
-            <a href="/docs/Documentation.html">Documentation.html</a>
+            <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/quickstart-mcp.md">quickstart-mcp.md</a>
+          </div>
+        </article>
+        <article class="card span-4">
+          <h3>Legacy product notes</h3>
+          <p>Historical architecture notes — prefer the MCP quickstart and SDK README for new installs.</p>
+          <div class="link-list">
+            <a href="/docs/Documentation.html">Documentation.html (legacy)</a>
           </div>
         </article>
         <article class="card span-4">
