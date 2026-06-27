@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scroll Pass - Matrix Scroll</title>
+    <meta name="description" content="Verified developer identity certificate profile.">
+    <link rel="icon" type="image/png" href="/og-image.png">
+    <link rel="stylesheet" href="/assets/site.css">
+    <style>
+      .pass-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 70vh;
+        padding: 40px 16px;
+      }
+      .pass-card {
+        width: 100%;
+        max-width: 480px;
+        background: rgba(17, 24, 39, 0.7);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(99, 102, 241, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+      .pass-card::before {
+        content: '';
+        position: absolute;
+        top: -10%;
+        right: -10%;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
+        pointer-events: none;
+      }
+      .pass-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 32px;
+      }
+      .pass-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+      }
+      .pass-mark {
+        width: 12px;
+        height: 12px;
+        background: var(--accent);
+        border-radius: 3px;
+        transform: rotate(45deg);
+      }
+      .pass-title {
+        font-size: 28px;
+        font-weight: 800;
+        margin-top: 0;
+        margin-bottom: 4px;
+        background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .pass-account {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+      .pass-details {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .pass-field label {
+        display: block;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+        margin-bottom: 4px;
+      }
+      .pass-field span {
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        word-break: break-all;
+      }
+      .pass-field code {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="Matrix Scroll home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Matrix Scroll</span>
+        </a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <div class="pass-container">
+        <!-- Profile View -->
+        <div class="pass-card" id="profile-card">
+          <div class="pass-header">
+            <div class="pass-logo">
+              <span class="pass-mark"></span>
+              <span>SCROLL PASS</span>
+            </div>
+            <span class="status-badge verified" id="prof-badge">Verified Identity</span>
+          </div>
+
+          <h1 class="pass-title" id="prof-name">Ryan James York</h1>
+          <div class="pass-account" id="prof-account">
+            github:ssx360
+          </div>
+
+          <div class="pass-details">
+            <div class="pass-field">
+              <label>Device ID</label>
+              <span id="prof-device-id">MS-EAB9-1217</span>
+            </div>
+            <div class="pass-field">
+              <label>Ed25519 Public Key</label>
+              <code id="prof-pubkey">Vxee+i1db9bLRAY5cPJw7gFBCk2lHlp...</code>
+            </div>
+            <div class="pass-field" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <label>Plan</label>
+                <span id="prof-plan">Basic</span>
+              </div>
+              <div>
+                <label>Expires</label>
+                <span id="prof-expires">2026-07-27</span>
+              </div>
+            </div>
+            <div class="pass-field">
+              <label>Authority Issuer</label>
+              <span id="prof-issuer" style="font-size: 12px; color: var(--muted);">matrixscroll-authority-v1</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="error-card" class="pass-card" style="display: none; text-align: center;">
+          <h2 style="margin-top: 0; color: #EF4444;">Profile Not Found</h2>
+          <p style="color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 24px;">The device identity profile could not be loaded. Enter a device ID below to preview in simulation mode.</p>
+          <form id="sim-lookup-form" style="display: flex; gap: 12px; max-width: 320px; margin: 0 auto;">
+            <input type="text" id="sim-id" value="MS-EAB9-1217" required placeholder="MS-XXXX-XXXX" style="flex: 1; padding: 8px 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: #fff;">
+            <button type="submit" class="button primary" style="padding: 8px 16px; font-size: 13px;">View</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const pathParts = window.location.pathname.split("/");
+        let deviceId = pathParts.pop();
+        
+        // If trailing slash, pop again
+        if (!deviceId && pathParts.length > 0) {
+          deviceId = pathParts.pop();
+        }
+
+        if (deviceId && /^MS-[0-9A-F]{4}-[0-9A-F]{4}$/.test(deviceId)) {
+          loadProfile(deviceId);
+        } else {
+          // Check URL query search
+          const urlParams = new URLSearchParams(window.location.search);
+          const qId = urlParams.get("id");
+          if (qId && /^MS-[0-9A-F]{4}-[0-9A-F]{4}$/.test(qId)) {
+            loadProfile(qId);
+          } else {
+            showError();
+          }
+        }
+
+        document.getElementById("sim-lookup-form").addEventListener("submit", (e) => {
+          e.preventDefault();
+          const targetId = document.getElementById("sim-id").value.trim();
+          loadProfile(targetId);
+        });
+      });
+
+      async function loadProfile(deviceId) {
+        document.getElementById("error-card").style.display = "none";
+        document.getElementById("profile-card").style.display = "block";
+
+        try {
+          const response = await fetch(`/id/${deviceId}.json`);
+          if (response.ok) {
+            const cert = await response.json();
+            renderProfile(cert.subject, cert.issuer.authority);
+          } else {
+            // Check if mock matches locally stored simulation keys
+            const localKeys = JSON.parse(localStorage.getItem("ms_mock_keys")) || [];
+            const keyRecord = localKeys.find(k => k.device_id === deviceId);
+            if (keyRecord) {
+              const mockCert = {
+                display_name: "Local Mock Profile",
+                public_key: keyRecord.public_key,
+                device_id: deviceId,
+                verified_accounts: [{ type: "github", value: keyRecord.actor, method: "oauth" }],
+                plan: "basic",
+                expires_at: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+              };
+              renderProfile(mockCert, "matrixscroll-simulated-authority");
+            } else if (deviceId === "MS-EAB9-1217") {
+              // Static mock sample
+              const mockCert = {
+                display_name: "Ryan James York",
+                public_key: "Vxee+i1db9bLRAY5cPJw7gFBCk2lHlp...",
+                device_id: "MS-EAB9-1217",
+                verified_accounts: [{ type: "github", value: "ssx360", method: "oauth" }],
+                plan: "basic",
+                expires_at: "2026-07-27T00:00:00Z"
+              };
+              renderProfile(mockCert, "matrixscroll-simulated-authority");
+            } else {
+              showError();
+            }
+          }
+        } catch (e) {
+          showError();
+        }
+      }
+
+      function renderProfile(subject, authority) {
+        document.getElementById("prof-name").textContent = subject.display_name;
+        document.getElementById("prof-device-id").textContent = subject.device_id;
+        document.getElementById("prof-pubkey").textContent = subject.public_key;
+        document.getElementById("prof-plan").textContent = subject.plan.toUpperCase();
+        
+        const expDate = new Date(subject.expires_at).toLocaleDateString(undefined, {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        document.getElementById("prof-expires").textContent = expDate;
+        document.getElementById("prof-issuer").textContent = authority;
+
+        const acct = subject.verified_accounts && subject.verified_accounts[0];
+        if (acct) {
+          document.getElementById("prof-account").textContent = `${acct.type}:${acct.value}`;
+          document.getElementById("prof-account").style.display = "inline-flex";
+        } else {
+          document.getElementById("prof-account").style.display = "none";
+        }
+      }
+
+      function showError() {
+        document.getElementById("profile-card").style.display = "none";
+        document.getElementById("error-card").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
