@@ -2,6 +2,10 @@
   "framework": null,
   "buildCommand": "",
   "outputDirectory": ".",
+  "redirects": [
+    { "source": "/device", "destination": "/hardware/", "permanent": true },
+    { "source": "/device/", "destination": "/hardware/", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/docs/Documentation.md", "destination": "/docs/Documentation.html" },
     { "source": "/docs/Whitepaper.md", "destination": "/docs/Whitepaper.html" }
