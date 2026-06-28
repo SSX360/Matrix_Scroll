@@ -5,10 +5,11 @@
       "command": "matrixscroll-mcp",
       "args": []
     },
-    "cursor-copilot": {
-      "command": "path/to/cursor-co-pilot/.venv/Scripts/python.exe",
+    "digital-rain-mcp": {
+      "type": "stdio",
+      "command": "path/to/digital-rain/.venv/Scripts/python.exe",
       "args": [
-        "path/to/cursor-co-pilot/mcp_server.py"
+        "path/to/digital-rain/mcp_server.py"
       ],
       "env": {
         "COPILOT_WORKSPACE": "${workspaceFolder}",

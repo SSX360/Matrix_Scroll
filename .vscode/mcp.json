@@ -1,10 +1,10 @@
 {
   "servers": {
-    "cursor-copilot": {
+    "digital-rain-mcp": {
       "type": "stdio",
-      "command": "c:/Users/ryanj/OneDrive/Desktop/cursor-co-pilot/.venv/Scripts/python.exe",
+      "command": "C:/Users/ryanj/OneDrive/Desktop/SSX_optimize/digital-rain/.venv/Scripts/python.exe",
       "args": [
-        "c:/Users/ryanj/OneDrive/Desktop/cursor-co-pilot/mcp_server.py"
+        "C:/Users/ryanj/OneDrive/Desktop/SSX_optimize/digital-rain/mcp_server.py"
       ],
       "env": {
         "COPILOT_WORKSPACE": "${workspaceFolder}",

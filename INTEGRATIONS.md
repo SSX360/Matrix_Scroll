@@ -48,11 +48,11 @@ VS Code has built-in MCP support in agent mode. Commit a workspace config at `.v
 ```json
 {
   "servers": {
-    "cursor-copilot": {
+    "digital-rain-mcp": {
       "type": "stdio",
-      "command": "path/to/cursor-co-pilot/.venv/Scripts/python.exe",
+      "command": "path/to/digital-rain/.venv/Scripts/python.exe",
       "args": [
-        "path/to/cursor-co-pilot/mcp_server.py"
+        "path/to/digital-rain/mcp_server.py"
       ],
       "env": {
         "COPILOT_WORKSPACE": "${workspaceFolder}",
@@ -76,10 +76,10 @@ If you are using VS Code with agent extensions like Cline or Roo-Code, add the s
 ```json
 {
   "mcpServers": {
-    "cursor-copilot": {
+    "digital-rain-mcp": {
       "command": "python",
       "args": [
-        "path/to/cursor-co-pilot/mcp_server.py"
+        "path/to/digital-rain/mcp_server.py"
       ],
       "env": {
         "COPILOT_WORKSPACE": "${workspaceFolder}",
@@ -99,10 +99,10 @@ To integrate with the Claude Desktop app, edit your `claude_desktop_config.json`
 ```json
 {
   "mcpServers": {
-    "cursor-copilot": {
+    "digital-rain-mcp": {
       "command": "python",
       "args": [
-        "path/to/cursor-co-pilot/mcp_server.py"
+        "path/to/digital-rain/mcp_server.py"
       ],
       "env": {
         "COPILOT_WORKSPACE": "${workspaceFolder}",
@@ -118,7 +118,7 @@ To integrate with the Claude Desktop app, edit your `claude_desktop_config.json`
 ### D. Cursor Editor
 The Cursor editor handles it automatically! It registers via `.cursor/mcp.json` or by adding a new `command` MCP server in your Cursor settings:
 - **Type**: `command`
-- **Command**: `python path/to/cursor-co-pilot/mcp_server.py`
+- **Command**: `python path/to/digital-rain/mcp_server.py`
 - **Env**: set `COPILOT_WORKSPACE` to `${workspaceFolder}` so scans target the repo you have open.
 
 ---
