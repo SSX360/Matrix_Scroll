@@ -1,28 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
 
 :root {
-  color-scheme: light;
-  --bg: #ffffff;
-  --bg-2: #fcfcfc;
-  --panel: #fafafa;
-  --panel-2: #f4f4f5;
-  --text: #18181b;
-  --muted: #4b5563;
-  --soft: #71717a;
-  --line: #e4e4e7;
-  --line-strong: #a1a1aa;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-2: #10b981;
-  --danger: #ef4444;
-  --ok: #10b981;
-  --shadow: 0 4px 30px rgba(0, 0, 0, 0.015), 0 1px 3px rgba(0, 0, 0, 0.01);
-  --sans: "Cormorant Garamond", Georgia, serif;
-  --display: "Cormorant Garamond", Georgia, serif;
-  --interface: "Inter", -apple-system, sans-serif;
+  color-scheme: dark;
+  --bg: #0c0a14;
+  --bg-2: #12101c;
+  --panel: rgba(24, 20, 36, 0.72);
+  --panel-2: rgba(32, 26, 48, 0.85);
+  --text: #f4f0ff;
+  --muted: #b8b0cc;
+  --soft: #8a829e;
+  --line: rgba(168, 139, 250, 0.22);
+  --line-strong: rgba(251, 191, 36, 0.35);
+  --accent: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --accent-2: #fbbf24;
+  --danger: #f87171;
+  --ok: #34d399;
+  --shadow: 0 12px 40px rgba(8, 4, 18, 0.55), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --display: "Space Grotesk", "Inter", sans-serif;
+  --interface: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: "JetBrains Mono", monospace;
-  --radius: 8px;
-  --radius-sm: 4px;
+  --radius: 10px;
+  --radius-sm: 6px;
 }
 
 * {
@@ -53,7 +53,7 @@ body {
   min-height: 100vh;
   background-color: var(--bg);
   color: var(--text);
-  font-family: var(--sans);
+  font-family: var(--interface);
   font-size: clamp(16px, 1.2vw, 18px);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
@@ -312,6 +312,18 @@ pre code {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 16px;
   margin: 24px 0;
+}
+
+
+.panel,
+.compat-card,
+.status-card,
+.signal-card,
+.cta-panel {
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
 }
 
 .panel,
