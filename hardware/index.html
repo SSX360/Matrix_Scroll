@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AP2 Vault Card — Matrix Scroll Hardware</title>
+  <meta name="description" content="AP2 Vault Card hardware preview: NFC tap-to-approve possession factor on nRF52840 + SE050. Same verifier contract as emulated mode — software ships now, hardware is the trust upgrade.">
+  <link rel="canonical" href="https://matrixscroll.com/hardware/">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/site-shell.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell">
+      <a class="brand" href="/"><span class="brand-dot"></span><span>Matrix Scroll</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="/verify/">Verify</a>
+        <a href="/compare/">Compare</a>
+        <a href="/spec/">Spec</a>
+        <a href="/hardware/" aria-current="page">Hardware</a>
+        <a href="/docs/">Docs</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button" href="https://ssx360.com/contact?intent=ap2">Request hardware pilot</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="shell">
+      <section class="hero">
+        <span class="eyebrow">AP2 Vault Card · hardware preview</span>
+        <h1>NFC tap-to-approve. Same verifier contract as software.</h1>
+        <p>Matrix Scroll ships as software today — emulated Ed25519 signing on your machine. The AP2 Vault Card is the hardware trust upgrade: a deliberate physical tap captures human-present approval while the private key stays sealed in an SE050 secure element on nRF52840.</p>
+        <div class="status-block">
+          <div><strong>Shipping now:</strong> PyPI <code>0.2.6</code>, Git hooks, Scroll Gate PR verification, browser verifier, and emulated-mode evaluation.</div>
+          <div><strong>In progress:</strong> SSX360 SE050 hardware preview and verifier-compatible external Ed25519 signer guidance.</div>
+          <div><strong>Not:</strong> IAM, sandboxing, prompt filtering, or an agent runtime.</div>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card span-6">
+          <h3>Software → hardware transition</h3>
+          <p>Emulated mode stores the signing key locally so teams can evaluate the full commit envelope flow today. Hardware mode keeps the same schema and verifier — but moves the key into the secure element so the host cannot export it.</p>
+        </article>
+        <article class="card span-6">
+          <h3>NFC tap-to-approve</h3>
+          <p>For payment mandates, a deliberate tap on the AP2 Vault Card captures explicit human approval at the moment money moves. Phase 1 pilots use an emulated tap via the Matrix Scroll CLI until NFC companion ships.</p>
+        </article>
+      </section>
+
+      <h2 class="section-title">Reference stack</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>nRF52840</h3>
+          <p>Low-power MCU with NFC-A front end for tap-to-approve UX and USB provisioning during fleet enrollment.</p>
+        </article>
+        <article class="card span-4">
+          <h3>SE050 secure element</h3>
+          <p>Non-exportable Ed25519 signing inside the chip boundary — the host requests signatures but cannot read the private key.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Same proof surfaces</h3>
+          <p>CLI, browser verifier, and CI action stay unchanged. Hardware signs the same canonical manifest bytes Matrix Scroll already uses.</p>
+        </article>
+      </section>
+
+      <h2 class="section-title">Why this path exists</h2>
+      <section class="grid">
+        <article class="card span-4">
+          <h3>Possession factor</h3>
+          <p>A compromised agent session cannot trigger approval without the physical card present for tap authorization.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Bounded mandates</h3>
+          <p>Per-cart, budget cap, TTL, and merchant scope — exceed the bounds and a fresh tap is required or the payment is refused.</p>
+        </article>
+        <article class="card span-4">
+          <h3>Design-partner only</h3>
+          <p>Preview access stays narrow until latency, provisioning, and acceptance criteria are documented against the existing verifier contract.</p>
+        </article>
+      </section>
+
+      <section class="card span-12" style="margin-top:32px">
+        <h3>Ready for rollout?</h3>
+        <p>Verify the protocol, install the MCP server, then request a hardware pilot when your team needs fleet card policy, possession-factor audit, and hosted enforcement.</p>
+        <div class="link-list">
+          <a href="/verify/">Verify a commit</a>
+          <a href="/#install">Install the MCP</a>
+          <a href="https://ssx360.com/partner/ap2-vault-card">AP2 Vault Card partner brief</a>
+          <a href="https://ssx360.com/contact?intent=pilot">Book a provenance pilot</a>
+          <a href="https://ssx360.com/contact?intent=ap2">Request hardware pilot</a>
+          <a href="https://ssx360.com/contact?intent=pilot">Book a provenance pilot</a>
+          <a href="https://ssx360.com/signup">Sign in at SSX360</a>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <span>Matrix Scroll · AP2 Vault Card hardware preview</span>
+        <span><a href="/spec/">Spec</a> | <a href="/verify/">Verify</a> | <a href="/docs/">Docs</a></span>
+      </footer>
+    </div>
+  </main>
+</body>
+</html>
