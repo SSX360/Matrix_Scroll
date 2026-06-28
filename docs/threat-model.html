@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Threat model — Matrix Scroll Documentation</title>
+    <meta name="description" content="Matrix Scroll attestation limits, L1 software-key assumptions, and trust anchor distribution.">
+    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, AP2 Vault Card, offline verification, git hooks">
+    <meta name="author" content="Matrix Scroll">
+    <meta name="robots" content="index, follow">
+    <meta name="content-language" content="en-US">
+    <meta name="geo.region" content="US">
+    <meta name="geo.placename" content="United States">
+    <link rel="canonical" href="https://matrixscroll.com/docs/threat-model.html">
+    <link rel="alternate" hreflang="en-US" href="https://matrixscroll.com/docs/threat-model.html">
+    <link rel="alternate" hreflang="x-default" href="https://matrixscroll.com/docs/threat-model.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Matrix Scroll">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://matrixscroll.com/docs/threat-model.html">
+    <meta property="og:title" content="Matrix Scroll threat model">
+    <meta property="og:description" content="Matrix Scroll attestation limits, L1 software-key assumptions, and trust anchor distribution.">
+    <meta property="og:image" content="https://matrixscroll.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MatrixScroll">
+    <meta name="twitter:title" content="Matrix Scroll threat model">
+    <meta name="twitter:description" content="Matrix Scroll attestation limits, L1 software-key assumptions, and trust anchor distribution.">
+    <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
+    <meta name="twitter:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
+    <meta name="theme-color" content="#0a0908">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site-enhancements.js" defer></script>
+    <script src="/assets/site-nav.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links"></div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell reveal-up">
+        <p class="eyebrow">Security</p>
+        <h1>Threat model</h1>
+        <p class="lead">Attestation limits and L1 software-key assumptions.</p>
+        <div class="button-row">
+          <a class="button secondary" href="/docs/">Back to docs</a>
+          <a class="button ghost" href="/hardware/">Hardware path →</a>
+        </div>
+      </section>
+
+      <section class="band reveal-up">
+        <div class="shell">
+          <div class="status-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));" aria-label="Security model details">
+            <article class="status-card panel">
+              <strong>What is defeated</strong>
+              <p>Protects against silent out-of-band commit modification, signature stripping in transit, and unrecorded agent contribution. Once signed, any downstream tampering of the commit message, author, or canonical schema metadata will break the signature verification offline and in CI.</p>
+            </article>
+            <article class="status-card panel">
+              <strong>What is NOT defeated (L1 limits)</strong>
+              <p>An emulated software key (L1) proves possession of the private key file, not the physical identity of the actor. A compromised developer machine, a malicious local agent, or an attacker with write access to the filesystem can sign envelopes that verify perfectly. In L1 mode, actor binding is advisory and relies on workstation access controls.</p>
+            </article>
+          </div>
+          <div class="compare-callout" style="margin-top: 24px;">
+            <strong>Trust anchor distribution &amp; key rotation</strong>
+            <p>Organizations establish trust by distributing public keys to verifiers (e.g., CI/CD runners using the <code>--trusted-keys</code> parameter). Revocation, multi-maintainer key rotation, and transparency-log integrations are active areas of protocol development. Matrix Scroll commits represent advisory self-attestations until external trust anchors or transparency logs are integrated.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+          <p>Open protocol for signed agent-assisted Git commits.</p>
+        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a></div>
+        <div><h2>Learn</h2><a href="/docs/why.html">Why it exists</a><a href="/docs/protocol-flow.html">Protocol flow</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

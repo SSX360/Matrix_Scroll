@@ -1,0 +1,390 @@
+/* AP2 Vault Card cinematic hardware page */
+.ap2-page {
+  --ap2-amber: oklch(0.7 0.12 70);
+  --ap2-purple: oklch(0.5 0.15 290);
+}
+
+.ap2-cinematic {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  transition: opacity 0.5s ease;
+}
+
+.ap2-cinematic.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ap2-cinematic-inner {
+  text-align: center;
+}
+
+.ap2-cinematic-label {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  color: var(--ap2-amber);
+  opacity: 0;
+}
+
+.ap2-cinematic-line {
+  margin: 12px auto 0;
+  height: 1px;
+  width: 80px;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: var(--ap2-amber);
+}
+
+.ap2-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(96px, 12vw, 140px) 0 clamp(48px, 8vw, 80px);
+}
+
+.ap2-hero-glow-a,
+.ap2-hero-glow-b {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(120px);
+}
+
+.ap2-hero-glow-a {
+  top: 35%;
+  right: 20%;
+  width: min(600px, 70vw);
+  height: min(600px, 70vw);
+  background: var(--ap2-purple);
+  opacity: 0.2;
+}
+
+.ap2-hero-glow-b {
+  top: 28%;
+  right: 28%;
+  width: min(400px, 50vw);
+  height: min(400px, 50vw);
+  background: var(--ap2-amber);
+  opacity: 0.15;
+}
+
+.ap2-hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .ap2-hero-grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  }
+}
+
+.ap2-hero-copy h1 {
+  font-family: var(--display);
+  font-size: clamp(2.75rem, 7vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.ap2-hero-copy h1 .accent {
+  color: var(--ap2-amber);
+}
+
+.ap2-hero-word {
+  display: block;
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.ap2-hero-sub {
+  opacity: 0;
+  max-width: 28rem;
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.ap2-hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.ap2-hero-visual img {
+  width: 100%;
+  max-width: 700px;
+  opacity: 0;
+  transform: scale(0.96);
+  will-change: transform;
+}
+
+.ap2-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.4;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--muted);
+}
+
+.ap2-scroll-hint span:last-child {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--ap2-amber), transparent);
+}
+
+.ap2-section {
+  padding: clamp(72px, 10vw, 120px) 0;
+  position: relative;
+}
+
+.ap2-section-head h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin: 0.5rem 0 0;
+}
+
+.ap2-steps {
+  display: grid;
+  gap: 16px;
+}
+
+.ap2-step-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: clamp(20px, 3vw, 28px);
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.ap2-step-num {
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  color: var(--ap2-amber);
+  flex-shrink: 0;
+}
+
+.ap2-parallax-break {
+  position: relative;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.ap2-parallax-break img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12);
+  will-change: transform;
+}
+
+.ap2-parallax-break::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, var(--bg), transparent 35%, transparent 65%, var(--bg));
+}
+
+.ap2-arch-grid {
+  display: grid;
+  gap: clamp(32px, 5vw, 48px);
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .ap2-arch-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+.ap2-arch-grid img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.ap2-arch-item {
+  border-left: 2px solid var(--line);
+  padding: 4px 0 4px 20px;
+  margin-bottom: 20px;
+}
+
+.ap2-arch-item.amber { border-color: var(--ap2-amber); }
+.ap2-arch-item.purple { border-color: var(--ap2-purple); }
+
+.ap2-arch-item h4 {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  margin: 0 0 6px;
+}
+
+.ap2-arch-item.amber h4 { color: var(--ap2-amber); }
+.ap2-arch-item.purple h4 { color: var(--ap2-purple); }
+
+.ap2-security-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.ap2-sec-item {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ap2-spec-table-wrap {
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.ap2-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.ap2-spec-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.ap2-spec-table tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.ap2-spec-table td:first-child {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  width: 38%;
+}
+
+.ap2-waitlist {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.ap2-stat-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 6vw, 48px);
+  margin-top: 48px;
+  flex-wrap: wrap;
+}
+
+.ap2-stat-val {
+  font-family: var(--mono);
+  font-size: 1.75rem;
+  color: var(--ap2-amber);
+}
+
+.ap2-stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.ap2-stat-note {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ap2-poc-lab {
+  margin-top: 0;
+  border-top: 1px solid var(--line);
+  padding: clamp(48px, 8vw, 72px) 0;
+}
+
+.ap2-poc-lab summary {
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  list-style: none;
+}
+
+.ap2-poc-lab summary::-webkit-details-marker {
+  display: none;
+}
+
+.ap2-poc-lab-body {
+  margin-top: 16px;
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+.ap2-local-nav {
+  display: none;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .ap2-local-nav {
+    display: flex;
+  }
+}
+
+.ap2-local-nav a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.ap2-local-nav a:hover {
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ap2-cinematic {
+    display: none !important;
+  }
+
+  .ap2-hero-word,
+  .ap2-hero-sub,
+  .ap2-hero-visual img,
+  .ap2-step-card,
+  .ap2-sec-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .ap2-parallax-break img {
+    transform: none !important;
+  }
+}

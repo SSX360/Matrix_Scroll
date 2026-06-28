@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-      <head>
+        <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Matrix Scroll — Prove who or what made the commit</title>
@@ -223,124 +223,18 @@
         </div>
       </section>
 
-      <section class="shell split-section reveal-up">
-        <div>
-          <p class="eyebrow">Why it exists</p>
-          <h2>AI code needs provenance that survives the chat window.</h2>
-          <p>
-            Agent-assisted commits often lose their provenance as soon as the
-            chat window closes. Traditional audit trails can show that a
-            workstation pushed a commit, but not whether an agent, model, CI
-            task, or vendor tool produced the change. Matrix Scroll turns that
-            gap into a signed commit envelope anyone can verify offline.
-          </p>
-          <p>
-            The protocol stays intentionally small: canonicalize the manifest,
-            exclude the signature block, sign the bytes, publish the public
-            key, and let anyone verify the result.
-          </p>
+      <div class="partner-proof-bar reveal-up">
+        <div class="shell partner-proof-inner">
+          <span>Design partner pilot · PoC with select teams</span>
+          <span class="partner-proof-links">
+            <a href="https://pypi.org/project/matrixscroll/0.3.0/" rel="noopener">PyPI 0.3.0</a>
+            <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>
+            <a href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">Scroll Gate</a>
+          </span>
         </div>
-        <div class="manifest-card" aria-label="Example signature block">
-          <pre><code>{
-  "signature": {
-    "schema": "matrixscroll.signature.v1",
-    "algorithm": "ed25519",
-    "device_id": "MS-EAB9-1217",
-    "mode": "emulated",
-    "signed_at": "2026-06-19T14:32:00Z",
-    "public_key": "Vxee...",
-    "value": "SQPM..."
-  }
-}</code></pre>
-        </div>
-      </section>
+      </div>
 
-      <section class="band reveal-up">
-        <div class="shell">
-          <div class="section-heading">
-            <p class="eyebrow">Protocol flow</p>
-            <h2>From agent output to durable proof.</h2>
-          </div>
-          <div class="flow-grid" aria-label="Matrix Scroll protocol flow">
-            <article class="flow-step">
-              <span>01</span>
-              <h3>IDE or agent</h3>
-              <p>Creates a release, commit, evidence pack, or policy manifest.</p>
-            </article>
-            <article class="flow-step">
-              <span>02</span>
-              <h3>SDK canonicalizes</h3>
-              <p>Sorted keys, compact separators, ASCII escaping, no NaN, and no top-level signature input.</p>
-            </article>
-            <article class="flow-step">
-              <span>03</span>
-              <h3>The active signer signs</h3>
-              <p>Today that means the emulated provider. Later it can support external keyrings and secure enclaves using the same public contract.</p>
-            </article>
-            <article class="flow-step">
-              <span>04</span>
-              <h3>Anyone verifies</h3>
-              <p>Public key, device ID, algorithm, timestamp, and signature travel with the manifest.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="shell split-section reveal-up hardware-ready">
-        <div>
-          <p class="eyebrow">Hardware ready</p>
-          <h2>Software signing today. Possession-factor approval next.</h2>
-          <p>
-            Matrix Scroll ships as an open SDK with local CLI, Git hooks, and MCP integration. The AP2 Vault Card
-            extends the same envelope contract with NFC tap-to-approve and an NXP SE050 secure element — without
-            changing the verifier.
-          </p>
-          <ul class="hardware-ready-list">
-            <li>Same <code>matrixscroll.identity.v1</code> byte contract</li>
-            <li>Emulated signing on PyPI today; hardware-backed signing in pilot</li>
-            <li>Fleet policy and audit via SSX360 control plane</li>
-          </ul>
-          <div class="button-row">
-            <a class="button primary" href="/hardware/">Explore AP2 Vault Card</a>
-            <a class="button secondary" href="https://ssx360.com/contact?intent=ap2">Request hardware pilot</a>
-          </div>
-        </div>
-        <figure class="hardware-ready-visual">
-          <img
-            src="/assets/images/ap2-vault-card-closeup.webp"
-            alt="AP2 Vault Card close-up — matte black surface with gold core edge and NFC contactless symbol"
-            width="2560"
-            height="1440"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
-      </section>
-
-      <section class="band reveal-up">
-        <div class="shell">
-          <div class="section-heading">
-            <p class="eyebrow">Threat Model &amp; Security Assumptions</p>
-            <h2>Attestation limits and L1 software-key assumptions.</h2>
-          </div>
-          <div class="status-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr));" aria-label="Security model details">
-            <article class="status-card">
-              <strong>What is defeated</strong>
-              <p>Protects against silent out-of-band commit modification, signature stripping in transit, and unrecorded agent contribution. Once signed, any downstream tampering of the commit message, author, or canonical schema metadata will break the signature verification offline and in CI.</p>
-            </article>
-            <article class="status-card">
-              <strong>What is NOT defeated (L1 Limits)</strong>
-              <p>An emulated software key (L1) proves possession of the private key file, not the physical identity of the actor. A compromised developer machine, a malicious local agent, or an attacker with write access to the filesystem can sign envelopes that verify perfectly. In L1 mode, actor binding is advisory and relies on workstation access controls.</p>
-            </article>
-          </div>
-          <div class="compare-callout" style="margin-top: 24px;">
-            <strong>Trust anchor distribution &amp; key rotation</strong>
-            <p>Organizations establish trust by distributing public keys to verifiers (e.g., CI/CD runners using the <code>--trusted-keys</code> parameter). Revocation, multi-maintainer key rotation, and transparency-log integrations are active areas of protocol development. Matrix Scroll commits represent advisory self-attestations until external trust anchors or transparency logs are integrated.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="band" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <section id="pricing" class="band reveal-up" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
         <div class="shell pricing-section">
           <div class="pricing-header">
             <p class="eyebrow">Trust Tiers</p>
@@ -443,31 +337,38 @@
         </div>
       </section>
 
-      <section class="shell cta-grid">
-        <article class="cta-panel">
-          <p class="eyebrow">Build</p>
-          <h2>Start with the open SDK.</h2>
-          <p>Install hooks, sign one commit, and add a PR gate without changing your existing Git flow.</p>
-          <a class="button primary" href="/docs/">Open quickstart</a>
-        </article>
-        <article class="cta-panel">
-          <p class="eyebrow">Verify</p>
-          <h2>Test a signed manifest in-browser.</h2>
-          <p>The verifier runs client-side. Paste a signed commit envelope, release manifest, or evidence pack and check it locally.</p>
-          <a class="button secondary" href="/verify/">Open verifier</a>
-        </article>
-        <article class="cta-panel">
-          <p class="eyebrow">Spec</p>
-          <h2>Review the open specification.</h2>
-          <p>Read the canonical wire format, JSON schemas, public key derivations, and compliance test vectors on GitHub.</p>
-          <a class="button primary" href="/spec/">Read the spec</a>
-        </article>
-        <article class="cta-panel">
-          <p class="eyebrow">MCP Server</p>
-          <h2>Agent Self-Attestation</h2>
-          <p>Enable AI agents to sign their own commits in-loop. Integrates with Claude Desktop, Cursor, and VS Code to cryptographically attest code changes using Ed25519.</p>
-          <a class="button primary" href="/mcp/">Install MCP Server</a>
-        </article>
+      <section class="shell home-teaser reveal-up">
+        <div class="home-teaser-inner">
+          <div>
+            <p class="eyebrow">Hardware path</p>
+            <h2>Possession-factor approval with AP2 Vault Card.</h2>
+            <p>Same <code>matrixscroll.identity.v1</code> envelope — tap-to-approve on NXP SE050 silicon. Full story on the hardware page.</p>
+            <div class="button-row">
+              <a class="button primary" href="/hardware/">Explore AP2 Vault Card</a>
+              <a class="button secondary" href="https://ssx360.com/contact?intent=ap2">Request hardware pilot</a>
+            </div>
+          </div>
+          <figure class="hardware-ready-visual">
+            <img src="/assets/images/ap2-vault-card-closeup.webp" alt="AP2 Vault Card close-up" width="2560" height="1440" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </section>
+
+      <section class="shell reveal-up">
+        <div class="section-heading compact">
+          <p class="eyebrow">Next steps</p>
+          <h2>Install, verify, or read the depth.</h2>
+        </div>
+        <div class="button-row">
+          <a class="button primary" href="/docs/">Open documentation</a>
+          <a class="button secondary" href="/verify/">Open browser verifier</a>
+        </div>
+        <p class="small-note" style="margin-top: 20px;">
+          Deep dives: <a href="/docs/why.html">Why it exists</a> ·
+          <a href="/docs/protocol-flow.html">Protocol flow</a> ·
+          <a href="/docs/threat-model.html">Threat model</a> ·
+          <a href="/spec/">Specification</a>
+        </p>
       </section>
     </main>
 
@@ -483,7 +384,7 @@
         </div>
         <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="/verify/">Verifier</a></div>
         <div><h2>Ecosystem</h2><a href="/hardware/">Hardware</a><a href="/ap2/">AP2</a><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 Control Plane ↗</a></div>
-        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/docs/why.html">Why it exists</a><a href="/docs/protocol-flow.html">Protocol flow</a><a href="/docs/threat-model.html">Threat model</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
       </div>
     </footer>
     <script>

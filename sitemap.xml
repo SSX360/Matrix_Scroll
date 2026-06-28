@@ -11,5 +11,9 @@
   <url><loc>https://matrixscroll.com/ecosystem/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
   <url><loc>https://matrixscroll.com/roadmap/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://matrixscroll.com/authority/</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://matrixscroll.com/docs/why.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://matrixscroll.com/docs/protocol-flow.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://matrixscroll.com/docs/threat-model.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://matrixscroll.com/hardware/lab/</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://matrixscroll.com/docs/Whitepaper.html</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
 </urlset>
