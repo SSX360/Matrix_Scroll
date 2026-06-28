@@ -19,6 +19,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "index.html": "wrote every commit.",
             "compare/index.html": "Keep your current controls. Add commit-time provenance.",
             "device/index.html": "Software first. Preview trust upgrade next.",
+            "hardware/index.html": "NFC tap-to-approve. Same verifier contract as software.",
             "docs/index.html": "quickstart-mcp.md",
             "spec/index.html": "Pure Ed25519 over canonical JSON bytes.",
             "verify/index.html": "Tamper Sample",
@@ -41,6 +42,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "verify/index.html",
             "spec/index.html",
             "device/index.html",
+            "hardware/index.html",
         ):
             text = (site_root / relative_path).read_text(encoding="utf-8")
             for marker in self._status_markers():
@@ -61,6 +63,10 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "matrixscroll-mcp",
             '"mcpServers"',
             'id="answers"',
+            'id="hardware"',
+            "Hardware ready",
+            "/hardware/",
+            "Request hardware pilot",
             "What is Matrix Scroll and how does it secure Git?",
         ):
             self.assertIn(marker, homepage)
@@ -101,6 +107,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "verify/index.html",
             "spec/index.html",
             "device/index.html",
+            "hardware/index.html",
         ):
             text = (site_root / relative_path).read_text(encoding="utf-8")
             self.assertIn("Book a provenance pilot", text, relative_path)
@@ -131,6 +138,7 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "verify/index.html",
             "spec/index.html",
             "device/index.html",
+            "hardware/index.html",
         ):
             text = (site_root / relative_path).read_text(encoding="utf-8")
             self.assertNotIn("cursor-copilot", text, relative_path)
@@ -145,10 +153,19 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "verify/index.html",
             "spec/index.html",
             "device/index.html",
+            "hardware/index.html",
         ):
             text = (site_root / relative_path).read_text(encoding="utf-8")
             for marker in ("â€”", "â†’", "â—", "Ã"):
                 self.assertNotIn(marker, text, relative_path)
+
+    def test_vercel_redirects_device_to_hardware(self):
+        config_path = Path(__file__).resolve().parents[1] / "vercel.json"
+        config = json.loads(config_path.read_text(encoding="utf-8"))
+        redirects = {(item["source"], item["destination"]) for item in config.get("redirects", [])}
+
+        self.assertIn(("/device", "/hardware/"), redirects)
+        self.assertIn(("/device/", "/hardware/"), redirects)
 
     def test_docs_reference_pages_keep_explicit_html_destinations(self):
         config_path = Path(__file__).resolve().parents[1] / "vercel.json"
