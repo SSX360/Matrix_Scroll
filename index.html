@@ -236,7 +236,38 @@
         </div>
       </section>
 
-      <section class="band">
+      <section class="shell split-section reveal-up hardware-ready">
+        <div>
+          <p class="eyebrow">Hardware ready</p>
+          <h2>Software signing today. Possession-factor approval next.</h2>
+          <p>
+            Matrix Scroll ships as an open SDK with local CLI, Git hooks, and MCP integration. The AP2 Vault Card
+            extends the same envelope contract with NFC tap-to-approve and an NXP SE050 secure element — without
+            changing the verifier.
+          </p>
+          <ul class="hardware-ready-list">
+            <li>Same <code>matrixscroll.identity.v1</code> byte contract</li>
+            <li>Emulated signing on PyPI today; hardware-backed signing in pilot</li>
+            <li>Fleet policy and audit via SSX360 control plane</li>
+          </ul>
+          <div class="button-row">
+            <a class="button primary" href="/hardware/">Explore AP2 Vault Card</a>
+            <a class="button secondary" href="https://ssx360.com/contact?intent=ap2">Request hardware pilot</a>
+          </div>
+        </div>
+        <figure class="hardware-ready-visual">
+          <img
+            src="/assets/images/ap2-vault-card-closeup.webp"
+            alt="AP2 Vault Card close-up — matte black surface with gold core edge and NFC contactless symbol"
+            width="2560"
+            height="1440"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </section>
+
+      <section class="band reveal-up">
         <div class="shell">
           <div class="section-heading">
             <p class="eyebrow">Threat Model &amp; Security Assumptions</p>

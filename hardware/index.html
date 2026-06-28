@@ -91,6 +91,26 @@
       }
       .holo-card-v2:active { cursor: grabbing; }
 
+      .holo-card-v2.photo-card {
+        width: min(520px, 94vw);
+        height: auto;
+        aspect-ratio: 16 / 10;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        cursor: default;
+      }
+      .holo-card-v2.photo-card .device-viewport { padding: 0; height: auto; }
+      .holo-card-v2.photo-card .holo-overlay { opacity: 0.08; }
+      .holo-card-v2.photo-card .card-glare { opacity: 0.35; }
+      .dv-photo {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 18px;
+        filter: drop-shadow(0 24px 56px rgba(124, 58, 237, 0.35));
+      }
+
       .holo-overlay {
         position: absolute; inset: 0; z-index: 5; pointer-events: none;
         mix-blend-mode: color-dodge; opacity: 0.4;
@@ -644,13 +664,15 @@
               status: "poc",
               cogs: "$2.90", retail: "$29.00", color: "blue", chip: true, nfc: true,
               kicker: "AP2 Vault Controller", name: "Matrix Scroll", badge: "",
-              materials: "Semi-transparent thick PET plastic with embedded, custom circular copper antenna coils, scratch-resistant double-sided coating, iridescent gradient foil print.",
-              tech: "High-frequency NTAG213 NFC chip. Pre-programmed with signed, hardware-bound agentic payment intents. When swiped against a smartphone, instantly opens an authorization token.",
-              loop: "Bundled as a gift inside developer welcome packages. Acts as the tangible safety switch for autonomous agents executing payment actions, making agentic control a physical gesture.",
+              materials: "Matte black PET with embedded NFC antenna, copper coil, and NXP SE050 secure element for on-chip Ed25519 signing.",
+              tech: "nRF52840 host MCU + SE050 secure element. NFC tap-to-approve for bounded agent payment mandates — same envelope contract as software signing.",
+              loop: "Bundled in hardware pilot welcome kits. The tangible possession factor a compromised agent session cannot forge.",
               actionLabel: "Simulate Secure NFC Payment Tap",
-              coreValue: "Home Assistant Sandbox", success: "[OK] Secure Manifest successfully integrated with local chain.",
-              center: "ring-icon", icon: "globe", centerLabel: "AP2 Tap-to-Authorize", centerSub: "SECURE-NFC: 0x882A...7E",
-              footL: ["FREQUENCY: 13.56MHz", "SECURE PAYMENTS ACTIVE", "NFC Enabled Active Node"], footR: { type: "qr", seed: 3 }
+              coreValue: "Possession-factor approval", success: "[OK] Tap authorization record verified offline.",
+              center: "photo",
+              photoSrc: "/assets/images/ap2-vault-card-angled.webp",
+              photoAlt: "AP2 Vault Card — matte black NFC hardware with purple rim lighting",
+              footL: ["FREQUENCY: 13.56MHz", "SE050 ON-CHIP", "NFC TAP-TO-APPROVE"], footR: { type: "meta", hi: "ACTIVE POC", lines: ["MS-C2-VAULT"] }
             },
             signer: {
               modelCode: "MS-C3-HARD", title: "SSX360 Crystal Signer", short: "SSX360",
@@ -692,6 +714,15 @@
 
         // ---------- Build the device viewport for a product ----------
         function buildViewport(p) {
+          if (p.center === "photo") {
+            els.card.classList.add("photo-card");
+            els.actionBtn.style.setProperty("--exec", COLORS[p.color].exec);
+            els.viewport.innerHTML =
+              '<img class="dv-photo" src="' + p.photoSrc + '" alt="' + p.photoAlt + '" width="2560" height="1440" loading="eager" decoding="async" />';
+            return;
+          }
+
+          els.card.classList.remove("photo-card");
           var c = COLORS[p.color];
           var topRight = p.chip
             ? '<div class="gold-chip-v2" aria-hidden="true"><i></i><i></i><i></i></div>'
