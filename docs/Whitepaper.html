@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Attestation for Git Commits - Matrix Scroll</title>
-    <meta name="description" content="Signed provenance for agent-assisted Git commits. Public whitepaper for the Matrix Scroll commit envelope protocol.">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Whitepaper — Matrix Scroll</title>
+    <meta name="description" content="Technical whitepaper for signed commit provenance, verification, and the Matrix Scroll trust model.">
+    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, AP2 Vault Card, offline verification, git hooks">
+    <meta name="author" content="Matrix Scroll">
+    <meta name="robots" content="index, follow">
+    <meta name="content-language" content="en-US">
+    <meta name="geo.region" content="US">
+    <meta name="geo.placename" content="United States">
     <link rel="canonical" href="https://matrixscroll.com/docs/Whitepaper.html">
+    <link rel="alternate" hreflang="en-US" href="https://matrixscroll.com/docs/Whitepaper.html">
+    <link rel="alternate" hreflang="x-default" href="https://matrixscroll.com/docs/Whitepaper.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Matrix Scroll">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://matrixscroll.com/docs/Whitepaper.html">
+    <meta property="og:title" content="Matrix Scroll Whitepaper">
+    <meta property="og:description" content="Technical whitepaper for signed commit provenance, verification, and the Matrix Scroll trust model.">
+    <meta property="og:image" content="https://matrixscroll.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MatrixScroll">
+    <meta name="twitter:title" content="Matrix Scroll Whitepaper">
+    <meta name="twitter:description" content="Technical whitepaper for signed commit provenance, verification, and the Matrix Scroll trust model.">
+    <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
+    <meta name="twitter:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
+    <meta name="theme-color" content="#0a0908">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/assets/site.css">
     <style>
         :root {

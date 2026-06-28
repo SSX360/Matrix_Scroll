@@ -2,4 +2,6 @@
 overview.html
 *.webm
 *.png
+!og-image.png
+!apple-touch-icon.png
 *.log
