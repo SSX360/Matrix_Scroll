@@ -65,15 +65,7 @@
       </nav>
     </header>
 
-    <!-- Simulation Control Banner -->
-    <div class="sim-control-panel shell" id="sim-banner">
-      <p>💡 <strong>Simulation Mode</strong> is active. You can preview all Stripe &amp; Supabase auth states without setting up API keys.</p>
-      <div>
-        <button id="btn-toggle-auth" class="button secondary" style="padding: 4px 10px; font-size: 11px;">Mock Login</button>
-        <button id="btn-toggle-verify" class="button secondary" style="padding: 4px 10px; font-size: 11px; margin-left: 8px;">Mock Verify Profile</button>
-        <button id="btn-toggle-sim" class="button ghost" style="padding: 4px 10px; font-size: 11px; margin-left: 8px; border-color: var(--line);">Use Real API</button>
-      </div>
-    </div>
+    <div class="sim-control-panel shell" id="config-banner" style="display: none; border-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.04);"></div>
 
     <main id="main" class="shell authority-container">
       
@@ -85,7 +77,7 @@
         <form id="auth-form">
           <div class="input-group">
             <label for="auth-email">Email Address</label>
-            <input type="email" id="auth-email" required placeholder="dev@example.com">
+            <input type="email" id="auth-email" required placeholder="you@company.com" autocomplete="email">
           </div>
           <div class="input-group">
             <label for="auth-password">Password</label>
@@ -106,7 +98,7 @@
       <section id="view-dashboard" style="display: none;">
         <div class="auth-header-row">
           <div>
-            <span class="eyebrow" id="dash-user-email">dev@example.com</span>
+            <span class="eyebrow" id="dash-user-email">Signed in</span>
             <h1>Identity Dashboard</h1>
           </div>
           <div>
@@ -157,6 +149,9 @@
                 You are currently on the <strong>Freedom</strong> ($0/mo) plan. Your signing keys are active, but verification gates will report your identity as "Unverified" (L1 self-attested only).
               </p>
               
+              <p style="font-size: 13.5px; color: var(--muted); line-height: 1.5; margin-bottom: 24px;">
+                Subscriptions and Stripe checkout run on the SSX360 control plane. Sign in there to activate hosted issuer verification.
+              </p>
               <div class="compare-callout" style="margin-bottom: 24px; border-color: rgba(99,102,241,0.25); background: rgba(99,102,241,0.025);">
                 <strong style="color: var(--accent);">Upgrade to Basic ($24.99/mo) to unlock:</strong>
                 <ul style="padding-left: 18px; margin: 8px 0 0 0; font-size: 13px; color: var(--muted); line-height: 1.5;">
@@ -167,7 +162,7 @@
                 </ul>
               </div>
 
-              <button id="btn-upgrade-checkout" class="button primary" style="width: 100%;">Upgrade to Basic ($24.99/mo)</button>
+              <button id="btn-upgrade-checkout" class="button primary" style="width: 100%;">Subscribe via SSX360</button>
             </div>
 
             <div id="billing-manage-box" style="display: none;">
@@ -175,44 +170,13 @@
                 🎉 Your identity is fully **Verified** on the **Basic** ($24.99/mo) tier. Verification gates will establish trust anchors from your registered keys.
               </p>
               
-              <button id="btn-manage-billing" class="button secondary" style="width: 100%;">Manage Subscription</button>
+              <button id="btn-manage-billing" class="button secondary" style="width: 100%;">Manage billing on SSX360</button>
             </div>
             
             <div id="billing-error-feedback" class="auth-feedback error" style="margin-top: 16px;"></div>
           </div>
         </div>
       </section>
-
-    <!-- Simulated Stripe Checkout Modal -->
-    <div id="checkout-modal" class="modal-overlay" style="display: none;">
-      <div class="modal-content auth-card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-          <h2 style="margin: 0;">Simulated Stripe Checkout</h2>
-          <button id="btn-close-modal" class="button ghost" style="padding: 4px 8px; font-size: 12px; border-color: var(--line); cursor: pointer;">&times;</button>
-        </div>
-        <p style="font-size: 13.5px; color: var(--muted); margin-bottom: 20px; line-height: 1.5;">You are subscribing to the <strong>Matrix Scroll Basic Plan</strong> ($24.99/mo).</p>
-        
-        <form id="modal-payment-form">
-          <div class="input-group">
-            <label>Card Number</label>
-            <input type="text" placeholder="4242 4242 4242 4242" value="4242 4242 4242 4242" disabled>
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-            <div class="input-group">
-              <label>Expires</label>
-              <input type="text" placeholder="MM/YY" value="12/29" disabled>
-            </div>
-            <div class="input-group">
-              <label>CVC</label>
-              <input type="text" placeholder="123" value="123" disabled>
-            </div>
-          </div>
-          <button type="submit" id="btn-modal-pay" class="button primary" style="width: 100%; margin-top: 12px; display: flex; justify-content: center; align-items: center; gap: 10px; cursor: pointer;">
-            <span>Pay $24.99</span>
-          </button>
-        </form>
-      </div>
-    </div>
     </main>
 
     <footer class="site-footer">
@@ -228,524 +192,11 @@
         <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a>
           <a href="/ap2/">AP2</a>
           <a href="/hardware/">Hardware</a><a href="/ecosystem/">Ecosystem</a></div>
-        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="https://ssx360.com/contact?intent=team">Contact sales</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
       </div>
     </footer>
 
-    <!-- Frontend logic for Auth, Checkout and key registry -->
-    <script>
-      // Simulation / Mock State Variables
-      let isSimulated = true;
-      let mockAuthUser = null;
-      let mockVerified = false;
-      let mockKeys = [];
-
-      // Load simulated state from localStorage if available
-      try {
-        const storedUser = localStorage.getItem("ms_mock_user");
-        const storedVerified = localStorage.getItem("ms_mock_verified");
-        const storedKeys = localStorage.getItem("ms_mock_keys");
-        
-        if (storedUser) mockAuthUser = JSON.parse(storedUser);
-        if (storedVerified) mockVerified = storedVerified === "true";
-        if (storedKeys) mockKeys = JSON.parse(storedKeys);
-      } catch (e) {
-        console.warn("Failed to load simulated state from localStorage", e);
-      }
-
-      // Supabase Configuration (Placeholder)
-      let supabaseClient = null;
-      let realAuthUser = null;
-      const SUPABASE_URL = ""; 
-      const SUPABASE_ANON_KEY = "";
-
-      // DOM Elements
-      const simBanner = document.getElementById("sim-banner");
-      const btnToggleAuth = document.getElementById("btn-toggle-auth");
-      const btnToggleVerify = document.getElementById("btn-toggle-verify");
-      const btnToggleSim = document.getElementById("btn-toggle-sim");
-
-      const viewAuth = document.getElementById("view-auth");
-      const viewDashboard = document.getElementById("view-dashboard");
-      const authForm = document.getElementById("auth-form");
-      const authTitle = document.getElementById("auth-title");
-      const authEmailInput = document.getElementById("auth-email");
-      const authPasswordInput = document.getElementById("auth-password");
-      const btnSubmitAuth = document.getElementById("btn-submit-auth");
-      const authToggleMsg = document.getElementById("auth-toggle-msg");
-      const authToggleLink = document.getElementById("auth-toggle-link");
-      const authErrorFeedback = document.getElementById("auth-error-feedback");
-
-      const dashUserEmail = document.getElementById("dash-user-email");
-      const dashStatusBadge = document.getElementById("dash-status-badge");
-      const boxStatusBadge = document.getElementById("box-status-badge");
-      const btnSignout = document.getElementById("btn-signout");
-
-      const keyRegisterForm = document.getElementById("key-register-form");
-      const regActor = document.getElementById("reg-actor");
-      const regDevice = document.getElementById("reg-device");
-      const regPubkey = document.getElementById("reg-pubkey");
-      const regFeedback = document.getElementById("reg-feedback");
-      const keysListContainer = document.getElementById("keys-list-container");
-
-      const billingActionBox = document.getElementById("billing-action-box");
-      const billingManageBox = document.getElementById("billing-manage-box");
-      const btnUpgradeCheckout = document.getElementById("btn-upgrade-checkout");
-      const btnManageBilling = document.getElementById("btn-manage-billing");
-      const billingErrorFeedback = document.getElementById("billing-error-feedback");
-
-      // Modal Elements
-      const checkoutModal = document.getElementById("checkout-modal");
-      const btnCloseModal = document.getElementById("btn-close-modal");
-      const modalPaymentForm = document.getElementById("modal-payment-form");
-      const btnModalPay = document.getElementById("btn-modal-pay");
-
-      let isSignUpMode = false;
-
-      // Initialize
-      document.addEventListener("DOMContentLoaded", () => {
-        setupSimulationHandlers();
-        setupAuthToggle();
-        setupAuthFormHandler();
-        setupSignoutHandler();
-        setupKeyRegisterHandler();
-        setupBillingHandlers();
-        setupModalHandlers();
-        
-        // Attempt to check if real keys are available
-        tryInitializeSupabase();
-        refreshUI();
-      });
-
-      function saveSimState() {
-        try {
-          localStorage.setItem("ms_mock_user", mockAuthUser ? JSON.stringify(mockAuthUser) : "");
-          localStorage.setItem("ms_mock_verified", mockVerified ? "true" : "false");
-          localStorage.setItem("ms_mock_keys", JSON.stringify(mockKeys));
-        } catch (e) {
-          console.error("Failed to save simulated state to localStorage", e);
-        }
-      }
-
-      function tryInitializeSupabase() {
-        if (SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase) {
-          try {
-            supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-            isSimulated = false;
-            updateSimBannerVisuals();
-            checkRealAuthSession();
-          } catch (e) {
-            console.warn("Failed to initialize Supabase, fallback to simulation mode", e);
-          }
-        }
-      }
-
-      function setupSimulationHandlers() {
-        btnToggleAuth.addEventListener("click", () => {
-          if (!isSimulated) return;
-          if (mockAuthUser) {
-            mockAuthUser = null;
-            btnToggleAuth.textContent = "Mock Login";
-          } else {
-            mockAuthUser = { email: "dev@example.com", id: "mock-uid-1234" };
-            btnToggleAuth.textContent = "Mock Logout";
-          }
-          saveSimState();
-          refreshUI();
-        });
-
-        btnToggleVerify.addEventListener("click", () => {
-          if (!isSimulated) return;
-          mockVerified = !mockVerified;
-          btnToggleVerify.textContent = mockVerified ? "Mock Unverify Profile" : "Mock Verify Profile";
-          saveSimState();
-          refreshUI();
-        });
-
-        btnToggleSim.addEventListener("click", () => {
-          if (isSimulated) {
-            isSimulated = false;
-            btnToggleSim.textContent = "Use Simulated API";
-            alert("Swapped to Real API Mode. Note: This will fail if Supabase / Stripe credentials are not configured in Vercel.");
-          } else {
-            isSimulated = true;
-            btnToggleSim.textContent = "Use Real API";
-          }
-          updateSimBannerVisuals();
-          refreshUI();
-        });
-      }
-
-      function updateSimBannerVisuals() {
-        if (isSimulated) {
-          simBanner.style.borderColor = "rgba(16, 185, 129, 0.2)";
-          simBanner.style.background = "rgba(16, 185, 129, 0.02)";
-          btnToggleAuth.style.display = "inline-block";
-          btnToggleVerify.style.display = "inline-block";
-          btnToggleAuth.textContent = mockAuthUser ? "Mock Logout" : "Mock Login";
-          btnToggleVerify.textContent = mockVerified ? "Mock Unverify Profile" : "Mock Verify Profile";
-        } else {
-          simBanner.style.borderColor = "rgba(99, 102, 241, 0.2)";
-          simBanner.style.background = "rgba(99, 102, 241, 0.02)";
-          btnToggleAuth.style.display = "none";
-          btnToggleVerify.style.display = "none";
-        }
-      }
-
-      function setupAuthToggle() {
-        authToggleLink.addEventListener("click", (e) => {
-          e.preventDefault();
-          isSignUpMode = !isSignUpMode;
-          if (isSignUpMode) {
-            authTitle.textContent = "Create Authority Account";
-            btnSubmitAuth.textContent = "Sign Up";
-            authToggleMsg.textContent = "Already have an account?";
-            authToggleLink.textContent = "Sign In";
-          } else {
-            authTitle.textContent = "Claim Your Hosted Identity";
-            btnSubmitAuth.textContent = "Sign In";
-            authToggleMsg.textContent = "Don't have an account?";
-            authToggleLink.textContent = "Sign Up";
-          }
-          authErrorFeedback.style.display = "none";
-        });
-      }
-
-      async function setupAuthFormHandler() {
-        authForm.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          authErrorFeedback.style.display = "none";
-          const email = authEmailInput.value;
-          const password = authPasswordInput.value;
-
-          if (isSimulated) {
-            mockAuthUser = { email, id: "mock-uid-" + Math.floor(Math.random() * 100000) };
-            saveSimState();
-            btnToggleAuth.textContent = "Mock Logout";
-            refreshUI();
-          } else {
-            if (!supabaseClient) {
-              showError(authErrorFeedback, "Supabase is not configured.");
-              return;
-            }
-            try {
-              let result;
-              if (isSignUpMode) {
-                result = await supabaseClient.auth.signUp({ email, password });
-              } else {
-                result = await supabaseClient.auth.signInWithPassword({ email, password });
-              }
-              if (result.error) {
-                showError(authErrorFeedback, result.error.message);
-              } else {
-                refreshUI();
-              }
-            } catch (err) {
-              showError(authErrorFeedback, err.message);
-            }
-          }
-        });
-      }
-
-      function setupSignoutHandler() {
-        btnSignout.addEventListener("click", async () => {
-          if (isSimulated) {
-            mockAuthUser = null;
-            btnToggleAuth.textContent = "Mock Login";
-            saveSimState();
-            refreshUI();
-          } else {
-            if (supabaseClient) {
-              await supabaseClient.auth.signOut();
-              refreshUI();
-            }
-          }
-        });
-      }
-
-      function setupKeyRegisterHandler() {
-        keyRegisterForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          regFeedback.style.display = "none";
-          const actor = regActor.value.trim();
-          const device = regDevice.value.trim();
-          const pubkey = regPubkey.value.trim();
-
-          const newKey = {
-            id: isSimulated ? "key-" + Date.now() : null,
-            actor,
-            device_id: device,
-            public_key: pubkey,
-            created_at: new Date().toISOString()
-          };
-
-          if (isSimulated) {
-            mockKeys.push(newKey);
-            saveSimState();
-            showSuccess(regFeedback, "Signing key registered successfully!");
-            keyRegisterForm.reset();
-            refreshUI();
-          } else {
-            supabaseInsertKey(newKey);
-          }
-        });
-      }
-
-      async function supabaseInsertKey(newKey) {
-        try {
-          const { data: { session } } = await supabaseClient.auth.getSession();
-          if (!session) return;
-          const { error } = await supabaseClient.from("keys").insert({
-            actor: newKey.actor,
-            device_id: newKey.device_id,
-            public_key: newKey.public_key,
-            user_id: session.user.id
-          });
-          if (error) {
-            showError(regFeedback, error.message);
-          } else {
-            showSuccess(regFeedback, "Signing key registered successfully!");
-            keyRegisterForm.reset();
-            fetchRealKeys();
-          }
-        } catch (e) {
-          showError(regFeedback, e.message);
-        }
-      }
-
-      function removeKey(keyId) {
-        if (isSimulated) {
-          mockKeys = mockKeys.filter(k => k.id !== keyId);
-          saveSimState();
-          refreshUI();
-        } else {
-          supabaseRemoveKey(keyId);
-        }
-      }
-
-      async function supabaseRemoveKey(keyId) {
-        try {
-          const { error } = await supabaseClient.from("keys").delete().eq("id", keyId);
-          if (error) {
-            alert("Failed to delete key: " + error.message);
-          } else {
-            fetchRealKeys();
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }
-
-      function setupBillingHandlers() {
-        btnUpgradeCheckout.addEventListener("click", async () => {
-          billingErrorFeedback.style.display = "none";
-          if (isSimulated) {
-            // Open simulated payment modal
-            checkoutModal.style.display = "flex";
-          } else {
-            redirectToStripeCheckout();
-          }
-        });
-
-        btnManageBilling.addEventListener("click", () => {
-          if (isSimulated) {
-            alert("Redirecting to Stripe Customer Billing Portal simulation... Here you can cancel or update billing cycles.");
-          } else {
-            redirectToStripePortal();
-          }
-        });
-      }
-
-      function setupModalHandlers() {
-        btnCloseModal.addEventListener("click", () => {
-          checkoutModal.style.display = "none";
-        });
-
-        // Close modal when clicking overlay
-        checkoutModal.addEventListener("click", (e) => {
-          if (e.target === checkoutModal) {
-            checkoutModal.style.display = "none";
-          }
-        });
-
-        modalPaymentForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          
-          // Disable button and show spinner loader
-          btnModalPay.disabled = true;
-          btnModalPay.innerHTML = '<span class="spinner"></span> <span>Processing Payment...</span>';
-
-          setTimeout(() => {
-            // Upgrade visual state to paid
-            btnModalPay.style.background = "var(--accent-2)";
-            btnModalPay.style.borderColor = "var(--accent-2)";
-            btnModalPay.innerHTML = '<span>✓ Paid</span>';
-
-            setTimeout(() => {
-              // Complete checkout simulation
-              mockVerified = true;
-              saveSimState();
-              checkoutModal.style.display = "none";
-              
-              // Reset button styles
-              btnModalPay.disabled = false;
-              btnModalPay.style.background = "";
-              btnModalPay.style.borderColor = "";
-              btnModalPay.innerHTML = '<span>Pay $24.99</span>';
-              
-              refreshUI();
-            }, 800);
-          }, 2000);
-        });
-      }
-
-      async function redirectToStripeCheckout() {
-        try {
-          const { data: { session } } = await supabaseClient.auth.getSession();
-          if (!session) return;
-          const response = await fetch("/api/checkout", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer " + session.access_token
-            }
-          });
-          const result = await response.json();
-          if (result.url) {
-            window.location.href = result.url;
-          } else {
-            showError(billingErrorFeedback, result.error || "Failed to create checkout session.");
-          }
-        } catch (e) {
-          showError(billingErrorFeedback, e.message);
-        }
-      }
-
-      async function redirectToStripePortal() {
-        try {
-          const { data: { session } } = await supabaseClient.auth.getSession();
-          if (!session) return;
-          const response = await fetch("/api/portal", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": "Bearer " + session.access_token
-            }
-          });
-          const result = await response.json();
-          if (result.url) {
-            window.location.href = result.url;
-          } else {
-            showError(billingErrorFeedback, result.error || "Failed to load billing portal.");
-          }
-        } catch (e) {
-          showError(billingErrorFeedback, e.message);
-        }
-      }
-
-      function refreshUI() {
-        const user = getActiveUser();
-        if (user) {
-          viewAuth.style.display = "none";
-          viewDashboard.style.display = "block";
-          dashUserEmail.textContent = user.email;
-          
-          const verified = getVerifiedStatus();
-          
-          if (verified) {
-            dashStatusBadge.className = "status-badge verified";
-            dashStatusBadge.textContent = "Verified";
-            boxStatusBadge.className = "status-badge verified";
-            boxStatusBadge.textContent = "Verified Identity Issuer Active";
-            billingActionBox.style.display = "none";
-            billingManageBox.style.display = "block";
-          } else {
-            dashStatusBadge.className = "status-badge unverified";
-            dashStatusBadge.textContent = "Unverified";
-            boxStatusBadge.className = "status-badge unverified";
-            boxStatusBadge.textContent = "Unverified Issuer Identity";
-            billingActionBox.style.display = "block";
-            billingManageBox.style.display = "none";
-          }
-
-          renderKeysList();
-        } else {
-          viewAuth.style.display = "block";
-          viewDashboard.style.display = "none";
-        }
-      }
-
-      function getActiveUser() {
-        if (isSimulated) return mockAuthUser;
-        return realAuthUser;
-      }
-
-      function getVerifiedStatus() {
-        if (isSimulated) return mockVerified;
-        return false; 
-      }
-
-      function renderKeysList() {
-        const keys = isSimulated ? mockKeys : []; 
-        keysListContainer.innerHTML = "";
-        
-        if (keys.length === 0) {
-          keysListContainer.innerHTML = `<div class="empty-keys-msg">No keys registered yet. Register your first key above.</div>`;
-          return;
-        }
-
-        keys.forEach(k => {
-          const item = document.createElement("div");
-          item.className = "key-item";
-          item.innerHTML = `
-            <div class="key-meta">
-              <span>Actor: <strong>${k.actor}</strong> (${k.device_id})</span>
-              <button class="btn-remove" data-key-id="${k.id}">Revoke</button>
-            </div>
-            <div class="key-val">${k.public_key}</div>
-          `;
-          keysListContainer.appendChild(item);
-        });
-
-        // Securely bind event listeners dynamically
-        keysListContainer.querySelectorAll(".btn-remove").forEach(btn => {
-          btn.addEventListener("click", () => {
-            removeKey(btn.dataset.keyId);
-          });
-        });
-      }
-
-      async function fetchRealKeys() {
-        if (isSimulated || !supabaseClient) return;
-        try {
-          const { data, error } = await supabaseClient.from("keys").select("*");
-          if (!error && data) {
-            // Render list
-          }
-        } catch (e) {
-          console.error(e);
-        }
-      }
-
-      async function checkRealAuthSession() {
-        if (!supabaseClient) return;
-        supabaseClient.auth.onAuthStateChange((event, session) => {
-          realAuthUser = session?.user || null;
-          refreshUI();
-        });
-      }
-
-      function showError(el, msg) {
-        el.textContent = msg;
-        el.className = "auth-feedback error";
-        el.style.display = "block";
-      }
-
-      function showSuccess(el, msg) {
-        el.textContent = msg;
-        el.className = "auth-feedback success";
-        el.style.display = "block";
-      }
-    </script>
+    <script src="/assets/runtime-config.js"></script>
+    <script src="/assets/authority-app.js" defer></script>
   </body>
 </html>
