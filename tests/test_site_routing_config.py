@@ -107,6 +107,13 @@ class SiteRoutingConfigTests(unittest.TestCase):
             self.assertIn("https://ssx360.com/signup", text, relative_path)
             self.assertIn("/verify/", text, relative_path)
 
+    def test_docs_hub_links_ap2_evaluation_path(self):
+        docs_page = (Path(__file__).resolve().parents[1] / "docs" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Evaluating payment approval?", docs_page)
+        self.assertIn("https://ssx360.com/partner/ap2-vault-card", docs_page)
+        self.assertIn("https://ssx360.com/contact?intent=ap2", docs_page)
+        self.assertEqual(docs_page.count("Ready for rollout?"), 1)
+
     def test_docs_hub_does_not_promote_legacy_product_notes(self):
         docs_page = (Path(__file__).resolve().parents[1] / "docs" / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("Documentation.html (legacy)", docs_page)
