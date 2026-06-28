@@ -59,6 +59,25 @@ rewrites in [`vercel.json`](./vercel.json).
 - Keep version pins and quickstart steps aligned with the SDK README
 - Validate preview deploys before promotion
 
+## Deploy matrixscroll.com
+
+Production host: **matrixscroll.com** (Vercel project `matrixscroll-site`).
+
+| Path | When to use |
+| --- | --- |
+| Push to `master` | GitHub Action [`.github/workflows/deploy-site.yml`](./.github/workflows/deploy-site.yml) runs `scripts/deploy-production.mjs` when repo secrets are configured |
+| Local fallback | `node scripts/deploy-production.mjs` from repo root |
+
+**Why the staging script:** Deploying the full repo with dirty git or CLI from the monorepo root can leave Vercel deployments in **BLOCKED** state. The script copies only public site assets (`index.html`, `static/`, route dirs, `vercel.json`) into a clean temp folder, then runs `vercel deploy --prod`.
+
+**GitHub secrets** (Settings → Secrets → Actions):
+
+- `VERCEL_TOKEN` — Vercel personal/team token with deploy access
+- `VERCEL_ORG_ID` — `team_sia5QmwPTVH4L8Bm1Wbuq8aQ` (ssx-360)
+- `VERCEL_PROJECT_ID` — `prj_GNngMHFsHmP3qL8EKOU72f6Vh1Ey` (matrixscroll-site)
+
+**Vercel Deployment Protection:** If Git-integrated deploys stay BLOCKED, use the workflow above or relax production protection for the `master` branch in the Vercel dashboard.
+
 ## Workflow guardrails
 
 - Public-surface and workflow changes are maintainer-reviewed through

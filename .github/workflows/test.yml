@@ -39,3 +39,13 @@ jobs:
         run: python -m qa.run_gates --workspace empty --report out/qa-report.json
       - name: Build expanded release evidence smoke
         run: python -m qa.release_evidence --skip-unit-tests --skip-compile --workspace typescript --workspace monorepo --output-dir out/release-evidence-ci
+
+  site-routing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate public site routing and pilot CTAs
+        run: python -m unittest tests.test_site_routing_config -v
