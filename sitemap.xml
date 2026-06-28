@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://matrixscroll.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://matrixscroll.com/hardware/</loc><changefreq>monthly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://matrixscroll.com/ap2/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://matrixscroll.com/docs/</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://matrixscroll.com/mcp/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://matrixscroll.com/verify/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://matrixscroll.com/spec/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://matrixscroll.com/compare/</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://matrixscroll.com/ecosystem/</loc><changefreq>monthly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://matrixscroll.com/roadmap/</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://matrixscroll.com/authority/</loc><changefreq>monthly</changefreq><priority>0.65</priority></url>
+  <url><loc>https://matrixscroll.com/docs/Whitepaper.html</loc><changefreq>yearly</changefreq><priority>0.6</priority></url>
+</urlset>

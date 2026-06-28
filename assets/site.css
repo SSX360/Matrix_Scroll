@@ -2,21 +2,21 @@
 
 :root {
   color-scheme: dark;
-  --bg: #0c0a14;
-  --bg-2: #12101c;
-  --panel: rgba(24, 20, 36, 0.72);
-  --panel-2: rgba(32, 26, 48, 0.85);
-  --text: #f4f0ff;
-  --muted: #b8b0cc;
-  --soft: #8a829e;
-  --line: rgba(168, 139, 250, 0.22);
-  --line-strong: rgba(251, 191, 36, 0.35);
-  --accent: #a78bfa;
-  --accent-hover: #c4b5fd;
-  --accent-2: #fbbf24;
+  --bg: #0a0908;
+  --bg-2: #121010;
+  --panel: rgba(18, 16, 14, 0.72);
+  --panel-2: rgba(26, 22, 18, 0.85);
+  --text: #f4f0eb;
+  --muted: #9a9288;
+  --soft: #6b645c;
+  --line: rgba(232, 184, 74, 0.22);
+  --line-strong: rgba(232, 184, 74, 0.4);
+  --accent: #e8b84a;
+  --accent-hover: #f0c96a;
+  --accent-2: #9b7bd4;
   --danger: #f87171;
   --ok: #34d399;
-  --shadow: 0 12px 40px rgba(8, 4, 18, 0.55), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  --shadow: 0 12px 40px rgba(8, 4, 2, 0.55), 0 1px 0 rgba(255, 255, 255, 0.04) inset;
   --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --display: "Space Grotesk", "Inter", sans-serif;
   --interface: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -53,13 +53,23 @@ body {
   min-height: 100vh;
   background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse 80% 50% at 8% -10%, rgba(167, 139, 250, 0.14), transparent 55%),
-    radial-gradient(ellipse 60% 45% at 92% 8%, rgba(251, 191, 36, 0.08), transparent 50%);
+    radial-gradient(ellipse 80% 50% at 8% -10%, rgba(155, 123, 212, 0.12), transparent 55%),
+    radial-gradient(ellipse 60% 45% at 92% 8%, rgba(232, 184, 74, 0.1), transparent 50%);
   color: var(--text);
   font-family: var(--interface);
   font-size: clamp(16px, 1.2vw, 18px);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
 }
 
 a {
@@ -1119,4 +1129,11 @@ th {
     opacity: 1;
     transform: none;
   }
+}
+
+.amber-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.4;
+  margin: 0 0 2rem;
 }

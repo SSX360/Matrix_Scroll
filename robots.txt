@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /id/
+
+Sitemap: https://matrixscroll.com/sitemap.xml
