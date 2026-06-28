@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en" class="bg-background">
-      <head>
+<html lang="en">
+    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AP2 Vault Card — Hardware | Matrix Scroll</title>
@@ -38,917 +38,265 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/assets/site.css">
+    <link rel="stylesheet" href="/assets/ap2-hardware.css">
     <script src="/assets/site-nav.js" defer></script>
-    <style>
-      /* ============================================================
-         Hardware Showcase — interactive configurator (light chrome,
-         dark holographic device viewport). Vanilla CSS/JS.
-         ============================================================ */
-      .hw-intro { padding: 8px 0 16px; }
-
-      .hw-playground {
-        display: grid;
-        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
-        gap: clamp(24px, 4vw, 40px);
-        align-items: start;
-        margin: 24px 0 16px;
-      }
-      @media (max-width: 900px) {
-        .hw-playground { grid-template-columns: 1fr; }
-      }
-
-      /* ---------- Dark device stage (left) ---------- */
-      .device-stage {
-        background: #0b1020;
-        border: 1px solid #1b2440;
-        border-radius: var(--radius);
-        padding: clamp(16px, 3vw, 24px);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-        position: relative;
-        overflow: hidden;
-      }
-      .device-stage-head {
-        position: absolute;
-        top: 14px;
-        right: 18px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        z-index: 20;
-      }
-      .device-stage-head .dot {
-        width: 8px; height: 8px; border-radius: 50%;
-        background: #34d399; box-shadow: 0 0 8px #34d399;
-        animation: dv-pulse 1.6s ease-in-out infinite;
-      }
-      .device-stage-head .label {
-        font-family: var(--mono);
-        font-size: 10px;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: #8aa0c6;
-      }
-
-      .card-scene { perspective: 1200px; padding: 24px 0 8px; width: 100%; display: flex; justify-content: center; }
-
-      .holo-card-v2 {
-        --dv: #22d3ee;
-        position: relative;
-        width: min(320px, 84vw);
-        height: 470px;
-        border-radius: 22px;
-        background: linear-gradient(180deg, #0d1530 0%, #0a0c1f 100%);
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 30px 60px -18px rgba(0,0,0,0.75);
-        transform-style: preserve-3d;
-        transition: transform 0.18s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease;
-        overflow: hidden;
-        cursor: grab;
-      }
-      .holo-card-v2:active { cursor: grabbing; }
-
-      .holo-card-v2.photo-card {
-        width: min(520px, 94vw);
-        height: auto;
-        aspect-ratio: 16 / 10;
-        background: transparent;
-        border: none;
-        box-shadow: none;
-        cursor: default;
-      }
-      .holo-card-v2.photo-card .device-viewport { padding: 0; height: auto; }
-      .holo-card-v2.photo-card .holo-overlay { opacity: 0.08; }
-      .holo-card-v2.photo-card .card-glare { opacity: 0.35; }
-      .dv-photo {
-        width: 100%;
-        height: auto;
-        display: block;
-        border-radius: 18px;
-        filter: drop-shadow(0 24px 56px rgba(124, 58, 237, 0.35));
-      }
-
-      .holo-overlay {
-        position: absolute; inset: 0; z-index: 5; pointer-events: none;
-        mix-blend-mode: color-dodge; opacity: 0.4;
-        background: linear-gradient(var(--angle, 135deg),
-          rgba(34,211,238,0.7) 0%, rgba(45,212,191,0.7) 30%,
-          rgba(16,185,129,0.7) 60%, rgba(34,211,238,0.7) 100%);
-        background-size: 300% 300%;
-        background-position: var(--mx, 50%) var(--my, 50%);
-        transition: opacity 0.3s ease;
-      }
-      .card-glare {
-        position: absolute; inset: 0; z-index: 10; pointer-events: none;
-        mix-blend-mode: overlay;
-        background: radial-gradient(circle 200px at var(--gx, 50%) var(--gy, 50%),
-          rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 70%);
-      }
-
-      .device-viewport {
-        position: relative; z-index: 12;
-        width: 100%; height: 100%;
-        padding: 22px;
-        display: flex; flex-direction: column; justify-content: space-between;
-        color: #e6edf7; font-family: var(--interface);
-      }
-      .dv-top { display: flex; justify-content: space-between; align-items: flex-start; }
-      .dv-kicker {
-        font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
-        text-transform: uppercase; color: var(--dv);
-      }
-      .dv-name {
-        font-family: var(--mono); font-size: 14px; font-weight: 700; color: #fff;
-        margin-top: 4px; display: flex; align-items: center; gap: 7px;
-      }
-      .dv-name .live { width: 7px; height: 7px; border-radius: 50%; background: var(--dv); box-shadow: 0 0 7px var(--dv); animation: dv-pulse 1.6s ease-in-out infinite; }
-      .dv-badge {
-        font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em;
-        color: var(--dv); border: 1px solid color-mix(in srgb, var(--dv) 45%, transparent);
-        background: color-mix(in srgb, var(--dv) 14%, transparent);
-        padding: 3px 8px; border-radius: 6px; white-space: nowrap;
-      }
-      .gold-chip-v2 {
-        width: 28px; height: 36px; border-radius: 6px;
-        background: linear-gradient(135deg, #fde68a, #f59e0b);
-        padding: 4px; display: grid; gap: 3px; align-content: space-between;
-      }
-      .gold-chip-v2 i { display: block; height: 2px; background: rgba(0,0,0,0.25); border-radius: 1px; }
-
-      .dv-center {
-        flex: 1; display: flex; flex-direction: column;
-        align-items: center; justify-content: center; gap: 14px;
-        position: relative;
-      }
-      .dv-ring {
-        position: relative; width: 138px; height: 138px;
-        display: flex; align-items: center; justify-content: center;
-      }
-      .dv-ring::before, .dv-ring::after {
-        content: ""; position: absolute; border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--dv) 40%, transparent);
-        inset: 0; animation: dv-spin 22s linear infinite;
-      }
-      .dv-ring::after { inset: 14px; border-style: solid; border-color: color-mix(in srgb, var(--dv) 22%, transparent); animation-duration: 11s; animation-direction: reverse; }
-      .dv-core {
-        position: relative; z-index: 2;
-        width: 92px; height: 92px; border-radius: 50%;
-        background: color-mix(in srgb, var(--dv) 12%, #0a0c1f);
-        border: 1px solid color-mix(in srgb, var(--dv) 40%, transparent);
-        box-shadow: 0 0 28px color-mix(in srgb, var(--dv) 30%, transparent);
-        display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-      }
-      .dv-core .cap { font-family: var(--mono); font-size: 9px; color: var(--dv); }
-      .dv-core .val { font-family: var(--mono); font-size: 22px; font-weight: 700; color: #fff; line-height: 1.1; }
-      .dv-core .sub { font-family: var(--mono); font-size: 8px; color: color-mix(in srgb, var(--dv) 70%, #8aa0c6); }
-      .dv-icon { color: var(--dv); filter: drop-shadow(0 0 10px var(--dv)); }
-
-      .dv-wave { display: flex; align-items: center; gap: 6px; height: 64px; }
-      .dv-wave i {
-        width: 6px; border-radius: 4px; background: var(--dv);
-        animation: dv-wave 1.2s ease-in-out infinite;
-      }
-      .dv-center-label { text-align: center; }
-      .dv-center-label .t { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #dbe4f3; }
-      .dv-center-label .s { font-family: var(--mono); font-size: 9px; color: #6f82a6; margin-top: 3px; }
-      .dv-pill {
-        font-family: var(--mono); font-size: 10px; color: #fff;
-        background: color-mix(in srgb, var(--dv) 18%, transparent);
-        border: 1px solid color-mix(in srgb, var(--dv) 40%, transparent);
-        padding: 4px 10px; border-radius: 6px;
-      }
-
-      .dv-foot { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 14px; }
-      .dv-foot-col { font-family: var(--mono); font-size: 9px; line-height: 1.7; color: #8aa0c6; }
-      .dv-foot-col.right { text-align: right; }
-      .dv-foot-col .hi { color: var(--dv); font-weight: 700; font-size: 10px; }
-
-      .qr-box {
-        position: relative; width: 60px; height: 60px; border-radius: 8px;
-        background: #060a16; border: 1px solid color-mix(in srgb, var(--dv) 45%, transparent);
-        box-shadow: 0 0 14px color-mix(in srgb, var(--dv) 20%, transparent);
-        padding: 6px; overflow: hidden;
-      }
-      .qr-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; width: 100%; height: 100%; }
-      .qr-grid span { border-radius: 1px; }
-      .qr-grid span.on { background: var(--dv); }
-      .qr-grid span.off { background: #11192e; }
-      .scan-line {
-        position: absolute; left: 0; width: 100%; height: 2px;
-        background: var(--dv); box-shadow: 0 0 12px var(--dv);
-        animation: dv-scan 3.2s ease-in-out infinite; z-index: 4;
-      }
-      .nfc-coil { position: absolute; inset: 14px; border: 2px solid rgba(245,158,11,0.18); border-radius: 16px; pointer-events: none; z-index: 1; }
-      .nfc-coil::before { content: ""; position: absolute; inset: 8px; border: 2px solid rgba(245,158,11,0.14); border-radius: 12px; }
-
-      /* ---------- Device controls + terminal ---------- */
-      .device-controls {
-        width: 100%;
-        background: #0a0e1c;
-        border: 1px solid #1b2440;
-        border-radius: var(--radius);
-        padding: 16px;
-      }
-      .ctrl-head {
-        display: flex; justify-content: space-between; align-items: center;
-        border-bottom: 1px solid #1b2440; padding-bottom: 10px; margin-bottom: 14px;
-      }
-      .ctrl-head .t { font-family: var(--mono); font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #8aa0c6; }
-      .ctrl-head .b { font-family: var(--mono); font-size: 10px; color: #58a6ff; border: 1px solid #1f3a5f; background: #0d1f33; padding: 3px 8px; border-radius: 6px; }
-      .exec-btn {
-        width: 100%; min-height: 44px; border: none; border-radius: 10px;
-        font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
-        color: #04121a; cursor: pointer;
-        background: var(--exec, #22d3ee);
-        transition: filter 0.2s ease, transform 0.1s ease;
-      }
-      .exec-btn:hover { filter: brightness(1.08); }
-      .exec-btn:active { transform: scale(0.985); }
-      .terminal {
-        margin-top: 14px; background: #060a16; border: 1px solid #1b2440; border-radius: 8px;
-        padding: 12px; font-family: var(--mono); font-size: 11px; color: #8aa0c6;
-        height: 150px; display: flex; flex-direction: column; justify-content: space-between;
-      }
-      .terminal-logs { overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
-      .terminal-logs .pmt { color: #4d5b78; }
-      .terminal-logs .ok { color: #56d364; }
-      .terminal-logs .warn { color: #e3b341; }
-      .terminal-logs .info { color: #58a6ff; }
-      .terminal-logs .sign { color: #9d7bff; font-weight: 700; }
-      .terminal-logs .done { color: #56d364; font-weight: 700; }
-      .terminal-foot {
-        border-top: 1px solid #11192e; padding-top: 8px; margin-top: 8px;
-        display: flex; justify-content: space-between; font-size: 10px; color: #4d5b78;
-      }
-      .terminal-foot .model { color: #58a6ff; font-weight: 700; }
-
-      /* ---------- Configurator (light chrome) ---------- */
-      .config-stack { display: flex; flex-direction: column; gap: 20px; }
-
-      .config-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
-      .config-head h2 { margin: 0; border: none; padding: 0; font-size: clamp(18px, 3vw, 22px); }
-      .config-head h2 .num { font-family: var(--mono); color: var(--accent); font-size: 0.8em; margin-right: 6px; }
-
-      .seg-toggle { display: inline-flex; gap: 4px; background: var(--panel-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 4px; }
-      .seg-btn {
-        font-family: var(--interface); font-size: 11px; font-weight: 600;
-        text-transform: uppercase; letter-spacing: 0.04em;
-        padding: 7px 12px; border-radius: var(--radius-sm); border: 1px solid transparent;
-        background: transparent; color: var(--soft); cursor: pointer; transition: all 0.18s ease;
-      }
-      .seg-btn[aria-pressed="true"] { background: var(--bg); color: var(--text); border-color: var(--line); box-shadow: var(--shadow); }
-      .seg-btn:hover { color: var(--text); }
-
-      .selector-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
-      .selector-btn {
-        text-align: left; display: flex; flex-direction: column;
-        padding: 16px; border-radius: var(--radius); border: 1px solid var(--line);
-        background: var(--bg); cursor: pointer; transition: all 0.2s ease;
-        font-family: var(--interface);
-      }
-      .selector-btn:hover { border-color: var(--line-strong); background: var(--bg-2); transform: translateY(-1px); box-shadow: var(--shadow); }
-      .selector-btn[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
-      .selector-btn .code { font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; }
-      .selector-btn .name { font-weight: 700; font-size: 14px; color: var(--text); margin-top: 6px; line-height: 1.3; }
-      .selector-btn .mat { font-size: 12px; color: var(--soft); margin-top: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-      .selector-btn .cogs { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-top: 12px; }
-
-      .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-      @media (max-width: 560px) { .spec-grid { grid-template-columns: 1fr; } }
-      .spec-block .k { font-family: var(--interface); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--soft); margin-bottom: 4px; }
-      .spec-block .v { font-size: 14px; color: var(--muted); margin: 0; }
-      .spec-block .v.lead-val { font-size: 16px; font-weight: 600; color: var(--text); }
-      .spec-block .v.mono { font-family: var(--mono); color: var(--text); }
-      .spec-highlight { margin-top: 4px; padding: 16px; border-radius: var(--radius); background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); }
-      .spec-highlight .k { color: var(--accent); }
-
-      .econ-badge { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--accent-2); background: #ecfdf5; border: 1px solid #a7f3d0; padding: 4px 12px; border-radius: 999px; }
-      .econ-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); animation: dv-pulse 1.6s ease-in-out infinite; }
-      .econ-margin { color: var(--accent-2); font-weight: 700; }
-
-      .hw-status-banner {
-        display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
-        margin: 20px 0 8px; padding: 14px 18px;
-        border-radius: var(--radius); border: 1px solid #a7f3d0; background: #ecfdf5;
-        font-size: 13px; line-height: 1.55; color: var(--text);
-      }
-      .hw-status-banner strong { color: #047857; }
-      .roadmap-badge {
-        display: inline-flex; align-items: center;
-        font-family: var(--mono); font-size: 9px; font-weight: 700;
-        letter-spacing: 0.08em; text-transform: uppercase;
-        padding: 3px 8px; border-radius: 999px; margin-top: 8px;
-        border: 1px solid #fcd34d; background: #fffbeb; color: #b45309;
-      }
-      .roadmap-badge.poc {
-        border-color: #93c5fd; background: #eff6ff; color: #1d4ed8;
-      }
-      .future-hardware-panel { margin-top: 8px; }
-      .future-hardware-panel summary {
-        cursor: pointer; list-style: none;
-        font-family: var(--interface); font-size: 13px; font-weight: 600;
-        color: var(--soft); padding: 10px 0;
-      }
-      .future-hardware-panel summary::-webkit-details-marker { display: none; }
-      .future-hardware-panel summary::before {
-        content: "▸ "; font-family: var(--mono); color: var(--accent);
-      }
-      .future-hardware-panel[open] summary::before { content: "▾ "; }
-
-      /* ---------- Animations ---------- */
-      @keyframes dv-spin { to { transform: rotate(360deg); } }
-      @keyframes dv-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-      @keyframes dv-scan { 0%, 100% { top: 4%; } 50% { top: 92%; } }
-      @keyframes dv-wave { 0%, 100% { height: 12%; } 50% { height: 90%; } }
-
-      @media (prefers-reduced-motion: reduce) {
-        .dv-ring::before, .dv-ring::after, .scan-line, .dv-wave i,
-        .dv-name .live, .device-stage-head .dot, .econ-badge .dot { animation: none !important; }
-        .holo-card-v2 { transition: none !important; }
-        .holo-overlay { opacity: 0.3; }
-      }
-    </style>
+    <script src="/assets/site-enhancements.js" defer></script>
+    <script src="/assets/ap2-hardware.js" defer></script>
   </head>
-  <body>
+  <body class="ap2-page">
+    <div id="ap2-cinematic" class="ap2-cinematic" aria-hidden="true">
+      <div class="ap2-cinematic-inner">
+        <div class="ap2-cinematic-label">AP2 VAULT CARD</div>
+        <div class="ap2-cinematic-line"></div>
+      </div>
+    </div>
+
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <nav class="nav" aria-label="Primary navigation">
-        <a class="brand" href="/" aria-label="Matrix Scroll home">
-          <span class="brand-mark" aria-hidden="true"></span>
-          <span>Matrix Scroll</span>
-        </a>
-        <div class="nav-links">
-          <a href="/spec/">Spec</a>
-          <a href="/docs/">Docs</a>
-          <a href="/mcp/">MCP</a>
-          <a href="/docs/Whitepaper.html">Whitepaper</a>
-          <a href="/compare/">Compare</a>
-          <a href="/verify/">Verifier</a>
-          <a href="/ap2/">AP2</a>
-          <a href="/hardware/" aria-current="page">Hardware</a>
-          <a href="/ecosystem/">Ecosystem</a>
-          <a href="/roadmap/">Roadmap</a>
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links"></div>
+        <div class="ap2-local-nav" aria-label="Page sections">
+          <a href="#how-it-works">How it works</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#security">Security</a>
+          <a href="#waitlist">Request access</a>
         </div>
       </nav>
     </header>
 
     <main id="main">
-      <section class="shell hw-intro" style="padding: 48px 0 8px;">
-        <span class="eyebrow">matrixscroll.hardware.v2 &bull; Sovereign Local Execution</span>
-        <h1>Hardware-Rooted AI: Offline Models &amp; Secure Edge Units</h1>
-        <p class="hero-subtitle">IoT &amp; Local AI Spec v2.0 &bull; Secure Edge Custody</p>
-        <p>By marrying NXP-based hardware keys to local computational units, we enable complete security for offline operations. Whether executing offline LLM decisions, translating critical speech, or conducting localized personal home-agent logic, Matrix Scroll anchors every generation with unforgeable physical signatures.</p>
-        <div class="hw-status-banner" role="note">
-          <strong>AP2 Vault Card</strong> is the active proof-of-concept — NFC tap-to-approve for agent payment mandates. Other units below are <strong>roadmap concepts</strong>, not shipping products.
-        </div>
-      </section>
-
-      <!-- Interactive Playground -->
-      <section class="shell">
-        <div class="hw-playground">
-          <!-- Device stage (left) -->
-          <div class="device-stage">
-            <div class="device-stage-head">
-              <span class="dot" aria-hidden="true"></span>
-              <span class="label" id="hardwareStatus">Local infra OK</span>
-            </div>
-
-            <div class="card-scene" id="cardContainer">
-              <div class="holo-card-v2" id="tokenCard">
-                <div class="holo-overlay" id="holoOverlay" aria-hidden="true"></div>
-                <div class="card-glare" id="cardGlare" aria-hidden="true"></div>
-                <div class="device-viewport" id="deviceVisualContent">
-                  <!-- populated by JS -->
-                </div>
-              </div>
-            </div>
-
-            <div class="device-controls">
-              <div class="ctrl-head">
-                <span class="t">Device Controller</span>
-                <span class="b">SDK Interface Active</span>
-              </div>
-              <button class="exec-btn" id="actionBtn" type="button">Execute Verified Local Action</button>
-              <div class="terminal">
-                <div class="terminal-logs" id="terminalLogs" role="log" aria-live="polite">
-                  <div><span class="pmt">system$</span> matrixscroll status --local</div>
-                  <div class="ok">[READY] NXP SE050 cryptographic hardware bound.</div>
-                  <div class="warn">[IDLE] Waiting for secure intent event execution...</div>
-                </div>
-                <div class="terminal-foot">
-                  <span>SE-ID: 0x228FB...</span>
-                  <span>Active Model: <span class="model" id="terminalModelLabel">Node-One</span></span>
-                </div>
-              </div>
+      <section class="ap2-hero shell">
+        <div class="ap2-hero-glow-a" aria-hidden="true"></div>
+        <div class="ap2-hero-glow-b" aria-hidden="true"></div>
+        <div class="ap2-hero-grid">
+          <div class="ap2-hero-copy">
+            <p class="section-eyebrow">[01] Introduction</p>
+            <h1>
+              <span class="ap2-hero-word">The key</span>
+              <span class="ap2-hero-word">never leaves</span>
+              <span class="ap2-hero-word accent">the card.</span>
+            </h1>
+            <p class="ap2-hero-sub lead">
+              On-card Ed25519 signing for AI agent payments. The private key lives on silicon — not in software, not in the cloud.
+            </p>
+            <div class="button-row ap2-hero-sub">
+              <a class="button primary" href="https://ssx360.com/contact?intent=ap2">Request hardware pilot</a>
+              <a class="button secondary" href="#how-it-works">See how it works</a>
             </div>
           </div>
+          <div class="ap2-hero-visual">
+            <img
+              src="/assets/images/ap2-vault-card-hero.webp"
+              alt="AP2 Vault Card — matte black NFC smart card with SE050 secure element"
+              width="2560"
+              height="1440"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div class="ap2-scroll-hint" aria-hidden="true"><span>SCROLL</span><span></span></div>
+      </section>
 
-          <!-- Configurator (right) -->
-          <div class="config-stack">
-            <!-- 01. Selector -->
-            <div class="panel" style="padding: clamp(18px, 3vw, 24px);">
-              <div class="config-head">
-                <h2><span class="num">01.</span>Hardware Ecosystem Options</h2>
-                <div class="seg-toggle" role="group" aria-label="Hardware category">
-                  <button class="seg-btn" id="catBtn-cards" type="button" aria-pressed="true" onclick="toggleCategory('cards')">Physical Cards</button>
-                  <button class="seg-btn" id="catBtn-iot" type="button" aria-pressed="false" onclick="toggleCategory('iot')">Future Hardware</button>
-                </div>
-              </div>
-              <div class="selector-grid" id="selectionGrid" role="group" aria-label="Hardware tier selector">
-                <!-- populated by JS -->
-              </div>
-              <details class="future-hardware-panel" id="futureHardwarePanel">
-                <summary>Future hardware concepts (roadmap — not shipping)</summary>
-                <p style="margin: 0 0 12px; font-size: 13px; line-height: 1.6; color: var(--muted);">
-                  Node-One, Polyglot Slab, and Aegis Core are speculative IoT concepts for offline AI and secure edge custody. Switch to <strong>Future Hardware</strong> above to explore them interactively.
-                </p>
-              </details>
+      <div class="partner-proof-bar">
+        <div class="shell partner-proof-inner">
+          <span>Hardware pilot · select design partners</span>
+          <span class="partner-proof-links">
+            <a href="https://pypi.org/project/matrixscroll/0.3.0/" rel="noopener">PyPI SDK</a>
+            <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>
+            <a href="https://ssx360.com/" rel="noopener">SSX360 control plane</a>
+          </span>
+        </div>
+      </div>
+
+      <div class="amber-line"></div>
+
+      <section id="how-it-works" class="ap2-section shell">
+        <div class="ap2-section-head">
+          <p class="section-eyebrow">[02] Process</p>
+          <h2>Tap to approve. <span style="color: var(--muted);">Nothing more.</span></h2>
+        </div>
+        <div class="ap2-steps" style="margin-top: 40px;">
+          <article class="ap2-step-card panel">
+            <span class="ap2-step-num">01</span>
+            <div>
+              <h3>Agent requests payment</h3>
+              <p>Your AI agent needs to authorize a transaction — a SaaS subscription, cloud compute, or API call.</p>
             </div>
-
-            <!-- 02. Specs -->
-            <div class="panel" style="padding: clamp(18px, 3vw, 24px);">
-              <div class="config-head" style="border-bottom: 1px solid var(--line); padding-bottom: 14px;">
-                <h2><span class="num" style="color: var(--accent-2);">02.</span>Product Specs &amp; Integration Logic</h2>
-                <span class="eyebrow" id="specModelCode" style="margin: 0;">MODEL-ID: MS-N1-LLM</span>
-              </div>
-              <div id="specContent"><!-- populated by JS --></div>
+          </article>
+          <article class="ap2-step-card panel">
+            <span class="ap2-step-num">02</span>
+            <div>
+              <h3>Phone prompts for tap</h3>
+              <p>The companion app displays mandate details: amount, vendor, and policy context. It asks for physical approval.</p>
             </div>
+          </article>
+          <article class="ap2-step-card panel">
+            <span class="ap2-step-num">03</span>
+            <div>
+              <h3>Card signs on-chip</h3>
+              <p>You tap the AP2 Vault Card. The NXP SE050 (CC EAL6+) secure element signs with Ed25519. The private key never leaves the chip.</p>
+            </div>
+          </article>
+          <article class="ap2-step-card panel">
+            <span class="ap2-step-num">04</span>
+            <div>
+              <h3>Payment executes</h3>
+              <p>The signed envelope is verified by the SSX360 control plane. The transaction proceeds — cryptographically proven to be human-approved.</p>
+            </div>
+          </article>
+        </div>
+      </section>
 
-            <!-- 03. Integrity chain -->
-            <div class="panel" style="padding: clamp(18px, 3vw, 24px);">
-              <h2 style="margin-top: 0; border: none; padding: 0; font-size: clamp(18px, 3vw, 22px);"><span class="num" style="font-family: var(--mono); color: #d97706; font-size: 0.8em; margin-right: 6px;">03.</span>Interactive Manifest Integrity Chain</h2>
-              <p>How the Matrix Scroll offline loop mirrors our core Git Hook process to ensure secure execution:</p>
-              <div class="flow-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
-                <div class="flow-step">
-                  <span class="panel-kicker">Step 1</span>
-                  <h3 style="margin-top: 0; font-size: 16px;">Input Trigger</h3>
-                  <p style="margin: 0; font-size: 13px;">Prompt, speech, or smart-home action registered locally on unit.</p>
-                </div>
-                <div class="flow-step">
-                  <span class="panel-kicker">Step 2</span>
-                  <h3 style="margin-top: 0; font-size: 16px;">Manifest Lock</h3>
-                  <p style="margin: 0; font-size: 13px;">Model input &amp; state hash converted into localized manifest block.</p>
-                </div>
-                <div class="flow-step">
-                  <span class="panel-kicker">Step 3</span>
-                  <h3 style="margin-top: 0; font-size: 16px;">SE-050 Sign</h3>
-                  <p style="margin: 0; font-size: 13px;">NXP secure element signs cryptographic manifest on-chip.</p>
-                </div>
-                <div class="flow-step">
-                  <span class="panel-kicker">Step 4</span>
-                  <h3 style="margin-top: 0; font-size: 16px;">Trust Audit</h3>
-                  <p style="margin: 0; font-size: 13px;">Outbound reports or logs carry tamper-proof signature audits.</p>
-                </div>
-              </div>
+      <div class="ap2-parallax-break" aria-hidden="true">
+        <img src="/assets/images/ap2-vault-card-closeup.webp" alt="" width="2560" height="1440" loading="lazy" decoding="async" />
+      </div>
+
+      <section id="architecture" class="ap2-section shell ap2-reveal-block">
+        <div class="ap2-arch-grid">
+          <figure>
+            <img
+              src="/assets/images/ap2-vault-card-angled.webp"
+              alt="AP2 Vault Card tap-to-approve gesture"
+              width="2560"
+              height="1440"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <div>
+            <p class="section-eyebrow">[03] Architecture</p>
+            <h2>Hardware-rooted <span style="color: var(--ap2-amber);">trust.</span></h2>
+            <div class="ap2-arch-item amber">
+              <h4>SECURE ELEMENT</h4>
+              <p>NXP SE050 (CC EAL6+) — tamper-resistant chip certification. Holds the Ed25519 private key in hardware; certification applies to the secure element, not the whole card assembly.</p>
+            </div>
+            <div class="ap2-arch-item purple">
+              <h4>NFC INTERFACE</h4>
+              <p>Passive operation — no battery. The antenna powers the chip and carries the signed payload in a single tap.</p>
+            </div>
+            <div class="ap2-arch-item">
+              <h4>CONTROL PLANE</h4>
+              <p>SSX360 verifies signatures, enforces spend policies, and provides real-time audit trails for every approval.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Strategic ROI -->
-      <section class="shell content-section">
-        <h2>Capturing the Zero-Trust Edge Market</h2>
-        <p>Why adding physical, local-first computational units turns Matrix Scroll into a highly defense-compliant business model.</p>
-        <div class="pillar-grid">
-          <article class="panel">
-            <span class="panel-kicker">A</span>
-            <h3>Sovereign Computational Custody</h3>
-            <p>Enterprises in defense, medicine, and high-finance completely ban public LLM API calls due to data leaks. By moving models to offline edge units and anchoring telemetry outputs using Matrix Scroll signatures, compliance departments get cryptographic guarantees that no unverified data leaves local custody.</p>
-            <p style="font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0;">Target Audience: Government contractors, healthcare networks, corporate executive suites.</p>
+      <div class="amber-line"></div>
+
+      <section id="security" class="ap2-section shell">
+        <div class="ap2-section-head ap2-reveal-block">
+          <p class="section-eyebrow">[04] Security model</p>
+          <h2>Why hardware beats software.</h2>
+        </div>
+        <div class="ap2-security-grid" style="margin-top: 32px;">
+          <article class="ap2-sec-item panel">
+            <p class="ap2-step-num" style="font-size: 12px;">01</p>
+            <h3>Key never extracted</h3>
+            <p>The SE050 generates and stores the private key internally. There is no API to export it.</p>
           </article>
-          <article class="panel">
-            <span class="panel-kicker">B</span>
-            <h3>Zero-Tamper AI Audit Trails</h3>
-            <p>If an autonomous AI assistant makes a critical action (e.g., locking a vault or purchasing local supplies), how do you prove the decision was authenticated? Standard local servers are vulnerable to file system modifications. Housing the private signing keys in a secure NXP SE050 element ensures the AI&apos;s operation trail is completely immutable.</p>
-            <p style="font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0;">Target Audience: Automated manufacturing systems, logistical planners, agentic-payment nodes.</p>
+          <article class="ap2-sec-item panel">
+            <p class="ap2-step-num" style="font-size: 12px;">02</p>
+            <h3>No battery, no attack surface</h3>
+            <p>Passive NFC means no Bluetooth, no WiFi, no firmware update channel. The card is air-gapped by physics.</p>
           </article>
-          <article class="panel">
-            <span class="panel-kicker">C</span>
-            <h3>Physical-First Subscription Drivers</h3>
-            <p>SaaS subscription companies face heavy attrition. Physical units sitting on desks act as daily, permanent reminders of the product ecosystem. When high-value developers or managers tap their secure units to run verified offline prompts, the brand affinity turns into an unbreakable lock-in.</p>
-            <p style="font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 0;">Economic Impact: Extends user lifetime value (LTV) from 18 months to over 5 years.</p>
+          <article class="ap2-sec-item panel">
+            <p class="ap2-step-num" style="font-size: 12px;">03</p>
+            <h3>Possession factor</h3>
+            <p>Software can be copied. This card cannot. Physical presence is required for every approval.</p>
+          </article>
+          <article class="ap2-sec-item panel">
+            <p class="ap2-step-num" style="font-size: 12px;">04</p>
+            <h3>Tamper-evident silicon</h3>
+            <p>CC EAL6+ applies to the NXP SE050 secure element — the chip resists physical intrusion at certified levels.</p>
+          </article>
+          <article class="ap2-sec-item panel">
+            <p class="ap2-step-num" style="font-size: 12px;">05</p>
+            <h3>Cryptographic proof</h3>
+            <p>Every approval produces a verifiable Ed25519 signature. The audit trail is mathematically checkable offline.</p>
+          </article>
+          <article class="ap2-sec-item panel">
+            <p class="ap2-step-num" style="font-size: 12px;">06</p>
+            <h3>Policy enforcement</h3>
+            <p>SSX360 enforces spend limits, vendor allowlists, and time-of-day restrictions before the card is prompted.</p>
           </article>
         </div>
       </section>
 
-      <!-- Unit Economics -->
-      <section class="shell content-section" style="margin-bottom: 80px;">
-        <div class="config-head" style="margin-bottom: 8px;">
-          <h2 style="margin: 0; border: none; padding: 0;">Full Hardware Suite Unit Economics</h2>
-          <span class="econ-badge"><span class="dot" aria-hidden="true"></span>Financial Matrix v2.0</span>
+      <section class="ap2-section shell ap2-reveal-block">
+        <div class="split-section" style="display: grid; gap: 48px; align-items: start;">
+          <div>
+            <p class="section-eyebrow">[05] Specifications</p>
+            <h2>Built for <span style="color: var(--ap2-amber);">zero compromise.</span></h2>
+            <p class="lead">Every component is chosen so the private key never leaves the card while maintaining sub-second approval latency.</p>
+          </div>
+          <div class="ap2-spec-table-wrap">
+            <table class="ap2-spec-table">
+              <tbody>
+                <tr><td>Secure Element</td><td>NXP SE050C1 (CC EAL6+ chip certification)</td></tr>
+                <tr><td>Signing Algorithm</td><td>Ed25519 (EdDSA over Curve25519)</td></tr>
+                <tr><td>NFC Protocol</td><td>ISO 14443-A, Type 4 Tag</td></tr>
+                <tr><td>Power Source</td><td>Passive (harvested from NFC field)</td></tr>
+                <tr><td>Form Factor</td><td>ISO 7810 ID-1 (credit card size)</td></tr>
+                <tr><td>PoC Controller</td><td>nRF52840 (Nordic Semiconductor)</td></tr>
+                <tr><td>Production Target</td><td>Single-chip passive smart card</td></tr>
+                <tr><td>Signing Latency</td><td>&lt; 200ms from tap to signature</td></tr>
+                <tr><td>Key Storage</td><td>On-chip only, non-exportable</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <p>Estimations based on specialized manufacturing batches (1k &ndash; 5k runs). Figures update with the selected category above.</p>
-        <div style="overflow-x: auto;">
-          <table>
-            <thead>
-              <tr>
-                <th>Hardware Unit</th>
-                <th>Category</th>
-                <th>Est. COGS</th>
-                <th>Suggested Retail / Bundle</th>
-                <th>Core Verification Value</th>
-                <th>Target Margin (Direct)</th>
-              </tr>
-            </thead>
-            <tbody id="economicsTableBody"><!-- populated by JS --></tbody>
-          </table>
+      </section>
+
+      <div class="amber-line"></div>
+
+      <section id="waitlist" class="ap2-section shell ap2-waitlist ap2-reveal-block">
+        <p class="section-eyebrow">[06] Early access</p>
+        <h2>Request hardware access.</h2>
+        <p class="lead">The AP2 Vault Card is in PoC with select design partners. If your team manages AI agent spend and needs possession-factor approval, we want to talk.</p>
+        <div class="button-row" style="justify-content: center; margin-top: 28px;">
+          <a class="button primary" href="https://ssx360.com/contact?intent=ap2">Request a pilot</a>
+          <a class="button secondary" href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">Explore SSX360</a>
         </div>
+        <div class="ap2-stat-row">
+          <div>
+            <div class="ap2-stat-val">&lt;200ms</div>
+            <div class="ap2-stat-label">SIGNING LATENCY</div>
+          </div>
+          <div>
+            <div class="ap2-stat-val">EAL6+</div>
+            <div class="ap2-stat-label">SE050 CHIP CERT</div>
+          </div>
+          <div>
+            <div class="ap2-stat-val">0</div>
+            <div class="ap2-stat-label">BATTERIES</div>
+          </div>
+        </div>
+        <p class="ap2-stat-note">EAL6+ refers to NXP SE050 secure element certification — not certification of the full card product.</p>
+      </section>
+
+      <section class="ap2-poc-lab shell">
+        <details>
+          <summary>PoC lab — interactive hardware configurator</summary>
+          <div class="ap2-poc-lab-body">
+            <p>The original portfolio configurator and device simulator remain available for design partners evaluating form factors and economics.</p>
+            <a class="button secondary" href="/hardware/lab/" style="margin-top: 16px;">Open PoC lab</a>
+          </div>
+        </details>
       </section>
     </main>
 
     <footer class="site-footer">
       <div class="shell footer-grid">
         <div>
-          <a class="brand footer-brand" href="/">
-            <span class="brand-mark" aria-hidden="true"></span>
-            <span>Matrix Scroll</span>
-          </a>
-          <p>Open protocol for signed agent-assisted Git commits. Matrix Scroll Hosted Authority is the trust mapping issuer for keys and profiles.</p>
-          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-david-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James David York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+          <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+          <p>AP2 Vault Card — possession-factor approval for agent payments. Protocol at matrixscroll.com · control plane at ssx360.com.</p>
         </div>
-        <div>
-          <h2>Protocol</h2>
-          <a href="/spec/">Spec</a>
-          <a href="/verify/">Verifier</a>
-          <a href="/ap2/">AP2</a>
-          <a href="/hardware/">Hardware Spec</a>
-          <a href="/ecosystem/">Ecosystem</a>
-        </div>
-        <div>
-          <h2>Resources</h2>
-          <a href="/docs/">Docs</a>
-          <a href="/mcp/">MCP</a>
-          <a href="/compare/">Compare</a>
-          <a href="/docs/Whitepaper.html">Whitepaper</a>
-          <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>
-        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a></div>
+        <div><h2>Ecosystem</h2><a href="/ap2/">AP2</a><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 ↗</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/hardware/lab/">PoC lab</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
       </div>
     </footer>
-
-    <script>
-      (function () {
-        "use strict";
-
-        // ---------- Inline SVG icons (no emoji) ----------
-        var icons = {
-          bolt: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
-          globe: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18"/></svg>',
-          shield: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>'
-        };
-
-        // ---------- Accent palette (no purple/fuchsia) ----------
-        var COLORS = {
-          cyan:    { hex: "#22d3ee", exec: "#22d3ee" },
-          teal:    { hex: "#2dd4bf", exec: "#2dd4bf" },
-          amber:   { hex: "#f59e0b", exec: "#f59e0b" },
-          emerald: { hex: "#10b981", exec: "#10b981" },
-          blue:    { hex: "#3b82f6", exec: "#60a5fa" }
-        };
-
-        function qr(seed) {
-          var cells = "";
-          for (var i = 0; i < 25; i++) {
-            var on = ((seed * (i + 3)) % 5) < 3;
-            cells += '<span class="' + (on ? "on" : "off") + '"></span>';
-          }
-          return '<div class="qr-box"><div class="scan-line"></div><div class="qr-grid">' + cells + "</div></div>";
-        }
-
-        function waveBars() {
-          var delays = [0.1, 0.3, 0.5, 0.2, 0.4, 0.6, 0.1];
-          return '<div class="dv-wave">' + delays.map(function (d) {
-            return '<i style="animation-delay:' + d + 's"></i>';
-          }).join("") + "</div>";
-        }
-
-        // ---------- Portfolio data ----------
-        var portfolio = {
-          iot: {
-            node1: {
-              modelCode: "MS-N1-LLM", title: "Node-One Offline LLM Hub", short: "Node-One",
-              status: "concept",
-              cogs: "$45.00", retail: "$299.00", color: "cyan",
-              kicker: "Offline LLM Apparatus", name: "NODE-ONE HUB", badge: "UNIT: ACTIVE",
-              materials: "Frosted dark-smoke aluminum shell, central circular telemetry OLED screen, glowing system status ring.",
-              tech: "Hosts quantized 3B/7B LLMs in localized high-speed memory. Every output state undergoes direct on-chip Ed25519 signing via NXP SE050 to ensure zero external prompt injections occur undetected.",
-              loop: "Deployed in secure war rooms and executive offices. Ensures absolute information security while generating auditable, signed decision manifests.",
-              actionLabel: "Generate Signed Local Inference",
-              coreValue: "Offline Prompt Authenticator", success: "[OK] Offline LLM Prompt Signed: hash verified successfully.",
-              center: "ring-counter", footL: ["TEMP: 42&deg;C", "PROMPT STATUS: COMPLIANT"], footR: { type: "meta", hi: "100% OFFLINE", lines: ["KEY: SE050_A1"] }
-            },
-            polyglot: {
-              modelCode: "MS-P2-POLY", title: "Polyglot Slab Secure Translator", short: "Polyglot",
-              status: "concept",
-              cogs: "$55.00", retail: "$349.00", color: "teal",
-              kicker: "Diplomatic Core", name: "POLYGLOT SLAB", badge: "TRANSLATING",
-              materials: "Ultra-thin lightweight titanium chassis, fully transparent central visual screen showing voice transcription logic.",
-              tech: "Dual-microphone cluster feeding directly into an offline whisper model. Generates signed, tamper-proof transcript manifests to safeguard official negotiations against gaslighting or malicious transcripts.",
-              loop: "Crucial for diplomatic corps, cross-border corporate partnerships, and legal counsels demanding verifiable localized logs.",
-              actionLabel: "Generate Signed Local Transcription",
-              coreValue: "Immutable Conversational Vault", success: "[OK] Speech Transcript Sealed: verified transcript log compiled.",
-              center: "wave", centerPill: "EN &#8594; JP [VERIFIED]", centerSub: "Transcript signing hash locked...",
-              footL: ["LATENCY: 12ms", "SECURE LOGS: LOCAL ONLY"], footR: { type: "meta", hi: "CRYPTO SIGNED", lines: ["NXP_TRANS_09"] }
-            },
-            aegis: {
-              modelCode: "MS-A3-CORE", title: "Aegis Core Local Assistant", short: "Aegis",
-              status: "concept",
-              cogs: "$70.00", retail: "$499.00", color: "amber",
-              kicker: "Security Boundary Layer", name: "AEGIS ASSISTANT", badge: "SHIELD ACTIVE",
-              materials: "Machined geometric composite armor panel, perimeter glowing safety grid indicators, surface expansion slots.",
-              tech: "Aggregates home telemetry, files, and camera inputs. Pre-verifies assistant requests via physically isolated circuits, completely mitigating standard web injection vectors.",
-              loop: "For sovereign automated houses, secure computing modules, and localized execution tasks requiring physical key authorization.",
-              actionLabel: "Verify Secure Assistant Action",
-              coreValue: "Home Assistant Sandbox", success: "[OK] Sandbox Isolation Confirmed: zero leaks detected.",
-              center: "shield", centerLabel: "Integrity Matrix Secured",
-              footL: ["DEVICES BOUND: 14", "OVERRIDE KEY: INSERTED"], footR: { type: "meta", hi: "100% SANDBOXED", lines: ["AEGIS-VAULT-9"] }
-            }
-          },
-          cards: {
-            pass: {
-              modelCode: "MS-C1-PASS", title: "The Scroll Pass", short: "Scroll Pass",
-              status: "concept",
-              cogs: "$1.20", retail: "$19.00 / mo", color: "emerald", chip: true,
-              kicker: "Dev Identity Pass", name: "Matrix Scroll", badge: "",
-              materials: "Transparent frosted PVC card, printed dynamic high-contrast green QR, metallic holographic hot stamp overlays.",
-              tech: "Offline cryptographic proof via highly scan-optimized QR. Resolves straight to a verified public key directory or customizable Developer Profile hosted on Matrix Scroll.",
-              loop: "Sent to top 500 open-source contributors and developers who configure their first local Git-hook signed via the PyPI package. Drives viral exposure and showcases proof-of-identity on X / GitHub.",
-              actionLabel: "Verify Cryptographic Profile Link",
-              coreValue: "Home Assistant Sandbox", success: "[OK] Secure Manifest successfully integrated with local chain.",
-              center: "ring-icon", icon: "bolt", centerLabel: "Developer Tier Pass", centerSub: "ID: SCROLL-DEV-0922",
-              footL: ["ALGO: ED25519", "STATUS: SIGNED", "PyPI Verified v0.2.6"], footR: { type: "qr", seed: 2 }
-            },
-            ap2: {
-              modelCode: "MS-C2-VAULT", title: "AP2 Vault Card", short: "AP2 Vault",
-              status: "poc",
-              cogs: "$2.90", retail: "$29.00", color: "blue", chip: true, nfc: true,
-              kicker: "AP2 Vault Controller", name: "Matrix Scroll", badge: "",
-              materials: "Matte black PET with embedded NFC antenna, copper coil, and NXP SE050 secure element for on-chip Ed25519 signing.",
-              tech: "nRF52840 host MCU + SE050 secure element. NFC tap-to-approve for bounded agent payment mandates — same envelope contract as software signing.",
-              loop: "Bundled in hardware pilot welcome kits. The tangible possession factor a compromised agent session cannot forge.",
-              actionLabel: "Simulate Secure NFC Payment Tap",
-              coreValue: "Possession-factor approval", success: "[OK] Tap authorization record verified offline.",
-              center: "photo",
-              photoSrc: "/assets/images/ap2-vault-card-angled.webp",
-              photoAlt: "AP2 Vault Card — matte black NFC hardware with purple rim lighting",
-              footL: ["FREQUENCY: 13.56MHz", "SE050 ON-CHIP", "NFC TAP-TO-APPROVE"], footR: { type: "meta", hi: "ACTIVE POC", lines: ["MS-C2-VAULT"] }
-            },
-            signer: {
-              modelCode: "MS-C3-HARD", title: "SSX360 Crystal Signer", short: "SSX360",
-              status: "concept",
-              cogs: "$13.50", retail: "$99.00", color: "amber", chip: true,
-              kicker: "Hardware Root Trust", name: "Matrix Scroll", badge: "",
-              materials: "Frosted composite glass casing, ultra-thin polished steel frame, laser-etched serial numbers, glowing green LED indicator inside the internal PCB transparent window.",
-              tech: "Custom integrated NXP SE050 secure element microchip on a specialized USB-C/NFC transit circuit. Stores private keys securely on physical silicon; performs Ed25519 signing on-chip.",
-              loop: "Sold as a standard enterprise hardware kit or included in bulk Team subscriptions. Ensures that zero developer keys can ever leak via software hacks, completing the Phase 5 roadmap.",
-              actionLabel: "Simulate On-Chip Secure Commit Signing",
-              coreValue: "Home Assistant Sandbox", success: "[OK] Secure Manifest successfully integrated with local chain.",
-              center: "ring-icon", icon: "shield", centerLabel: "SSX360 NXP SE050", centerSub: "SE-ID: 994-3882-110",
-              footL: ["KEY ENCLAVE: SECURE", "CRYPTO ENGINE: ED25519", "On-Chip Cryptography Active"], footR: { type: "qr", seed: 5 }
-            }
-          }
-        };
-
-        var firstTier = { iot: "node1", cards: "ap2" };
-        var activeCategory = "cards";
-        var activeTier = "ap2";
-        var tpsInterval = null;
-
-        var els = {
-          card: document.getElementById("tokenCard"),
-          container: document.getElementById("cardContainer"),
-          overlay: document.getElementById("holoOverlay"),
-          glare: document.getElementById("cardGlare"),
-          viewport: document.getElementById("deviceVisualContent"),
-          grid: document.getElementById("selectionGrid"),
-          specContent: document.getElementById("specContent"),
-          specModelCode: document.getElementById("specModelCode"),
-          terminalModel: document.getElementById("terminalModelLabel"),
-          actionBtn: document.getElementById("actionBtn"),
-          econBody: document.getElementById("economicsTableBody"),
-          iotBtn: document.getElementById("catBtn-iot"),
-          cardsBtn: document.getElementById("catBtn-cards"),
-          logs: document.getElementById("terminalLogs")
-        };
-
-        // ---------- Build the device viewport for a product ----------
-        function buildViewport(p) {
-          if (p.center === "photo") {
-            els.card.classList.add("photo-card");
-            els.actionBtn.style.setProperty("--exec", COLORS[p.color].exec);
-            els.viewport.innerHTML =
-              '<img class="dv-photo" src="' + p.photoSrc + '" alt="' + p.photoAlt + '" width="2560" height="1440" loading="eager" decoding="async" />';
-            return;
-          }
-
-          els.card.classList.remove("photo-card");
-          var c = COLORS[p.color];
-          var topRight = p.chip
-            ? '<div class="gold-chip-v2" aria-hidden="true"><i></i><i></i><i></i></div>'
-            : (p.badge ? '<span class="dv-badge">' + p.badge + "</span>" : "");
-
-          var center = "";
-          if (p.center === "ring-counter") {
-            center =
-              '<div class="dv-ring"><div class="dv-core">' +
-              '<span class="cap">LOCAL TPS</span>' +
-              '<span class="val" id="tpsValue">38.4</span>' +
-              '<span class="sub">7B LLAMA.CPP</span></div></div>' +
-              '<div class="dv-center-label"><div class="t">Secure Model Kernel Signed</div></div>';
-          } else if (p.center === "wave") {
-            center = waveBars() +
-              '<div class="dv-center-label"><span class="dv-pill">' + p.centerPill + "</span>" +
-              '<div class="s">' + p.centerSub + "</div></div>";
-          } else if (p.center === "shield") {
-            center = '<div class="dv-ring"><div class="dv-icon">' + icons.shield + "</div></div>" +
-              '<div class="dv-center-label"><span class="dv-pill">' + p.centerLabel + "</span></div>";
-          } else if (p.center === "ring-icon") {
-            center = '<div class="dv-ring"><div class="dv-icon">' + icons[p.icon] + "</div></div>" +
-              '<div class="dv-center-label"><div class="t">' + p.centerLabel + "</div>" +
-              '<div class="s">' + p.centerSub + "</div></div>";
-          }
-
-          var footRight = "";
-          if (p.footR.type === "qr") {
-            footRight = qr(p.footR.seed);
-          } else {
-            footRight = '<div class="dv-foot-col right"><div class="hi">' + p.footR.hi + "</div>" +
-              p.footR.lines.map(function (l) { return "<div>" + l + "</div>"; }).join("") + "</div>";
-          }
-
-          var footLeft = '<div class="dv-foot-col">' +
-            p.footL.map(function (l) { return "<div>" + l + "</div>"; }).join("") + "</div>";
-
-          var nfc = p.nfc ? '<div class="nfc-coil" aria-hidden="true"></div>' : "";
-
-          els.card.style.setProperty("--dv", c.hex);
-          els.actionBtn.style.setProperty("--exec", c.exec);
-
-          els.viewport.innerHTML =
-            nfc +
-            '<div class="dv-top"><div><div class="dv-kicker">' + p.kicker + "</div>" +
-            '<div class="dv-name"><span class="live"></span>' + p.name + "</div></div>" + topRight + "</div>" +
-            '<div class="dv-center">' + center + "</div>" +
-            '<div class="dv-foot">' + footLeft + footRight + "</div>";
-        }
-
-        function statusBadge(status) {
-          if (status === "poc") {
-            return '<span class="roadmap-badge poc">Active PoC</span>';
-          }
-          if (status === "concept") {
-            return '<span class="roadmap-badge">Roadmap / Concept</span>';
-          }
-          return "";
-        }
-
-        // ---------- Spec panel ----------
-        function buildSpecs(p) {
-          els.specContent.innerHTML =
-            (p.status === "concept"
-              ? '<p style="margin:0 0 16px;padding:12px 14px;border-radius:var(--radius);border:1px solid #fcd34d;background:#fffbeb;font-size:13px;line-height:1.55;color:var(--text);"><strong>Roadmap concept.</strong> This unit is not shipping. Specifications and economics are illustrative only.</p>'
-              : p.status === "poc"
-                ? '<p style="margin:0 0 16px;padding:12px 14px;border-radius:var(--radius);border:1px solid #93c5fd;background:#eff6ff;font-size:13px;line-height:1.55;color:var(--text);"><strong>Active proof-of-concept.</strong> AP2 Vault Card pilots use emulated tap-to-approve today; NFC hardware follows in later phases.</p>'
-                : "") +
-            '<div class="spec-block" style="margin-bottom:18px;">' +
-            '<div class="k">Selected Hardware</div><p class="v lead-val">' + p.title + "</p></div>" +
-            '<div class="spec-grid" style="margin-bottom:18px;">' +
-            '<div class="spec-block"><div class="k">Target Production COGS</div><p class="v mono">' + p.cogs + " per unit</p></div>" +
-            '<div class="spec-block"><div class="k">Form-Factor Composition</div><p class="v">' + p.materials + "</p></div></div>" +
-            '<div class="spec-block" style="margin-bottom:16px;"><div class="k">NXP Cryptographic Integration Scheme</div><p class="v">' + p.tech + "</p></div>" +
-            '<div class="spec-highlight"><div class="k">Local Rollout Ecosystem Strategy</div><p class="v" style="margin:0;">' + p.loop + "</p></div>";
-        }
-
-        // ---------- Economics table ----------
-        function renderEconomics() {
-          var items = portfolio[activeCategory];
-          var rows = "";
-          Object.keys(items).forEach(function (key) {
-            var p = items[key];
-            var c = COLORS[p.color];
-            var margin;
-            if (activeCategory === "iot") {
-              var retail = parseFloat(p.retail.replace(/[^0-9.]/g, ""));
-              var cogs = parseFloat(p.cogs.replace(/[^0-9.]/g, ""));
-              margin = '<span class="econ-margin">' + Math.round(((retail - cogs) / retail) * 100) + "%</span>";
-            } else {
-              margin = '<span class="econ-margin">High Margin Hook LTV</span>';
-            }
-            rows +=
-              "<tr><td><strong style=\"display:inline-flex;align-items:center;gap:8px;\">" +
-              '<span style="width:8px;height:8px;border-radius:50%;background:' + c.hex + ';"></span>' + p.title + "</strong></td>" +
-              "<td>" + (activeCategory === "iot" ? "Smart Unit" : "Secure Card") + "</td>" +
-              '<td style="font-family:var(--mono);">' + p.cogs + "</td>" +
-              '<td style="font-family:var(--mono);">' + p.retail + "</td>" +
-              "<td>" + p.coreValue + "</td>" +
-              "<td>" + margin + "</td></tr>";
-          });
-          els.econBody.innerHTML = rows;
-        }
-
-        // ---------- Selector grid ----------
-        function renderSelector() {
-          var items = portfolio[activeCategory];
-          var html = "";
-          Object.keys(items).forEach(function (key) {
-            var p = items[key];
-            html +=
-              '<button type="button" class="selector-btn" id="btn-' + key + '" aria-pressed="' + (key === activeTier) + '" onclick="selectTier(\'' + key + '\')">' +
-              '<span class="code">' + p.modelCode + "</span>" +
-              '<span class="name">' + p.title + "</span>" +
-              statusBadge(p.status) +
-              '<span class="mat">' + p.materials + "</span>" +
-              '<span class="cogs">Est. COGS: ' + p.cogs + "</span></button>";
-          });
-          els.grid.innerHTML = html;
-        }
-
-        // ---------- TPS sim ----------
-        function startTps() {
-          stopTps();
-          tpsInterval = setInterval(function () {
-            var el = document.getElementById("tpsValue");
-            if (el) el.textContent = (35 + Math.random() * 5).toFixed(1);
-          }, 800);
-        }
-        function stopTps() { if (tpsInterval) { clearInterval(tpsInterval); tpsInterval = null; } }
-
-        // ---------- Select a tier ----------
-        window.selectTier = function (tier) {
-          activeTier = tier;
-          var items = portfolio[activeCategory];
-          Object.keys(items).forEach(function (key) {
-            var btn = document.getElementById("btn-" + key);
-            if (btn) btn.setAttribute("aria-pressed", String(key === tier));
-          });
-          var p = items[tier];
-          buildViewport(p);
-          buildSpecs(p);
-          els.actionBtn.textContent = p.actionLabel;
-          els.specModelCode.textContent = "MODEL-ID: " + p.modelCode;
-          els.terminalModel.textContent = p.short;
-          if (tier === "node1") startTps(); else stopTps();
-        };
-
-        // ---------- Toggle category ----------
-        window.toggleCategory = function (cat) {
-          activeCategory = cat;
-          activeTier = firstTier[cat];
-          els.iotBtn.setAttribute("aria-pressed", String(cat === "iot"));
-          els.cardsBtn.setAttribute("aria-pressed", String(cat === "cards"));
-          renderSelector();
-          window.selectTier(activeTier);
-          renderEconomics();
-        };
-
-        // ---------- Terminal simulation ----------
-        window.triggerSimulation = null;
-        function log(cls, text) {
-          var d = document.createElement("div");
-          if (cls) d.className = cls;
-          d.textContent = text;
-          els.logs.appendChild(d);
-          els.logs.scrollTop = els.logs.scrollHeight;
-        }
-        els.actionBtn.addEventListener("click", function () {
-          var p = portfolio[activeCategory][activeTier];
-          log("warn", "[INTENT] Initiated execution on " + p.title + "...");
-          setTimeout(function () { log("info", "[MANIFEST] Created system state manifest (.matrix_manifest.json)"); }, 600);
-          setTimeout(function () { log("sign", "[HARDWARE] Ed25519 payload signed internally via SE050."); }, 1200);
-          setTimeout(function () { log("done", p.success); }, 1800);
-        });
-
-        // ---------- 3D tilt + glare ----------
-        var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        if (!reduceMotion) {
-          els.container.addEventListener("mousemove", function (e) {
-            var rect = els.card.getBoundingClientRect();
-            var x = e.clientX - rect.left;
-            var y = e.clientY - rect.top;
-            var rotateY = -((x / rect.width) - 0.5) * 22;
-            var rotateX = ((y / rect.height) - 0.5) * 22;
-            els.card.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(1.02)";
-            var px = (x / rect.width) * 100, py = (y / rect.height) * 100;
-            var angle = Math.atan2(y - rect.height / 2, x - rect.width / 2) * 180 / Math.PI;
-            els.overlay.style.setProperty("--mx", px + "%");
-            els.overlay.style.setProperty("--my", py + "%");
-            els.overlay.style.setProperty("--angle", angle + "deg");
-            els.glare.style.setProperty("--gx", x + "px");
-            els.glare.style.setProperty("--gy", y + "px");
-          });
-          els.container.addEventListener("mouseleave", function () {
-            els.card.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-            els.overlay.style.setProperty("--mx", "50%");
-            els.overlay.style.setProperty("--my", "50%");
-            els.overlay.style.setProperty("--angle", "135deg");
-            els.glare.style.setProperty("--gx", "50%");
-            els.glare.style.setProperty("--gy", "50%");
-          });
-        }
-
-        // ---------- Init ----------
-        window.toggleCategory("cards");
-      })();
-    </script>
   </body>
 </html>

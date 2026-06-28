@@ -6,6 +6,7 @@
  */
 (function () {
   var PRIMARY = [
+    { href: "/#pricing", label: "Pricing", match: ["/#pricing"], homeOnly: true },
     { href: "/docs/", label: "Docs", match: ["/docs"] },
     { href: "/mcp/", label: "MCP", match: ["/mcp"] },
     { href: "/verify/", label: "Verifier", match: ["/verify"] },
@@ -66,7 +67,11 @@
 
   function linkHtml(item, path) {
     var active = itemActive(item, path) ? ' aria-current="page"' : ""
-    return '<a href="' + item.href + '"' + active + ">" + item.label + "</a>"
+    var href = item.href
+    if (item.homeOnly && path !== "/") {
+      href = "/"
+    }
+    return '<a href="' + href + '"' + active + ">" + item.label + "</a>"
   }
 
   function buildEcosystemBar(path) {
@@ -168,6 +173,15 @@
         /* allow default — user leaves protocol site for control plane */
       })
     })
+
+    var headerEl = document.querySelector(".site-header")
+    if (headerEl) {
+      var onScroll = function () {
+        headerEl.classList.toggle("is-scrolled", window.scrollY > 100)
+      }
+      onScroll()
+      window.addEventListener("scroll", onScroll, { passive: true })
+    }
   }
 
   if (document.readyState === "loading") {

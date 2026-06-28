@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Protocol flow — Matrix Scroll Documentation</title>
+    <meta name="description" content="From agent output to durable proof: the four-step Matrix Scroll signing and verification flow.">
+    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, AP2 Vault Card, offline verification, git hooks">
+    <meta name="author" content="Matrix Scroll">
+    <meta name="robots" content="index, follow">
+    <meta name="content-language" content="en-US">
+    <meta name="geo.region" content="US">
+    <meta name="geo.placename" content="United States">
+    <link rel="canonical" href="https://matrixscroll.com/docs/protocol-flow.html">
+    <link rel="alternate" hreflang="en-US" href="https://matrixscroll.com/docs/protocol-flow.html">
+    <link rel="alternate" hreflang="x-default" href="https://matrixscroll.com/docs/protocol-flow.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Matrix Scroll">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://matrixscroll.com/docs/protocol-flow.html">
+    <meta property="og:title" content="Matrix Scroll protocol flow">
+    <meta property="og:description" content="From agent output to durable proof: the four-step Matrix Scroll signing and verification flow.">
+    <meta property="og:image" content="https://matrixscroll.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@MatrixScroll">
+    <meta name="twitter:title" content="Matrix Scroll protocol flow">
+    <meta name="twitter:description" content="From agent output to durable proof: the four-step Matrix Scroll signing and verification flow.">
+    <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
+    <meta name="twitter:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
+    <meta name="theme-color" content="#0a0908">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/assets/site.css">
+    <script src="/assets/site-enhancements.js" defer></script>
+    <script src="/assets/site-nav.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+        <div class="nav-links"></div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="page-hero shell reveal-up">
+        <p class="eyebrow">Process</p>
+        <h1>Protocol flow</h1>
+        <p class="lead">From agent output to durable proof — four steps, one byte contract.</p>
+        <div class="button-row">
+          <a class="button secondary" href="/docs/why.html">← Why it exists</a>
+          <a class="button ghost" href="/spec/">Read the spec</a>
+        </div>
+      </section>
+
+      <section class="band reveal-up">
+        <div class="shell">
+          <div class="flow-grid reveal-stagger" aria-label="Matrix Scroll protocol flow">
+            <article class="flow-step panel">
+              <span>01</span>
+              <h3>IDE or agent</h3>
+              <p>Creates a release, commit, evidence pack, or policy manifest.</p>
+            </article>
+            <article class="flow-step panel">
+              <span>02</span>
+              <h3>SDK canonicalizes</h3>
+              <p>Sorted keys, compact separators, ASCII escaping, no NaN, and no top-level signature input.</p>
+            </article>
+            <article class="flow-step panel">
+              <span>03</span>
+              <h3>The active signer signs</h3>
+              <p>Today that means the emulated provider. Later it can support external keyrings and secure enclaves using the same public contract.</p>
+            </article>
+            <article class="flow-step panel">
+              <span>04</span>
+              <h3>Anyone verifies</h3>
+              <p>Public key, device ID, algorithm, timestamp, and signature travel with the manifest.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
+          <p>Open protocol for signed agent-assisted Git commits.</p>
+        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a></div>
+        <div><h2>Learn</h2><a href="/docs/why.html">Why it exists</a><a href="/docs/threat-model.html">Threat model</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
+      </div>
+    </footer>
+  </body>
+</html>

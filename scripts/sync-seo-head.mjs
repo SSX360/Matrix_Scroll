@@ -103,6 +103,30 @@ const pages = {
     description: "Technical whitepaper for signed commit provenance, verification, and the Matrix Scroll trust model.",
     ogTitle: "Matrix Scroll Whitepaper",
   },
+  "docs/why.html": {
+    path: "/docs/why.html",
+    title: "Why Matrix Scroll exists — Documentation",
+    description: "Why signed commit provenance matters for AI-assisted development — and how Matrix Scroll closes the gap.",
+    ogTitle: "Why Matrix Scroll exists",
+  },
+  "docs/protocol-flow.html": {
+    path: "/docs/protocol-flow.html",
+    title: "Protocol flow — Matrix Scroll Documentation",
+    description: "From agent output to durable proof: the four-step Matrix Scroll signing and verification flow.",
+    ogTitle: "Matrix Scroll protocol flow",
+  },
+  "docs/threat-model.html": {
+    path: "/docs/threat-model.html",
+    title: "Threat model — Matrix Scroll Documentation",
+    description: "Matrix Scroll attestation limits, L1 software-key assumptions, and trust anchor distribution.",
+    ogTitle: "Matrix Scroll threat model",
+  },
+  "hardware/lab/index.html": {
+    path: "/hardware/lab/",
+    title: "AP2 PoC Lab — Hardware configurator | Matrix Scroll",
+    description: "Interactive AP2 Vault Card configurator and device simulator for design partners.",
+    ogTitle: "AP2 PoC Lab — Hardware configurator",
+  },
 }
 
 function buildHead(page) {
