@@ -288,6 +288,35 @@
       .econ-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); animation: dv-pulse 1.6s ease-in-out infinite; }
       .econ-margin { color: var(--accent-2); font-weight: 700; }
 
+      .hw-status-banner {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+        margin: 20px 0 8px; padding: 14px 18px;
+        border-radius: var(--radius); border: 1px solid #a7f3d0; background: #ecfdf5;
+        font-size: 13px; line-height: 1.55; color: var(--text);
+      }
+      .hw-status-banner strong { color: #047857; }
+      .roadmap-badge {
+        display: inline-flex; align-items: center;
+        font-family: var(--mono); font-size: 9px; font-weight: 700;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 3px 8px; border-radius: 999px; margin-top: 8px;
+        border: 1px solid #fcd34d; background: #fffbeb; color: #b45309;
+      }
+      .roadmap-badge.poc {
+        border-color: #93c5fd; background: #eff6ff; color: #1d4ed8;
+      }
+      .future-hardware-panel { margin-top: 8px; }
+      .future-hardware-panel summary {
+        cursor: pointer; list-style: none;
+        font-family: var(--interface); font-size: 13px; font-weight: 600;
+        color: var(--soft); padding: 10px 0;
+      }
+      .future-hardware-panel summary::-webkit-details-marker { display: none; }
+      .future-hardware-panel summary::before {
+        content: "▸ "; font-family: var(--mono); color: var(--accent);
+      }
+      .future-hardware-panel[open] summary::before { content: "▾ "; }
+
       /* ---------- Animations ---------- */
       @keyframes dv-spin { to { transform: rotate(360deg); } }
       @keyframes dv-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
@@ -331,6 +360,9 @@
         <h1>Hardware-Rooted AI: Offline Models &amp; Secure Edge Units</h1>
         <p class="hero-subtitle">IoT &amp; Local AI Spec v2.0 &bull; Secure Edge Custody</p>
         <p>By marrying NXP-based hardware keys to local computational units, we enable complete security for offline operations. Whether executing offline LLM decisions, translating critical speech, or conducting localized personal home-agent logic, Matrix Scroll anchors every generation with unforgeable physical signatures.</p>
+        <div class="hw-status-banner" role="note">
+          <strong>AP2 Vault Card</strong> is the active proof-of-concept — NFC tap-to-approve for agent payment mandates. Other units below are <strong>roadmap concepts</strong>, not shipping products.
+        </div>
       </section>
 
       <!-- Interactive Playground -->
@@ -380,13 +412,19 @@
               <div class="config-head">
                 <h2><span class="num">01.</span>Hardware Ecosystem Options</h2>
                 <div class="seg-toggle" role="group" aria-label="Hardware category">
-                  <button class="seg-btn" id="catBtn-iot" type="button" aria-pressed="true" onclick="toggleCategory('iot')">Offline AI Smart Units</button>
-                  <button class="seg-btn" id="catBtn-cards" type="button" aria-pressed="false" onclick="toggleCategory('cards')">Physical Cards</button>
+                  <button class="seg-btn" id="catBtn-cards" type="button" aria-pressed="true" onclick="toggleCategory('cards')">Physical Cards</button>
+                  <button class="seg-btn" id="catBtn-iot" type="button" aria-pressed="false" onclick="toggleCategory('iot')">Future Hardware</button>
                 </div>
               </div>
               <div class="selector-grid" id="selectionGrid" role="group" aria-label="Hardware tier selector">
                 <!-- populated by JS -->
               </div>
+              <details class="future-hardware-panel" id="futureHardwarePanel">
+                <summary>Future hardware concepts (roadmap — not shipping)</summary>
+                <p style="margin: 0 0 12px; font-size: 13px; line-height: 1.6; color: var(--muted);">
+                  Node-One, Polyglot Slab, and Aegis Core are speculative IoT concepts for offline AI and secure edge custody. Switch to <strong>Future Hardware</strong> above to explore them interactively.
+                </p>
+              </details>
             </div>
 
             <!-- 02. Specs -->
@@ -550,6 +588,7 @@
           iot: {
             node1: {
               modelCode: "MS-N1-LLM", title: "Node-One Offline LLM Hub", short: "Node-One",
+              status: "concept",
               cogs: "$45.00", retail: "$299.00", color: "cyan",
               kicker: "Offline LLM Apparatus", name: "NODE-ONE HUB", badge: "UNIT: ACTIVE",
               materials: "Frosted dark-smoke aluminum shell, central circular telemetry OLED screen, glowing system status ring.",
@@ -561,6 +600,7 @@
             },
             polyglot: {
               modelCode: "MS-P2-POLY", title: "Polyglot Slab Secure Translator", short: "Polyglot",
+              status: "concept",
               cogs: "$55.00", retail: "$349.00", color: "teal",
               kicker: "Diplomatic Core", name: "POLYGLOT SLAB", badge: "TRANSLATING",
               materials: "Ultra-thin lightweight titanium chassis, fully transparent central visual screen showing voice transcription logic.",
@@ -573,6 +613,7 @@
             },
             aegis: {
               modelCode: "MS-A3-CORE", title: "Aegis Core Local Assistant", short: "Aegis",
+              status: "concept",
               cogs: "$70.00", retail: "$499.00", color: "amber",
               kicker: "Security Boundary Layer", name: "AEGIS ASSISTANT", badge: "SHIELD ACTIVE",
               materials: "Machined geometric composite armor panel, perimeter glowing safety grid indicators, surface expansion slots.",
@@ -587,6 +628,7 @@
           cards: {
             pass: {
               modelCode: "MS-C1-PASS", title: "The Scroll Pass", short: "Scroll Pass",
+              status: "concept",
               cogs: "$1.20", retail: "$19.00 / mo", color: "emerald", chip: true,
               kicker: "Dev Identity Pass", name: "Matrix Scroll", badge: "",
               materials: "Transparent frosted PVC card, printed dynamic high-contrast green QR, metallic holographic hot stamp overlays.",
@@ -599,6 +641,7 @@
             },
             ap2: {
               modelCode: "MS-C2-VAULT", title: "AP2 Vault Card", short: "AP2 Vault",
+              status: "poc",
               cogs: "$2.90", retail: "$29.00", color: "blue", chip: true, nfc: true,
               kicker: "AP2 Vault Controller", name: "Matrix Scroll", badge: "",
               materials: "Semi-transparent thick PET plastic with embedded, custom circular copper antenna coils, scratch-resistant double-sided coating, iridescent gradient foil print.",
@@ -611,6 +654,7 @@
             },
             signer: {
               modelCode: "MS-C3-HARD", title: "SSX360 Crystal Signer", short: "SSX360",
+              status: "concept",
               cogs: "$13.50", retail: "$99.00", color: "amber", chip: true,
               kicker: "Hardware Root Trust", name: "Matrix Scroll", badge: "",
               materials: "Frosted composite glass casing, ultra-thin polished steel frame, laser-etched serial numbers, glowing green LED indicator inside the internal PCB transparent window.",
@@ -624,9 +668,9 @@
           }
         };
 
-        var firstTier = { iot: "node1", cards: "pass" };
-        var activeCategory = "iot";
-        var activeTier = "node1";
+        var firstTier = { iot: "node1", cards: "ap2" };
+        var activeCategory = "cards";
+        var activeTier = "ap2";
         var tpsInterval = null;
 
         var els = {
@@ -698,9 +742,24 @@
             '<div class="dv-foot">' + footLeft + footRight + "</div>";
         }
 
+        function statusBadge(status) {
+          if (status === "poc") {
+            return '<span class="roadmap-badge poc">Active PoC</span>';
+          }
+          if (status === "concept") {
+            return '<span class="roadmap-badge">Roadmap / Concept</span>';
+          }
+          return "";
+        }
+
         // ---------- Spec panel ----------
         function buildSpecs(p) {
           els.specContent.innerHTML =
+            (p.status === "concept"
+              ? '<p style="margin:0 0 16px;padding:12px 14px;border-radius:var(--radius);border:1px solid #fcd34d;background:#fffbeb;font-size:13px;line-height:1.55;color:var(--text);"><strong>Roadmap concept.</strong> This unit is not shipping. Specifications and economics are illustrative only.</p>'
+              : p.status === "poc"
+                ? '<p style="margin:0 0 16px;padding:12px 14px;border-radius:var(--radius);border:1px solid #93c5fd;background:#eff6ff;font-size:13px;line-height:1.55;color:var(--text);"><strong>Active proof-of-concept.</strong> AP2 Vault Card pilots use emulated tap-to-approve today; NFC hardware follows in later phases.</p>'
+                : "") +
             '<div class="spec-block" style="margin-bottom:18px;">' +
             '<div class="k">Selected Hardware</div><p class="v lead-val">' + p.title + "</p></div>" +
             '<div class="spec-grid" style="margin-bottom:18px;">' +
@@ -747,6 +806,7 @@
               '<button type="button" class="selector-btn" id="btn-' + key + '" aria-pressed="' + (key === activeTier) + '" onclick="selectTier(\'' + key + '\')">' +
               '<span class="code">' + p.modelCode + "</span>" +
               '<span class="name">' + p.title + "</span>" +
+              statusBadge(p.status) +
               '<span class="mat">' + p.materials + "</span>" +
               '<span class="cogs">Est. COGS: ' + p.cogs + "</span></button>";
           });
@@ -837,7 +897,7 @@
         }
 
         // ---------- Init ----------
-        window.toggleCategory("iot");
+        window.toggleCategory("cards");
       })();
     </script>
   </body>
