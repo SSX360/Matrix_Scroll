@@ -323,9 +323,31 @@
   </div>
 </section>
 
-<section class="section pad">
+<section class="section pad" id="answers">
   <div class="sec-head mono">
     <span class="sec-num">05</span>
+    <span class="sec-label">Common questions</span>
+    <span class="sec-rule"></span>
+  </div>
+  <div class="limits-grid mono">
+    <div>
+      <h4>What is Matrix Scroll and how does it secure Git?</h4>
+      <p>Matrix Scroll is signed commit-time provenance for agent-assisted Git. It attaches an Ed25519-signed commit envelope that records who or what signed a change, which tool produced it, and optional bounded scope, then lets reviewers verify that proof offline in the CLI, browser, or CI before merge.</p>
+    </div>
+    <div>
+      <h4>How do hardware and emulated modes differ?</h4>
+      <p>Emulated mode ships today and stores the signing key locally so teams can evaluate the full flow now. Hardware mode keeps the same envelope schema and verifier contract, but moves the private key into the SE050 secure element; that path remains preview-only.</p>
+    </div>
+    <div>
+      <h4>How do I integrate Matrix Scroll into CI/CD?</h4>
+      <p>Install hooks, publish envelopes to <code>refs/notes/matrixscroll</code>, then run <code>SSX360/matrixscroll-verify-action@v1</code> on the PR commit range. Protected branches can require Matrix Scroll proof alongside existing scanners and branch protection.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section pad">
+  <div class="sec-head mono">
+    <span class="sec-num">06</span>
     <span class="sec-label">Compliance mapping</span>
     <span class="sec-rule"></span>
   </div>
@@ -335,7 +357,7 @@
 
 <section class="section pad" id="limits">
   <div class="sec-head mono">
-    <span class="sec-num">06</span>
+    <span class="sec-num">07</span>
     <span class="sec-label">Honest limits</span>
     <span class="sec-rule"></span>
   </div>
@@ -369,11 +391,11 @@
 <section class="section pad panel" style="padding-top:48px;padding-bottom:48px;">
   <div class="strip mono">
     <div><b>Need hosted identity, billing, policy, and audit history?</b> Run the protocol locally and free; add the control plane when a team needs accounts and enforcement.</div>
-    <a class="btn btn-outline" href="mailto:mission@ssx360.com?subject=Provenance%20Pilot%20Inquiry">Book a provenance pilot →</a>
+    <a class="btn btn-outline" href="https://ssx360.com/contact?intent=pilot">Book a provenance pilot →</a>
   </div>
   <div class="strip mono">
     <div><b>Ready for rollout?</b> Book a provenance pilot at the SSX360 control plane after you verify the protocol.</div>
-    <a class="btn btn-outline" href="mailto:mission@ssx360.com?subject=Provenance%20Pilot%20Inquiry">Book a pilot →</a>
+    <a class="btn btn-outline" href="https://ssx360.com/contact?intent=pilot">Book a pilot →</a>
   </div>
 </section>
 
@@ -414,7 +436,7 @@
     <a href="#proof"><span>04</span>Proof</a>
     <a href="https://matrixscroll.com/verify/"><span>05</span>Verify a commit</a>
     <a href="/docs/"><span>06</span>Docs</a>
-    <a href="mailto:mission@ssx360.com?subject=Provenance%20Pilot%20Inquiry"><span>07</span>SSX360 pilot</a>
+    <a href="https://ssx360.com/contact?intent=pilot"><span>07</span>SSX360 pilot</a>
   </nav>
 </div>
 

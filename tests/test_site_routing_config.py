@@ -56,10 +56,12 @@ class SiteRoutingConfigTests(unittest.TestCase):
             "https://matrixscroll.com/verify/",
             "Book a provenance pilot",
             "Ready for rollout?",
-            "Provenance%20Pilot%20Inquiry",
+            "https://ssx360.com/contact?intent=pilot",
             'matrixscroll[mcp]==0.2.6',
             "matrixscroll-mcp",
             '"mcpServers"',
+            'id="answers"',
+            "What is Matrix Scroll and how does it secure Git?",
         ):
             self.assertIn(marker, homepage)
         self.assertNotIn('pip install <span class="st">"matrixscroll[mcp]"</span>', homepage)
@@ -80,6 +82,51 @@ class SiteRoutingConfigTests(unittest.TestCase):
             self.assertIn("MCP server", text, relative_path)
             for question in questions:
                 self.assertIn(question, text, relative_path)
+
+        homepage = (site_root / "index.html").read_text(encoding="utf-8")
+        self.assertIn('id="answers"', homepage)
+        homepage_questions = (
+            "What is Matrix Scroll and how does it secure Git?",
+            "How do hardware and emulated modes differ",
+            "How do I integrate Matrix Scroll into CI/CD",
+        )
+        for question in homepage_questions:
+            self.assertIn(question, homepage)
+
+    def test_public_pages_share_rollout_ctas(self):
+        site_root = Path(__file__).resolve().parents[1]
+        for relative_path in (
+            "docs/index.html",
+            "compare/index.html",
+            "verify/index.html",
+            "spec/index.html",
+            "device/index.html",
+        ):
+            text = (site_root / relative_path).read_text(encoding="utf-8")
+            self.assertIn("Book a provenance pilot", text, relative_path)
+            self.assertIn("https://ssx360.com/signup", text, relative_path)
+            self.assertIn("/verify/", text, relative_path)
+
+    def test_docs_hub_does_not_promote_legacy_product_notes(self):
+        docs_page = (Path(__file__).resolve().parents[1] / "docs" / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("Documentation.html (legacy)", docs_page)
+
+    def test_legacy_documentation_page_is_noindex(self):
+        legacy = (Path(__file__).resolve().parents[1] / "docs" / "Documentation.html").read_text(encoding="utf-8")
+        self.assertIn('content="noindex,nofollow"', legacy)
+
+    def test_public_pages_do_not_ship_legacy_mcp_ids(self):
+        site_root = Path(__file__).resolve().parents[1]
+        for relative_path in (
+            "index.html",
+            "docs/index.html",
+            "compare/index.html",
+            "verify/index.html",
+            "spec/index.html",
+            "device/index.html",
+        ):
+            text = (site_root / relative_path).read_text(encoding="utf-8")
+            self.assertNotIn("cursor-copilot", text, relative_path)
 
     def test_public_pages_do_not_ship_mojibake(self):
         site_root = Path(__file__).resolve().parents[1]

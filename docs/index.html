@@ -78,13 +78,6 @@ git push origin refs/notes/matrixscroll
           </div>
         </article>
         <article class="card span-4">
-          <h3>Legacy product notes</h3>
-          <p>Historical architecture notes — prefer the MCP quickstart and SDK README for new installs.</p>
-          <div class="link-list">
-            <a href="/docs/Documentation.html">Documentation.html (legacy)</a>
-          </div>
-        </article>
-        <article class="card span-4">
           <h3>Whitepaper</h3>
           <p>Threat model, envelope design, and why commit-time provenance matters.</p>
           <div class="link-list">
@@ -121,7 +114,7 @@ git push origin refs/notes/matrixscroll
         </article>
       </section>
 
-      <h2 class="section-title">Fast answers</h2>
+      <h2 class="section-title" id="fast-answers">Fast answers</h2>
       <section class="grid">
         <article class="card span-4">
           <h3>What is Matrix Scroll and how does it secure Git?</h3>
@@ -135,6 +128,28 @@ git push origin refs/notes/matrixscroll
           <h3>How can I integrate Matrix Scroll into a CI/CD workflow?</h3>
           <p>Install the SDK and hooks in the repo, publish commit envelopes to <code>refs/notes/matrixscroll</code> before review, then run <code>SSX360/matrixscroll-verify-action@v1</code> in GitHub Actions to verify the full PR commit range. That lets protected branches require Matrix Scroll proof in CI without replacing your existing scanners, branch protection, or build attestations.</p>
         </article>
+      </section>
+
+      <section class="card span-12" style="margin-top:32px">
+        <h3>Ready for rollout?</h3>
+        <p>Verify the protocol, install the MCP server, then book a provenance pilot when your team needs hosted policy, audit export, and merge enforcement.</p>
+        <div class="link-list">
+          <a href="/verify/">Verify a commit</a>
+          <a href="/#install">Install the MCP</a>
+          <a href="https://ssx360.com/contact?intent=pilot">Book a provenance pilot</a>
+          <a href="https://ssx360.com/signup">Sign in at SSX360</a>
+        </div>
+      </section>
+
+      <section class="card span-12" style="margin-top:32px">
+        <h3>Ready for rollout?</h3>
+        <p>Verify the protocol, install the MCP server, then book a provenance pilot when your team needs hosted policy, audit export, and merge enforcement.</p>
+        <div class="link-list">
+          <a href="/verify/">Verify a commit</a>
+          <a href="/#install">Install the MCP</a>
+          <a href="https://ssx360.com/contact?intent=pilot">Book a provenance pilot</a>
+          <a href="https://ssx360.com/signup">Sign in at SSX360</a>
+        </div>
       </section>
 
       <footer class="site-footer">
