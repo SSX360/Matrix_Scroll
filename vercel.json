@@ -2,8 +2,8 @@
   "redirects": [
     { "source": "/verify", "destination": "https://ssx360.com/verify", "permanent": true },
     { "source": "/verify/:path*", "destination": "https://ssx360.com/verify/:path*", "permanent": true },
-    { "source": "/hardware", "destination": "https://ssx360.com/cards", "permanent": true },
-    { "source": "/hardware/:path*", "destination": "https://ssx360.com/cards", "permanent": true },
+    { "source": "/hardware", "destination": "https://ssx360.com/hardware", "permanent": true },
+    { "source": "/hardware/:path*", "destination": "https://ssx360.com/hardware", "permanent": true },
     { "source": "/docs/Documentation.md", "destination": "https://ssx360.com/docs", "permanent": true },
     { "source": "/docs/Documentation.html", "destination": "https://ssx360.com/docs", "permanent": true },
     { "source": "/docs/:path*", "destination": "https://ssx360.com/docs", "permanent": true },
