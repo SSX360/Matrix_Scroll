@@ -103,7 +103,12 @@
           <h1>Attest who or what made the commit.</h1>
           <p class="hero-subtitle">Signed commit provenance for humans, agents, and CI.</p>
           <p class="lead">
-            Matrix Scroll attaches a signed envelope to each Git commit so reviewers can verify developer and agent signatures offline, in CI, or in the browser long after the IDE session is gone. Know who signed the commit before push.
+            Matrix Scroll is a portable proof layer for Git: attach a signed envelope to each commit so reviewers can prove who or what made the change offline, in CI, or in the browser long after the IDE session is gone. Know who signed the commit before push.
+          </p>
+          <p class="lead">
+            Teams evaluating protected-branch enforcement can
+            <a href="https://ssx360.com/contact?intent=pilot">book a provenance pilot</a>
+            on the SSX360 control plane.
           </p>
           <div class="button-row" aria-label="Primary actions">
             <a class="button primary" href="/mcp/">Get the MCP Server</a>
@@ -111,8 +116,8 @@
             <a class="button ghost" href="/verify/">Verifier</a>
           </div>
           <div class="evidence-grid" aria-label="Public proof">
-            <a class="evidence-link" href="https://pypi.org/project/matrixscroll/0.3.0/" rel="noopener">
-              <strong>PyPI 0.3.0</strong>
+            <a class="evidence-link" href="https://pypi.org/project/matrixscroll/0.4.0/" rel="noopener">
+              <strong>PyPI 0.4.0</strong>
               <span>Reference SDK and package provenance are public right now.</span>
             </a>
             <a class="evidence-link" href="https://github.com/SSX360/matrixscroll/tree/main/vectors" rel="noopener">
@@ -135,7 +140,7 @@
           <div class="status-grid" aria-label="Honest product status">
             <article class="status-card">
               <strong>Shipping now</strong>
-              <p>PyPI 0.3.0, Git post-commit hooks, Scroll Gate PR checks, the browser verifier, and the public MCP server.</p>
+              <p>PyPI 0.4.0, Git post-commit hooks, Scroll Gate PR checks, the browser verifier, and the public MCP server.</p>
             </article>
             <article class="status-card">
               <strong>In progress</strong>
@@ -181,7 +186,7 @@
           <span class="trust-ticker-item">Ed25519 commit envelopes</span>
           <span class="trust-ticker-item">Offline browser verification</span>
           <span class="trust-ticker-item">Scroll Gate CI</span>
-          <span class="trust-ticker-item">PyPI 0.3.0</span>
+          <span class="trust-ticker-item">PyPI 0.4.0</span>
           <span class="trust-ticker-item">GitHub Actions</span>
           <span class="trust-ticker-item">AP2 Vault Card hardware path</span>
           <span class="trust-ticker-item">MCP server for Cursor &amp; VS Code</span>
@@ -189,7 +194,7 @@
           <span class="trust-ticker-item">Ed25519 commit envelopes</span>
           <span class="trust-ticker-item">Offline browser verification</span>
           <span class="trust-ticker-item">Scroll Gate CI</span>
-          <span class="trust-ticker-item">PyPI 0.3.0</span>
+          <span class="trust-ticker-item">PyPI 0.4.0</span>
           <span class="trust-ticker-item">GitHub Actions</span>
           <span class="trust-ticker-item">AP2 Vault Card hardware path</span>
           <span class="trust-ticker-item">MCP server for Cursor &amp; VS Code</span>
@@ -227,7 +232,7 @@
         <div class="shell partner-proof-inner">
           <span>Design partner pilot · PoC with select teams</span>
           <span class="partner-proof-links">
-            <a href="https://pypi.org/project/matrixscroll/0.3.0/" rel="noopener">PyPI 0.3.0</a>
+            <a href="https://pypi.org/project/matrixscroll/0.4.0/" rel="noopener">PyPI 0.4.0</a>
             <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>
             <a href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">Scroll Gate</a>
           </span>
@@ -379,7 +384,7 @@
             <span class="brand-mark" aria-hidden="true"></span>
             <span>Matrix Scroll</span>
           </a>
-          <p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.3.0, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+          <p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.4.0, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
           <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
         </div>
         <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="/verify/">Verifier</a></div>
