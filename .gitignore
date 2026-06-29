@@ -5,3 +5,4 @@ overview.html
 !og-image.png
 !apple-touch-icon.png
 *.log
+.env*

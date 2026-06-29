@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/", "destination": "https://ssx360.com/docs", "permanent": true },
     { "source": "/verify", "destination": "https://ssx360.com/verify", "permanent": true },
     { "source": "/verify/:path*", "destination": "https://ssx360.com/verify/:path*", "permanent": true },
     { "source": "/hardware", "destination": "https://ssx360.com/hardware", "permanent": true },
