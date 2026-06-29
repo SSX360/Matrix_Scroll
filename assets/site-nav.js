@@ -34,7 +34,7 @@
       },
     },
     {
-      href: "https://matrixscroll.com/hardware/",
+      href: "https://ssx360.com/hardware",
       label: "AP2 Vault Card",
       detail: "Hardware wedge",
       external: false,
