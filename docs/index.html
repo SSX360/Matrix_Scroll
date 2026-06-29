@@ -128,6 +128,17 @@ git commit -m "feat: agent change"
 matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
           </div>
           <div class="code-block">
+            <div class="terminal-top"><span>MCP install</span><span>v0.3.0</span></div>
+            <pre><code>pip install "matrixscroll[mcp]==0.3.0"
+{
+  "mcpServers": {
+    "matrixscroll-mcp": {
+      "command": "matrixscroll-mcp"
+    }
+  }
+}</code></pre>
+          </div>
+          <div class="code-block">
             <div class="terminal-top"><span>CI gate</span><span>v0.3.0</span></div>
             <pre><code>- uses: SSX360/matrixscroll-verify-action@v1
   with:
@@ -171,6 +182,7 @@ matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
             <p class="panel-kicker">Matrix Scroll MCP</p>
             <h3>Use the public MCP with the SDK.</h3>
             <p>Install the MCP in Cursor, VS Code, or Claude Desktop to audit proof surfaces, preview editor integration safely, and generate a public rollout plan around the SDK.</p>
+            <a class="button ghost" href="https://github.com/SSX360/matrixscroll/blob/main/docs/quickstart-mcp.md" rel="noopener">quickstart-mcp</a>
             <a class="button ghost" href="/mcp/">MCP guide</a>
           </article>
           <article class="panel">
