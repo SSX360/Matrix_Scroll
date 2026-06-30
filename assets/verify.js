@@ -2,13 +2,13 @@ const SAMPLE_COMMIT_ENVELOPE = `{
   "commit": {
     "author": {
       "date": "1740000000",
-      "email": "contributor@matrixscroll.dev",
-      "name": "Sample Contributor"
+      "email": "dev@example.com",
+      "name": "Example Developer"
     },
     "committer": {
       "date": "1740000000",
-      "email": "contributor@matrixscroll.dev",
-      "name": "Sample Contributor"
+      "email": "dev@example.com",
+      "name": "Example Developer"
     },
     "expected_id": "0000000000000000000000000000000000000000",
     "message": "feat: add commit envelope example\\n\\nSigned-by: matrixscroll",
