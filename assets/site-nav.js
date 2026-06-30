@@ -134,6 +134,41 @@
     )
   }
 
+  function normalizeLegacyLinks(root) {
+    if (!root) return
+    root.querySelectorAll('a[href="/ap2/"], a[href="/hardware/"]').forEach(function (a) {
+      a.remove()
+    })
+    root.querySelectorAll("a").forEach(function (a) {
+      var text = (a.textContent || "").trim()
+      if (text.indexOf("PyPI 0.3.0") !== -1) {
+        a.textContent = text.replace("PyPI 0.3.0", "PyPI 0.4.2")
+        if (!a.href || a.getAttribute("href") === "#") {
+          a.href = "https://pypi.org/project/matrixscroll/"
+        }
+      }
+    })
+  }
+
+  function normalizeFooter() {
+    var footer = document.querySelector(".site-footer")
+    if (!footer) return
+    normalizeLegacyLinks(footer)
+    footer.querySelectorAll(".footer-grid > div").forEach(function (col) {
+      var h2 = col.querySelector("h2")
+      if (!h2) return
+      var title = (h2.textContent || "").trim()
+      if ((title === "Ecosystem" || title === "Product") && !col.querySelector('a[href*="ssx360.com/enterprise"]')) {
+        var ent = document.createElement("a")
+        ent.href = "https://ssx360.com/enterprise"
+        ent.target = "_blank"
+        ent.rel = "noopener noreferrer"
+        ent.textContent = "Enterprise brief ↗"
+        col.appendChild(ent)
+      }
+    })
+  }
+
   function injectMobileToggle(nav) {
     if (nav.querySelector(".nav-toggle")) return
     var btn = document.createElement("button")
@@ -187,6 +222,8 @@
       onScroll()
       window.addEventListener("scroll", onScroll, { passive: true })
     }
+
+    normalizeFooter()
 
     var footer = document.querySelector(".site-footer")
     if (footer && !footer.querySelector(".footer-status-bar")) {
