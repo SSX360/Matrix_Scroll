@@ -196,7 +196,7 @@
           '<div class="shell footer-status-inner">' +
           '<span class="status-ok">Protocol online</span>' +
           "<span>matrixscroll.identity.v1 · Ed25519 · offline verify</span>" +
-          "<span>PyPI 0.4.0 · MCP public</span>" +
+          "<span>PyPI 0.4.2 · MCP public</span>" +
           "</div></div>"
       )
     }
