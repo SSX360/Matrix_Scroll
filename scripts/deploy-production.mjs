@@ -56,10 +56,17 @@ function ensureLinkedProject() {
 }
 
 function deploy() {
-  const scope = process.env.VERCEL_SCOPE || "ssx-360"
-  const args = ["vercel", "deploy", "--prod", "--yes", "--scope", scope, "--token", process.env.VERCEL_TOKEN]
+  const scope = process.env.VERCEL_SCOPE
+  const args = ["vercel", "deploy", "--prod", "--yes", "--token", process.env.VERCEL_TOKEN]
+  if (scope) {
+    args.push("--scope", scope)
+  }
 
-  console.log(`Deploying matrixscroll-site to production (scope: ${scope})…`)
+  console.log(
+    scope
+      ? `Deploying matrixscroll-site to production (scope: ${scope})…`
+      : "Deploying matrixscroll-site to production (linked org/project env)…",
+  )
 
   const result = spawnSync(process.platform === "win32" ? "npx.cmd" : "npx", args, {
     cwd: root,
