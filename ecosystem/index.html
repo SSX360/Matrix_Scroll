@@ -1,36 +1,24 @@
 <!doctype html>
 <html lang="en">
-      <head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ecosystem — Matrix Scroll · SSX360</title>
     <meta name="description" content="Matrix Scroll open protocol plus SSX360 hosted control plane for Scroll Gate verification, policy, and audit export.">
-    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, AP2 Vault Card, offline verification, git hooks">
+    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, MCP server, offline verification, git hooks">
     <meta name="author" content="Matrix Scroll">
     <meta name="robots" content="index, follow">
-    <meta name="content-language" content="en-US">
-    <meta name="geo.region" content="US">
-    <meta name="geo.placename" content="United States">
     <link rel="canonical" href="https://matrixscroll.com/ecosystem/">
-    <link rel="alternate" hreflang="en-US" href="https://matrixscroll.com/ecosystem/">
-    <link rel="alternate" hreflang="x-default" href="https://matrixscroll.com/ecosystem/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Matrix Scroll">
-    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://matrixscroll.com/ecosystem/">
     <meta property="og:title" content="Matrix Scroll Ecosystem">
-    <meta property="og:description" content="Matrix Scroll open protocol plus SSX360 hosted control plane for Scroll Gate verification, policy, and audit export.">
+    <meta property="og:description" content="Open protocol SDK, MCP server, Scroll Gate CI, and SSX360 hosted control plane.">
     <meta property="og:image" content="https://matrixscroll.com/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@MatrixScroll">
     <meta name="twitter:title" content="Matrix Scroll Ecosystem">
-    <meta name="twitter:description" content="Matrix Scroll open protocol plus SSX360 hosted control plane for Scroll Gate verification, policy, and audit export.">
-    <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
-    <meta name="twitter:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
-    <meta name="theme-color" content="#050505">
+    <meta name="twitter:description" content="Open protocol SDK, MCP server, Scroll Gate CI, and SSX360 hosted control plane.">
+    <meta name="theme-color" content="#080C14">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -39,136 +27,132 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/assets/site.css">
     <script src="/assets/site-nav.js" defer></script>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
-      <div class="nav-links">
-        <a href="/spec/">Spec</a>
-        <a href="/docs/">Docs</a>
-        <a href="/mcp/">MCP</a>
-        <a href="/docs/Whitepaper.html">Whitepaper</a>
-        <a href="/compare/">Compare</a>
-        <a href="/verify/">Verifier</a>
-          <a href="/ap2/">AP2</a>
-          <a href="/hardware/">Hardware</a>
-        <a href="/ecosystem/" aria-current="page">Ecosystem</a>
-        <a href="/roadmap/">Roadmap</a>
-      </div>
-    </nav>
-  </header>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">Matrix<span class="brand-accent">Scroll</span></span></a>
+        <div class="nav-links"></div>
+      </nav>
+    </header>
 
-  <main id="main">
-    <section class="shell page-hero">
-      <p class="eyebrow">matrixscroll.ecosystem.v1</p>
-      <h1>One signing layer.<br>Unified toolings.</h1>
-      <p class="lead">Matrix Scroll provides the core signing SDK and verification layer. Git hooks, Scroll Gate, the browser verifier, and the MCP server build on top of this layer to ensure secure, verifiable commit provenance from the editor to CI/CD pipelines.</p>
-      <div class="button-row">
-        <a class="button primary" href="/verify/">Verifier</a>
-        <a class="button secondary" href="/roadmap/">View rollout phases</a>
-        <a class="button ghost" href="/mcp/">Open Matrix Scroll MCP</a>
-      </div>
-      <div class="proof-strip">
-        <a class="proof-link" href="/mcp/">Public MCP guide</a>
-        <a class="proof-link" href="/spec/">Protocol Spec</a>
-        <a class="proof-link" href="/verify/">Browser verifier</a>
-        <a class="proof-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">GitHub Action</a>
-      </div>
-      <div class="signal-grid" aria-label="Ecosystem layers">
-        <article class="signal-card">
-          <strong>SDK &amp; Hooks</strong>
-          <p>The core python library and local Git hooks that generate cryptographic envelopes on developer machines.</p>
-        </article>
-        <article class="signal-card">
-          <strong>Scroll Gate CI</strong>
-          <p>The automated GitHub Action that validates commit ranges and enforces signing policies before merge.</p>
-        </article>
-        <article class="signal-card">
-          <strong>MCP Server</strong>
-          <p>The editor operator layer that audits repositories, scaffolds configurations, and builds rollout plans.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="shell content-section">
-      <div class="layers">
-        <article class="panel layer">
-          <p class="panel-kicker">Core SDK &amp; Wire Protocol</p>
-          <h3>Matrix Scroll SDK</h3>
-          <p>The foundation of the signing system. Writes canonical JSON envelopes, handles public key derivation, and runs fast client-side verification.</p>
-          <ul>
-            <li><strong>matrixscroll</strong> - Core Python package on PyPI (<code>pip install matrixscroll</code>)</li>
-            <li><strong>Git Hooks</strong> - Local post-commit scripts that run the signer on every workspace commit</li>
-            <li><strong>JSON Schemas</strong> - Public schemas defining the commit envelope and signature formats</li>
-          </ul>
-        </article>
-
-        <article class="panel layer sub">
-          <p class="panel-kicker">CI/CD Gate</p>
-          <h3>Scroll Gate CI</h3>
-          <p>Runs as a GitHub Action to enforce repository-wide signing policies. Verifies entire pull request commit ranges before merging.</p>
-          <ul>
-            <li><strong>matrixscroll-verify-action</strong> - Official verification action</li>
-            <li><strong>Verification Policies</strong> - Require specific signing modes (e.g., emulated keys) and list trusted public keys</li>
-          </ul>
-        </article>
-
-        <article class="panel layer sub">
-          <p class="panel-kicker">Editor Integration</p>
-          <h3>Matrix Scroll MCP</h3>
-          <p>Model Context Protocol server for AI code assistants. Scans repositories to assess trust boundaries and configures hooks safely.</p>
-          <ul>
-            <li><strong>Trust Audits</strong> - Identifies unsigned commits and tracks developer-to-agent contribution ratios</li>
-            <li><strong>Integration Scaffolding</strong> - Previews and generates clean editor configuration setups</li>
-          </ul>
-        </article>
-
-        <article class="panel layer sub">
-          <p class="panel-kicker">Hosted Control Plane</p>
-          <h3><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360</a></h3>
-          <p>Enterprise layer for identity, billing, team policy, Scroll Gate enforcement, and audit export. Signing stays local via the open SDK; SSX360 hosts verify and audit — not private repo contents.</p>
-          <ul>
-            <li><strong>Provenance pilots</strong> — protected-branch enforcement and evidence packs</li>
-            <li><strong>Trust Operations Console</strong> — ledger, policy registry, and compliance export</li>
-            <li><strong>Team registry</strong> — approved actors, tools, and scopes across repos</li>
-          </ul>
-          <div class="button-row" style="margin-top: 16px;">
-            <a class="button secondary" href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Enterprise brief ↗</a>
-            <a class="button ghost" href="https://ssx360.com/contact?intent=pilot">Provenance pilot</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="band">
-      <div class="shell">
-        <div class="section-heading compact">
-          <p class="eyebrow">Unified Verification</p>
-          <h2>One signature format. Consistent validation.</h2>
-        </div>
-        <p class="lead">Whether verified locally via the Python CLI, automated inside a GitHub Action, or checked by an auditor in the browser verifier, Matrix Scroll envelopes always validate against the same canonical cryptographic format.</p>
+    <main id="main">
+      <section class="shell page-hero">
+        <p class="eyebrow eyebrow-purple">Open Protocol Ecosystem</p>
+        <h1>Protocol locally.<br>Control plane at SSX360.</h1>
+        <p class="lead">Matrix Scroll provides the core signing SDK and verification layer. Git hooks, Scroll Gate, the browser verifier, and the MCP server build on this layer — SSX360 hosts team policy, audit ledger, and evidence export.</p>
         <div class="button-row">
-          <a class="button primary" href="/mcp/">See the MCP layer</a>
-          <a class="button secondary" href="/verify/">Try the Verifier</a>
-          <a class="button ghost" href="/roadmap/">See the rollout phases</a>
+          <a class="button primary" href="/docs/">pip install matrixscroll</a>
+          <a class="button secondary" href="/verify/">Verifier</a>
+          <a class="button ghost" href="/mcp/">MCP Server</a>
         </div>
-      </div>
-    </section>
-  </main>
+        <div class="proof-strip">
+          <a class="proof-link" href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">PyPI 0.4.2</a>
+          <a class="proof-link" href="/spec/">Protocol Spec</a>
+          <a class="proof-link" href="/verify/">Browser verifier</a>
+          <a class="proof-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">Scroll Gate</a>
+        </div>
+      </section>
 
-  <footer class="site-footer">
-    <div class="shell footer-grid">
-      <div>
-        <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a>
-        <p>Signed provenance for agent-assisted code. One unified cryptographic signature ecosystem from the local workspace to CI/CD pipelines.</p>
-          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+      <section class="band band-muted reveal-up">
+        <div class="shell">
+          <div class="enterprise-split">
+            <article class="panel enterprise-split-card glow-hover">
+              <p class="panel-kicker">Matrix Scroll Protocol</p>
+              <h3>100% Free Open Source</h3>
+              <p>Sign edits inside developer environments, verify locally, commit and inspect signature integrity locally. PyPI 0.4.2 · MCP public · offline verify.</p>
+              <div class="button-row" style="margin-top: 12px;">
+                <a class="button secondary" href="/docs/">Get started</a>
+                <a class="button ghost" href="/#terminal">Try CLI sandbox</a>
+              </div>
+            </article>
+            <article class="panel enterprise-split-card enterprise-split-ssx glow-hover">
+              <p class="panel-kicker">SSX360 Enterprise Control</p>
+              <h3>Hosted Verification &amp; Audit</h3>
+              <p>SaaS verification engine. Sync rules globally, output SOC 2/NIST supply chain audits, map compliant logs dynamically — without uploading source code.</p>
+              <div class="button-row" style="margin-top: 12px;">
+                <a class="button primary" href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Enterprise brief ↗</a>
+                <a class="button ghost" href="https://ssx360.com/contact?intent=pilot">Provenance pilot</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell content-section reveal-up">
+        <div class="layers">
+          <article class="panel layer ecosystem-layer-protocol">
+            <p class="panel-kicker">Core SDK &amp; Wire Protocol</p>
+            <h3>Matrix Scroll SDK</h3>
+            <p>The foundation of the signing system. Writes canonical JSON envelopes, handles public key derivation, and runs fast client-side verification.</p>
+            <ul>
+              <li><strong>matrixscroll</strong> — Core Python package on PyPI (<code>pip install matrixscroll</code>)</li>
+              <li><strong>Git Hooks</strong> — Local pre-commit scripts that sign AI-authored deltas</li>
+              <li><strong>JSON Schemas</strong> — Public schemas defining the commit envelope format</li>
+            </ul>
+          </article>
+
+          <article class="panel layer sub">
+            <p class="panel-kicker">CI/CD Gate</p>
+            <h3>Scroll Gate CI</h3>
+            <p>Runs as a GitHub Action to enforce repository-wide signing policies. Verifies entire pull request commit ranges before merging.</p>
+            <ul>
+              <li><strong>matrixscroll-verify-action</strong> — Official verification action</li>
+              <li><strong>Verification Policies</strong> — Require specific signing modes and trusted public keys</li>
+            </ul>
+          </article>
+
+          <article class="panel layer sub">
+            <p class="panel-kicker">Editor Integration</p>
+            <h3>Matrix Scroll MCP</h3>
+            <p>Model Context Protocol server for AI code assistants. Scans repositories to assess trust boundaries and configures hooks safely.</p>
+            <ul>
+              <li><strong>Trust Audits</strong> — Identifies unsigned commits and agent contribution ratios</li>
+              <li><strong>Integration Scaffolding</strong> — Previews and generates editor configuration setups</li>
+            </ul>
+          </article>
+
+          <article class="panel layer sub">
+            <p class="panel-kicker">Hosted Control Plane</p>
+            <h3><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360</a></h3>
+            <p>Enterprise layer for team policy, Scroll Gate enforcement, audit ledger, and evidence export. Signing stays local via the open SDK.</p>
+            <ul>
+              <li><strong>Provenance pilots</strong> — protected-branch enforcement and evidence packs</li>
+              <li><strong>Policy registry</strong> — ledger, compliance export, team actor registry</li>
+              <li><strong>SE050 roadmap</strong> — hardware secure element profiles for signing keys</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="band reveal-up">
+        <div class="shell">
+          <div class="section-heading compact is-centered">
+            <p class="eyebrow">Unified Verification</p>
+            <h2>One signature format. Consistent validation.</h2>
+          </div>
+          <p class="section-lead" style="text-align: center; max-width: 42rem; margin: 0 auto 24px;">Whether verified locally via the Python CLI, automated inside a GitHub Action, or checked by an auditor in the browser verifier, Matrix Scroll envelopes always validate against the same canonical cryptographic format.</p>
+          <div class="button-row" style="justify-content: center;">
+            <a class="button primary" href="/mcp/">See the MCP layer</a>
+            <a class="button secondary" href="/verify/">Try the Verifier</a>
+            <a class="button ghost" href="/compare/">How we compare</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span class="brand-text">Matrix<span class="brand-accent">Scroll</span></span></a>
+          <p>Signed provenance for agent-assisted code. Open protocol locally, SSX360 for hosted control. PyPI 0.4.2.</p>
+        </div>
+        <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a><a href="/ecosystem/">Ecosystem</a></div>
+        <div><h2>Product</h2><a href="/roadmap/">Roadmap</a><a href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Enterprise brief ↗</a><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 ↗</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">PyPI 0.4.2</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
       </div>
-      <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/verify/">Verifier</a><a href="/ecosystem/">Ecosystem</a></div>
-      <div><h2>Product</h2><a href="/roadmap/">Roadmap</a><a href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Enterprise brief ↗</a><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 Control Plane ↗</a></div>
-      <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="https://pypi.org/project/matrixscroll/" rel="noopener">PyPI 0.4.2</a></div>
-    </div>
-  </footer>
-</body>
+    </footer>
+    <script src="/assets/site-enhancements.js" defer></script>
+  </body>
 </html>

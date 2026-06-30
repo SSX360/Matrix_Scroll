@@ -1,36 +1,27 @@
 <!doctype html>
 <html lang="en">
-            <head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Matrix Scroll — AI-assisted code provenance</title>
-    <meta name="description" content="Open protocol for hardware-signed, AI-assisted commit provenance. Sign in the IDE with Ed25519, verify offline or in CI, audit on SSX360.">
-    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, AP2 Vault Card, offline verification, git hooks">
+    <title>Matrix Scroll — Open Source AI Code Provenance Protocol</title>
+    <meta name="description" content="Lightweight local protocol that cryptographically signs every line of AI-authored code in the IDE. Verify offline or block unverified additions in CI gates.">
+    <meta name="keywords" content="Matrix Scroll, commit provenance, Ed25519, agent signing, offline verification, git hooks, MCP server">
     <meta name="author" content="Matrix Scroll">
     <meta name="robots" content="index, follow">
     <meta name="content-language" content="en-US">
-    <meta name="geo.region" content="US">
-    <meta name="geo.placename" content="United States">
     <link rel="canonical" href="https://matrixscroll.com/">
-    <link rel="alternate" hreflang="en-US" href="https://matrixscroll.com/">
-    <link rel="alternate" hreflang="x-default" href="https://matrixscroll.com/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Matrix Scroll">
-    <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://matrixscroll.com/">
-    <meta property="og:title" content="Matrix Scroll — AI-assisted code provenance">
-    <meta property="og:description" content="Open protocol for hardware-signed, AI-assisted commit provenance. Sign in the IDE, verify offline or in CI, audit on SSX360.">
+    <meta property="og:title" content="Matrix Scroll — Open Source AI Code Provenance Protocol">
+    <meta property="og:description" content="Cryptographic signatures for code your AI wrote. Sign in the IDE, verify offline, gate in CI.">
     <meta property="og:image" content="https://matrixscroll.com/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Matrix Scroll — signed commit provenance for AI-assisted development">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@MatrixScroll">
-    <meta name="twitter:title" content="Matrix Scroll — AI-assisted code provenance">
-    <meta name="twitter:description" content="Open protocol for hardware-signed, AI-assisted commit provenance. Sign in the IDE, verify offline or in CI.">
+    <meta name="twitter:title" content="Matrix Scroll — Open Source AI Code Provenance Protocol">
+    <meta name="twitter:description" content="Cryptographic signatures for code your AI wrote. Sign in the IDE, verify offline, gate in CI.">
     <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
-    <meta name="twitter:image:alt" content="Matrix Scroll — signed commit provenance for AI-assisted development">
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="#080C14">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -41,6 +32,7 @@
     <script src="/assets/verify.js?v=20260622" defer></script>
     <script src="/assets/site-enhancements.js" defer></script>
     <script src="/assets/site-nav.js" defer></script>
+    <script src="/assets/home-protocol.js" defer></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,16 +48,10 @@
           ]
         },
         {
-          "@type": "WebSite",
-          "name": "Matrix Scroll",
-          "url": "https://matrixscroll.com/",
-          "inLanguage": "en-US",
-          "publisher": { "@type": "Organization", "name": "Matrix Scroll" }
-        },
-        {
           "@type": "SoftwareApplication",
           "name": "Matrix Scroll SDK",
           "applicationCategory": "DeveloperApplication",
+          "softwareVersion": "0.4.2",
           "operatingSystem": "macOS, Linux, Windows",
           "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
         }
@@ -73,216 +59,324 @@
     }
     </script>
   </head>
-  <body>
+  <body class="page-home">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
       <nav class="nav" aria-label="Primary navigation">
         <a class="brand" href="/" aria-label="Matrix Scroll home">
           <span class="brand-mark" aria-hidden="true"></span>
-          <span>Matrix Scroll</span>
+          <span class="brand-text">Matrix<span class="brand-accent">Scroll</span></span>
         </a>
-        <div class="nav-links">
-          <a href="/spec/">Spec</a>
-          <a href="/docs/">Docs</a>
-          <a href="/mcp/">MCP</a>
-          <a href="/docs/Whitepaper.html">Whitepaper</a>
-          <a href="/compare/">Compare</a>
-          <a href="/verify/">Verifier</a>
-          <a href="/ecosystem/">Ecosystem</a>
-          <a href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Enterprise ↗</a>
-          <a href="/roadmap/">Roadmap</a>
-        </div>
+        <div class="nav-links"></div>
       </nav>
     </header>
 
     <main id="main">
-      <section class="hero shell">
-        <div class="hero-copy">
-          <p class="eyebrow">matrixscroll.identity.v1</p>
-          <h1>Sign every AI-generated change in the IDE.</h1>
-          <p class="hero-subtitle">Open protocol for hardware-signed, AI-assisted code provenance.</p>
-          <p class="lead">
-            Matrix Scroll uses an Ed25519 root of trust — software emulator today, NXP SE050 secure element on the roadmap — to cryptographically sign commit envelopes as agents and copilots write code. Verify offline, in CI, or on the SSX360 control plane.
-          </p>
-          <p class="lead">
-            Enterprise teams with massive codebases and strict compliance requirements can
-            <a href="https://ssx360.com/enterprise">read the viability brief</a>
-            or <a href="https://ssx360.com/contact?intent=pilot">book a provenance pilot</a>.
-          </p>
-          <div class="button-row" aria-label="Primary actions">
-            <a class="button primary" href="/mcp/">Get the MCP Server</a>
-            <a class="button secondary" href="/docs/">Start free &mdash; pip install</a>
-            <a class="button ghost" href="/verify/">Verifier</a>
-          </div>
-          <div class="evidence-grid" aria-label="Public proof">
-            <a class="evidence-link" href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">
-              <strong>PyPI 0.4.2</strong>
-              <span>Reference SDK and package provenance are public right now.</span>
-            </a>
-            <a class="evidence-link" href="https://github.com/SSX360/matrixscroll/tree/main/vectors" rel="noopener">
-              <strong>Conformance vectors</strong>
-              <span>Published test vectors make the signature contract auditable.</span>
-            </a>
-            <a class="evidence-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">
-              <strong>Live GitHub Action</strong>
-              <span>Scroll Gate already verifies commit ranges in CI.</span>
-            </a>
-            <a class="evidence-link" href="/mcp/">
-              <strong>MCP Server</strong>
-              <span>Attest and verify agent commits directly inside Cursor, Claude, or VS Code.</span>
-            </a>
-          </div>
-          <div class="compare-callout">
-            <strong>Why not Sigstore or artifact attestations?</strong>
-            <p>Those tools attest build outputs after CI. Matrix Scroll records metadata and signatures before merge, keeping that attestation verifiable offline. <a href="/compare/">See the comparison.</a></p>
-          </div>
-          <div class="status-grid" aria-label="Honest product status">
-            <article class="status-card">
-              <strong>Shipping now</strong>
-              <p>PyPI 0.4.2, Git post-commit hooks, Scroll Gate PR checks, the browser verifier, and the public MCP server.</p>
-            </article>
-            <article class="status-card">
-              <strong>In progress</strong>
-              <p>Transparency-log integrations, custom verification policies, and additional language SDKs are next.</p>
-            </article>
-            <article class="status-card">
-              <strong>Scope</strong>
-              <p>Matrix Scroll adds provenance. It does not replace IAM, sandboxing, prompt controls, or agent runtimes.</p>
-            </article>
-          </div>
-        </div>
-        <div class="hero-proof-card console-window" data-verifier-root data-autoload="envelope" data-empty-title="No sample loaded yet." data-empty-message="Choose a signed sample to verify it locally.">
-          <div class="console-titlebar">
-            <span class="console-dot red" aria-hidden="true"></span>
-            <span class="console-dot amber" aria-hidden="true"></span>
-            <span class="console-dot green" aria-hidden="true"></span>
-            <span class="console-title">browser-verifier — matrixscroll.identity.v1</span>
-          </div>
-          <div class="console-body">
-          <div>
-            <p class="panel-kicker">Live proof / client-side</p>
-            <h2>Inspect a real signed sample above the fold.</h2>
-            <p>Load a commit envelope or release manifest and watch the browser verifier validate it without leaving the homepage.</p>
-          </div>
-          <div class="hero-proof-actions">
-            <button class="button secondary" type="button" data-load-sample="envelope">Commit sample</button>
-            <button class="button ghost" type="button" data-load-sample="release">Release manifest</button>
-            <button class="button ghost" type="button" data-load-sample="payment">Payment sample</button>
-            <button class="button ghost" type="button" data-tamper-button>Run tamper check</button>
-          </div>
-          <aside class="result-box" aria-live="polite">
-            <div data-result-status class="result-status">Waiting</div>
-            <h2 data-result-title>No document checked yet.</h2>
-            <p data-result-message>Load a sample to verify it locally.</p>
-            <ul data-result-list class="result-list"></ul>
-          </aside>
-          <div class="code-block hero-proof-code" aria-label="Signed sample manifest">
-            <div class="terminal-top">
-              <span>sample manifest</span>
-              <span>ed25519 / browser verify</span>
+      <!-- Full-bleed hero -->
+      <section class="hero-fullbleed" aria-labelledby="hero-heading">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow eyebrow-purple">
+              <span class="eyebrow-icon" aria-hidden="true">⎇</span>
+              Secure Cryptographic Git Hook
+            </p>
+            <h1 id="hero-heading">
+              Cryptographic Signatures<br>
+              <span class="text-gradient">For Code Your AI Wrote.</span>
+            </h1>
+            <p class="hero-lead">
+              Conventional Git signatures prove <em>who pushed</em> the commit—not <em>who generated</em> the lines.
+            </p>
+            <p class="hero-detail">
+              <strong>Matrix Scroll</strong> is a lightweight, zero-configuration local protocol that signs every line of AI-authored code the millisecond it's written in the IDE. Verify authorship offline, or block unverified additions inside your CI gates.
+            </p>
+            <div class="hero-actions">
+              <div class="install-copy">
+                <code class="install-cmd">pip install matrixscroll</code>
+                <button type="button" class="install-copy-btn" id="copy-install-btn" title="Copy to clipboard" aria-label="Copy install command">
+                  <span id="copy-icon">⎘</span>
+                </button>
+              </div>
+              <a class="button primary" href="#terminal">Play CLI Sandbox</a>
+              <a class="button secondary" href="/verify/">Browser Verifier</a>
             </div>
-            <pre data-manifest-display></pre>
+            <div class="hero-trust-strip">
+              <span><span class="trust-icon" aria-hidden="true">◉</span> Ed25519 Native Keys</span>
+              <span class="trust-sep" aria-hidden="true">|</span>
+              <span><span class="trust-icon trust-sky" aria-hidden="true">⚡</span> Pre-Commit / Pre-Push</span>
+              <span class="trust-sep" aria-hidden="true">|</span>
+              <span><span class="trust-icon" aria-hidden="true">▣</span> SE050 Hardware Roadmap</span>
+            </div>
           </div>
-          <p class="small-note">No upload, no backend call, no IDE dependency. Open the full <a href="/verify/">browser verifier</a> for paste, drag-and-drop, and broader sample testing.</p>
+
+          <div class="hero-visual">
+            <div class="protocol-card glow-hover">
+              <div class="protocol-card-accent"></div>
+              <div class="protocol-card-header">
+                <span class="protocol-card-label">Local Code Signature Block</span>
+                <span class="protocol-badge">SHA256 Match</span>
+              </div>
+              <div class="code-preview">
+                <div class="code-preview-file">
+                  <span>app/auth_controller.py</span>
+                  <span class="code-signed-label">signed changes</span>
+                </div>
+                <div class="code-line muted">1  def authenticate(request):</div>
+                <div class="code-line muted">2      token = request.headers.get("Auth")</div>
+                <div class="code-line added">3  <strong>+</strong> if not token or is_revoked(token):</div>
+                <div class="code-line added">4  <strong>+</strong>     raise AuthenticationError("Invalid Agent Origin")</div>
+                <div class="code-line muted">5      return verify_claims(token)</div>
+              </div>
+              <div class="metadata-envelope">
+                <div class="metadata-header">
+                  <span>--- METADATA ENVELOPE (APPENDED) ---</span>
+                  <span class="metadata-verified">Verified Match</span>
+                </div>
+                <div><span class="meta-key">protocol:</span> matrixscroll/v1</div>
+                <div><span class="meta-key">origin_context:</span> vscode-copilot-agent</div>
+                <div><span class="meta-key">author_pubkey:</span> ed25519_9a38f8...d4e1a</div>
+                <div><span class="meta-key">signature:</span> h8S9d1Ka...9sLk17MvQp02aW</div>
+              </div>
+              <div class="protocol-card-footer">
+                <span>Isolate AI additions.</span>
+                <a href="#anatomy">How it signs under the hood →</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <div class="trust-badges-bar shell" aria-label="Trust and compliance signals">
-        <div class="trust-badges-inner">
-          <a class="trust-badge" href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">
-            <span class="trust-badge-label">PyPI 0.4.2</span>
-            <span class="trust-badge-detail">Public SDK on PyPI</span>
-          </a>
-          <a class="trust-badge" href="https://glama.ai/mcp/servers/SSX360/matrixscroll" rel="noopener">
-            <span class="trust-badge-label">Glama A</span>
-            <span class="trust-badge-detail">MCP registry quality</span>
-          </a>
-          <a class="trust-badge" href="/verify/">
-            <span class="trust-badge-label">Offline verify</span>
-            <span class="trust-badge-detail">Browser + CI checks</span>
-          </a>
-          <a class="trust-badge" href="https://ssx360.com/enterprise" rel="noopener">
-            <span class="trust-badge-label">Enterprise</span>
-            <span class="trust-badge-detail">Provenance pilot path</span>
-          </a>
-          <a class="trust-badge" href="https://ssx360.com/" rel="noopener">
-            <span class="trust-badge-label">SSX360</span>
-            <span class="trust-badge-detail">Hosted control plane</span>
-          </a>
+      <!-- Problem / blindspot -->
+      <section id="problem" class="band band-muted reveal-up">
+        <div class="shell">
+          <div class="section-heading is-centered">
+            <p class="eyebrow eyebrow-sky">The Security Gap</p>
+            <h2>The AI-Assisted Code Blindspot</h2>
+            <p class="section-lead">Autonomous developer agents and autocomplete engines are changing files directly inside your environment. Standard checks can't tell the difference between human logic and machine output.</p>
+          </div>
+          <div class="compare-cards">
+            <article class="panel compare-card compare-card-danger">
+              <div class="compare-card-icon compare-card-icon-danger" aria-hidden="true">◎</div>
+              <p class="panel-kicker">Traditional GPG Commits</p>
+              <h3>Signs your name, even if AI wrote it</h3>
+              <p>Standard GPG models sign off on the commit metadata. If an AI agent edits 40 lines across 3 modules and commits them, your credential signs off on it anyway. There is no proof or trace of who generated the core logic.</p>
+              <div class="compare-snippet compare-snippet-danger">Signed by: dev_user@company.com [IDENTITY ASSUMED OK]</div>
+            </article>
+            <article class="panel compare-card compare-card-ok glow-hover">
+              <div class="compare-card-icon compare-card-icon-ok" aria-hidden="true">◉</div>
+              <p class="panel-kicker">Matrix Scroll Protocol</p>
+              <h3>Cryptographically separates human from AI</h3>
+              <p>Intercepts additions directly at generation time in the IDE. Each machine adjustment is assigned a unique signature specifying the origin tool (e.g., Gemini, Claude agent), enabling granular offline supply-chain checks.</p>
+              <div class="compare-snippet compare-snippet-ok">Author: Claude 3.5 [TOKEN CHECKED &amp; VERIFIED AT GATE]</div>
+            </article>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="trust-ticker" aria-hidden="true">
-        <div class="trust-ticker-track">
-          <span class="trust-ticker-item">Ed25519 commit envelopes</span>
-          <span class="trust-ticker-item">Offline browser verification</span>
-          <span class="trust-ticker-item">Scroll Gate CI</span>
-          <span class="trust-ticker-item">PyPI 0.4.2</span>
-          <span class="trust-ticker-item">GitHub Actions</span>
-          <span class="trust-ticker-item">SE050 secure element roadmap</span>
-          <span class="trust-ticker-item">MCP server for Cursor &amp; VS Code</span>
-          <span class="trust-ticker-item">SSX360 hosted control plane</span>
-          <span class="trust-ticker-item">Ed25519 commit envelopes</span>
-          <span class="trust-ticker-item">Offline browser verification</span>
-          <span class="trust-ticker-item">Scroll Gate CI</span>
-          <span class="trust-ticker-item">PyPI 0.4.2</span>
-          <span class="trust-ticker-item">GitHub Actions</span>
-          <span class="trust-ticker-item">SE050 secure element roadmap</span>
-          <span class="trust-ticker-item">MCP server for Cursor &amp; VS Code</span>
-          <span class="trust-ticker-item">SSX360 hosted control plane</span>
+      <!-- Signature anatomy -->
+      <section id="anatomy" class="protocol-section reveal-up">
+        <div class="shell">
+          <div class="section-heading is-centered">
+            <p class="eyebrow eyebrow-purple">Interactive Anatomy</p>
+            <h2>Interactive Protocol Breakdown</h2>
+            <p class="section-lead">Click each block below to see what metadata is cryptographically tied together at the instant of code creation.</p>
+          </div>
+          <div class="anatomy-grid">
+            <div class="anatomy-manifest panel">
+              <div class="anatomy-manifest-header">
+                <span>MANIFEST ANATOMY (Click keys to view data maps)</span>
+                <span class="anatomy-spec">protocol_spec_v1.0</span>
+              </div>
+              <div class="anatomy-keys">
+                <button type="button" class="anatomy-key is-active" id="ana-origin" data-anatomy-key="origin">
+                  <span class="key-purple">"origin_context"</span>: "github-copilot-chat-v1.4"
+                </button>
+                <button type="button" class="anatomy-key" id="ana-target" data-anatomy-key="target">
+                  <span class="key-sky">"files_affected"</span>: ["./api/billing/charge.py"]
+                </button>
+                <button type="button" class="anatomy-key" id="ana-hash" data-anatomy-key="hash">
+                  <span class="key-sky">"lines_hash"</span>: "9f8a7c6b5e4d3c2b1a0f9e8d7c6b5e4d"
+                </button>
+                <button type="button" class="anatomy-key" id="ana-key" data-anatomy-key="key">
+                  <span class="key-sky">"signing_key"</span>: "ed25519_pub_7c8d9e2f..."
+                </button>
+                <button type="button" class="anatomy-key" id="ana-sig" data-anatomy-key="sig">
+                  <span class="key-sky">"signature"</span>: "82a17f2e1c9d8b7a6f5e..."
+                </button>
+              </div>
+            </div>
+            <div class="anatomy-explainer panel">
+              <div class="anatomy-explainer-glow" aria-hidden="true"></div>
+              <p class="panel-kicker">Parameter Mapping</p>
+              <h3 id="anatomy-title">Origin Context</h3>
+              <p id="anatomy-desc" class="anatomy-desc">Declares which autonomous agent, editor plug-in, or LLM generation model authored the additions.</p>
+              <div class="anatomy-explainer-footer">
+                <span>Mathematical Evidence Map</span>
+                <span class="anatomy-aligned">Ed25519 Aligned</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <section class="band reveal-up">
+      <!-- CLI sandbox -->
+      <section id="terminal" class="band band-muted reveal-up">
+        <div class="shell">
+          <div class="section-heading is-centered">
+            <p class="eyebrow eyebrow-sky">Terminal Playground</p>
+            <h2>Interactive Terminal Simulator</h2>
+            <p class="section-lead">Simulate installing and executing the open source command line utility in real-time.</p>
+          </div>
+          <div class="cli-grid">
+            <div class="cli-controls panel">
+              <p class="panel-kicker">Step 1: Run Command</p>
+              <button type="button" class="cli-btn is-active" id="cli-btn-init" data-cli-cmd="init">
+                <span>$ matrixscroll init</span>
+                <span class="cli-play" aria-hidden="true">▶</span>
+              </button>
+              <button type="button" class="cli-btn" id="cli-btn-sign" data-cli-cmd="sign">
+                <span>$ matrixscroll sign main.py</span>
+                <span class="cli-play" aria-hidden="true">▶</span>
+              </button>
+              <button type="button" class="cli-btn" id="cli-btn-ver-pass" data-cli-cmd="verify-pass">
+                <span>$ matrixscroll verify --valid</span>
+                <span class="cli-play" aria-hidden="true">▶</span>
+              </button>
+              <button type="button" class="cli-btn" id="cli-btn-ver-fail" data-cli-cmd="verify-fail">
+                <span>$ matrixscroll verify --tampered</span>
+                <span class="cli-play" aria-hidden="true">▶</span>
+              </button>
+            </div>
+            <div class="cli-terminal console-window">
+              <div class="console-titlebar">
+                <span class="console-dot red" aria-hidden="true"></span>
+                <span class="console-dot amber" aria-hidden="true"></span>
+                <span class="console-dot green" aria-hidden="true"></span>
+                <span class="console-title">matrixscroll-cli (Local Emulator)</span>
+              </div>
+              <div class="cli-screen" id="terminal-screen">
+                <div class="cli-muted"># Run a command on the left to start sandbox operations</div>
+                <div class="cli-cmd">$ <span class="terminal-cursor" aria-hidden="true">|</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live verifier proof -->
+      <section class="protocol-section reveal-up">
         <div class="shell">
           <div class="section-heading compact">
-            <p class="eyebrow">What you can verify today</p>
-            <h2>Start in software. Keep the proof portable.</h2>
+            <p class="eyebrow">Live proof / client-side</p>
+            <h2>Inspect a real signed sample — no upload required.</h2>
           </div>
-          <div class="pillar-grid">
-            <article class="panel">
-              <p class="panel-kicker">Shipping today</p>
-              <h3>Install the SDK and verify a real commit.</h3>
-              <p>Matrix Scroll works today as a software-backed provenance layer for developer machines and CI.</p>
-            </article>
-            <article class="panel">
-              <p class="panel-kicker">Public wire format</p>
-              <h3>The byte contract is open.</h3>
-              <p>Canonical JSON rules, schemas, public keys, and conformance vectors are published so anyone can implement or audit the format.</p>
-            </article>
-            <article class="panel">
-              <p class="panel-kicker">CI-ready proof</p>
-              <h3>Bring the proof into every pull request.</h3>
-              <p>Scroll Gate verifies each commit in a PR range before merge, and the browser verifier gives reviewers a zero-install check.</p>
-            </article>
+          <div class="verifier-grid">
+            <div class="hero-proof-card console-window" data-verifier-root data-autoload="envelope" data-empty-title="No sample loaded yet." data-empty-message="Choose a signed sample to verify it locally.">
+              <div class="console-titlebar">
+                <span class="console-dot red" aria-hidden="true"></span>
+                <span class="console-dot amber" aria-hidden="true"></span>
+                <span class="console-dot green" aria-hidden="true"></span>
+                <span class="console-title">browser-verifier — matrixscroll.identity.v1</span>
+              </div>
+              <div class="console-body">
+                <div class="hero-proof-actions">
+                  <button class="button secondary" type="button" data-load-sample="envelope">Commit sample</button>
+                  <button class="button ghost" type="button" data-load-sample="release">Release manifest</button>
+                  <button class="button ghost" type="button" data-tamper-button>Run tamper check</button>
+                </div>
+                <aside class="result-box" aria-live="polite">
+                  <div data-result-status class="result-status">Waiting</div>
+                  <h2 data-result-title>No document checked yet.</h2>
+                  <p data-result-message>Load a sample to verify it locally.</p>
+                  <ul data-result-list class="result-list"></ul>
+                </aside>
+                <div class="code-block hero-proof-code" aria-label="Signed sample manifest">
+                  <div class="terminal-top">
+                    <span>sample manifest</span>
+                    <span>ed25519 / browser verify</span>
+                  </div>
+                  <pre data-manifest-display></pre>
+                </div>
+              </div>
+            </div>
+            <div class="verifier-aside">
+              <article class="panel">
+                <p class="panel-kicker">MCP Server</p>
+                <h3>Attest inside Cursor, Claude, or VS Code</h3>
+                <p>The public MCP server audits repositories, scaffolds hook configs, and verifies agent commits directly in your editor.</p>
+                <a class="button secondary" href="/mcp/">Get the MCP Server</a>
+              </article>
+              <article class="panel">
+                <p class="panel-kicker">PyPI 0.4.2</p>
+                <h3>Reference SDK on PyPI</h3>
+                <p>Published conformance vectors, Git hooks, and Scroll Gate PR checks make the signature contract auditable today.</p>
+                <a class="button ghost" href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">View on PyPI</a>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
-      <div class="partner-proof-bar reveal-up">
-        <div class="shell partner-proof-inner">
-          <span>Design partner pilot · PoC with select teams</span>
-          <span class="partner-proof-links">
-            <a href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">PyPI 0.4.2</a>
-            <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>
-            <a href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">Scroll Gate</a>
-          </span>
+      <!-- Comparison table -->
+      <section id="comparison" class="protocol-section reveal-up">
+        <div class="shell">
+          <div class="section-heading is-centered">
+            <p class="eyebrow">Standard Integrity Maps</p>
+            <h2>How Matrix Scroll Compares</h2>
+            <p class="section-lead">Why standard signature models fall short when managing the risk profile of autonomous AI code generation.</p>
+          </div>
+          <div class="comparison-table-wrap panel">
+            <div class="comparison-scroll">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Integrity Vector</th>
+                    <th>Standard GPG Signatures</th>
+                    <th>Sigstore / in-toto</th>
+                    <th class="col-highlight">Matrix Scroll Protocol</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Identity Verification</strong></td>
+                    <td>Human Committer</td>
+                    <td>Developer OIDC Account</td>
+                    <td class="col-highlight"><strong>Exact AI Generator model ID</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Line-Level Attribution</strong></td>
+                    <td class="cell-danger">✗ None</td>
+                    <td>Whole commit metadata</td>
+                    <td class="col-highlight"><strong>✓ Specific generated blocks</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Offline Generation Checks</strong></td>
+                    <td>Requires GPG Key Server</td>
+                    <td>Requires OpenID connection</td>
+                    <td class="col-highlight"><strong>✓ Fully offline signature match</strong></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Hardware Token Roadmap</strong></td>
+                    <td>Yubikey Support</td>
+                    <td>Hardware token profiles</td>
+                    <td class="col-highlight"><strong>✓ Direct SE050 Cryptographic Keys</strong></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small-note comparison-note"><a href="/compare/">See the full comparison</a> including SLSA, Sigstore, and artifact attestations.</p>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <section id="pricing" class="band reveal-up" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <!-- Pricing -->
+      <section id="pricing" class="band reveal-up">
         <div class="shell pricing-section">
           <div class="pricing-header">
             <p class="eyebrow">Trust tiers</p>
             <h2>Protocol is free. Hosted verify and audit at SSX360.</h2>
-            <p style="max-width: 720px; margin: 16px auto 0; color: var(--muted); line-height: 1.6;">
-              Matrix Scroll signing, MCP, and offline verification stay open and local. Team seats, Scroll Gate CI,
-              audit ledger, and evidence export are billed on
-              <a href="https://ssx360.com/#pricing" style="color: var(--accent);">ssx360.com</a> — not on this site.
-            </p>
+            <p class="section-lead">Matrix Scroll signing, MCP, and offline verification stay open and local. Team seats, Scroll Gate CI, audit ledger, and evidence export are billed on <a href="https://ssx360.com/#pricing">ssx360.com</a>.</p>
           </div>
-
           <div class="pricing-grid">
             <article class="pricing-card">
               <h3>Freedom</h3>
@@ -294,13 +388,12 @@
               </div>
               <a href="/docs/" class="cta-button secondary">Get started</a>
               <ul class="features-list">
-                <li><span class="check-icon">✓</span> Local Ed25519 SDK (PyPI)</li>
+                <li><span class="check-icon">✓</span> Local Ed25519 SDK (PyPI 0.4.2)</li>
                 <li><span class="check-icon">✓</span> Public MCP server</li>
                 <li><span class="check-icon">✓</span> Unlimited offline verification</li>
                 <li><span class="check-icon">✓</span> Git hooks integration</li>
               </ul>
             </article>
-
             <article class="pricing-card popular">
               <div class="popular-badge">Hosted control plane</div>
               <h3>Team</h3>
@@ -318,7 +411,6 @@
                 <li><span class="check-icon">✓</span> JSON evidence export</li>
               </ul>
             </article>
-
             <article class="pricing-card">
               <h3>Enterprise</h3>
               <p class="description">Provenance pilots, compliance mapping, and annual contracts for regulated teams.</p>
@@ -334,55 +426,27 @@
               </ul>
             </article>
           </div>
-
-          <div class="why-explainer">
-            <div style="font-size: 24px; color: var(--accent);">💡</div>
-            <div class="explainer-content">
-              <h4>Open protocol, hosted trust operations</h4>
-              <p>
-                Anyone can run the Matrix Scroll SDK locally. SSX360 is the hosted control plane where teams verify
-                envelopes on protected branches, enforce policy, and export audit evidence — without uploading source
-                code. Enterprise buyers start at
-                <a href="https://ssx360.com/enterprise" style="color: var(--accent);">ssx360.com/enterprise</a>.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section class="shell home-teaser reveal-up">
-        <div class="home-teaser-inner">
-          <div>
-            <p class="eyebrow">SSX360 control plane</p>
-            <h2>Enterprise teams: verify, policy, and audit at scale.</h2>
-            <p>Matrix Scroll signs locally. SSX360 hosts Scroll Gate verification, the Trust Operations Console, and JSON evidence export for protected-branch rollout — without uploading source code.</p>
-            <div class="button-row">
-              <a class="button primary-warm" href="https://ssx360.com/enterprise">Read enterprise viability brief</a>
-              <a class="button secondary" href="https://ssx360.com/contact?intent=pilot">Book a provenance pilot</a>
-              <a class="button ghost" href="/ecosystem/">View ecosystem</a>
-            </div>
+      <!-- Enterprise handoff -->
+      <section class="enterprise-cta reveal-up">
+        <div class="shell enterprise-cta-inner">
+          <p class="eyebrow eyebrow-sky">Central Policy Control</p>
+          <h2>Need Enterprise Control &amp; Audit Ledger?</h2>
+          <p class="section-lead">While Matrix Scroll runs locally on developer machines and gates offline verification pipelines, central enterprise dashboards require <strong>SSX360</strong>.</p>
+          <div class="enterprise-split">
+            <article class="panel enterprise-split-card">
+              <h3>Matrix Scroll Protocol</h3>
+              <p>100% free open source tool. Sign edits inside developer environments, verify locally, commit and inspect signature integrity locally.</p>
+            </article>
+            <article class="panel enterprise-split-card enterprise-split-ssx">
+              <h3>SSX360 Enterprise Control</h3>
+              <p>SaaS or hosted verification engine. Sync rules globally, output SOC 2/NIST supply chain audits, map compliant logs dynamically.</p>
+            </article>
           </div>
-          <figure class="hardware-ready-visual">
-            <img src="/assets/images/ap2-vault-card-closeup.webp" alt="Matrix Scroll protocol stack diagram placeholder" width="2560" height="1440" loading="lazy" decoding="async" />
-          </figure>
+          <a class="button primary" href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Explore Central Compliance Control at SSX360</a>
         </div>
-      </section>
-
-      <section class="shell reveal-up">
-        <div class="section-heading compact">
-          <p class="eyebrow">Next steps</p>
-          <h2>Install, verify, or read the depth.</h2>
-        </div>
-        <div class="button-row">
-          <a class="button primary" href="/docs/">Open documentation</a>
-          <a class="button secondary" href="/verify/">Open browser verifier</a>
-        </div>
-        <p class="small-note" style="margin-top: 20px;">
-          Deep dives: <a href="/docs/why.html">Why it exists</a> ·
-          <a href="/docs/protocol-flow.html">Protocol flow</a> ·
-          <a href="/docs/threat-model.html">Threat model</a> ·
-          <a href="/spec/">Specification</a>
-        </p>
       </section>
     </main>
 
@@ -391,19 +455,15 @@
         <div>
           <a class="brand footer-brand" href="/">
             <span class="brand-mark" aria-hidden="true"></span>
-            <span>Matrix Scroll</span>
+            <span class="brand-text">Matrix<span class="brand-accent">Scroll</span></span>
           </a>
-          <p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.4.2, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
-          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
+          <p>Open Source Cryptographic Commit Provenance Protocol. Distributed under MIT License. <strong>PyPI 0.4.2</strong> · MCP public · offline verify.</p>
+          <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James York</a> · <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p>
         </div>
         <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/schemas/commit-envelope.v1.json">Schemas</a><a href="/verify/">Verifier</a></div>
         <div><h2>Ecosystem</h2><a href="/ecosystem/">Ecosystem</a><a href="https://ssx360.com/enterprise" target="_blank" rel="noopener noreferrer">Enterprise brief ↗</a><a href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 Control Plane ↗</a></div>
-        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/docs/why.html">Why it exists</a><a href="/docs/protocol-flow.html">Protocol flow</a><a href="/docs/threat-model.html">Threat model</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="/docs/Whitepaper.html">Whitepaper</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a><a href="mailto:security@matrixscroll.com">Security disclosure</a></div>
+        <div><h2>Resources</h2><a href="/docs/">Docs</a><a href="/mcp/">MCP</a><a href="/compare/">Compare</a><a href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">PyPI 0.4.2</a><a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a></div>
       </div>
     </footer>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-      });
-    </script>
   </body>
 </html>
