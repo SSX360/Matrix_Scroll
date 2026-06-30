@@ -129,6 +129,7 @@
       '<a class="nav-external" href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 Control Plane <span aria-hidden="true">↗</span></a>' +
       "</div></details>" +
       '<a class="nav-external nav-external-desktop" href="https://ssx360.com/" target="_blank" rel="noopener noreferrer">SSX360 <span aria-hidden="true">↗</span></a>' +
+      '<a class="nav-cta" href="/mcp/">Get MCP</a>' +
       "</div>"
     )
   }
@@ -154,6 +155,10 @@
   function init() {
     var path = normalizePath()
     var header = document.querySelector(".site-header")
+
+    if (path.startsWith("/hardware") || path.startsWith("/ap2")) {
+      document.body.classList.add("page-hardware")
+    }
 
     if (header && !document.querySelector(".ecosystem-bar")) {
       header.insertAdjacentHTML("beforebegin", buildEcosystemBar(path))
@@ -181,6 +186,19 @@
       }
       onScroll()
       window.addEventListener("scroll", onScroll, { passive: true })
+    }
+
+    var footer = document.querySelector(".site-footer")
+    if (footer && !footer.querySelector(".footer-status-bar")) {
+      footer.insertAdjacentHTML(
+        "afterbegin",
+        '<div class="footer-status-bar">' +
+          '<div class="shell footer-status-inner">' +
+          '<span class="status-ok">Protocol online</span>' +
+          "<span>matrixscroll.identity.v1 · Ed25519 · offline verify</span>" +
+          "<span>PyPI 0.4.0 · MCP public</span>" +
+          "</div></div>"
+      )
     }
   }
 

@@ -1,15 +1,9 @@
 {
   "redirects": [
-    { "source": "/", "destination": "https://ssx360.com/docs", "permanent": false },
-    { "source": "/verify", "destination": "https://ssx360.com/verify", "permanent": false },
-    { "source": "/verify/:path*", "destination": "https://ssx360.com/verify/:path*", "permanent": false },
-    { "source": "/hardware", "destination": "https://ssx360.com/hardware", "permanent": false },
-    { "source": "/hardware/:path*", "destination": "https://ssx360.com/hardware", "permanent": false },
-    { "source": "/docs/Documentation.md", "destination": "https://ssx360.com/docs", "permanent": false },
-    { "source": "/docs/Documentation.html", "destination": "https://ssx360.com/docs", "permanent": false },
-    { "source": "/docs/:path*", "destination": "https://ssx360.com/docs", "permanent": false },
-    { "source": "/mcp/:path*", "destination": "https://ssx360.com/docs#mcp", "permanent": false },
-    { "source": "/docs/Whitepaper.md", "destination": "https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md", "permanent": false },
-    { "source": "/:path*", "destination": "https://ssx360.com/docs", "permanent": false }
+    {
+      "source": "/docs/Whitepaper.md",
+      "destination": "https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md",
+      "permanent": false
+    }
   ]
 }

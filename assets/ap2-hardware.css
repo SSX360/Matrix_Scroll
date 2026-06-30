@@ -1,7 +1,9 @@
 /* AP2 Vault Card cinematic hardware page */
 .ap2-page {
-  --ap2-amber: oklch(0.7 0.12 70);
-  --ap2-purple: oklch(0.5 0.15 290);
+  --ap2-amber: #e8b84a;
+  --ap2-cyan: #00f2ff;
+  --ap2-purple: #6366f1;
+  background-color: var(--bg);
 }
 
 .ap2-cinematic {
@@ -63,8 +65,8 @@
   right: 20%;
   width: min(600px, 70vw);
   height: min(600px, 70vw);
-  background: var(--ap2-purple);
-  opacity: 0.2;
+  background: var(--ap2-cyan);
+  opacity: 0.12;
 }
 
 .ap2-hero-glow-b {
@@ -73,7 +75,7 @@
   width: min(400px, 50vw);
   height: min(400px, 50vw);
   background: var(--ap2-amber);
-  opacity: 0.15;
+  opacity: 0.14;
 }
 
 .ap2-hero-grid {

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-      <head>
+        <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MCP Server — Matrix Scroll</title>
@@ -30,7 +30,7 @@
     <meta name="twitter:description" content="Attest and verify agent commits inside Cursor, Claude Code, or VS Code with the public Matrix Scroll MCP server.">
     <meta name="twitter:image" content="https://matrixscroll.com/og-image.png">
     <meta name="twitter:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
-    <meta name="theme-color" content="#0a0908">
+    <meta name="theme-color" content="#050505">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -39,102 +39,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/assets/site.css">
     <script src="/assets/site-nav.js" defer></script>
-    <style>
-      .terminal-mockup {
-        background: #0d1117;
-        border: 1px solid #30363d;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-        font-family: 'Courier New', Courier, monospace;
-        margin: 40px auto;
-        max-width: 800px;
-        text-align: left;
-      }
-      .terminal-header {
-        background: #161b22;
-        padding: 12px 16px;
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #30363d;
-      }
-      .terminal-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        margin-right: 8px;
-        display: inline-block;
-      }
-      .terminal-dot.red { background: #ff5f56; }
-      .terminal-dot.yellow { background: #ffbd2e; }
-      .terminal-dot.green { background: #27c93f; }
-      .terminal-title {
-        color: #8b949e;
-        font-size: 13px;
-        margin-left: auto;
-        margin-right: auto;
-        font-weight: bold;
-      }
-      .terminal-body {
-        padding: 20px;
-        color: #c9d1d9;
-        font-size: 14px;
-        line-height: 1.6;
-        min-height: 380px;
-        max-height: 500px;
-        overflow-y: auto;
-        background: #0d1117;
-      }
-      .terminal-line {
-        margin-bottom: 14px;
-      }
-      .command-line {
-        color: #58a6ff;
-      }
-      .command-line .prompt {
-        color: #ff7b72;
-        font-weight: bold;
-        margin-right: 8px;
-      }
-      .output-line {
-        color: #c9d1d9;
-      }
-      .output-line pre {
-        margin: 0;
-        white-space: pre-wrap;
-        word-break: break-all;
-        font-family: inherit;
-        color: #79c0ff;
-      }
-      .output-line .success-tag {
-        color: #3fb950;
-        font-weight: bold;
-      }
-      .tool-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-        margin: 40px 0;
-      }
-      .tool-card {
-        background: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 8px;
-        padding: 24px;
-        text-align: left;
-      }
-      .tool-card h3 {
-        margin-top: 0;
-        color: #58a6ff;
-        font-family: monospace;
-      }
-      .tool-card p {
-        color: #8b949e;
-        font-size: 14px;
-        line-height: 1.5;
-        margin-bottom: 0;
-      }
-    </style>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const terminal = document.getElementById("terminal-content");
@@ -218,7 +122,7 @@
     </header>
 
     <main id="main">
-      <section class="page-hero shell" style="text-align: center;">
+      <section class="page-hero shell is-centered">
         <p class="eyebrow">Model Context Protocol / Agent Provenance</p>
         <h1>Agent Self-Attestation Surface</h1>
         <p class="lead">Matrix Scroll MCP provides the cryptographic attestation layer for AI coding assistants. When Cursor or Claude Code performs an engineering task, they can attest their changes directly through the MCP server, generating offline-verifiable signatures before merge.</p>

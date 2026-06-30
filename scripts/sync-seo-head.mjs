@@ -162,7 +162,7 @@ function buildHead(page) {
     <meta name="twitter:description" content="${page.description}">
     <meta name="twitter:image" content="${OG_IMAGE}">
     <meta name="twitter:image:alt" content="AP2 Vault Card — possession-factor approval for AI agent payments">
-    <meta name="theme-color" content="#0a0908">
+    <meta name="theme-color" content="#050505">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">

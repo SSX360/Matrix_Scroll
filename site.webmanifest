@@ -4,8 +4,8 @@
   "description": "Signed commit provenance for humans, agents, and CI with offline verification.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0a0908",
-  "theme_color": "#0a0908",
+  "background_color": "#050505",
+  "theme_color": "#050505",
   "lang": "en-US",
   "icons": [
     {
