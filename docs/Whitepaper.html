@@ -243,7 +243,7 @@ matrixscroll envelope-verify &lt;sha&gt;</code></pre>
 
     <h2>Implementation</h2>
     <h3>1. Install</h3>
-    <pre><code>pip install "matrixscroll==0.3.0"
+    <pre><code>pip install "matrixscroll==0.4.2"
 matrixscroll hook-install
 matrixscroll hook-status</code></pre>
 
@@ -252,15 +252,15 @@ matrixscroll hook-status</code></pre>
 export MATRIXSCROLL_TOOL=agent-runner
 git commit -m "feat: agent-assisted change"
 matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
-    <p>Hooks default to <strong>warn mode</strong>. Set <code>"enforce": true</code> in <code>.git/matrixscroll/config.json</code> to block commits when signing fails. Windows support landed in <strong>0.2.1</strong>; the public examples on this page pin <strong>0.3.0</strong>.</p>
+    <p>Hooks default to <strong>warn mode</strong>. Set <code>"enforce": true</code> in <code>.git/matrixscroll/config.json</code> to block commits when signing fails. Windows support landed in <strong>0.2.1</strong>; the public examples on this page pin <strong>0.4.2</strong>.</p>
 
     <h3>3. CI gate</h3>
     <pre><code>- uses: SSX360/matrixscroll-verify-action@v1
   with:
-    matrixscroll-version: "0.3.0"
+    matrixscroll-version: "0.4.2"
     require-mode: emulated
     trusted-keys: trusted-keys.json</code></pre>
-    <p>Policy flags such as <code>--require-mode</code> and <code>--trusted-keys</code> ship in the current <strong>0.2.x</strong> line; public examples pin <strong>0.3.0</strong>.</p>
+    <p>Policy flags such as <code>--require-mode</code> and <code>--trusted-keys</code> ship in the current <strong>0.2.x</strong> line; public examples pin <strong>0.4.2</strong>.</p>
 
     <h2>Trust levels</h2>
     <table>
@@ -275,7 +275,7 @@ matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
     </table>
 
     <div class="honest-limits">
-        <strong>Honest limits:</strong> Shipping now: PyPI 0.3.0, Git hooks, Scroll Gate PR verification, browser verifier. In progress: External Ed25519-capable key backends and transparency-log integrations. Not: IAM, sandbox, prompt filter, or agent runtime.
+        <strong>Honest limits:</strong> Shipping now: PyPI 0.4.2, Git hooks, Scroll Gate PR verification, browser verifier. In progress: External Ed25519-capable key backends and transparency-log integrations. Not: IAM, sandbox, prompt filter, or agent runtime.
     </div>
 
     <h2>Next steps</h2>

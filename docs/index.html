@@ -66,7 +66,7 @@
         <h1>Docs</h1>
         <p class="lead">Install Matrix Scroll, add the Git hooks, and verify signed commit envelopes today. The same format can later support secure enclaves and SSH-agent keychains without changing verification.</p>
         <div class="button-row">
-          <a class="button primary" href="#install-flow">Install 0.3.0</a>
+          <a class="button primary" href="#install-flow">Install 0.4.2</a>
           <a class="button secondary" href="/verify/">Try the verifier</a>
           <a class="button ghost" href="https://github.com/SSX360/matrixscroll" rel="noopener">View GitHub</a>
         </div>
@@ -87,7 +87,7 @@
         <div class="status-grid" aria-label="Honest product status">
           <article class="status-card">
             <strong>Shipping now</strong>
-            <p>PyPI 0.3.0, Git hooks, the browser verifier, and PR-range checks through the GitHub Action.</p>
+            <p>PyPI 0.4.2, Git hooks, the browser verifier, and PR-range checks through the GitHub Action.</p>
           </article>
           <article class="status-card">
             <strong>In progress</strong>
@@ -105,7 +105,7 @@
           <a class="proof-link" href="/verify/">Browser verifier</a>
           <a class="proof-link" href="/mcp/">Matrix Scroll MCP</a>
           <a class="proof-link" href="/compare/">Compare page</a>
-          <a class="proof-link" href="https://pypi.org/project/matrixscroll/0.3.0/" rel="noopener">PyPI provenance</a>
+          <a class="proof-link" href="https://pypi.org/project/matrixscroll/0.4.2/" rel="noopener">PyPI provenance</a>
           <a class="proof-link" href="https://github.com/SSX360/matrixscroll/tree/main/vectors" rel="noopener">Conformance vectors</a>
           <a class="proof-link" href="https://github.com/SSX360/matrixscroll-verify-action" rel="noopener">GitHub Action</a>
           <a class="proof-link" href="https://github.com/SSX360/matrixscroll/blob/main/docs/AGENTIC_AI_SECURITY.md" rel="noopener">Tests and policy docs</a>
@@ -115,8 +115,8 @@
       <section id="install-flow" class="content-section shell">
         <div class="interface-grid">
           <div class="code-block">
-            <div class="terminal-top"><span>install</span><span>v0.3.0</span></div>
-            <pre><code>pip install "matrixscroll==0.3.0"
+            <div class="terminal-top"><span>install</span><span>v0.4.2</span></div>
+            <pre><code>pip install "matrixscroll==0.4.2"
 matrixscroll hook-install
 matrixscroll hook-status</code></pre>
           </div>
@@ -128,8 +128,8 @@ git commit -m "feat: agent change"
 matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
           </div>
           <div class="code-block">
-            <div class="terminal-top"><span>MCP install</span><span>v0.3.0</span></div>
-            <pre><code>pip install "matrixscroll[mcp]==0.3.0"
+            <div class="terminal-top"><span>MCP install</span><span>v0.4.2</span></div>
+            <pre><code>pip install "matrixscroll[mcp]==0.4.2"
 {
   "mcpServers": {
     "matrixscroll-mcp": {
@@ -139,14 +139,14 @@ matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
 }</code></pre>
           </div>
           <div class="code-block">
-            <div class="terminal-top"><span>CI gate</span><span>v0.3.0</span></div>
+            <div class="terminal-top"><span>CI gate</span><span>v0.4.2</span></div>
             <pre><code>- uses: SSX360/matrixscroll-verify-action@v1
   with:
-    matrixscroll-version: "0.3.0"
+    matrixscroll-version: "0.4.2"
     require-mode: emulated</code></pre>
           </div>
         </div>
-        <p class="small-note">Hooks default to warn mode; set <code>"enforce": true</code> in <code>.git/matrixscroll/config.json</code> to block failed signing. Windows support landed in <strong>0.2.1</strong>; the public examples on this page pin <strong>0.3.0</strong>. Source of truth: <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>, <a href="https://github.com/SSX360/matrixscroll/blob/main/SPEC.md" rel="noopener">SPEC.md</a>, <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md" rel="noopener">whitepaper</a>.</p>
+        <p class="small-note">Hooks default to warn mode; set <code>"enforce": true</code> in <code>.git/matrixscroll/config.json</code> to block failed signing. Windows support landed in <strong>0.2.1</strong>; the public examples on this page pin <strong>0.4.2</strong>. Source of truth: <a href="https://github.com/SSX360/matrixscroll" rel="noopener">GitHub</a>, <a href="https://github.com/SSX360/matrixscroll/blob/main/SPEC.md" rel="noopener">SPEC.md</a>, <a href="https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md" rel="noopener">whitepaper</a>.</p>
 
         <div class="compare-callout" style="margin-top: 32px; border-color: rgba(99,102,241,0.24); background: rgba(99,102,241,0.025);">
           <strong>Threat Model &amp; L1 Security Limits</strong>
@@ -197,7 +197,7 @@ matrixscroll envelope-verify "$(git rev-parse HEAD)"</code></pre>
 
     <footer class="site-footer">
       <div class="shell footer-grid">
-        <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a><p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.3.0, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
+        <div><a class="brand footer-brand" href="/"><span class="brand-mark" aria-hidden="true"></span><span>Matrix Scroll</span></a><p>Open protocol for signed agent-assisted Git commits. <strong>Shipping now:</strong> PyPI 0.4.2, Git hooks, Scroll Gate PR checks, and the browser verifier. <strong>Next:</strong> External Ed25519-capable key backends and transparency-log integrations. <strong>Scope:</strong> provenance, not IAM, sandboxing, or agent runtimes.</p>
           <p class="attribution" style="margin-top: 12px; font-size: 13px; color: var(--muted);">Made by <a href="https://www.linkedin.com/in/ryan-james-york/" target="_blank" rel="noopener" style="text-decoration: underline; color: inherit;">Ryan James York</a> &bull; Contact: <a href="mailto:security@matrixscroll.com" style="color: inherit; text-decoration: underline;">security@matrixscroll.com</a></p></div>
         <div><h2>Protocol</h2><a href="/spec/">Spec</a><a href="/docs/">SDK quickstart</a><a href="/verify/">Verifier</a>
           <a href="/ap2/">AP2</a>
