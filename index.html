@@ -274,89 +274,62 @@
       <section id="pricing" class="band reveal-up" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
         <div class="shell pricing-section">
           <div class="pricing-header">
-            <p class="eyebrow">Trust Tiers</p>
-            <h2>Simple, developer-first pricing</h2>
-            
-            <div class="billing-toggle-container">
-              <span id="label-monthly" class="active">Monthly</span>
-              <button class="toggle-button" id="billing-toggle" aria-label="Toggle annual billing" aria-checked="false">
-                <span class="toggle-handle"></span>
-              </button>
-              <span id="label-annually">Annually <span class="discount-badge">Save 20%</span></span>
-            </div>
+            <p class="eyebrow">Trust tiers</p>
+            <h2>Protocol is free. Hosted verify and audit at SSX360.</h2>
+            <p style="max-width: 720px; margin: 16px auto 0; color: var(--muted); line-height: 1.6;">
+              Matrix Scroll signing, MCP, and offline verification stay open and local. Team seats, Scroll Gate CI,
+              audit ledger, and evidence export are billed on
+              <a href="https://ssx360.com/#pricing" style="color: var(--accent);">ssx360.com</a> — not on this site.
+            </p>
           </div>
 
           <div class="pricing-grid">
-            <!-- Freedom -->
             <article class="pricing-card">
               <h3>Freedom</h3>
-              <p class="description">Local signing and offline verification tools for individuals.</p>
+              <p class="description">Local signing and offline verification for individuals and OSS.</p>
               <div class="price-container">
                 <span class="currency">$</span>
-                <span class="amount" id="price-freedom">0</span>
+                <span class="amount">0</span>
                 <span class="period">/mo</span>
               </div>
-              <a href="/docs/" class="cta-button secondary">Get Started</a>
+              <a href="/docs/" class="cta-button secondary">Get started</a>
               <ul class="features-list">
-                <li><span class="check-icon">✓</span> Local Ed25519 SDK</li>
-                <li><span class="check-icon">✓</span> Public MCP Server</li>
+                <li><span class="check-icon">✓</span> Local Ed25519 SDK (PyPI)</li>
+                <li><span class="check-icon">✓</span> Public MCP server</li>
                 <li><span class="check-icon">✓</span> Unlimited offline verification</li>
                 <li><span class="check-icon">✓</span> Git hooks integration</li>
               </ul>
             </article>
 
-            <!-- Basic (Pro/Individual) -->
             <article class="pricing-card popular">
-              <div class="popular-badge">Popular choice</div>
-              <h3>Basic</h3>
-              <p class="description">Hosted verified identity authority. Establish trusted proof others rely on.</p>
-              <div class="price-container">
-                <span class="currency">$</span>
-                <span class="amount" id="price-basic">24.99</span>
-                <span class="period" id="period-basic">/mo</span>
-              </div>
-              <a href="/authority/" class="cta-button primary">Claim Hosted Identity</a>
-              <ul class="features-list">
-                <li><span class="check-icon">✓</span> Hosted Issuer Registry</li>
-                <li><span class="check-icon">✓</span> Public-key status lookup</li>
-                <li><span class="check-icon">✓</span> Interactive Verifier badges</li>
-                <li><span class="check-icon">✓</span> Anti-spoofing protection</li>
-                <li><span class="check-icon">✓</span> Priority support</li>
-              </ul>
-            </article>
-
-            <!-- Team -->
-            <article class="pricing-card">
+              <div class="popular-badge">Hosted control plane</div>
               <h3>Team</h3>
-              <p class="description">Shared trust anchors and enforcement logs for developer teams.</p>
+              <p class="description">Scroll Gate CI, policy registry, audit ledger, and evidence export for orgs.</p>
               <div class="price-container">
                 <span class="currency">$</span>
-                <span class="amount" id="price-team">40</span>
-                <span class="period" id="period-team">/seat/mo</span>
+                <span class="amount">99</span>
+                <span class="period">–299 /org · mo</span>
               </div>
-              <a href="/authority/" class="cta-button secondary">Start Team Trial</a>
+              <a href="https://ssx360.com/signup" class="cta-button primary">Start on SSX360</a>
               <ul class="features-list">
-                <li><span class="check-icon">✓</span> Everything in Basic</li>
-                <li><span class="check-icon">✓</span> Shared authority ledger</li>
-                <li><span class="check-icon">✓</span> Team SSO & SAML</li>
-                <li><span class="check-icon">✓</span> Centralized audit logs</li>
-                <li><span class="check-icon">✓</span> Rollout telemetry dashboards</li>
+                <li><span class="check-icon">✓</span> Hosted POST /api/v1/verify</li>
+                <li><span class="check-icon">✓</span> Team policy registry</li>
+                <li><span class="check-icon">✓</span> Queryable audit history</li>
+                <li><span class="check-icon">✓</span> JSON evidence export</li>
               </ul>
             </article>
 
-            <!-- Enterprise -->
             <article class="pricing-card">
               <h3>Enterprise</h3>
-              <p class="description">On-premise enclaves and compliance packs for regulated security.</p>
+              <p class="description">Provenance pilots, compliance mapping, and annual contracts for regulated teams.</p>
               <div class="price-container">
                 <span class="custom-price">Contact</span>
               </div>
-              <a href="https://ssx360.com/contact?intent=enterprise" class="cta-button secondary">Contact sales</a>
+              <a href="https://ssx360.com/enterprise" class="cta-button secondary">Enterprise viability brief</a>
               <ul class="features-list">
-                <li><span class="check-icon">✓</span> Everything in Team</li>
-                <li><span class="check-icon">✓</span> On-prem authority issuer</li>
-                <li><span class="check-icon">✓</span> Secure enclave & FIPS configs</li>
-                <li><span class="check-icon">✓</span> EU AI Act evidence exporter</li>
+                <li><span class="check-icon">✓</span> Provenance pilot rollout</li>
+                <li><span class="check-icon">✓</span> NIST SSDF / SLSA mapping</li>
+                <li><span class="check-icon">✓</span> SIEM export (roadmap)</li>
                 <li><span class="check-icon">✓</span> Dedicated support SLA</li>
               </ul>
             </article>
@@ -365,9 +338,12 @@
           <div class="why-explainer">
             <div style="font-size: 24px; color: var(--accent);">💡</div>
             <div class="explainer-content">
-              <h4>Why the Hosted Identity Authority? ("You can't fork trust")</h4>
+              <h4>Open protocol, hosted trust operations</h4>
               <p>
-                Anyone can copy the open-source SDK or fork the protocol. However, you cannot fork the hosted issuer registry others rely on. The Hosted Identity Authority cryptographically vouches for your key's binding (linking public keys to verified email domains or GitHub profiles) and handles revocation checks in real-time. Without a trusted authority, signature keys remain advisory and are vulnerable to machine-level spoofing.
+                Anyone can run the Matrix Scroll SDK locally. SSX360 is the hosted control plane where teams verify
+                envelopes on protected branches, enforce policy, and export audit evidence — without uploading source
+                code. Enterprise buyers start at
+                <a href="https://ssx360.com/enterprise" style="color: var(--accent);">ssx360.com/enterprise</a>.
               </p>
             </div>
           </div>
@@ -427,39 +403,6 @@
     </footer>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const toggle = document.getElementById("billing-toggle");
-        const monthlyLabel = document.getElementById("label-monthly");
-        const annuallyLabel = document.getElementById("label-annually");
-        
-        const priceBasic = document.getElementById("price-basic");
-        const priceTeam = document.getElementById("price-team");
-        const periodBasic = document.getElementById("period-basic");
-        const periodTeam = document.getElementById("period-team");
-        
-        if (toggle) {
-          toggle.addEventListener("click", () => {
-            const isAnnual = toggle.classList.toggle("active");
-            toggle.setAttribute("aria-checked", isAnnual ? "true" : "false");
-            
-            if (isAnnual) {
-              monthlyLabel.classList.remove("active");
-              annuallyLabel.classList.add("active");
-              
-              priceBasic.textContent = "19.99";
-              priceTeam.textContent = "32";
-              periodBasic.textContent = " /mo (billed annually)";
-              periodTeam.textContent = " /seat/mo (billed annually)";
-            } else {
-              monthlyLabel.classList.add("active");
-              annuallyLabel.classList.remove("active");
-              
-              priceBasic.textContent = "24.99";
-              priceTeam.textContent = "40";
-              periodBasic.textContent = "/mo";
-              periodTeam.textContent = "/seat/mo";
-            }
-          });
-        }
       });
     </script>
   </body>
