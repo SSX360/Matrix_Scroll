@@ -4,6 +4,36 @@
       "source": "/docs/Whitepaper.md",
       "destination": "https://github.com/SSX360/matrixscroll/blob/main/docs/WHITEPAPER.md",
       "permanent": false
+    },
+    {
+      "source": "/hardware",
+      "destination": "/docs/why.html",
+      "permanent": true
+    },
+    {
+      "source": "/hardware/",
+      "destination": "/docs/why.html",
+      "permanent": true
+    },
+    {
+      "source": "/hardware/lab",
+      "destination": "/docs/why.html",
+      "permanent": true
+    },
+    {
+      "source": "/hardware/lab/",
+      "destination": "/docs/why.html",
+      "permanent": true
+    },
+    {
+      "source": "/ap2",
+      "destination": "/ecosystem/",
+      "permanent": true
+    },
+    {
+      "source": "/ap2/",
+      "destination": "/ecosystem/",
+      "permanent": true
     }
   ]
 }

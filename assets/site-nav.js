@@ -6,13 +6,12 @@
  */
 (function () {
   var PRIMARY = [
-    { href: "/#pricing", label: "Pricing", match: ["/#pricing"], homeOnly: true },
     { href: "/docs/", label: "Docs", match: ["/docs"] },
     { href: "/mcp/", label: "MCP", match: ["/mcp"] },
     { href: "/verify/", label: "Verifier", match: ["/verify"] },
-    { href: "/hardware/", label: "Hardware", match: ["/hardware"] },
-    { href: "/ap2/", label: "AP2", match: ["/ap2"] },
+    { href: "/compare/", label: "Compare", match: ["/compare"] },
     { href: "/ecosystem/", label: "Ecosystem", match: ["/ecosystem"] },
+    { href: "https://ssx360.com/enterprise", label: "Enterprise", match: [], external: true },
   ]
 
   var MORE = [
@@ -29,17 +28,8 @@
       label: "Matrix Scroll",
       detail: "Open protocol",
       external: false,
-      active: function (path) {
-        return !path.startsWith("/hardware") && !path.startsWith("/ap2")
-      },
-    },
-    {
-      href: "https://ssx360.com/hardware",
-      label: "AP2 Vault Card",
-      detail: "Hardware wedge",
-      external: false,
-      active: function (path) {
-        return path.startsWith("/hardware") || path.startsWith("/ap2")
+      active: function () {
+        return true
       },
     },
     {
@@ -67,6 +57,16 @@
 
   function linkHtml(item, path) {
     var active = itemActive(item, path) ? ' aria-current="page"' : ""
+    if (item.external) {
+      return (
+        '<a class="nav-external" href="' +
+        item.href +
+        '" target="_blank" rel="noopener noreferrer"' +
+        ">" +
+        item.label +
+        ' <span aria-hidden="true">↗</span></a>'
+      )
+    }
     var href = item.href
     if (item.homeOnly && path !== "/") {
       href = "/"
